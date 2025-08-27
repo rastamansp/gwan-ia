@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gwan IA - Páginas de Desenvolvimento</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .file-card {
+            @apply p-6 border border-gray-200 rounded-lg bg-white hover:shadow-md transition-shadow duration-200;
+        }
+        
+        .file-card:hover {
+            @apply border-blue-300;
+        }
+        
+        .file-icon {
+            @apply w-12 h-12 rounded-lg flex items-center justify-center text-white text-xl font-bold;
+        }
+        
+        .file-icon.html { @apply bg-orange-500; }
+        .file-icon.md { @apply bg-blue-500; }
+        
+        .tag {
+            @apply inline-block px-2 py-1 text-xs font-medium rounded-full;
+        }
+        
+        .tag-primary { @apply bg-blue-100 text-blue-800; }
+        .tag-secondary { @apply bg-gray-100 text-gray-800; }
+        .tag-success { @apply bg-green-100 text-green-800; }
+        .tag-warning { @apply bg-yellow-100 text-yellow-800; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto py-8 px-4">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="w-20 h-20 bg-blue-500 rounded-3xl mx-auto mb-6 flex items-center justify-center">
+                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Gwan IA</h1>
+            <p class="text-xl text-gray-600">Páginas de Desenvolvimento e Sistema de Design</p>
+        </div>
+
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-8">
+            <a href="../../" class="hover:text-blue-600">🏠 Home</a>
+            <span>/</span>
+            <a href="../" class="hover:text-blue-600">src</a>
+            <span>/</span>
+            <span class="text-gray-900 font-medium">pages</span>
+        </nav>
+
+        <!-- Arquivos Principais -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Página de Autenticação -->
+            <div class="file-card">
+                <div class="flex items-start space-x-4">
+                    <div class="file-icon html">A</div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Página de Autenticação</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Página completa com todas as telas de autenticação OTP: login, cadastro, ativação e verificação.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag tag-primary">HTML</span>
+                            <span class="tag tag-success">Tailwind CSS</span>
+                            <span class="tag tag-warning">JavaScript</span>
+                        </div>
+                        <a href="auth.html" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm">
+                            Abrir página
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exemplos de Uso -->
+            <div class="file-card">
+                <div class="flex items-start space-x-4">
+                    <div class="file-icon html">E</div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Exemplos de Uso</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Demonstração interativa do sistema de design com exemplos de cores, componentes e personalização.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag tag-primary">HTML</span>
+                            <span class="tag tag-success">Tailwind CSS</span>
+                            <span class="tag tag-warning">JavaScript</span>
+                            <span class="tag tag-secondary">Interativo</span>
+                        </div>
+                        <a href="exemplo-uso.html" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm">
+                            Abrir exemplos
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documentação -->
+            <div class="file-card">
+                <div class="flex items-start space-x-4">
+                    <div class="file-icon md">D</div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Documentação</h3>
+                        <p class="text-gray-600 text-sm mb-3">
+                            Guia completo de uso, personalização e integração da página de autenticação.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="tag tag-primary">Markdown</span>
+                            <span class="tag tag-success">Documentação</span>
+                            <span class="tag tag-secondary">Guia</span>
+                        </div>
+                        <a href="README.md" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm">
+                            Ler documentação
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Funcionalidades Implementadas -->
+        <div class="bg-white rounded-lg border border-gray-200 p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">🚀 Funcionalidades Implementadas</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">✅ Autenticação OTP</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>• Login com email</li>
+                        <li>• Cadastro de nova conta</li>
+                        <li>• Ativação por email</li>
+                        <li>• Verificação de código OTP</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-3">✅ Sistema de Design</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>• Cores semânticas</li>
+                        <li>• Componentes reutilizáveis</li>
+                        <li>• Tipografia consistente</li>
+                        <li>• Responsividade mobile-first</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Próximos Passos -->
+        <div class="bg-blue-50 rounded-lg border border-blue-200 p-6 mb-8">
+            <h2 class="text-2xl font-bold text-blue-900 mb-4">🔄 Próximos Passos</h2>
+            
+            <div class="space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">1</span>
+                    </div>
+                    <span class="text-blue-800">Integrar com backend real</span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">2</span>
+                    </div>
+                    <span class="text-blue-800">Converter para componentes React</span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">3</span>
+                    </div>
+                    <span class="text-blue-800">Implementar validações avançadas</span>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">4</span>
+                    </div>
+                    <span class="text-blue-800">Adicionar testes automatizados</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Úteis -->
+        <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">🔗 Links Úteis</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-2">📚 Documentação</h3>
+                    <ul class="space-y-1">
+                        <li><a href="../../cursorrules/" class="text-blue-600 hover:text-blue-700 text-sm">📖 Regras do Cursor</a></li>
+                        <li><a href="../theme/" class="text-blue-600 hover:text-blue-700 text-sm">🎨 Sistema de Design</a></li>
+                        <li><a href="README.md" class="text-blue-600 hover:text-blue-700 text-sm">📱 Guia de Autenticação</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold text-gray-900 mb-2">🛠️ Ferramentas</h3>
+                    <ul class="space-y-1">
+                        <li><a href="https://tailwindcss.com" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm">🎨 Tailwind CSS</a></li>
+                        <li><a href="https://fonts.google.com/specimen/Inter" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm">🔤 Fonte Inter</a></li>
+                        <li><a href="https://www.radix-ui.com/themes/playground" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm">🎭 Radix UI Themes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pt-8 border-t border-gray-200">
+            <p class="text-gray-600">
+                🚀 <strong>Gwan IA</strong> - Sistema de Design e Autenticação
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                Páginas criadas com ❤️ usando Tailwind CSS e Clean Architecture
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Adicionar efeitos de hover nos cards
+        document.querySelectorAll('.file-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

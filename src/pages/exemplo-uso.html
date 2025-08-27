@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo de Uso - Página de Autenticação</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        .example-section {
+            @apply p-6 border-b border-gray-200;
+        }
+        
+        .code-block {
+            @apply bg-gray-100 p-4 rounded-lg text-sm font-mono overflow-x-auto;
+        }
+        
+        .color-preview {
+            @apply inline-block w-6 h-6 rounded border border-gray-300 mr-2;
+        }
+        
+        .component-demo {
+            @apply p-4 border border-gray-200 rounded-lg bg-white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-6xl mx-auto py-8">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">🎨 Sistema de Design - Gwan IA</h1>
+            <p class="text-xl text-gray-600">Exemplos de uso e personalização da página de autenticação</p>
+        </div>
+
+        <!-- Navegação -->
+        <nav class="flex justify-center mb-8">
+            <div class="flex space-x-1 bg-white p-1 rounded-lg shadow-sm">
+                <button onclick="showSection('cores')" class="px-4 py-2 rounded-md bg-blue-100 text-blue-700 font-medium">Cores</button>
+                <button onclick="showSection('componentes')" class="px-4 py-2 rounded-md hover:bg-gray-100 text-gray-700">Componentes</button>
+                <button onclick="showSection('personalizacao')" class="px-4 py-2 rounded-md hover:bg-gray-100 text-gray-700">Personalização</button>
+                <button onclick="showSection('integracao')" class="px-4 py-2 rounded-md hover:bg-gray-100 text-gray-700">Integração</button>
+            </div>
+        </nav>
+
+        <!-- Seção: Cores Semânticas -->
+        <section id="cores" class="example-section">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">🎨 Cores Semânticas</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Accent Colors -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-3">Accent (Primárias)</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="color-preview bg-blue-500"></div>
+                            <span class="text-sm">accent.primary</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-blue-600"></div>
+                            <span class="text-sm">accent.primaryHover</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-blue-100"></div>
+                            <span class="text-sm">accent.background</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gray Colors -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-3">Gray (Neutras)</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="color-preview bg-gray-50"></div>
+                            <span class="text-sm">gray.background</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-gray-900"></div>
+                            <span class="text-sm">gray.black</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-gray-600"></div>
+                            <span class="text-sm">gray.mutedText</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semantic Colors -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-3">Semânticas</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="color-preview bg-green-500"></div>
+                            <span class="text-sm">success.primary</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-red-500"></div>
+                            <span class="text-sm">error.primary</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="color-preview bg-yellow-500"></div>
+                            <span class="text-sm">warning.primary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h4 class="font-semibold text-gray-900 mb-3">Como usar no Tailwind:</h4>
+                <div class="code-block">
+                    <pre><code>// Classes do Tailwind
+bg-accent-primary      // Background azul primário
+text-gray-black        // Texto preto
+border-error-primary   // Borda vermelha de erro
+hover:bg-accent-primaryHover  // Hover azul escuro</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Componentes -->
+        <section id="componentes" class="example-section hidden">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">🧩 Componentes Base</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Botões -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Botões</h3>
+                    <div class="space-y-3">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            Primary
+                        </button>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            Secondary
+                        </button>
+                        <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            Outline
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Inputs -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Inputs</h3>
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Input padrão" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="email" placeholder="Email com erro" class="w-full px-3 py-2 border border-red-500 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 bg-red-50">
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Cards</h3>
+                    <div class="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
+                        <h4 class="font-medium text-gray-900 mb-2">Card Surface</h4>
+                        <p class="text-gray-600 text-sm">Este é um exemplo de card com estilo surface.</p>
+                    </div>
+                </div>
+
+                <!-- OTP Input -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Input OTP</h3>
+                    <div class="flex space-x-2">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" maxlength="1" class="w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Personalização -->
+        <section id="personalizacao" class="example-section hidden">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">🎨 Personalização</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Cores Personalizadas -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Cores da Marca</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cor Primária</label>
+                            <input type="color" value="#FF6B35" class="w-full h-12 rounded-lg border border-gray-300">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cor Secundária</label>
+                            <input type="color" value="#004E89" class="w-full h-12 rounded-lg border border-gray-300">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tipografia -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Tipografia</h3>
+                    <div class="space-y-2">
+                        <h1 class="text-3xl font-bold text-gray-900">Título H1</h1>
+                        <h2 class="text-2xl font-semibold text-gray-800">Título H2</h2>
+                        <h3 class="text-xl font-medium text-gray-700">Título H3</h3>
+                        <p class="text-base text-gray-600">Texto do corpo</p>
+                        <p class="text-sm text-gray-500">Texto pequeno</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                <h4 class="font-semibold text-gray-900 mb-3">Código de Personalização:</h4>
+                <div class="code-block">
+                    <pre><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          primary: '#FF6B35',    // Laranja personalizado
+          secondary: '#004E89',  // Azul personalizado
+        }
+      },
+      fontFamily: {
+        'custom': ['Poppins', 'sans-serif']
+      }
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Integração -->
+        <section id="integracao" class="example-section hidden">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">🔗 Integração com Backend</h2>
+            
+            <div class="space-y-6">
+                <!-- API Calls -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Chamadas de API</h3>
+                    <div class="code-block">
+                        <pre><code>// Login
+async function handleLogin(email) {
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+    
+    if (response.ok) {
+      showScreen('verification-screen');
+    }
+  } catch (error) {
+    showError('Erro ao fazer login');
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Estados de Loading -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Estados de Loading</h3>
+                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50" disabled>
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Carregando...
+                    </button>
+                </div>
+
+                <!-- Tratamento de Erros -->
+                <div class="component-demo">
+                    <h3 class="font-semibold text-gray-900 mb-4">Tratamento de Erros</h3>
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">Erro de validação</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    <p>Email inválido ou conta não encontrada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 pt-8 border-t border-gray-200">
+            <p class="text-gray-600">
+                🚀 <strong>Gwan IA</strong> - Sistema de Design e Autenticação
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
+                Use este template como base para seu projeto de autenticação
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Navegação entre seções
+        function showSection(sectionId) {
+            // Esconder todas as seções
+            document.querySelectorAll('.example-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Mostrar seção selecionada
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Atualizar botões de navegação
+            document.querySelectorAll('nav button').forEach(button => {
+                button.classList.remove('bg-blue-100', 'text-blue-700');
+                button.classList.add('hover:bg-gray-100', 'text-gray-700');
+            });
+            
+            // Destacar botão ativo
+            event.target.classList.remove('hover:bg-gray-100', 'text-gray-700');
+            event.target.classList.add('bg-blue-100', 'text-blue-700');
+        }
+
+        // Mostrar primeira seção por padrão
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('cores');
+        });
+
+        // Navegação automática dos inputs OTP
+        document.querySelectorAll('input[maxlength="1"]').forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1) {
+                    const nextInput = document.querySelectorAll('input[maxlength="1"]')[index + 1];
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && e.target.value.length === 0) {
+                    const prevInput = document.querySelectorAll('input[maxlength="1"]')[index - 1];
+                    if (prevInput) {
+                        prevInput.focus();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

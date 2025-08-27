@@ -1,0 +1,35 @@
+# Regras do Cursor - Projeto Gwan IA
+
+## 📚 Documentação Organizada
+
+As regras do Cursor estão organizadas na pasta `cursorrules/` para melhor estruturação:
+
+### 🏠 **Regras Principais**
+- **`cursorrules/main.md`** - Visão geral e regras principais do projeto
+
+### 🏗️ **Arquitetura**
+- **`cursorrules/architecture/clean-architecture.md`** - Clean Architecture e SOLID
+
+### 🧩 **Componentes**
+- **`cursorrules/components/react-components.md`** - Padrões de componentes React
+
+### 🛠️ **Stack Tecnológica**
+- **`cursorrules/stack/stack-tecnologica.md`** - Dependências e configurações
+
+### 💻 **Desenvolvimento**
+- **`cursorrules/development/typescript.md`** - Convenções TypeScript
+- **`cursorrules/development/prd.md`** - Product Requirements Document
+
+### 📖 **Documentação Completa**
+- **`cursorrules/README.md`** - Guia de uso das regras
+
+## 🚀 Início Rápido
+
+Para começar a desenvolver, consulte:
+1. `cursorrules/main.md` - Regras gerais
+2. `cursorrules/stack/stack-tecnologica.md` - Configurações técnicas
+3. `cursorrules/architecture/clean-architecture.md` - Padrões arquiteturais
+
+## 📝 Nota
+
+Este arquivo serve como ponto de entrada. Para regras detalhadas, consulte os arquivos específicos na pasta `cursorrules/`.
