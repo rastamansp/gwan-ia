@@ -22,6 +22,7 @@ import BibliotecaPage from './pages/BibliotecaPage'
 import BotJaiminhoPage from './pages/BotJaiminhoPage'
 import BotMarleyPage from './pages/BotMarleyPage'
 import BotGwanPage from './pages/BotGwanPage'
+import DebugPage from './pages/DebugPage'
 
 function App() {
   return (
@@ -96,6 +97,9 @@ function App() {
           <Route path="/bot-jaiminho" element={<BotJaiminhoPage />} />
           <Route path="/bot-marley" element={<BotMarleyPage />} />
           <Route path="/bot-gwan" element={<BotGwanPage />} />
+          
+          {/* Rota de Debug */}
+          <Route path="/debug" element={<DebugPage />} />
         </Routes>
       </AuthProvider>
     </ThemeProvider>

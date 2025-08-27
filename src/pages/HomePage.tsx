@@ -23,6 +23,7 @@ const HomePage: React.FC = () => {
               <Link to="/theme" className="text-muted-foreground hover:text-primary font-medium">🎨 Tema</Link>
               <Link to="/auth" className="text-muted-foreground hover:text-primary font-medium">🔐 Auth</Link>
               <Link to="/register-account" className="text-muted-foreground hover:text-primary font-medium">📝 Registro</Link>
+              <Link to="/debug" className="text-muted-foreground hover:text-primary font-medium">🔧 Debug</Link>
             </nav>
           </div>
         </div>
