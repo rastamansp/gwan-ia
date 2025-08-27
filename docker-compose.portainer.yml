@@ -31,23 +31,6 @@ services:
       # API
       - VITE_API_URL=${VITE_API_URL:-https://api.gwan.com.br/api}
       
-      # SMTP
-      - VITE_SMTP_HOST=${VITE_SMTP_HOST:-smtp.gmail.com}
-      - VITE_SMTP_PORT=${VITE_SMTP_PORT:-587}
-      - VITE_SMTP_SECURE=${VITE_SMTP_SECURE:-false}
-      - VITE_SMTP_USER=${VITE_SMTP_USER:-}
-      - VITE_SMTP_PASSWORD=${VITE_SMTP_PASSWORD:-}
-      - VITE_SMTP_FROM_NAME=${VITE_SMTP_FROM_NAME:-GWAN}
-      - VITE_SMTP_FROM_EMAIL=${VITE_SMTP_FROM_EMAIL:-noreply@gwan.com.br}
-      
-      # Admin
-      - VITE_ADMIN_EMAIL=${VITE_ADMIN_EMAIL:-admin@gwan.com.br}
-      - VITE_ADMIN_PASSWORD=${VITE_ADMIN_PASSWORD:-}
-      - VITE_ADMIN_NAME=${VITE_ADMIN_NAME:-Administrador Gwan}
-      
-      # Chatwoot
-      - VITE_CHATWOOT_KEY=${VITE_CHATWOOT_KEY:-}
-      
       # Build
       - VITE_BUILD_TIME=${VITE_BUILD_TIME:-}
       - VITE_GIT_COMMIT=${VITE_GIT_COMMIT:-}

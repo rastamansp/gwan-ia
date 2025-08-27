@@ -9,21 +9,12 @@ services:
         VITE_API_URL: ${VITE_API_URL:-https://api.gwan.com.br/api}
         VITE_APP_NAME: ${VITE_APP_NAME:-Gwan IA}
         VITE_APP_VERSION: ${VITE_APP_VERSION:-1.0.0}
-        VITE_SMTP_HOST: ${VITE_SMTP_HOST:-smtp.gmail.com}
-        VITE_SMTP_PORT: ${VITE_SMTP_PORT:-587}
-        VITE_SMTP_SECURE: ${VITE_SMTP_SECURE:-false}
-        VITE_SMTP_USER: ${VITE_SMTP_USER:-}
-        VITE_SMTP_PASSWORD: ${VITE_SMTP_PASSWORD:-}
-        VITE_SMTP_FROM_NAME: ${VITE_SMTP_FROM_NAME:-GWAN}
-        VITE_SMTP_FROM_EMAIL: ${VITE_SMTP_FROM_EMAIL:-noreply@gwan.com.br}
-        VITE_ADMIN_EMAIL: ${VITE_ADMIN_EMAIL:-admin@gwan.com.br}
-        VITE_ADMIN_PASSWORD: ${VITE_ADMIN_PASSWORD:-}
-        VITE_ADMIN_NAME: ${VITE_ADMIN_NAME:-Administrador Gwan}
-        VITE_CHATWOOT_KEY: ${VITE_CHATWOOT_KEY:-}
         VITE_BUILD_TIME: ${VITE_BUILD_TIME:-}
         VITE_GIT_COMMIT: ${VITE_GIT_COMMIT:-}
         VITE_GIT_BRANCH: ${VITE_GIT_BRANCH:-}
     container_name: gwan-site
+    ports:
+      - "8080:80"
     restart: unless-stopped
     networks:
       - gwan
@@ -45,33 +36,11 @@ services:
       - NODE_ENV=production
       
       # Aplicação
-      - VITE_APP_NAME=Gwan IA
-      - VITE_APP_VERSION=1.0.0
+      - VITE_APP_NAME=${VITE_APP_NAME:-Gwan IA}
+      - VITE_APP_VERSION=${VITE_APP_VERSION:-1.0.0}
       
       # API
-      - VITE_API_URL=https://api.gwan.com.br/api
-      
-      # SMTP
-      - VITE_SMTP_HOST=smtp.gmail.com
-      - VITE_SMTP_PORT=587
-      - VITE_SMTP_SECURE=false
-      - VITE_SMTP_USER=${SMTP_USER:-}
-      - VITE_SMTP_PASSWORD=${SMTP_PASSWORD:-}
-      - VITE_SMTP_FROM_NAME=GWAN
-      - VITE_SMTP_FROM_EMAIL=noreply@gwan.com.br
-      
-      # Admin
-      - VITE_ADMIN_EMAIL=${ADMIN_EMAIL:-admin@gwan.com.br}
-      - VITE_ADMIN_PASSWORD=${ADMIN_PASSWORD:-}
-      - VITE_ADMIN_NAME=Administrador Gwan
-      
-      # Chatwoot
-      - VITE_CHATWOOT_KEY=${CHATWOOT_KEY:-}
-      
-      # Build
-      - VITE_BUILD_TIME=${BUILD_TIME:-}
-      - VITE_GIT_COMMIT=${GIT_COMMIT:-}
-      - VITE_GIT_BRANCH=${GIT_BRANCH:-}
+      - VITE_API_URL=${VITE_API_URL:-https://api.gwan.com.br/api}
 
 networks:
   gwan:
