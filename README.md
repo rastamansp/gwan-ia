@@ -93,7 +93,41 @@ pnpm build
 
 # Preview
 pnpm preview
+
+# Validação completa (lint + type-check + build)
+pnpm validate
 ```
+
+## 🧪 **Validação e Qualidade**
+
+### **Hook de Validação Automática**
+O projeto utiliza **Husky** para garantir qualidade de código antes de cada commit:
+
+- **✅ Pre-commit Hook** - Validação automática antes do commit
+- **✅ ESLint** - Verificação de padrões de código
+- **✅ TypeScript Check** - Validação de tipos
+- **✅ Build Validation** - Teste de build antes do commit
+
+#### **Scripts de Validação:**
+```bash
+# Lint com ESLint
+pnpm lint
+
+# Correção automática de lint
+pnpm lint:fix
+
+# Verificação de tipos TypeScript
+pnpm type-check
+
+# Validação completa
+pnpm validate
+```
+
+#### **Configuração Automática:**
+- **Husky** executa validações automaticamente
+- **lint-staged** formata apenas arquivos modificados
+- **Prettier** mantém formatação consistente
+- **Commit bloqueado** se houver erros críticos
 
 ## 🐳 Docker
 

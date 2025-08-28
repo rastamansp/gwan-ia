@@ -9,12 +9,15 @@
 - [x] **Chat Widget Integrado**
 - [x] **Design System Completo**
 - [x] **Páginas dos Chatbots com Headers Compartilhados**
-- [x] **HomePage com Navegação Dropdown**
+- [x] **HomePage com Navegação Dropdown e Botões Alinhados**
 - [x] **Docker e Deploy para Produção**
 - [x] **Configuração Traefik para gwan.com.br**
 - [x] **Variáveis de Ambiente Configuradas**
 - [x] **TypeScript sem Erros**
 - [x] **Build Docker Funcionando**
+- [x] **Hook de Validação Automática (Husky)**
+- [x] **ESLint e Prettier Configurados**
+- [x] **Validação de Qualidade Antes do Commit**
 
 ---
 

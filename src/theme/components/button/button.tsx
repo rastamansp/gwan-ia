@@ -1,130 +1,68 @@
 import React from 'react';
-import { clsx } from 'clsx';
 import { IButtonProps } from './button.types';
 
-export const Button: React.FC<IButtonProps> = ({
+const Button: React.FC<IButtonProps> = ({
   variant = 'solid',
+  color = 'primary',
   size = 'md',
-  color = 'accent',
-  disabled = false,
   loading = false,
+  leftIcon,
+  rightIcon,
   fullWidth = false,
+  className = '',
   children,
-  className,
-  onClick,
-  type = 'button',
   ...props
 }) => {
-  const baseClasses = clsx(
-    // Base styles
-    'inline-flex items-center justify-center font-medium transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2',
-    'disabled:opacity-50 disabled:cursor-not-allowed',
-    'active:scale-95',
-    
-    // Size variants
-    size === 'xs' && 'px-2 py-1 text-xs rounded',
-    size === 'sm' && 'px-3 py-1.5 text-sm rounded',
-    size === 'md' && 'px-4 py-2 text-sm rounded-md',
-    size === 'lg' && 'px-6 py-2.5 text-base rounded-md',
-    size === 'xl' && 'px-8 py-3 text-lg rounded-lg',
-    
-    // Width
-    fullWidth && 'w-full',
-    
-    // Color and variant combinations
-    variant === 'solid' && color === 'accent' && [
-      'bg-accent-primary text-white',
-      'hover:bg-accent-primaryHover focus:ring-accent-primary',
-      'disabled:hover:bg-accent-primary'
-    ],
-    variant === 'solid' && color === 'gray' && [
-      'bg-gray-mutedText text-white',
-      'hover:bg-gray-strongMutedText focus:ring-gray-mutedText',
-      'disabled:hover:bg-gray-mutedText'
-    ],
-    variant === 'solid' && color === 'success' && [
-      'bg-success-primary text-white',
-      'hover:bg-success-primaryHover focus:ring-success-primary',
-      'disabled:hover:bg-success-primary'
-    ],
-    variant === 'solid' && color === 'warning' && [
-      'bg-warning-primary text-white',
-      'hover:bg-warning-primaryHover focus:ring-warning-primary',
-      'disabled:hover:bg-warning-primary'
-    ],
-    variant === 'solid' && color === 'error' && [
-      'bg-error-primary text-white',
-      'hover:bg-error-primaryHover focus:ring-error-primary',
-      'disabled:hover:bg-error-primary'
-    ],
-    
-    variant === 'soft' && color === 'accent' && [
-      'bg-accent-muted text-accent-primaryLight',
-      'hover:bg-accent-border focus:ring-accent-primary',
-      'disabled:hover:bg-accent-muted'
-    ],
-    variant === 'soft' && color === 'gray' && [
-      'bg-gray-muted text-gray-veryStrongText',
-      'hover:bg-gray-border focus:ring-gray-mutedText',
-      'disabled:hover:bg-gray-muted'
-    ],
-    
-    variant === 'surface' && color === 'accent' && [
-      'bg-accent-surface text-accent-primaryLight border border-accent-border',
-      'hover:bg-accent-muted focus:ring-accent-primary',
-      'disabled:hover:bg-accent-surface'
-    ],
-    variant === 'surface' && color === 'gray' && [
-      'bg-gray-surface text-gray-veryStrongText border border-gray-border',
-      'hover:bg-gray-muted focus:ring-gray-mutedText',
-      'disabled:hover:bg-gray-surface'
-    ],
-    
-    variant === 'outline' && color === 'accent' && [
-      'bg-transparent text-accent-primaryLight border border-accent-border',
-      'hover:bg-accent-surface focus:ring-accent-primary',
-      'disabled:hover:bg-transparent'
-    ],
-    variant === 'outline' && color === 'gray' && [
-      'bg-transparent text-gray-veryStrongText border border-gray-border',
-      'hover:bg-gray-surface focus:ring-gray-mutedText',
-      'disabled:hover:bg-transparent'
-    ],
-    
-    variant === 'ghost' && color === 'accent' && [
-      'bg-transparent text-accent-primaryLight',
-      'hover:bg-accent-surface focus:ring-accent-primary',
-      'disabled:hover:bg-transparent'
-    ],
-    variant === 'ghost' && color === 'gray' && [
-      'bg-transparent text-gray-veryStrongText',
-      'hover:bg-gray-surface focus:ring-gray-mutedText',
-      'disabled:hover:bg-transparent'
-    ],
-    
-    // Custom classes
-    className
-  );
+  const baseClasses = `
+    inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-offset-2
+    disabled:opacity-50 disabled:cursor-not-allowed
+  `;
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!disabled && !loading && onClick) {
-      onClick(e);
-    }
+  const sizeClasses = {
+    xs: 'px-2 py-1 text-xs rounded',
+    sm: 'px-3 py-1.5 text-sm rounded',
+    md: 'px-4 py-2 text-sm rounded-md',
+    lg: 'px-6 py-3 text-base rounded-md',
+    xl: 'px-8 py-3 text-lg rounded-lg',
   };
 
+  const variantClasses = {
+    solid: 'text-white shadow-sm',
+    soft: 'text-current shadow-sm',
+    surface: 'text-current shadow-sm',
+    outline: 'border-2 text-current bg-transparent',
+    ghost: 'text-current bg-transparent hover:bg-gray-100',
+  };
+
+  const colorClasses = {
+    primary: 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
+    secondary: 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500',
+    success: 'bg-green-600 hover:bg-green-700 focus:ring-green-500',
+    warning: 'bg-yellow-600 hover:bg-yellow-700 focus:ring-yellow-500',
+    danger: 'bg-red-600 hover:bg-red-700 focus:ring-red-500',
+    neutral: 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500',
+    accent: 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500',
+    gray: 'bg-gray-600 hover:bg-gray-700 focus:ring-gray-500',
+    error: 'bg-red-600 hover:bg-red-700 focus:ring-red-500',
+  };
+
+  const classes = `
+    ${baseClasses}
+    ${sizeClasses[size]}
+    ${variantClasses[variant]}
+    ${colorClasses[color]}
+    ${fullWidth ? 'w-full' : ''}
+    ${className}
+  `
+    .trim()
+    .replace(/\s+/g, ' ');
+
   return (
-    <button
-      type={type}
-      className={baseClasses}
-      disabled={disabled || loading}
-      onClick={handleClick}
-      {...props}
-    >
+    <button className={classes} disabled={loading} {...props}>
       {loading && (
         <svg
           className="animate-spin -ml-1 mr-2 h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
         >
@@ -143,7 +81,11 @@ export const Button: React.FC<IButtonProps> = ({
           />
         </svg>
       )}
+      {leftIcon && <span className="mr-2">{leftIcon}</span>}
       {children}
+      {rightIcon && <span className="ml-2">{rightIcon}</span>}
     </button>
   );
 };
+
+export default Button;

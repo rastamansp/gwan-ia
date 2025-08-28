@@ -1,2 +1,2 @@
-export { Input } from './input';
-export type { IInputProps, InputVariant, InputSize, InputColor } from './input.types';
+export { default as Input } from './input';
+export type { IInputProps } from './input.types';

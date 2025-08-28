@@ -1,37 +1,26 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import React from 'react';
 
 export type ButtonVariant = 'solid' | 'soft' | 'surface' | 'outline' | 'ghost';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type ButtonColor = 'accent' | 'gray' | 'success' | 'warning' | 'error';
+export type ButtonColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'neutral'
+  | 'accent'
+  | 'gray'
+  | 'error';
 
-export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  /** Variante visual do botão */
+export interface IButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
-  
-  /** Tamanho do botão */
-  size?: ButtonSize;
-  
-  /** Cor do botão */
   color?: ButtonColor;
-  
-  /** Estado desabilitado */
-  disabled?: boolean;
-  
-  /** Estado de carregamento */
+  size?: ButtonSize;
   loading?: boolean;
-  
-  /** Largura total */
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
   fullWidth?: boolean;
-  
-  /** Conteúdo do botão */
-  children: ReactNode;
-  
-  /** Classes CSS customizadas */
-  className?: string;
-  
-  /** Função de clique */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  
-  /** Tipo do botão */
-  type?: 'button' | 'submit' | 'reset';
+  children: React.ReactNode;
 }
