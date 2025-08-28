@@ -20,10 +20,34 @@ const HomePage: React.FC = () => {
             
             <nav className="flex space-x-8">
               <Link to="/" className="text-primary font-medium">🏠 Home</Link>
-              <Link to="/theme" className="text-muted-foreground hover:text-primary font-medium">🎨 Tema</Link>
-              <Link to="/auth" className="text-muted-foreground hover:text-primary font-medium">🔐 Auth</Link>
-              <Link to="/register-account" className="text-muted-foreground hover:text-primary font-medium">📝 Registro</Link>
-              <Link to="/debug" className="text-muted-foreground hover:text-primary font-medium">🔧 Debug</Link>
+              
+              {/* Menu Dropdown de Chatbots */}
+              <div className="relative group">
+                <button className="text-muted-foreground hover:text-primary font-medium flex items-center gap-1 transition-colors duration-200">
+                  🤖 Chatbots
+                  <svg className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="py-2">
+                    <Link to="/bot-jaiminho" className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200">
+                      🌿 Jaiminho - Naturopata
+                    </Link>
+                    <Link to="/bot-marley" className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200">
+                      🎵 Marley - Músico
+                    </Link>
+                    <Link to="/bot-gwan" className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200">
+                      🏢 Gwan - Institucional
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              <Link to="/auth" className="text-muted-foreground hover:text-primary font-medium">🔐 Login</Link>
+              <Link to="/register-account" className="text-muted-foreground hover:text-primary font-medium">📝 Inscreva-se</Link>
             </nav>
           </div>
         </div>
@@ -53,7 +77,10 @@ const HomePage: React.FC = () => {
               </div>
               <h4 className="text-lg font-bold text-card-foreground mb-2">Chatbot Inteligente</h4>
               <p className="text-muted-foreground text-sm mb-4">Conversas naturais com IA avançada</p>
-              <div className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <div 
+                onClick={() => alert('🚀 Funcionalidade será implementada em breve!\n\nEm breve você poderá conversar com nossos chatbots inteligentes especializados.')}
+                className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+              >
                 Experimentar →
               </div>
             </div>
@@ -67,7 +94,10 @@ const HomePage: React.FC = () => {
               </div>
               <h4 className="text-lg font-bold text-card-foreground mb-2">Tradução Automática</h4>
               <p className="text-muted-foreground text-sm mb-4">Traduza entre 100+ idiomas instantaneamente</p>
-              <div className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <div 
+                onClick={() => alert('🌍 Funcionalidade será implementada em breve!\n\nEm breve você poderá traduzir textos entre mais de 100 idiomas com nossa IA avançada.')}
+                className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+              >
                 Experimentar →
               </div>
             </div>
@@ -81,7 +111,10 @@ const HomePage: React.FC = () => {
               </div>
               <h4 className="text-lg font-bold text-card-foreground mb-2">Geração de Imagens</h4>
               <p className="text-muted-foreground text-sm mb-4">Crie imagens únicas com descrições de texto</p>
-              <div className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <div 
+                onClick={() => alert('🎨 Funcionalidade será implementada em breve!\n\nEm breve você poderá criar imagens únicas e impressionantes usando apenas descrições de texto.')}
+                className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+              >
                 Experimentar →
               </div>
             </div>
@@ -95,7 +128,10 @@ const HomePage: React.FC = () => {
               </div>
               <h4 className="text-lg font-bold text-card-foreground mb-2">Geração de Vídeos</h4>
               <p className="text-muted-foreground text-sm mb-4">Produza vídeos impressionantes com IA</p>
-              <div className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer">
+              <div 
+                onClick={() => alert('🎬 Funcionalidade será implementada em breve!\n\nEm breve você poderá criar vídeos impressionantes e profissionais usando nossa tecnologia de IA avançada.')}
+                className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer"
+              >
                 Experimentar →
               </div>
             </div>

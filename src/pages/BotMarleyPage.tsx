@@ -2,36 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ChatWidget from '../components/chat/ChatWidget'
 import { useChat } from '../hooks/useChat'
+import Header from '../components/layout/Header'
 
 const BotMarleyPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat('https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat')
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="container">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-3">
-              <Link to="/" className="flex items-center space-x-3 text-primary hover:text-primary/80 transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="font-medium">Voltar ao Início</span>
-              </Link>
-            </div>
-            
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h1 className="text-2xl font-bold text-card-foreground">BotMarley</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Header Compartilhado */}
+      <Header showBackButton={true} backButtonText="Voltar ao Início" />
 
       {/* Main Content */}
       <main className="container py-20">

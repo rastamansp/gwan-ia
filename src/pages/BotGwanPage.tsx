@@ -2,36 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ChatWidget from '../components/chat/ChatWidget'
 import { useChat } from '../hooks/useChat'
+import Header from '../components/layout/Header'
 
 const BotGwanPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat('https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat')
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="container">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-3">
-              <Link to="/" className="flex items-center space-x-3 text-primary hover:text-primary/80 transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="font-medium">Voltar ao Início</span>
-              </Link>
-            </div>
-            
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-              </div>
-              <h1 className="text-2xl font-bold text-card-foreground">BotGwan</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Header Compartilhado */}
+      <Header showBackButton={true} backButtonText="Voltar ao Início" />
 
       {/* Main Content */}
       <main className="container py-20">

@@ -2,36 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ChatWidget from '../components/chat/ChatWidget'
 import { useChat } from '../hooks/useChat'
+import Header from '../components/layout/Header'
 
 const BotJaiminhoPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat('https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat')
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header */}
-      <header className="bg-card shadow-sm border-b border-border">
-        <div className="container">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-3">
-              <Link to="/" className="flex items-center space-x-3 text-primary hover:text-primary/80 transition-colors">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                <span className="font-medium">Voltar ao Início</span>
-              </Link>
-            </div>
-            
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h1 className="text-2xl font-bold text-card-foreground">BotJaiminho</h1>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Header Compartilhado */}
+      <Header showBackButton={true} backButtonText="Voltar ao Início" />
 
       {/* Main Content */}
       <main className="container py-20">
