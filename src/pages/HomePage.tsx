@@ -1,10 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatVersion, getAppVersion } from '@/utils/version';
+import { useToast } from '../hooks/useToast';
+import ToastContainer from '../components/ui/ToastContainer';
 
 const HomePage: React.FC = () => {
+  const { toasts, showInfo } = useToast();
+
+  const handleFeatureComingSoon = (feature: string, description: string) => {
+    showInfo(`${feature} - ${description}`, 6000);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-hero">
+      {/* Toast Container */}
+      <ToastContainer toasts={toasts} />
+
       {/* Header with navigation links */}
       <header className="bg-card shadow-sm border-b border-border">
         <div className="container">
@@ -136,8 +147,9 @@ const HomePage: React.FC = () => {
               </p>
               <div
                 onClick={() =>
-                  alert(
-                    '🚀 Funcionalidade será implementada em breve!\n\nEm breve você poderá conversar com nossos chatbots inteligentes especializados.'
+                  handleFeatureComingSoon(
+                    '🚀 Chatbot Inteligente',
+                    'Funcionalidade será implementada em breve!'
                   )
                 }
                 className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer mt-auto"
@@ -171,8 +183,9 @@ const HomePage: React.FC = () => {
               </p>
               <div
                 onClick={() =>
-                  alert(
-                    '🌍 Funcionalidade será implementada em breve!\n\nEm breve você poderá traduzir textos entre mais de 100 idiomas com nossa IA avançada.'
+                  handleFeatureComingSoon(
+                    '🌍 Tradução Automática',
+                    'Funcionalidade será implementada em breve!'
                   )
                 }
                 className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer mt-auto"
@@ -206,8 +219,9 @@ const HomePage: React.FC = () => {
               </p>
               <div
                 onClick={() =>
-                  alert(
-                    '🎨 Funcionalidade será implementada em breve!\n\nEm breve você poderá criar imagens únicas e impressionantes usando apenas descrições de texto.'
+                  handleFeatureComingSoon(
+                    '🎨 Geração de Imagens',
+                    'Funcionalidade será implementada em breve!'
                   )
                 }
                 className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer mt-auto"
@@ -241,8 +255,9 @@ const HomePage: React.FC = () => {
               </p>
               <div
                 onClick={() =>
-                  alert(
-                    '🎬 Funcionalidade será implementada em breve!\n\nEm breve você poderá criar vídeos impressionantes e profissionais usando nossa tecnologia de IA avançada.'
+                  handleFeatureComingSoon(
+                    '🎬 Geração de Vídeos',
+                    'Funcionalidade será implementada em breve!'
                   )
                 }
                 className="text-card-foreground text-sm font-medium hover:text-primary transition-colors cursor-pointer mt-auto"
