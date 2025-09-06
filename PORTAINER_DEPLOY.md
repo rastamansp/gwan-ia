@@ -36,7 +36,7 @@ docker-compose build
 
 ## 🎯 Deploy no Portainer
 
-### Opção 1: Usar docker-compose.yml (Build + Deploy)
+### Deploy de Produção (Recomendado)
 
 1. **Acesse o Portainer**
 2. **Vá para Stacks**
@@ -46,21 +46,22 @@ docker-compose build
    - **Build method:** `Web editor`
    - **Copy and paste o conteúdo do arquivo `docker-compose.yml`**
 
-### Opção 2: Usar docker-compose.portainer.yml (Imagem Pré-buildada)
+### Deploy Local (Desenvolvimento)
 
-1. **Acesse o Portainer**
-2. **Vá para Stacks**
-3. **Clique em "Add stack"**
-4. **Configure:**
-   - **Name:** `gwan-site`
-   - **Build method:** `Web editor`
-   - **Copy and paste o conteúdo do arquivo `docker-compose.portainer.yml`**
+Para desenvolvimento local, use o arquivo `docker-compose.local.yml`:
 
-## 📁 Estrutura de Arquivos para Portainer
+```bash
+# Executar localmente
+docker-compose -f docker-compose.local.yml up -d
+
+# Acessar em http://localhost:8080
+```
+
+## 📁 Estrutura de Arquivos
 
 ```
-├── docker-compose.yml           # Build + Deploy completo
-├── docker-compose.portainer.yml # Deploy apenas (imagem pré-buildada)
+├── docker-compose.yml           # Deploy de produção (Portainer)
+├── docker-compose.local.yml     # Deploy local (desenvolvimento)
 ├── Dockerfile                   # Build da aplicação
 ├── nginx.conf                   # Configuração Nginx
 ├── .dockerignore                # Arquivos ignorados
@@ -69,26 +70,29 @@ docker-compose build
 
 ## 🔄 Workflow de Deploy
 
-### Primeira Vez (Build + Deploy)
+### Deploy de Produção (Portainer)
 
-1. **Faça upload do código para o servidor**
-2. **Build da imagem:**
-   ```bash
-   docker build -t gwan-site:latest .
-   ```
-3. **Deploy no Portainer usando `docker-compose.yml`**
+1. **O Portainer fará o build automaticamente** usando o `docker-compose.yml`
+2. **Deploy no Portainer:**
+   - Vá para Stacks
+   - Add stack com conteúdo do `docker-compose.yml`
+   - O build será feito automaticamente
 
 ### Atualizações (Re-deploy)
 
-1. **Faça upload do novo código para o servidor**
-2. **Rebuild da imagem:**
-   ```bash
-   docker build -t gwan-site:latest .
-   ```
-3. **No Portainer:**
+1. **No Portainer:**
    - Vá para a stack `gwan-site`
    - Clique em "Update the stack"
-   - Force update se necessário
+   - O build será refeito automaticamente com o novo código
+
+### Desenvolvimento Local
+
+```bash
+# Usar arquivo local para desenvolvimento
+docker-compose -f docker-compose.local.yml up -d
+
+# Acessar em http://localhost:8080
+```
 
 ## ⚙️ Configurações Portainer
 
