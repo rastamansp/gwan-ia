@@ -155,6 +155,39 @@ docker-compose up -d
 http://localhost:8080
 ```
 
+## 🚀 Deploy em Produção (Portainer)
+
+### **Configuração no Portainer:**
+
+1. **Adicionar Stack:**
+   - **Repository URL:** `https://github.com/rastamansp/gwan-ia.git`
+   - **Reference:** `main`
+   - **Compose path:** `docker-compose-producao.yml`
+
+2. **Variáveis de Ambiente:**
+   ```env
+   NODE_ENV=production
+   VITE_APP_NAME=Gwan IA
+   VITE_APP_VERSION=1.0.0
+   VITE_API_URL=https://api.gwan.com.br/api
+   VITE_BUILD_TIME=
+   VITE_GIT_COMMIT=
+   VITE_GIT_BRANCH=main
+   VITE_DEBUG=false
+   VITE_LOG_LEVEL=info
+   VITE_SHOW_DEV_TOOLS=false
+   ```
+
+3. **Deploy Automático:**
+   - Build automático via Git
+   - Traefik configurado para `gwan.com.br`
+   - SSL automático via Let's Encrypt
+
+### **Arquivos de Deploy:**
+- **`docker-compose.yml`** - Desenvolvimento local
+- **`docker-compose-producao.yml`** - Produção (Portainer)
+- **`env.production`** - Variáveis de ambiente de produção
+
 ## 📝 Licença
 
 MIT License
