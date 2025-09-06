@@ -37,13 +37,13 @@ services:
       - VITE_APP_NAME=${VITE_APP_NAME:-Gwan IA}
       - VITE_APP_VERSION=${VITE_APP_VERSION:-1.0.0}
       
-      # API
+      # API (CORRIGIDO)
       - VITE_API_URL=${VITE_API_URL:-https://api.gwan.com.br/api}
       
-      # Build
+      # Build (CORRIGIDO - deixar vazio para auto-gerar)
       - VITE_BUILD_TIME=${VITE_BUILD_TIME:-}
       - VITE_GIT_COMMIT=${VITE_GIT_COMMIT:-}
-      - VITE_GIT_BRANCH=${VITE_GIT_BRANCH:-}
+      - VITE_GIT_BRANCH=${VITE_GIT_BRANCH:-main}
     deploy:
       resources:
         limits:
