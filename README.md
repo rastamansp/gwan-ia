@@ -7,7 +7,7 @@
 #### **🏠 Página Inicial (HomePage)**
 - Design responsivo com tema personalizado
 - Seção "Experimente" com cards dos chatbots
-- Navegação com dropdown de Chatbots
+- Navegação unificada com Header compartilhado
 - Links para Login e Inscreva-se
 - Alertas para funcionalidades em desenvolvimento
 
@@ -25,11 +25,25 @@
 - Contexto de autenticação global
 - Rotas protegidas
 
-#### **💬 Chat Widget**
-- Widget flutuante para conversas
-- Integração com webhooks externos
-- Histórico de conversas
-- Endpoints específicos para cada bot
+#### **🛒 Gwan Mart - E-commerce**
+- **Loja online** com produtos tecnológicos premium
+- **Página de produtos** com galeria de imagens
+- **Páginas de detalhes** dinâmicas por produto
+- **Integração WhatsApp** para compras
+- **Seleção de opções** obrigatória (cores, armazenamento)
+- **Controles de quantidade** e origem do frete
+- **Campo CEP** opcional para cálculo de frete
+- **Mensagens formatadas** com dados completos do produto
+- **Navegação unificada** em todas as páginas
+
+#### **📱 Integração WhatsApp**
+- **Botões de compra** integrados ao WhatsApp
+- **Mensagens formatadas** com dados do produto
+- **Número internacional** configurado (5511987221050)
+- **Dados incluídos**: ID, nome, opção, quantidade, origem, CEP, preço
+- **Validação obrigatória** de seleção de opções
+- **Formatação automática** de CEP (00000-000)
+- **Links diretos** para WhatsApp Web/App
 
 #### **🎨 Design System**
 - Tema personalizado com Tailwind CSS
@@ -67,6 +81,8 @@
 - `/bot-jaiminho` - Chatbot Jaiminho
 - `/bot-marley` - Chatbot Marley  
 - `/bot-gwan` - Chatbot Gwan
+- `/gwan-mart` - Loja online Gwan Mart
+- `/gwan-mart/product/:productId` - Página de detalhes do produto
 - `/dashboard` - Dashboard (estrutura básica)
 - `/debug` - Validação de variáveis de ambiente
 

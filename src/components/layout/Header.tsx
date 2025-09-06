@@ -62,16 +62,17 @@ const Header: React.FC<HeaderProps> = ({
           </div>
 
           <nav className="flex space-x-8">
-            <Link
-              to="/"
-              className="text-muted-foreground hover:text-primary font-medium"
-            >
+            <Link to="/" className="text-primary font-medium">
               🏠 Home
+            </Link>
+
+            <Link to="/gwan-mart" className="text-primary font-medium">
+              🛒 Gwan Mart
             </Link>
 
             {/* Menu Dropdown de Chatbots */}
             <div className="relative group">
-              <button className="text-muted-foreground hover:text-primary font-medium flex items-center gap-1 transition-colors duration-200">
+              <button className="text-muted-foreground hover:text-primary font-medium flex items-center gap-1 transition-colors duration-200 whitespace-nowrap">
                 🤖 Chatbots
                 <svg
                   className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
