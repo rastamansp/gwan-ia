@@ -162,7 +162,7 @@ http://localhost:8080
 1. **Adicionar Stack:**
    - **Repository URL:** `https://github.com/rastamansp/gwan-ia.git`
    - **Reference:** `main`
-   - **Compose path:** `docker-compose-producao.yml`
+   - **Compose path:** `docker-compose-production.yml`
 
 2. **Variáveis de Ambiente:**
    ```env
@@ -176,6 +176,16 @@ http://localhost:8080
    VITE_DEBUG=false
    VITE_LOG_LEVEL=info
    VITE_SHOW_DEV_TOOLS=false
+   
+   # Monitoramento APM
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://gwan.com.br:4317
+   OTEL_SERVICE_NAME=gwan-ia-frontend
+   OTEL_SERVICE_VERSION=1.0.0
+   OTEL_RESOURCE_ATTRIBUTES=service.name=gwan-ia-frontend,service.version=1.0.0
+   
+   # Logs
+   LOG_LEVEL=info
+   LOG_FORMAT=json
    ```
 
 3. **Deploy Automático:**
@@ -185,8 +195,9 @@ http://localhost:8080
 
 ### **Arquivos de Deploy:**
 - **`docker-compose.yml`** - Desenvolvimento local
-- **`docker-compose-producao.yml`** - Produção (Portainer)
+- **`docker-compose-production.yml`** - Produção (Portainer)
 - **`env.production`** - Variáveis de ambiente de produção
+- **`MONITORING.md`** - Configuração de monitoramento APM
 
 ## 📝 Licença
 
