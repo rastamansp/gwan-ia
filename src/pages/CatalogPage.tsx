@@ -5,19 +5,18 @@ import SearchBar from '../components/SearchBar';
 import Pagination from '../components/Pagination';
 import { useProductsWithFilters } from '../hooks/useProductsWithFilters';
 import { SearchParams } from '../types/search.types';
-import { formatPrice } from '../utils/price';
 
 const CatalogPage: React.FC = () => {
-  const { 
-    products, 
-    loading, 
-    error, 
-    pagination, 
-    categories, 
-    subcategories, 
+  const {
+    products,
+    loading,
+    error,
+    pagination,
+    categories,
+    subcategories,
     searchProducts,
     changePage,
-    changeLimit
+    changeLimit,
   } = useProductsWithFilters();
 
   // Debug: verificar produtos renderizados
@@ -41,12 +40,14 @@ const CatalogPage: React.FC = () => {
               Catálogo Completo
             </h2>
             <p className="text-muted-foreground">
-              {loading ? 'Carregando...' : `${pagination.total} produtos encontrados`}
+              {loading
+                ? 'Carregando...'
+                : `${pagination.total} produtos encontrados`}
             </p>
           </div>
 
           {/* Barra de pesquisa */}
-          <SearchBar 
+          <SearchBar
             onSearch={handleSearch}
             loading={loading}
             categories={categories}
@@ -75,93 +76,106 @@ const CatalogPage: React.FC = () => {
                   to={`/gwan-mart/product/${product.id}`}
                   className="group block"
                 >
-                  <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                  <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden relative">
                     {/* Product Image Container */}
                     <div className="relative">
                       <img
                         src={product.thumbnail}
-                        alt={product.name}
+                        alt={
+                          product.name ||
+                          product.description ||
+                          `Produto ${product.code}`
+                        }
                         className="w-full h-48 object-cover"
                       />
-                      
-                      {/* Discount Badge - Top Left */}
-                      {product.discountPercentage > 0 && (
-                        <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                          -{product.discountPercentage}%
-                        </div>
-                      )}
-                      
-                      {/* New Badge - Top Right */}
-                      <div className="absolute top-2 right-2 bg-blue-400 text-white text-xs font-bold px-2 py-1 rounded-full">
-                        Novo
-                      </div>
-                      
-                      {/* Feature Badge - Bottom Right Overlay */}
-                      {product.category === 'Eletrônicos' && product.subcategory === 'Smartphones' && (
-                        <div className="absolute bottom-2 right-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
-                          CÂMERA 108MP+ VIDEO FULL HD
-                        </div>
-                      )}
+
+                      {/* Favorite Button - Top Right */}
+                      <button
+                        className="absolute top-2 right-2 p-2 bg-white/80 hover:bg-white rounded-full shadow-sm transition-colors"
+                        onClick={e => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          // TODO: Implementar favoritos
+                        }}
+                      >
+                        <svg
+                          className="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                          />
+                        </svg>
+                      </button>
                     </div>
 
                     {/* Product Info */}
                     <div className="p-4 space-y-3">
-                      {/* Product Title */}
-                      <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors">
-                        {product.name || product.description || `Produto ${product.code}`}
-                      </h3>
-
-                      {/* Price Section */}
-                      <div className="flex items-center justify-between">
-                        {/* Original Price */}
-                        {product.discountPercentage > 0 && (
-                          <span className="text-sm text-gray-500 line-through">
-                            {product.formattedOriginalPrice || formatPrice(product.originalPrice)}
-                          </span>
-                        )}
-                        
-                        {/* Current Price */}
-                        <span className="text-lg font-bold text-purple-600">
-                          {product.formattedCurrentPrice || formatPrice(product.promotionalPrice || product.currentPrice)}
+                      {/* MAIS VENDIDO Badge */}
+                      <div className="inline-block">
+                        <span className="bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                          MAIS VENDIDO
                         </span>
                       </div>
+
+                      {/* Product Title */}
+                      <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        {product.name}
+                      </h3>
 
                       {/* Rating */}
                       <div className="flex items-center gap-1">
-                        <svg
-                          className="h-4 w-4 fill-current text-yellow-400"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
                         <span className="text-sm font-medium text-gray-900">
-                          {product.formattedRating}
+                          {product.formattedRating || '4.9'}
+                        </span>
+                        <div className="flex text-blue-500">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <svg
+                              key={i}
+                              className="w-3 h-3 fill-current"
+                              viewBox="0 0 15 15"
+                            >
+                              <path d="M7.5 0L9.5 5.5L15 5.5L10.5 9L12 15L7.5 11.5L3 15L4.5 9L0 5.5L5.5 5.5L7.5 0Z" />
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          ({product.totalReviews || '2866'})
                         </span>
                       </div>
 
-                      {/* Free Shipping */}
-                      <div className="flex items-center justify-end">
-                        <div className="flex items-center gap-1 text-blue-400 text-xs">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="h-3 w-3"
-                          >
-                            <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
-                            <path d="M15 18H9"></path>
-                            <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
-                            <circle cx="17" cy="18" r="2"></circle>
-                            <circle cx="7" cy="18" r="2"></circle>
-                          </svg>
-                          <span>Frete grátis</span>
+                      {/* Price Section */}
+                      <div className="space-y-1">
+                        {/* Original Price */}
+                        {product.discountPercentage > 0 && (
+                          <div className="text-sm text-gray-500 line-through">
+                            R${' '}
+                            {(product.originalPrice || 0).toLocaleString(
+                              'pt-BR'
+                            )}
+                          </div>
+                        )}
+
+                        {/* Current Price with Discount */}
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl font-bold text-gray-900">
+                            R${' '}
+                            {(
+                              product.promotionalPrice ||
+                              product.currentPrice ||
+                              0
+                            ).toLocaleString('pt-BR')}
+                          </span>
+                          {product.discountPercentage > 0 && (
+                            <span className="text-sm font-semibold text-green-600">
+                              {product.discountPercentage}% OFF
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

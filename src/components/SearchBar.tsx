@@ -8,11 +8,11 @@ interface SearchBarProps {
   subcategories?: string[];
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ 
-  onSearch, 
-  loading = false, 
-  categories = [], 
-  subcategories = [] 
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  loading = false,
+  categories = [],
+  subcategories = [],
 }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -28,24 +28,27 @@ const SearchBar: React.FC<SearchBarProps> = ({
     sortBy: 'name',
     sortOrder: 'asc',
     page: 1,
-    limit: 20
+    limit: 20,
   });
 
-  const handleInputChange = (field: keyof SearchParams, value: any) => {
+  const handleInputChange = (
+    field: keyof SearchParams,
+    value: string | number | boolean | undefined
+  ) => {
     setSearchParams(prev => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
   const handleSearch = () => {
     // Remove campos vazios antes de enviar
     const cleanParams = Object.fromEntries(
-      Object.entries(searchParams).filter(([_, value]) => 
-        value !== '' && value !== undefined && value !== null
+      Object.entries(searchParams).filter(
+        ([, value]) => value !== '' && value !== undefined && value !== null
       )
     ) as SearchParams;
-    
+
     onSearch(cleanParams);
   };
 
@@ -63,7 +66,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       sortBy: 'name',
       sortOrder: 'asc',
       page: 1,
-      limit: 20
+      limit: 20,
     });
     onSearch({});
   };
@@ -83,7 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             type="text"
             placeholder="Buscar por nome ou código do produto..."
             value={searchParams.search || ''}
-            onChange={(e) => handleInputChange('search', e.target.value)}
+            onChange={e => handleInputChange('search', e.target.value)}
             onKeyPress={handleKeyPress}
             className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             disabled={loading}
@@ -171,11 +174,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </label>
             <select
               value={searchParams.category || ''}
-              onChange={(e) => handleInputChange('category', e.target.value)}
+              onChange={e => handleInputChange('category', e.target.value)}
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="">Todas as categorias</option>
-              {categories.map((category) => (
+              {categories.map(category => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -190,11 +193,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </label>
             <select
               value={searchParams.subcategory || ''}
-              onChange={(e) => handleInputChange('subcategory', e.target.value)}
+              onChange={e => handleInputChange('subcategory', e.target.value)}
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="">Todas as subcategorias</option>
-              {subcategories.map((subcategory) => (
+              {subcategories.map(subcategory => (
                 <option key={subcategory} value={subcategory}>
                   {subcategory}
                 </option>
@@ -211,7 +214,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
               type="number"
               placeholder="0"
               value={searchParams.minPrice || ''}
-              onChange={(e) => handleInputChange('minPrice', e.target.value ? Number(e.target.value) : undefined)}
+              onChange={e =>
+                handleInputChange(
+                  'minPrice',
+                  e.target.value ? Number(e.target.value) : undefined
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
@@ -225,7 +233,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
               type="number"
               placeholder="9999"
               value={searchParams.maxPrice || ''}
-              onChange={(e) => handleInputChange('maxPrice', e.target.value ? Number(e.target.value) : undefined)}
+              onChange={e =>
+                handleInputChange(
+                  'maxPrice',
+                  e.target.value ? Number(e.target.value) : undefined
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
@@ -241,7 +254,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
               min="0"
               max="100"
               value={searchParams.minDiscount || ''}
-              onChange={(e) => handleInputChange('minDiscount', e.target.value ? Number(e.target.value) : undefined)}
+              onChange={e =>
+                handleInputChange(
+                  'minDiscount',
+                  e.target.value ? Number(e.target.value) : undefined
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
@@ -258,7 +276,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
               max="5"
               step="0.1"
               value={searchParams.minRating || ''}
-              onChange={(e) => handleInputChange('minRating', e.target.value ? Number(e.target.value) : undefined)}
+              onChange={e =>
+                handleInputChange(
+                  'minRating',
+                  e.target.value ? Number(e.target.value) : undefined
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
@@ -270,7 +293,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </label>
             <select
               value={searchParams.sortBy || 'name'}
-              onChange={(e) => handleInputChange('sortBy', e.target.value as SearchParams['sortBy'])}
+              onChange={e =>
+                handleInputChange(
+                  'sortBy',
+                  e.target.value as SearchParams['sortBy']
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="name">Nome</option>
@@ -288,7 +316,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </label>
             <select
               value={searchParams.sortOrder || 'asc'}
-              onChange={(e) => handleInputChange('sortOrder', e.target.value as SearchParams['sortOrder'])}
+              onChange={e =>
+                handleInputChange(
+                  'sortOrder',
+                  e.target.value as SearchParams['sortOrder']
+                )
+              }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="asc">Crescente</option>
