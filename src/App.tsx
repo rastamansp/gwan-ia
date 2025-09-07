@@ -23,6 +23,7 @@ import BotJaiminhoPage from './pages/BotJaiminhoPage';
 import BotMarleyPage from './pages/BotMarleyPage';
 import BotGwanPage from './pages/BotGwanPage';
 import GwanMartPage from './pages/GwanMartPage';
+import CatalogPage from './pages/CatalogPage';
 import ProductPage from './pages/ProductPage';
 import DebugPage from './pages/DebugPage';
 
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gwan-mart" element={<GwanMartPage />} />
+          <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
           <Route
             path="/gwan-mart/product/:productId"
             element={<ProductPage />}

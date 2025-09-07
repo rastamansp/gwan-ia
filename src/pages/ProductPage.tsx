@@ -2,170 +2,16 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
-
-// Dados mockados dos produtos
-const products = {
-  'smartphone-premium-5g': {
-    id: 'smartphone-premium-5g',
-    name: 'Smartphone Premium 5G',
-    category: 'Eletrônicos',
-    price: 1299.99,
-    originalPrice: 1599.99,
-    discount: 19,
-    rating: 4.9,
-    reviews: 127,
-    description:
-      'O smartphone mais avançado com tecnologia 5G, câmera tripla de 108MP e bateria de longa duração. Design elegante e performance incomparável.',
-    images: [
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&crop=center',
-    ],
-    variants: [
-      {
-        name: 'Preto Espacial',
-        price: 1299.99,
-        storage: '256GB',
-        color: 'Preto',
-      },
-      { name: 'Azul Oceano', price: 1299.99, storage: '256GB', color: 'Azul' },
-      { name: 'Prata Lunar', price: 1399.99, storage: '512GB', color: 'Prata' },
-    ],
-    specifications: {
-      Tela: '6.7" Super AMOLED',
-      Processador: 'Snapdragon 8 Gen 2',
-      RAM: '12GB',
-      Armazenamento: '256GB',
-      Câmera: '108MP + 12MP + 8MP',
-      Bateria: '5000mAh',
-      Sistema: 'Android 14',
-    },
-  },
-  'fone-wireless-premium': {
-    id: 'fone-wireless-premium',
-    name: 'Fone Wireless Premium',
-    category: 'Áudio',
-    price: 399.99,
-    originalPrice: 499.99,
-    discount: 20,
-    rating: 4.8,
-    reviews: 89,
-    description:
-      'Fone de ouvido sem fio com cancelamento de ruído ativo, qualidade de som premium e bateria de longa duração.',
-    images: [
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&crop=center',
-    ],
-    variants: [
-      { name: 'Preto', price: 399.99, storage: 'Padrão', color: 'Preto' },
-      { name: 'Branco', price: 399.99, storage: 'Padrão', color: 'Branco' },
-      {
-        name: 'Azul',
-        price: 429.99,
-        storage: 'Edição Limitada',
-        color: 'Azul',
-      },
-    ],
-    specifications: {
-      Tipo: 'Over-ear sem fio',
-      'Cancelamento de Ruído': 'Ativo',
-      Bateria: '30 horas',
-      Conexão: 'Bluetooth 5.3',
-      Alcance: '10 metros',
-      Peso: '250g',
-      Garantia: '12 meses',
-    },
-  },
-  'notebook-gamer-pro': {
-    id: 'notebook-gamer-pro',
-    name: 'Notebook Gamer Pro',
-    category: 'Computadores',
-    price: 2499.99,
-    originalPrice: 2999.99,
-    discount: 15,
-    rating: 4.7,
-    reviews: 156,
-    description:
-      'Notebook gamer de alta performance com placa de vídeo dedicada, processador potente e tela de alta resolução.',
-    images: [
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&crop=center',
-    ],
-    variants: [
-      {
-        name: 'Preto Gamer',
-        price: 2499.99,
-        storage: '512GB SSD',
-        color: 'Preto',
-      },
-      { name: 'RGB Edition', price: 2699.99, storage: '1TB SSD', color: 'RGB' },
-    ],
-    specifications: {
-      Tela: '15.6" Full HD 144Hz',
-      Processador: 'Intel i7-12700H',
-      'Placa de Vídeo': 'RTX 4060 8GB',
-      RAM: '16GB DDR4',
-      Armazenamento: '512GB SSD',
-      Sistema: 'Windows 11',
-      Peso: '2.3kg',
-    },
-  },
-  'smartwatch-fitness': {
-    id: 'smartwatch-fitness',
-    name: 'Smartwatch Fitness',
-    category: 'Wearables',
-    price: 599.99,
-    originalPrice: 799.99,
-    discount: 25,
-    rating: 4.6,
-    reviews: 203,
-    description:
-      'Smartwatch completo para fitness com monitoramento de saúde, GPS integrado e bateria de longa duração.',
-    images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&crop=center',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&crop=center',
-    ],
-    variants: [
-      {
-        name: 'Preto Esportivo',
-        price: 599.99,
-        storage: 'Padrão',
-        color: 'Preto',
-      },
-      { name: 'Rosa Fitness', price: 599.99, storage: 'Padrão', color: 'Rosa' },
-      {
-        name: 'Azul Premium',
-        price: 649.99,
-        storage: 'Edição Premium',
-        color: 'Azul',
-      },
-    ],
-    specifications: {
-      Tela: '1.4" AMOLED',
-      Bateria: '7 dias',
-      Resistência: '5ATM',
-      GPS: 'Integrado',
-      Monitoramento: 'Frequência cardíaca',
-      Conexão: 'Bluetooth 5.0',
-      Compatibilidade: 'iOS/Android',
-    },
-  },
-};
+import { useProduct } from '../hooks/useProduct';
 
 const ProductPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
+  const { product, loading, error } = useProduct(productId);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [origin, setOrigin] = useState('São Paulo - SP');
   const [zipCode, setZipCode] = useState('');
-
-  const product = productId
-    ? products[productId as keyof typeof products]
-    : null;
 
   const formatZipCode = (value: string) => {
     // Remove tudo que não é número
@@ -186,27 +32,43 @@ const ProductPage: React.FC = () => {
   const handleWhatsAppClick = () => {
     if (!product) return;
 
-    const selectedOption = product.variants[selectedVariant];
+    const selectedOption = product.availableVariations[selectedVariant];
     const productData: WhatsAppProductData = {
-      id: product.id,
-      name: product.name,
+      id: product.id.toString(),
+      name: product.description,
       quantity: quantity,
       origin: origin,
-      price: selectedOption?.price || product.price,
-      selectedOption: selectedOption?.name,
+      price: product.promotionalPrice || product.originalPrice,
+      selectedOption: selectedOption?.nome,
       zipCode: zipCode.trim() || undefined,
     };
 
     openWhatsApp(productData);
   };
 
-  if (!product) {
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-hero">
+        <Header />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <h1 className="text-2xl font-bold text-foreground mb-4">
+            Carregando produto...
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !product) {
     return (
       <div className="min-h-screen bg-gradient-hero">
         <Header />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">
-            Produto não encontrado
+            {error || 'Produto não encontrado'}
           </h1>
           <Link to="/gwan-mart" className="text-primary hover:text-primary/80">
             Voltar para a loja
@@ -222,6 +84,10 @@ const ProductPage: React.FC = () => {
       currency: 'BRL',
     }).format(price);
   };
+
+  // Usar preço promocional se disponível, senão usar preço original
+  const currentPrice = product.promotionalPrice || product.originalPrice;
+  const isOnSale = product.isOnSale && product.promotionalPrice;
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -273,7 +139,7 @@ const ProductPage: React.FC = () => {
             {product.category}
           </span>
           <span className="text-muted-foreground">/</span>
-          <span className="text-sm font-medium">{product.name}</span>
+          <span className="text-sm font-medium">{product.description}</span>
         </div>
 
         {/* Product Details */}
@@ -283,8 +149,8 @@ const ProductPage: React.FC = () => {
             <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-medium">
               <div className="aspect-square bg-gradient-to-br from-muted/20 to-muted/40">
                 <img
-                  src={product.images[selectedImage]}
-                  alt={product.name}
+                  src={product.imagens[selectedImage] || product.thumbnail}
+                  alt={product.description}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -292,7 +158,7 @@ const ProductPage: React.FC = () => {
 
             {/* Thumbnail Images */}
             <div className="flex gap-2 overflow-x-auto">
-              {product.images.map((image, index) => (
+              {product.imagens.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
@@ -304,7 +170,7 @@ const ProductPage: React.FC = () => {
                 >
                   <img
                     src={image}
-                    alt={`${product.name} ${index + 1}`}
+                    alt={`${product.description} ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -319,67 +185,82 @@ const ProductPage: React.FC = () => {
                 <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                   {product.category}
                 </div>
-                <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80">
-                  -{product.discount}%
-                </div>
+                {isOnSale && (
+                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80">
+                    -{product.discountPercentage}%
+                  </div>
+                )}
               </div>
 
               <h1 className="text-3xl font-bold text-foreground mb-2">
-                {product.name}
+                {product.description}
               </h1>
 
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex text-yellow-400">
-                  {renderStars(product.rating)}
+                  {renderStars(product.averageRating)}
                 </div>
                 <span className="text-sm text-muted-foreground">
-                  ({product.reviews} avaliações)
+                  {product.formattedReviews}
                 </span>
               </div>
 
               <div className="flex items-center gap-3 mb-4">
                 <span className="text-3xl font-bold text-primary">
-                  {formatPrice(product.price)}
+                  {formatPrice(currentPrice)}
                 </span>
-                <span className="text-lg text-muted-foreground line-through">
-                  {formatPrice(product.originalPrice)}
-                </span>
+                {isOnSale && (
+                  <span className="text-lg text-muted-foreground line-through">
+                    {formatPrice(product.originalPrice)}
+                  </span>
+                )}
               </div>
 
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {product.description}
-              </p>
+              <div className="text-muted-foreground leading-relaxed mb-6">
+                <p>
+                  <strong>Código:</strong> {product.code}
+                </p>
+                <p>
+                  <strong>Estoque:</strong> {product.stock} unidades
+                </p>
+                <p>
+                  <strong>Fornecedor:</strong> {product.supplier}
+                </p>
+              </div>
             </div>
 
             {/* Variants */}
-            <div className="space-y-3">
-              <h3 className="font-medium">Escolha uma opção:</h3>
-              <div className="grid grid-cols-1 gap-2">
-                {product.variants.map((variant, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedVariant(index)}
-                    className={`p-3 border rounded-lg text-left transition-all ${
-                      selectedVariant === index
-                        ? 'border-primary bg-primary/5 shadow-soft'
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                  >
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <span className="font-medium">{variant.name}</span>
-                        <div className="text-sm text-muted-foreground">
-                          {variant.storage} • {variant.color}
+            {product.availableVariations.length > 0 && (
+              <div className="space-y-3">
+                <h3 className="font-medium">Escolha uma opção:</h3>
+                <div className="grid grid-cols-1 gap-2">
+                  {product.availableVariations.map((variant, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedVariant(index)}
+                      className={`p-3 border rounded-lg text-left transition-all ${
+                        selectedVariant === index
+                          ? 'border-primary bg-primary/5 shadow-soft'
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <span className="font-medium">{variant.nome}</span>
+                          <div className="text-sm text-muted-foreground">
+                            {variant.cor} •{' '}
+                            {variant.disponivel ? 'Disponível' : 'Indisponível'}
+                          </div>
                         </div>
+                        <span className="font-bold text-primary">
+                          {formatPrice(currentPrice)}
+                        </span>
                       </div>
-                      <span className="font-bold text-primary">
-                        {formatPrice(variant.price)}
-                      </span>
-                    </div>
-                  </button>
-                ))}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Quantity and Origin Controls */}
             <div className="space-y-4">
@@ -452,7 +333,10 @@ const ProductPage: React.FC = () => {
             <div className="space-y-3">
               <button
                 onClick={handleWhatsAppClick}
-                disabled={selectedVariant === null}
+                disabled={
+                  product.availableVariations.length > 0 &&
+                  selectedVariant === null
+                }
                 className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-11 rounded-md px-8 w-full bg-green-600 hover:bg-green-700 text-white shadow-medium hover:shadow-strong transition-all"
               >
                 <svg
@@ -469,7 +353,8 @@ const ProductPage: React.FC = () => {
                 >
                   <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
                 </svg>
-                {selectedVariant === null
+                {product.availableVariations.length > 0 &&
+                selectedVariant === null
                   ? 'Selecione uma opção para comprar'
                   : 'Comprar pelo WhatsApp'}
               </button>
@@ -623,24 +508,39 @@ const ProductPage: React.FC = () => {
 
           <div className="rounded-lg border text-card-foreground shadow-sm bg-gradient-card shadow-soft">
             <div className="p-6">
-              <h3 className="font-bold text-lg mb-4">
-                Especificações Técnicas
-              </h3>
+              <h3 className="font-bold text-lg mb-4">Informações do Produto</h3>
               <div className="space-y-3">
-                {Object.entries(product.specifications).map(
-                  ([key, value], index) => (
-                    <div key={index}>
-                      <div className="flex justify-between py-2">
-                        <span className="text-muted-foreground">{key}:</span>
-                        <span className="font-medium">{value}</span>
-                      </div>
-                      {index <
-                        Object.entries(product.specifications).length - 1 && (
-                        <div className="shrink-0 bg-border h-[1px] w-full"></div>
-                      )}
-                    </div>
-                  )
-                )}
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">Código:</span>
+                  <span className="font-medium">{product.code}</span>
+                </div>
+                <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">NCM:</span>
+                  <span className="font-medium">{product.ncm}</span>
+                </div>
+                <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">GTIN/EAN:</span>
+                  <span className="font-medium">{product.gtinEan}</span>
+                </div>
+                <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">Estoque:</span>
+                  <span className="font-medium">{product.stock} unidades</span>
+                </div>
+                <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">Fornecedor:</span>
+                  <span className="font-medium">{product.supplier}</span>
+                </div>
+                <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                <div className="flex justify-between py-2">
+                  <span className="text-muted-foreground">Disponível:</span>
+                  <span className="font-medium">
+                    {product.isAvailable ? 'Sim' : 'Não'}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

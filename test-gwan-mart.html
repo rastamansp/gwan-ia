@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste API - Gwan Mart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .loading {
+            color: #007bff;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 300px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f9f9f9;
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+            float: left;
+            margin-right: 15px;
+        }
+        .product-info {
+            overflow: hidden;
+        }
+        .product-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .product-price {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .product-discount {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .product-stock {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-top: 5px;
+            display: inline-block;
+        }
+        .stock-high { background: #d4edda; color: #155724; }
+        .stock-low { background: #fff3cd; color: #856404; }
+        .stock-none { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Teste da API - Gwan Mart</h1>
+        
+        <div class="test-section">
+            <h2>1. Teste de Conectividade</h2>
+            <button onclick="testConnection()">Testar Conexão</button>
+            <div id="connection-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>2. Teste de Produtos em Destaque</h2>
+            <button onclick="testFeaturedProducts()">Buscar Produtos em Destaque</button>
+            <div id="featured-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>3. Teste de Produto Individual</h2>
+            <input type="text" id="productId" placeholder="ID do produto (ex: 16527361911)" value="16527361911" style="width: 300px; padding: 8px; margin-right: 10px;">
+            <button onclick="testProductFetch()">Buscar Produto</button>
+            <div id="product-result"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>4. Teste de URLs da Aplicação</h2>
+            <button onclick="testAppUrls()">Testar URLs</button>
+            <div id="url-result"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000/api';
+        const APP_BASE = 'http://localhost:3001';
+        
+        async function testConnection() {
+            const resultDiv = document.getElementById('connection-result');
+            resultDiv.innerHTML = '<div class="loading">Testando conexão...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="success">✅ Conexão com API estabelecida com sucesso!</div>';
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro na conexão: ${response.status} ${response.statusText}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro de conexão: ${error.message}</div>`;
+            }
+        }
+
+        async function testFeaturedProducts() {
+            const resultDiv = document.getElementById('featured-result');
+            resultDiv.innerHTML = '<div class="loading">Buscando produtos em destaque...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/v1/products/featured`);
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    const products = data.data.products;
+                    let html = `
+                        <div class="success">✅ ${products.length} produtos em destaque encontrados!</div>
+                        <div class="product-info">
+                            <p><strong>Total:</strong> ${data.data.total}</p>
+                            <p><strong>Categorias:</strong> ${data.data.categories.join(', ')}</p>
+                        </div>
+                    `;
+                    
+                    products.forEach(product => {
+                        const stockClass = product.stock > 10 ? 'stock-high' : 
+                                         product.stock > 0 ? 'stock-low' : 'stock-none';
+                        const stockText = product.stock > 10 ? 'Em estoque' : 
+                                         product.stock > 0 ? 'Últimas unidades' : 'Indisponível';
+                        
+                        html += `
+                            <div class="product-card">
+                                <img src="${product.thumbnail}" alt="${product.name}" class="product-image">
+                                <div class="product-info">
+                                    <div class="product-title">${product.name}</div>
+                                    <div><strong>Código:</strong> ${product.code}</div>
+                                    <div><strong>Categoria:</strong> ${product.category}</div>
+                                    <div class="product-price">${product.formattedCurrentPrice}</div>
+                                    ${product.discountPercentage > 0 ? `<div class="product-discount">Desconto: ${product.discountPercentage}%</div>` : ''}
+                                    <div><strong>Avaliação:</strong> ${product.formattedRating} ${product.formattedReviews}</div>
+                                    <div><strong>Estoque:</strong> ${product.stock} unidades</div>
+                                    <span class="product-stock ${stockClass}">${stockText}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro ao buscar produtos: ${data.error || 'Erro desconhecido'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro na requisição: ${error.message}</div>`;
+            }
+        }
+
+        async function testProductFetch() {
+            const productId = document.getElementById('productId').value;
+            const resultDiv = document.getElementById('product-result');
+            
+            if (!productId) {
+                resultDiv.innerHTML = '<div class="error">❌ Por favor, informe um ID de produto</div>';
+                return;
+            }
+            
+            resultDiv.innerHTML = '<div class="loading">Buscando produto...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/v1/products/${productId}`);
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'success') {
+                    const product = data.data;
+                    resultDiv.innerHTML = `
+                        <div class="success">✅ Produto encontrado com sucesso!</div>
+                        <div class="product-card">
+                            <img src="${product.thumbnail}" alt="${product.description}" class="product-image">
+                            <div class="product-info">
+                                <div class="product-title">${product.description}</div>
+                                <div><strong>Código:</strong> ${product.code}</div>
+                                <div><strong>Preço:</strong> ${product.formattedCurrentPrice}</div>
+                                <div><strong>Estoque:</strong> ${product.stock} unidades</div>
+                                <div><strong>Categoria:</strong> ${product.category}</div>
+                                <div><strong>Variações:</strong> ${product.availableVariations.length} opções</div>
+                                <div><strong>Imagens:</strong> ${product.imagens.length} disponíveis</div>
+                            </div>
+                        </div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">❌ Erro ao buscar produto: ${data.error || 'Produto não encontrado'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Erro na requisição: ${error.message}</div>`;
+            }
+        }
+
+        function testAppUrls() {
+            const resultDiv = document.getElementById('url-result');
+            
+            const urls = [
+                `${APP_BASE}/gwan-mart`,
+                `${APP_BASE}/gwan-mart/product/16527361911`,
+                `${APP_BASE}/`
+            ];
+            
+            let html = '<div class="success">🔗 URLs para teste:</div><ul>';
+            urls.forEach(url => {
+                html += `<li><a href="${url}" target="_blank">${url}</a></li>`;
+            });
+            html += '</ul>';
+            
+            resultDiv.innerHTML = html;
+        }
+
+        // Teste automático ao carregar a página
+        window.onload = function() {
+            console.log('🧪 Página de teste carregada');
+            console.log('API Base:', API_BASE);
+            console.log('App Base:', APP_BASE);
+        };
+    </script>
+</body>
+</html>

@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
 import Header from '../components/layout/Header';
+import { useFeaturedProducts } from '../hooks/useFeaturedProducts';
 
 const GwanMartPage: React.FC = () => {
+  const { products, loading, error } = useFeaturedProducts();
+
   const handleWhatsAppContact = () => {
     const contactData: WhatsAppProductData = {
       id: 'gwan-mart-contato',
@@ -13,6 +16,24 @@ const GwanMartPage: React.FC = () => {
     };
 
     openWhatsApp(contactData);
+  };
+
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <svg
+        key={i}
+        className={`h-3 w-3 ${i < Math.floor(rating) ? 'fill-current text-yellow-400' : 'text-gray-300'}`}
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+      </svg>
+    ));
   };
 
   return (
@@ -41,7 +62,10 @@ const GwanMartPage: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-foreground h-11 rounded-md px-8 bg-primary hover:bg-primary/90 shadow-medium">
+            <Link
+              to="/gwan-mart/catalog"
+              className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 text-primary-foreground h-11 rounded-md px-8 bg-primary hover:bg-primary/90 shadow-medium"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -59,7 +83,7 @@ const GwanMartPage: React.FC = () => {
                 <path d="M16 10a4 4 0 0 1-8 0"></path>
               </svg>
               Ver Produtos
-            </button>
+            </Link>
 
             <button
               onClick={handleWhatsAppContact}
@@ -155,143 +179,96 @@ const GwanMartPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {/* Product Card 1 */}
-          <Link to="/gwan-mart/product/smartphone-premium-5g" className="group">
-            <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
-              <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
-                <img
-                  src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&crop=center"
-                  alt="Smartphone Premium 5G"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
-                    Eletrônicos
-                  </div>
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
-                    -19%
-                  </div>
-                </div>
-                <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                  Smartphone Premium 5G
-                </h3>
-                <div className="flex items-center gap-2 mt-3">
-                  <span className="font-bold text-lg text-primary">
-                    R$ 1299,99
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    R$ 1599,99
-                  </span>
-                </div>
-              </div>
+        {loading ? (
+          <div className="flex justify-center items-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <span className="ml-4 text-muted-foreground">
+              Carregando produtos...
+            </span>
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <div className="text-destructive mb-4">
+              ❌ Erro ao carregar produtos
             </div>
-          </Link>
+            <p className="text-muted-foreground">{error}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {products.map(product => (
+              <Link
+                key={product.id}
+                to={`/gwan-mart/product/${product.id}`}
+                className="group"
+              >
+                <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
+                  <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
+                    <img
+                      src={product.thumbnail}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
+                        {product.category}
+                      </div>
+                      {product.discountPercentage > 0 && (
+                        <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
+                          -{product.discountPercentage}%
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
 
-          {/* Product Card 2 */}
-          <Link to="/gwan-mart/product/fone-wireless-premium" className="group">
-            <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
-              <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
-                <img
-                  src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&crop=center"
-                  alt="Fone Wireless Premium"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
-                    Áudio
-                  </div>
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
-                    -20%
-                  </div>
-                </div>
-                <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                  Fone Wireless Premium
-                </h3>
-                <div className="flex items-center gap-2 mt-3">
-                  <span className="font-bold text-lg text-primary">
-                    R$ 399,99
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    R$ 499,99
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
+                    {/* Rating */}
+                    <div className="flex items-center gap-1 mt-2">
+                      <div className="flex text-yellow-400">
+                        {renderStars(product.averageRating)}
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        {product.formattedReviews}
+                      </span>
+                    </div>
 
-          {/* Product Card 3 */}
-          <Link to="/gwan-mart/product/notebook-gamer-pro" className="group">
-            <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
-              <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
-                <img
-                  src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&crop=center"
-                  alt="Notebook Gamer Pro"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
-                    Computadores
-                  </div>
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
-                    -15%
-                  </div>
-                </div>
-                <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                  Notebook Gamer Pro
-                </h3>
-                <div className="flex items-center gap-2 mt-3">
-                  <span className="font-bold text-lg text-primary">
-                    R$ 2499,99
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    R$ 2999,99
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
+                    <div className="flex items-center gap-2 mt-3">
+                      <span className="font-bold text-lg text-primary">
+                        {product.formattedCurrentPrice}
+                      </span>
+                      {product.discountPercentage > 0 && (
+                        <span className="text-sm text-muted-foreground line-through">
+                          {product.formattedOriginalPrice}
+                        </span>
+                      )}
+                    </div>
 
-          {/* Product Card 4 */}
-          <Link to="/gwan-mart/product/smartwatch-fitness" className="group">
-            <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
-              <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
-                <img
-                  src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&crop=center"
-                  alt="Smartwatch Fitness"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
-                    Wearables
-                  </div>
-                  <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
-                    -25%
+                    {/* Stock indicator */}
+                    <div className="mt-2">
+                      <span
+                        className={`text-xs px-2 py-1 rounded-full ${
+                          product.stock > 10
+                            ? 'bg-green-100 text-green-800'
+                            : product.stock > 0
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {product.stock > 10
+                          ? 'Em estoque'
+                          : product.stock > 0
+                            ? 'Últimas unidades'
+                            : 'Indisponível'}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                  Smartwatch Fitness
-                </h3>
-                <div className="flex items-center gap-2 mt-3">
-                  <span className="font-bold text-lg text-primary">
-                    R$ 599,99
-                  </span>
-                  <span className="text-sm text-muted-foreground line-through">
-                    R$ 799,99
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* CTA Section */}
