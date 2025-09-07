@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
 import Header from '../components/layout/Header';
 import { useFeaturedProducts } from '../hooks/useFeaturedProducts';
+import { formatPrice } from '../utils/price';
 
 const GwanMartPage: React.FC = () => {
   const { products, loading, error } = useFeaturedProducts();
@@ -18,23 +19,6 @@ const GwanMartPage: React.FC = () => {
     openWhatsApp(contactData);
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <svg
-        key={i}
-        className={`h-3 w-3 ${i < Math.floor(rating) ? 'fill-current text-yellow-400' : 'text-gray-300'}`}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-      </svg>
-    ));
-  };
 
   return (
     <div className="min-h-screen bg-gradient-hero">
@@ -199,69 +183,96 @@ const GwanMartPage: React.FC = () => {
               <Link
                 key={product.id}
                 to={`/gwan-mart/product/${product.id}`}
-                className="group"
+                className="group block"
               >
-                <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02]">
-                  <div className="aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/60">
+                <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                  {/* Product Image Container */}
+                  <div className="relative">
                     <img
                       src={product.thumbnail}
                       alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="w-full h-48 object-cover"
                     />
-                  </div>
-                  <div className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 text-xs">
-                        {product.category}
+                    
+                    {/* Discount Badge - Top Left */}
+                    {product.discountPercentage > 0 && (
+                      <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                        -{product.discountPercentage}%
                       </div>
-                      {product.discountPercentage > 0 && (
-                        <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80 text-xs">
-                          -{product.discountPercentage}%
-                        </div>
-                      )}
+                    )}
+                    
+                    {/* New Badge - Top Right */}
+                    <div className="absolute top-2 right-2 bg-blue-400 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      Novo
                     </div>
-                    <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                      {product.name}
+                    
+                    {/* Feature Badge - Bottom Right Overlay */}
+                    {product.category === 'Eletrônicos' && product.subcategory === 'Smartphones' && (
+                      <div className="absolute bottom-2 right-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
+                        CÂMERA 108MP+ VIDEO FULL HD
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="p-4 space-y-3">
+                    {/* Product Title */}
+                    <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                      {product.name || product.description || `Produto ${product.code}`}
                     </h3>
 
-                    {/* Rating */}
-                    <div className="flex items-center gap-1 mt-2">
-                      <div className="flex text-yellow-400">
-                        {renderStars(product.averageRating)}
-                      </div>
-                      <span className="text-xs text-muted-foreground">
-                        {product.formattedReviews}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 mt-3">
-                      <span className="font-bold text-lg text-primary">
-                        {product.formattedCurrentPrice}
-                      </span>
+                    {/* Price Section */}
+                    <div className="flex items-center justify-between">
+                      {/* Original Price */}
                       {product.discountPercentage > 0 && (
-                        <span className="text-sm text-muted-foreground line-through">
-                          {product.formattedOriginalPrice}
+                        <span className="text-sm text-gray-500 line-through">
+                          {product.formattedOriginalPrice || formatPrice(product.originalPrice)}
                         </span>
                       )}
+                      
+                      {/* Current Price */}
+                      <span className="text-lg font-bold text-purple-600">
+                        {product.formattedCurrentPrice || formatPrice(product.promotionalPrice || product.currentPrice)}
+                      </span>
                     </div>
 
-                    {/* Stock indicator */}
-                    <div className="mt-2">
-                      <span
-                        className={`text-xs px-2 py-1 rounded-full ${
-                          product.stock > 10
-                            ? 'bg-green-100 text-green-800'
-                            : product.stock > 0
-                              ? 'bg-yellow-100 text-yellow-800'
-                              : 'bg-red-100 text-red-800'
-                        }`}
+                    {/* Rating */}
+                    <div className="flex items-center gap-1">
+                      <svg
+                        className="h-4 w-4 fill-current text-yellow-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
                       >
-                        {product.stock > 10
-                          ? 'Em estoque'
-                          : product.stock > 0
-                            ? 'Últimas unidades'
-                            : 'Indisponível'}
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                      </svg>
+                      <span className="text-sm font-medium text-gray-900">
+                        {product.formattedRating}
                       </span>
+                    </div>
+
+                    {/* Free Shipping */}
+                    <div className="flex items-center justify-end">
+                      <div className="flex items-center gap-1 text-blue-400 text-xs">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-3 w-3"
+                        >
+                          <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                          <path d="M15 18H9"></path>
+                          <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
+                          <circle cx="17" cy="18" r="2"></circle>
+                          <circle cx="7" cy="18" r="2"></circle>
+                        </svg>
+                        <span>Frete grátis</span>
+                      </div>
                     </div>
                   </div>
                 </div>

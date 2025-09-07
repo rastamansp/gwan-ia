@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
 import { useProduct } from '../hooks/useProduct';
 
 const ProductPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
+  const navigate = useNavigate();
   const { product, loading, error } = useProduct(productId);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(0);
@@ -114,8 +115,8 @@ const ProductPage: React.FC = () => {
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 mb-6">
-          <Link
-            to="/"
+          <button
+            onClick={() => navigate(-1)}
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             <svg
@@ -133,7 +134,7 @@ const ProductPage: React.FC = () => {
               <path d="m12 19-7-7 7-7"></path>
               <path d="M19 12H5"></path>
             </svg>
-          </Link>
+          </button>
           <span className="text-muted-foreground">/</span>
           <span className="text-sm text-muted-foreground">
             {product.category}

@@ -1,27 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
-import { useAllProducts } from '../hooks/useAllProducts';
+import SearchBar from '../components/SearchBar';
+import Pagination from '../components/Pagination';
+import { useProductsWithFilters } from '../hooks/useProductsWithFilters';
+import { SearchParams } from '../types/search.types';
+import { formatPrice } from '../utils/price';
 
 const CatalogPage: React.FC = () => {
-  const { products, loading, error } = useAllProducts();
+  const { 
+    products, 
+    loading, 
+    error, 
+    pagination, 
+    categories, 
+    subcategories, 
+    searchProducts,
+    changePage,
+    changeLimit
+  } = useProductsWithFilters();
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <svg
-        key={i}
-        className={`h-3 w-3 ${i < Math.floor(rating) ? 'fill-current text-yellow-400' : 'text-gray-300'}`}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-      </svg>
-    ));
+  // Debug: verificar produtos renderizados
+  console.log('CatalogPage - Products:', products);
+  if (products.length > 0) {
+    console.log('CatalogPage - First product:', products[0]);
+  }
+
+  const handleSearch = (params: SearchParams) => {
+    searchProducts(params);
   };
 
   return (
@@ -29,17 +35,23 @@ const CatalogPage: React.FC = () => {
       <Header />
 
       <main className="px-4 pb-16">
-        <div className="max-w-6xl mx-auto">
+        <div className="container mx-auto">
           <div className="mb-8 scroll-reveal">
             <h2 className="text-2xl font-semibold gradient-text mb-2">
               Catálogo Completo
             </h2>
             <p className="text-muted-foreground">
-              {loading
-                ? 'Carregando...'
-                : `${products.length} produtos encontrados`}
+              {loading ? 'Carregando...' : `${pagination.total} produtos encontrados`}
             </p>
           </div>
+
+          {/* Barra de pesquisa */}
+          <SearchBar 
+            onSearch={handleSearch}
+            loading={loading}
+            categories={categories}
+            subcategories={subcategories}
+          />
 
           {loading ? (
             <div className="flex justify-center items-center py-16">
@@ -56,56 +68,85 @@ const CatalogPage: React.FC = () => {
               <p className="text-muted-foreground">{error}</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {products.map(product => (
                 <Link
                   key={product.id}
                   to={`/gwan-mart/product/${product.id}`}
-                  className="group"
+                  className="group block"
                 >
-                  <div className="product-card p-4 cursor-pointer scroll-reveal bg-gradient-card shadow-soft hover:shadow-medium transition-all duration-300 group-hover:scale-[1.02] rounded-lg border text-card-foreground">
-                    <div className="relative mb-4 overflow-hidden rounded-lg">
+                  <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden">
+                    {/* Product Image Container */}
+                    <div className="relative">
                       <img
                         src={product.thumbnail}
                         alt={product.name}
-                        className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
-                        loading="lazy"
+                        className="w-full h-48 object-cover"
                       />
+                      
+                      {/* Discount Badge - Top Left */}
                       {product.discountPercentage > 0 && (
-                        <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground px-2 py-1 rounded-md text-xs font-semibold">
+                        <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                           -{product.discountPercentage}%
                         </div>
                       )}
-                      <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-md text-xs font-semibold">
+                      
+                      {/* New Badge - Top Right */}
+                      <div className="absolute top-2 right-2 bg-blue-400 text-white text-xs font-bold px-2 py-1 rounded-full">
                         Novo
                       </div>
+                      
+                      {/* Feature Badge - Bottom Right Overlay */}
+                      {product.category === 'Eletrônicos' && product.subcategory === 'Smartphones' && (
+                        <div className="absolute bottom-2 right-2 bg-yellow-400 text-black text-xs font-bold px-2 py-1 rounded-full">
+                          CÂMERA 108MP+ VIDEO FULL HD
+                        </div>
+                      )}
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-medium text-sm leading-tight line-clamp-2 text-foreground group-hover:text-primary transition-colors">
-                        {product.name}
+
+                    {/* Product Info */}
+                    <div className="p-4 space-y-3">
+                      {/* Product Title */}
+                      <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-primary transition-colors">
+                        {product.name || product.description || `Produto ${product.code}`}
                       </h3>
-                      <div className="flex items-center gap-2">
+
+                      {/* Price Section */}
+                      <div className="flex items-center justify-between">
+                        {/* Original Price */}
                         {product.discountPercentage > 0 && (
-                          <span className="text-muted-foreground text-sm line-through">
-                            {product.formattedOriginalPrice}
+                          <span className="text-sm text-gray-500 line-through">
+                            {product.formattedOriginalPrice || formatPrice(product.originalPrice)}
                           </span>
                         )}
-                        <span className="gradient-text text-lg font-bold">
-                          {product.formattedCurrentPrice}
+                        
+                        {/* Current Price */}
+                        <span className="text-lg font-bold text-purple-600">
+                          {product.formattedCurrentPrice || formatPrice(product.promotionalPrice || product.currentPrice)}
                         </span>
                       </div>
-                      <div className="flex items-center justify-between text-xs text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <div className="flex text-yellow-400">
-                            {renderStars(product.averageRating)}
-                          </div>
-                          <span>{product.formattedRating}</span>
-                        </div>
-                        <div className="flex items-center gap-1 text-primary">
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1">
+                        <svg
+                          className="h-4 w-4 fill-current text-yellow-400"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <span className="text-sm font-medium text-gray-900">
+                          {product.formattedRating}
+                        </span>
+                      </div>
+
+                      {/* Free Shipping */}
+                      <div className="flex items-center justify-end">
+                        <div className="flex items-center gap-1 text-blue-400 text-xs">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
@@ -120,7 +161,7 @@ const CatalogPage: React.FC = () => {
                             <circle cx="17" cy="18" r="2"></circle>
                             <circle cx="7" cy="18" r="2"></circle>
                           </svg>
-                          <span className="text-xs">Frete grátis</span>
+                          <span>Frete grátis</span>
                         </div>
                       </div>
                     </div>
@@ -129,6 +170,17 @@ const CatalogPage: React.FC = () => {
               ))}
             </div>
           )}
+
+          {/* Paginação */}
+          <Pagination
+            currentPage={pagination.page}
+            totalPages={pagination.totalPages}
+            totalItems={pagination.total}
+            itemsPerPage={pagination.limit}
+            onPageChange={changePage}
+            onLimitChange={changeLimit}
+            loading={loading}
+          />
         </div>
       </main>
     </div>

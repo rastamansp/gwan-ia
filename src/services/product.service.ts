@@ -1,3 +1,5 @@
+import { SearchParams, PaginatedResponse } from '../types/search.types';
+
 // Serviço para buscar produtos da API
 export interface ProductVariation {
   nome: string;
@@ -53,11 +55,13 @@ export interface FeaturedProduct {
   id: number;
   code: string;
   name: string;
+  description?: string;
   category: string;
   subcategory: string;
   discountPercentage: number;
   currentPrice: number;
   originalPrice: number;
+  promotionalPrice?: number | null;
   formattedCurrentPrice: string;
   formattedOriginalPrice: string;
   thumbnail: string;
@@ -134,20 +138,58 @@ export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
 export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/products`);
-
+    
     if (!response.ok) {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
-
+    
     const result: FeaturedProductsResponse = await response.json();
-
+    
     if (result.status === 'success' && result.data) {
       return result.data.products;
     }
-
+    
     throw new Error(result.error || 'Erro ao buscar produtos');
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
     return [];
+  }
+};
+
+// Função para construir query string a partir dos parâmetros
+const buildQueryString = (params: SearchParams): string => {
+  const searchParams = new URLSearchParams();
+  
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== '') {
+      searchParams.append(key, value.toString());
+    }
+  });
+  
+  return searchParams.toString();
+};
+
+// Função para buscar produtos com filtros
+export const fetchProductsWithFilters = async (params: SearchParams = {}): Promise<PaginatedResponse<FeaturedProduct>> => {
+  try {
+    const queryString = buildQueryString(params);
+    const url = `${import.meta.env.VITE_API_URL}/v1/products${queryString ? `?${queryString}` : ''}`;
+    
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`Erro ${response.status}: ${response.statusText}`);
+    }
+    
+    const result: PaginatedResponse<FeaturedProduct> = await response.json();
+    
+    if (result.status === 'success') {
+      return result;
+    }
+    
+    throw new Error(result.error || 'Erro ao buscar produtos');
+  } catch (error) {
+    console.error('Erro ao buscar produtos com filtros:', error);
+    throw error;
   }
 };
