@@ -1,91 +1,94 @@
-import React, { useState } from 'react'
-import { useLocation, useNavigate, Link } from 'react-router-dom'
-import env from '../config/env'
+import React, { useState } from 'react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import AuthService from '../services/auth.service';
+import { AuthError } from '../types/errors';
 
 const VerifyAccountPage: React.FC = () => {
-  const [code, setCode] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  
-  const location = useLocation()
-  const navigate = useNavigate()
+  const [code, setCode] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
 
-  const email = location.state?.email
+  const location = useLocation();
+  const navigate = useNavigate();
+  const authService = AuthService.getInstance();
+
+  const email = location.state?.email;
 
   // Se não houver email, redireciona para registro
   if (!email) {
-    navigate('/register-account')
-    return null
+    navigate('/register-account');
+    return null;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    setError(null)
-    setSuccess(null)
-    
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+    setSuccess(null);
+
     try {
-      console.log('Enviando dados de verificação:', { email, code })
+      console.log('Enviando dados de verificação:', { email, code });
 
-      const response = await fetch(`${env.API_URL}/auth/verify-code`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, code }),
-      })
+      // Usa o AuthService para ativar a conta
+      await authService.activateAccount(email, code);
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        console.error('Erro na resposta:', errorData)
-        throw new Error(errorData.message || 'Verification failed')
-      }
+      setSuccess('Conta verificada com sucesso! Redirecionando para login...');
 
-      setSuccess('Conta verificada com sucesso! Redirecionando para login...')
-      
       // Redireciona para login após verificação bem-sucedida
       setTimeout(() => {
-        navigate('/auth')
-      }, 2000)
-      
+        navigate('/auth');
+      }, 2000);
     } catch (error) {
-      console.error('Erro completo:', error)
-      setError('Erro na verificação. Tente novamente.')
+      console.error('Erro completo:', error);
+
+      if (error instanceof AuthError) {
+        setError(error.message);
+      } else {
+        setError('Erro na verificação. Tente novamente.');
+      }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleResendCode = async () => {
-    setIsLoading(true)
-    setError(null)
-    
+    setIsLoading(true);
+    setError(null);
+
     try {
       // Aqui você pode implementar o reenvio do código
-      setSuccess('Código reenviado com sucesso!')
+      setSuccess('Código reenviado com sucesso!');
     } catch (error) {
-      setError('Erro ao reenviar código. Tente novamente.')
+      setError('Erro ao reenviar código. Tente novamente.');
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
       {/* Logo e Header */}
       <div className="text-center mb-8">
         <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
-          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          <svg
+            className="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
           </svg>
         </div>
         <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-blue-600 bg-clip-text text-transparent mb-2">
           AI Admin
         </h1>
-        <p className="text-gray-400 text-lg">
-          Verifique sua conta
-        </p>
+        <p className="text-gray-400 text-lg">Verifique sua conta</p>
       </div>
 
       {/* Card de Verificação */}
@@ -98,9 +101,7 @@ const VerifyAccountPage: React.FC = () => {
             <p className="text-gray-400 mb-4">
               Digite o código enviado para seu email
             </p>
-            <p className="text-sm text-gray-500">
-              {email}
-            </p>
+            <p className="text-sm text-gray-500">{email}</p>
           </div>
 
           {/* Mensagens de erro e sucesso */}
@@ -109,7 +110,7 @@ const VerifyAccountPage: React.FC = () => {
               <p className="text-red-300 text-sm">{error}</p>
             </div>
           )}
-          
+
           {success && (
             <div className="mb-4 p-3 bg-green-900/50 border border-green-700 rounded-lg">
               <p className="text-green-300 text-sm">{success}</p>
@@ -118,20 +119,33 @@ const VerifyAccountPage: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="code" className="block text-sm font-medium text-white mb-2">
+              <label
+                htmlFor="code"
+                className="block text-sm font-medium text-white mb-2"
+              >
                 Código de Verificação
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
                   </svg>
                 </div>
                 <input
                   id="code"
                   type="text"
                   value={code}
-                  onChange={(e) => setCode(e.target.value)}
+                  onChange={e => setCode(e.target.value)}
                   placeholder="Digite o código de 6 dígitos"
                   className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 text-center text-lg tracking-widest"
                   required
@@ -148,9 +162,25 @@ const VerifyAccountPage: React.FC = () => {
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Verificando...
                 </div>
@@ -174,7 +204,10 @@ const VerifyAccountPage: React.FC = () => {
 
         {/* Link para Voltar */}
         <div className="text-center mt-6">
-          <Link to="/register-account" className="text-gray-400 hover:text-gray-300 text-sm transition-colors duration-200">
+          <Link
+            to="/register-account"
+            className="text-gray-400 hover:text-gray-300 text-sm transition-colors duration-200"
+          >
             ← Voltar para registro
           </Link>
         </div>
@@ -182,12 +215,15 @@ const VerifyAccountPage: React.FC = () => {
 
       {/* Link para Voltar ao Início */}
       <div className="mt-8">
-        <Link to="/" className="text-gray-500 hover:text-gray-400 text-sm transition-colors duration-200">
+        <Link
+          to="/"
+          className="text-gray-500 hover:text-gray-400 text-sm transition-colors duration-200"
+        >
           ← Voltar para o início
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default VerifyAccountPage
+export default VerifyAccountPage;
