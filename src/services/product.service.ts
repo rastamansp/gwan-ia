@@ -1,4 +1,5 @@
 import { SearchParams, PaginatedResponse } from '../types/search.types';
+import { buildApiUrl, buildApiUrlWithQuery } from '../utils/api-url';
 
 // Serviço para buscar produtos da API
 export interface ProductVariation {
@@ -90,7 +91,7 @@ export const fetchProduct = async (
 ): Promise<ProductData | null> => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/v1/products/${productId}`
+      buildApiUrl(import.meta.env.VITE_API_URL, `api/v1/products/${productId}`)
     );
 
     if (!response.ok) {
@@ -114,7 +115,7 @@ export const fetchProduct = async (
 export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/v1/products/featured`
+      buildApiUrl(import.meta.env.VITE_API_URL, 'api/v1/products/featured')
     );
 
     if (!response.ok) {
@@ -137,18 +138,20 @@ export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
 // Função para buscar todos os produtos (catálogo completo)
 export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/products`);
-    
+    const response = await fetch(
+      buildApiUrl(import.meta.env.VITE_API_URL, 'api/v1/products')
+    );
+
     if (!response.ok) {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
-    
+
     const result: FeaturedProductsResponse = await response.json();
-    
+
     if (result.status === 'success' && result.data) {
       return result.data.products;
     }
-    
+
     throw new Error(result.error || 'Erro ao buscar produtos');
   } catch (error) {
     console.error('Erro ao buscar produtos:', error);
@@ -156,37 +159,29 @@ export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
   }
 };
 
-// Função para construir query string a partir dos parâmetros
-const buildQueryString = (params: SearchParams): string => {
-  const searchParams = new URLSearchParams();
-  
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') {
-      searchParams.append(key, value.toString());
-    }
-  });
-  
-  return searchParams.toString();
-};
-
 // Função para buscar produtos com filtros
-export const fetchProductsWithFilters = async (params: SearchParams = {}): Promise<PaginatedResponse<FeaturedProduct>> => {
+export const fetchProductsWithFilters = async (
+  params: SearchParams = {}
+): Promise<PaginatedResponse<FeaturedProduct>> => {
   try {
-    const queryString = buildQueryString(params);
-    const url = `${import.meta.env.VITE_API_URL}/v1/products${queryString ? `?${queryString}` : ''}`;
-    
+    const url = buildApiUrlWithQuery(
+      import.meta.env.VITE_API_URL,
+      'api/v1/products',
+      params as Record<string, string | number | boolean | undefined>
+    );
+
     const response = await fetch(url);
-    
+
     if (!response.ok) {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
-    
+
     const result: PaginatedResponse<FeaturedProduct> = await response.json();
-    
+
     if (result.status === 'success') {
       return result;
     }
-    
+
     throw new Error(result.error || 'Erro ao buscar produtos');
   } catch (error) {
     console.error('Erro ao buscar produtos com filtros:', error);
