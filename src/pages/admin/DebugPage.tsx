@@ -1,20 +1,24 @@
 import React from 'react';
-import env from '../config/env';
+import env from '../../config/env';
 
 const DebugPage: React.FC = () => {
   // Função para formatar o valor da variável
   const formatValue = (value: any): string => {
     if (value === null || value === undefined) return '❌ Não definida';
     if (value === '') return '⚠️ Vazia';
-    if (typeof value === 'string' && value.includes('localhost')) return `🔴 ${value} (DESENVOLVIMENTO)`;
-    if (typeof value === 'string' && value.includes('gwan.com.br')) return `🟢 ${value} (PRODUÇÃO)`;
+    if (typeof value === 'string' && value.includes('localhost'))
+      return `🔴 ${value} (DESENVOLVIMENTO)`;
+    if (typeof value === 'string' && value.includes('gwan.com.br'))
+      return `🟢 ${value} (PRODUÇÃO)`;
     return `✅ ${value}`;
   };
 
   // Função para verificar se é produção
   const isProduction = () => {
-    return window.location.hostname === 'gwan.com.br' || 
-           window.location.hostname === 'www.gwan.com.br';
+    return (
+      window.location.hostname === 'gwan.com.br' ||
+      window.location.hostname === 'www.gwan.com.br'
+    );
   };
 
   return (
@@ -28,18 +32,19 @@ const DebugPage: React.FC = () => {
           <p className="text-lg text-gray-600">
             Validação das configurações do sistema
           </p>
-          <div className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
-            isProduction() 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-yellow-100 text-yellow-800'
-          }`}>
+          <div
+            className={`mt-4 px-4 py-2 rounded-lg text-sm font-medium ${
+              isProduction()
+                ? 'bg-green-100 text-green-800'
+                : 'bg-yellow-100 text-yellow-800'
+            }`}
+          >
             🌐 Ambiente: {isProduction() ? 'PRODUÇÃO' : 'DESENVOLVIMENTO'}
           </div>
         </div>
 
         {/* Variáveis de Ambiente */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          
           {/* Configurações da Aplicação */}
           <div className="bg-white rounded-lg shadow-md p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4 border-b pb-2">
@@ -65,7 +70,9 @@ const DebugPage: React.FC = () => {
             <div className="space-y-3">
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">URL Base:</span>
-                <span className="text-sm break-all">{formatValue(env.API_URL)}</span>
+                <span className="text-sm break-all">
+                  {formatValue(env.API_URL)}
+                </span>
               </div>
             </div>
           </div>
@@ -86,11 +93,15 @@ const DebugPage: React.FC = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">Porta:</span>
-                <span className="text-sm">{window.location.port || '80/443'}</span>
+                <span className="text-sm">
+                  {window.location.port || '80/443'}
+                </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="font-medium text-gray-700">User Agent:</span>
-                <span className="text-sm text-xs break-all">{navigator.userAgent.substring(0, 50)}...</span>
+                <span className="text-sm text-xs break-all">
+                  {navigator.userAgent.substring(0, 50)}...
+                </span>
               </div>
             </div>
           </div>
@@ -103,13 +114,23 @@ const DebugPage: React.FC = () => {
               🧪 Como Testar
             </h3>
             <p className="text-blue-700 mb-4">
-              Use esta página para validar se as variáveis de ambiente estão sendo carregadas corretamente.
+              Use esta página para validar se as variáveis de ambiente estão
+              sendo carregadas corretamente.
             </p>
             <div className="text-sm text-blue-600 space-y-1">
-              <p>✅ <strong>Verde:</strong> Configuração de produção detectada</p>
-              <p>🔴 <strong>Vermelho:</strong> Configuração de desenvolvimento detectada</p>
-              <p>⚠️ <strong>Amarelo:</strong> Valor vazio ou não configurado</p>
-              <p>❌ <strong>Vermelho:</strong> Variável não definida</p>
+              <p>
+                ✅ <strong>Verde:</strong> Configuração de produção detectada
+              </p>
+              <p>
+                🔴 <strong>Vermelho:</strong> Configuração de desenvolvimento
+                detectada
+              </p>
+              <p>
+                ⚠️ <strong>Amarelo:</strong> Valor vazio ou não configurado
+              </p>
+              <p>
+                ❌ <strong>Vermelho:</strong> Variável não definida
+              </p>
             </div>
           </div>
         </div>

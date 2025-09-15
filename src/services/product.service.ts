@@ -91,7 +91,7 @@ export const fetchProduct = async (
 ): Promise<ProductData | null> => {
   try {
     const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, `api/v1/products/${productId}`)
+      buildApiUrl(import.meta.env.VITE_API_URL, `products/${productId}`)
     );
 
     if (!response.ok) {
@@ -115,7 +115,7 @@ export const fetchProduct = async (
 export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
   try {
     const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, 'api/v1/products/featured')
+      buildApiUrl(import.meta.env.VITE_API_URL, 'products/featured')
     );
 
     if (!response.ok) {
@@ -139,7 +139,7 @@ export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
 export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
   try {
     const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, 'api/v1/products')
+      buildApiUrl(import.meta.env.VITE_API_URL, 'products')
     );
 
     if (!response.ok) {
@@ -166,7 +166,7 @@ export const fetchProductsWithFilters = async (
   try {
     const url = buildApiUrlWithQuery(
       import.meta.env.VITE_API_URL,
-      'api/v1/products',
+      'products',
       params as Record<string, string | number | boolean | undefined>
     );
 

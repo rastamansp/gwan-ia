@@ -1,11 +1,11 @@
 import React from 'react';
-import ChatWidget from '../components/chat/ChatWidget';
-import { useChat } from '../hooks/useChat';
-import Header from '../components/layout/Header';
+import ChatWidget from '../../components/chat/ChatWidget';
+import { useChat } from '../../hooks/useChat';
+import Header from '../../components/layout/Header';
 
-const BotJaiminhoPage: React.FC = () => {
+const BotGwanPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
-    'https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat'
+    'https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat'
   );
 
   return (
@@ -17,9 +17,9 @@ const BotJaiminhoPage: React.FC = () => {
       <main className="container py-20">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-8 mx-auto">
+          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-8 mx-auto">
             <svg
-              className="w-6 h-6 text-green-600"
+              className="w-6 h-6 text-gray-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -28,16 +28,16 @@ const BotJaiminhoPage: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
               />
             </svg>
           </div>
           <h2 className="text-5xl font-bold text-card-foreground mb-6">
-            Chatbot de Saúde
+            Chatbot de Conhecimento
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Obtenha informações de saúde instantâneas e dicas de bem-estar do
-            nosso assistente de saúde com IA.
+            Acesse uma riqueza de informações e aprenda coisas novas com nosso
+            assistente de IA experiente.
           </p>
           <button
             onClick={openChat}
@@ -58,27 +58,33 @@ const BotJaiminhoPage: React.FC = () => {
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Informações gerais de saúde
+                  Respondendo perguntas de conhecimento geral
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Dicas de bem-estar
+                  Fornecendo conteúdo educacional
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Recomendações de estilo de vida saudável
+                  Explicando tópicos complexos
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Orientação médica básica
+                  Oferecendo recursos de aprendizado
+                </span>
+              </li>
+              <li className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <span className="text-muted-foreground">
+                  Apoiando pesquisa e estudo
                 </span>
               </li>
             </ul>
@@ -120,20 +126,22 @@ const BotJaiminhoPage: React.FC = () => {
             <div className="space-y-6">
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  Quais são os sintomas comuns de um resfriado?
+                  O que é integração de API?
                 </h4>
                 <p className="text-muted-foreground">
-                  Os sintomas comuns do resfriado incluem coriza, dor de
-                  garganta, tosse e febre leve.
+                  Integração de API é o processo de conectar diferentes
+                  aplicações de software através de suas APIs para compartilhar
+                  dados e funcionalidades.
                 </p>
               </div>
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  Como posso prevenir a gripe?
+                  Como posso melhorar o desempenho da minha API?
                 </h4>
                 <p className="text-muted-foreground">
-                  Para prevenir a gripe, tome a vacina anualmente, lave as mãos
-                  com frequência e mantenha boa higiene.
+                  Para melhorar o desempenho da API, implemente cache, otimize
+                  consultas ao banco de dados e use estruturas de dados
+                  eficientes.
                 </p>
               </div>
             </div>
@@ -156,13 +164,13 @@ const BotJaiminhoPage: React.FC = () => {
       <ChatWidget
         isOpen={isOpen}
         onToggle={toggleChat}
-        chatbotName="BotJaiminho"
-        chatbotIcon="🌿"
-        chatbotColor="#10b981"
-        endpoint="https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat"
+        chatbotName="BotGwan"
+        chatbotIcon="🏢"
+        chatbotColor="#6b7280"
+        endpoint="https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat"
       />
     </div>
   );
 };
 
-export default BotJaiminhoPage;
+export default BotGwanPage;

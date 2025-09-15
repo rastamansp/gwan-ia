@@ -1,11 +1,11 @@
 import React from 'react';
-import ChatWidget from '../components/chat/ChatWidget';
-import { useChat } from '../hooks/useChat';
-import Header from '../components/layout/Header';
+import ChatWidget from '../../components/chat/ChatWidget';
+import { useChat } from '../../hooks/useChat';
+import Header from '../../components/layout/Header';
 
-const BotGwanPage: React.FC = () => {
+const BotMarleyPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
-    'https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat'
+    'https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat'
   );
 
   return (
@@ -17,9 +17,9 @@ const BotGwanPage: React.FC = () => {
       <main className="container py-20">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-8 mx-auto">
+          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-8 mx-auto">
             <svg
-              className="w-6 h-6 text-gray-600"
+              className="w-6 h-6 text-blue-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -28,16 +28,17 @@ const BotGwanPage: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
           </div>
           <h2 className="text-5xl font-bold text-card-foreground mb-6">
-            Chatbot de Conhecimento
+            Chatbot do Empresário
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Acesse uma riqueza de informações e aprenda coisas novas com nosso
-            assistente de IA experiente.
+            Obtenha informações sobre a carreira do Junior Dread, shows, turnês,
+            rider técnico, próximas datas, informações para contratação e
+            oportunidades de parceria.
           </p>
           <button
             onClick={openChat}
@@ -58,33 +59,33 @@ const BotGwanPage: React.FC = () => {
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Respondendo perguntas de conhecimento geral
+                  Informações e atualizações da carreira
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Fornecendo conteúdo educacional
+                  Agenda de shows e turnês
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Explicando tópicos complexos
+                  Detalhes do rider técnico
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Oferecendo recursos de aprendizado
+                  Consultas sobre contratação e parcerias
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Apoiando pesquisa e estudo
+                  Próximas datas de apresentações
                 </span>
               </li>
             </ul>
@@ -126,22 +127,22 @@ const BotGwanPage: React.FC = () => {
             <div className="space-y-6">
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  O que é integração de API?
+                  Como posso contratar o Junior Dread para um show?
                 </h4>
                 <p className="text-muted-foreground">
-                  Integração de API é o processo de conectar diferentes
-                  aplicações de software através de suas APIs para compartilhar
-                  dados e funcionalidades.
+                  Para contratar o Junior Dread, por favor forneça detalhes
+                  sobre seu evento incluindo data, local e tamanho esperado do
+                  público.
                 </p>
               </div>
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  Como posso melhorar o desempenho da minha API?
+                  O que está incluído no rider técnico?
                 </h4>
                 <p className="text-muted-foreground">
-                  Para melhorar o desempenho da API, implemente cache, otimize
-                  consultas ao banco de dados e use estruturas de dados
-                  eficientes.
+                  O rider técnico inclui requisitos de sistema de som,
+                  configuração do palco, necessidades de iluminação e outras
+                  especificações técnicas para a apresentação.
                 </p>
               </div>
             </div>
@@ -164,13 +165,13 @@ const BotGwanPage: React.FC = () => {
       <ChatWidget
         isOpen={isOpen}
         onToggle={toggleChat}
-        chatbotName="BotGwan"
-        chatbotIcon="🏢"
-        chatbotColor="#6b7280"
-        endpoint="https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat"
+        chatbotName="BotMarley"
+        chatbotIcon="😊"
+        chatbotColor="#3b82f6"
+        endpoint="https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat"
       />
     </div>
   );
 };
 
-export default BotGwanPage;
+export default BotMarleyPage;

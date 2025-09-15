@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
-import Header from '../components/layout/Header';
-import { useFeaturedProducts } from '../hooks/useFeaturedProducts';
+import { openWhatsApp, WhatsAppProductData } from '../../utils/whatsapp';
+import Header from '../../components/layout/Header';
+import { useFeaturedProducts } from '../../hooks/useFeaturedProducts';
 
 const GwanMartPage: React.FC = () => {
   const { products, loading, error } = useFeaturedProducts();

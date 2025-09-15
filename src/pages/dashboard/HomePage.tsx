@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatVersion, getAppVersion } from '@/utils/version';
-import { useToast } from '../hooks/useToast';
-import ToastContainer from '../components/ui/ToastContainer';
-import Header from '../components/layout/Header';
+import { useToast } from '../../hooks/useToast';
+import ToastContainer from '../../components/ui/ToastContainer';
+import Header from '../../components/layout/Header';
 
 const HomePage: React.FC = () => {
   const { toasts, showInfo } = useToast();

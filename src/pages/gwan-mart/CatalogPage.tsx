@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../components/layout/Header';
-import SearchBar from '../components/SearchBar';
-import Pagination from '../components/Pagination';
-import { useProductsWithFilters } from '../hooks/useProductsWithFilters';
-import { SearchParams } from '../types/search.types';
+import Header from '../../components/layout/Header';
+import SearchBar from '../../components/SearchBar';
+import Pagination from '../../components/Pagination';
+import { useProductsWithFilters } from '../../hooks/useProductsWithFilters';
+import { SearchParams } from '../../types/search.types';
 
 const CatalogPage: React.FC = () => {
   const {

@@ -1,11 +1,11 @@
 import React from 'react';
-import ChatWidget from '../components/chat/ChatWidget';
-import { useChat } from '../hooks/useChat';
-import Header from '../components/layout/Header';
+import ChatWidget from '../../components/chat/ChatWidget';
+import { useChat } from '../../hooks/useChat';
+import Header from '../../components/layout/Header';
 
-const BotMarleyPage: React.FC = () => {
+const BotJaiminhoPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
-    'https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat'
+    'https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat'
   );
 
   return (
@@ -17,9 +17,9 @@ const BotMarleyPage: React.FC = () => {
       <main className="container py-20">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-8 mx-auto">
+          <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-8 mx-auto">
             <svg
-              className="w-6 h-6 text-blue-600"
+              className="w-6 h-6 text-green-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -28,17 +28,16 @@ const BotMarleyPage: React.FC = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
               />
             </svg>
           </div>
           <h2 className="text-5xl font-bold text-card-foreground mb-6">
-            Chatbot do Empresário
+            Chatbot de Saúde
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Obtenha informações sobre a carreira do Junior Dread, shows, turnês,
-            rider técnico, próximas datas, informações para contratação e
-            oportunidades de parceria.
+            Obtenha informações de saúde instantâneas e dicas de bem-estar do
+            nosso assistente de saúde com IA.
           </p>
           <button
             onClick={openChat}
@@ -59,33 +58,27 @@ const BotMarleyPage: React.FC = () => {
             </p>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Informações e atualizações da carreira
+                  Informações gerais de saúde
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Agenda de shows e turnês
+                  Dicas de bem-estar
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Detalhes do rider técnico
+                  Recomendações de estilo de vida saudável
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-muted-foreground">
-                  Consultas sobre contratação e parcerias
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Próximas datas de apresentações
+                  Orientação médica básica
                 </span>
               </li>
             </ul>
@@ -127,22 +120,20 @@ const BotMarleyPage: React.FC = () => {
             <div className="space-y-6">
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  Como posso contratar o Junior Dread para um show?
+                  Quais são os sintomas comuns de um resfriado?
                 </h4>
                 <p className="text-muted-foreground">
-                  Para contratar o Junior Dread, por favor forneça detalhes
-                  sobre seu evento incluindo data, local e tamanho esperado do
-                  público.
+                  Os sintomas comuns do resfriado incluem coriza, dor de
+                  garganta, tosse e febre leve.
                 </p>
               </div>
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  O que está incluído no rider técnico?
+                  Como posso prevenir a gripe?
                 </h4>
                 <p className="text-muted-foreground">
-                  O rider técnico inclui requisitos de sistema de som,
-                  configuração do palco, necessidades de iluminação e outras
-                  especificações técnicas para a apresentação.
+                  Para prevenir a gripe, tome a vacina anualmente, lave as mãos
+                  com frequência e mantenha boa higiene.
                 </p>
               </div>
             </div>
@@ -165,13 +156,13 @@ const BotMarleyPage: React.FC = () => {
       <ChatWidget
         isOpen={isOpen}
         onToggle={toggleChat}
-        chatbotName="BotMarley"
-        chatbotIcon="😊"
-        chatbotColor="#3b82f6"
-        endpoint="https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat"
+        chatbotName="BotJaiminho"
+        chatbotIcon="🌿"
+        chatbotColor="#10b981"
+        endpoint="https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat"
       />
     </div>
   );
 };
 
-export default BotMarleyPage;
+export default BotJaiminhoPage;

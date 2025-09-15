@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import AuthService from '../services/auth.service';
-import { AuthError } from '../types/errors';
+import AuthService from '../../services/auth.service';
+import { AuthError } from '../../types/errors';
 
 const VerifyAccountPage: React.FC = () => {
   const [code, setCode] = useState('');

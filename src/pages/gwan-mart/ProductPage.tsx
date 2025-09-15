@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import Header from '../components/layout/Header';
-import { openWhatsApp, WhatsAppProductData } from '../utils/whatsapp';
-import { useProduct } from '../hooks/useProduct';
+import Header from '../../components/layout/Header';
+import { openWhatsApp, WhatsAppProductData } from '../../utils/whatsapp';
+import { useProduct } from '../../hooks/useProduct';
 
 const ProductPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
