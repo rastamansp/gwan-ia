@@ -221,7 +221,25 @@ export const fetchProductsWithFilters = async (
     const result: PaginatedResponse<FeaturedProduct> = await response.json();
 
     if (result.status === 'success') {
-      return result;
+      // Processar os dados para converter strings em números
+      const processedProducts = result.data.products.map((product: any) => ({
+        ...product,
+        costPrice: parseFloat(product.costPrice) || 0,
+        originalPrice: parseFloat(product.originalPrice) || 0,
+        promotionalPrice: parseFloat(product.promotionalPrice) || 0,
+        discountPercentage: parseFloat(product.discountPercentage) || 0,
+        averageRating: parseFloat(product.averageRating) || 0,
+        stock: parseInt(product.stock) || 0,
+        totalReviews: parseInt(product.totalReviews) || 0,
+      }));
+
+      return {
+        ...result,
+        data: {
+          ...result.data,
+          products: processedProducts,
+        },
+      };
     }
 
     throw new Error(result.error || 'Erro ao buscar produtos');

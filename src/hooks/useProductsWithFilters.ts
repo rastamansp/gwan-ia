@@ -45,8 +45,8 @@ export const useProductsWithFilters = (initialParams: SearchParams = {}) => {
             result.data.products[0].originalPrice,
           originalPrice: result.data.products[0].originalPrice,
           promotionalPrice: result.data.products[0].promotionalPrice,
-          formattedCurrentPrice: `R$ ${(result.data.products[0].promotionalPrice || result.data.products[0].originalPrice).toLocaleString('pt-BR')}`,
-          formattedOriginalPrice: `R$ ${result.data.products[0].originalPrice.toLocaleString('pt-BR')}`,
+          formattedCurrentPrice: `R$ ${Number(result.data.products[0].promotionalPrice || result.data.products[0].originalPrice || 0).toLocaleString('pt-BR')}`,
+          formattedOriginalPrice: `R$ ${Number(result.data.products[0].originalPrice || 0).toLocaleString('pt-BR')}`,
           discountPercentage: result.data.products[0].discountPercentage,
         });
       }

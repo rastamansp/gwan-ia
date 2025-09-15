@@ -131,7 +131,7 @@ const CatalogPage: React.FC = () => {
                       {/* Rating */}
                       <div className="flex items-center gap-1">
                         <span className="text-sm font-medium text-gray-900">
-                          {product.averageRating.toFixed(1) || '4.9'}
+                          {Number(product.averageRating).toFixed(1) || '4.9'}
                         </span>
                         <div className="flex text-blue-500">
                           {Array.from({ length: 5 }, (_, i) => (
@@ -152,10 +152,10 @@ const CatalogPage: React.FC = () => {
                       {/* Price Section */}
                       <div className="space-y-1">
                         {/* Original Price */}
-                        {product.discountPercentage > 0 && (
+                        {Number(product.discountPercentage) > 0 && (
                           <div className="text-sm text-gray-500 line-through">
                             R${' '}
-                            {(product.originalPrice || 0).toLocaleString(
+                            {Number(product.originalPrice || 0).toLocaleString(
                               'pt-BR'
                             )}
                           </div>
@@ -165,15 +165,15 @@ const CatalogPage: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <span className="text-2xl font-bold text-gray-900">
                             R${' '}
-                            {(
+                            {Number(
                               product.promotionalPrice ||
-                              product.originalPrice ||
-                              0
+                                product.originalPrice ||
+                                0
                             ).toLocaleString('pt-BR')}
                           </span>
-                          {product.discountPercentage > 0 && (
+                          {Number(product.discountPercentage) > 0 && (
                             <span className="text-sm font-semibold text-green-600">
-                              {product.discountPercentage}% OFF
+                              {Number(product.discountPercentage)}% OFF
                             </span>
                           )}
                         </div>
