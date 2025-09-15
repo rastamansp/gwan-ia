@@ -1,68 +1,66 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { UserSession } from '../types/auth.types'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from 'react';
+import { UserSession } from '../types/auth.types';
+import { SessionService } from '../services/session.service';
 
 interface AuthContextType {
-  user: UserSession | null
-  login: (userData: UserSession) => void
-  logout: () => void
-  isAuthenticated: boolean
+  user: UserSession | null;
+  login: (userData: UserSession) => void;
+  logout: () => void;
+  isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const useAuth = () => {
-  const context = useContext(AuthContext)
+  const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider')
+    throw new Error('useAuth must be used within an AuthProvider');
   }
-  return context
-}
+  return context;
+};
 
 interface AuthProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<UserSession | null>(null)
+  const [user, setUser] = useState<UserSession | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const sessionService = SessionService.getInstance();
 
   // Verifica se há usuário na sessão ao inicializar
   useEffect(() => {
-    const sessionData = localStorage.getItem('userSession')
-    if (sessionData) {
-      try {
-        const sessionUser = JSON.parse(sessionData)
-        if (sessionUser && sessionUser.id) {
-          setUser(sessionUser)
-        }
-      } catch (error) {
-        console.error('Erro ao parsear sessão:', error)
-        localStorage.removeItem('userSession')
-      }
+    const sessionUser = sessionService.getSession();
+    if (sessionUser) {
+      setUser(sessionUser);
     }
-  }, [])
+    setIsLoading(false);
+  }, [sessionService]);
 
   const login = (userData: UserSession) => {
-    setUser(userData)
-    localStorage.setItem('userSession', JSON.stringify(userData))
-  }
+    setUser(userData);
+    sessionService.setSession(userData);
+  };
 
   const logout = () => {
-    setUser(null)
-    localStorage.removeItem('userSession')
-  }
-
-  const isAuthenticated = !!user
+    setUser(null);
+    sessionService.clearSession();
+  };
 
   const value: AuthContextType = {
     user,
     login,
     logout,
-    isAuthenticated
-  }
+    isAuthenticated: !!user,
+    isLoading,
+  };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  )
-}
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};

@@ -33,7 +33,10 @@ const ProductPage: React.FC = () => {
   const handleWhatsAppClick = () => {
     if (!product) return;
 
-    const selectedOption = product.availableVariations[selectedVariant];
+    const selectedOption =
+      product.availableVariations && product.availableVariations.length > 0
+        ? product.availableVariations[selectedVariant]
+        : null;
     const productData: WhatsAppProductData = {
       id: product.id.toString(),
       name: product.description,
@@ -88,7 +91,9 @@ const ProductPage: React.FC = () => {
 
   // Usar preço promocional se disponível, senão usar preço original
   const currentPrice = product.promotionalPrice || product.originalPrice;
-  const isOnSale = product.isOnSale && product.promotionalPrice;
+  const isOnSale =
+    product.promotionalPrice &&
+    product.promotionalPrice < product.originalPrice;
 
   const renderStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -150,7 +155,11 @@ const ProductPage: React.FC = () => {
             <div className="rounded-lg border text-card-foreground shadow-sm overflow-hidden bg-gradient-card shadow-medium">
               <div className="aspect-square bg-gradient-to-br from-muted/20 to-muted/40">
                 <img
-                  src={product.imagens[selectedImage] || product.thumbnail}
+                  src={
+                    product.imagens && product.imagens.length > 0
+                      ? product.imagens[selectedImage]
+                      : product.thumbnail
+                  }
                   alt={product.description}
                   className="w-full h-full object-cover"
                 />
@@ -159,23 +168,29 @@ const ProductPage: React.FC = () => {
 
             {/* Thumbnail Images */}
             <div className="flex gap-2 overflow-x-auto">
-              {product.imagens.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImage(index)}
-                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
-                    selectedImage === index
-                      ? 'border-primary shadow-soft'
-                      : 'border-border hover:border-primary/50'
-                  }`}
-                >
-                  <img
-                    src={image}
-                    alt={`${product.description} ${index + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </button>
-              ))}
+              {product.imagens && product.imagens.length > 0 ? (
+                product.imagens.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImage(index)}
+                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                      selectedImage === index
+                        ? 'border-primary shadow-soft'
+                        : 'border-border hover:border-primary/50'
+                    }`}
+                  >
+                    <img
+                      src={image}
+                      alt={`${product.description} ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))
+              ) : (
+                <div className="text-sm text-muted-foreground">
+                  Nenhuma imagem adicional disponível
+                </div>
+              )}
             </div>
           </div>
 
@@ -202,7 +217,7 @@ const ProductPage: React.FC = () => {
                   {renderStars(product.averageRating)}
                 </div>
                 <span className="text-sm text-muted-foreground">
-                  {product.formattedReviews}
+                  {product.totalReviews} avaliações
                 </span>
               </div>
 
@@ -231,37 +246,40 @@ const ProductPage: React.FC = () => {
             </div>
 
             {/* Variants */}
-            {product.availableVariations.length > 0 && (
-              <div className="space-y-3">
-                <h3 className="font-medium">Escolha uma opção:</h3>
-                <div className="grid grid-cols-1 gap-2">
-                  {product.availableVariations.map((variant, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setSelectedVariant(index)}
-                      className={`p-3 border rounded-lg text-left transition-all ${
-                        selectedVariant === index
-                          ? 'border-primary bg-primary/5 shadow-soft'
-                          : 'border-border hover:border-primary/50'
-                      }`}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <span className="font-medium">{variant.nome}</span>
-                          <div className="text-sm text-muted-foreground">
-                            {variant.cor} •{' '}
-                            {variant.disponivel ? 'Disponível' : 'Indisponível'}
+            {product.availableVariations &&
+              product.availableVariations.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="font-medium">Escolha uma opção:</h3>
+                  <div className="grid grid-cols-1 gap-2">
+                    {product.availableVariations.map((variant, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedVariant(index)}
+                        className={`p-3 border rounded-lg text-left transition-all ${
+                          selectedVariant === index
+                            ? 'border-primary bg-primary/5 shadow-soft'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <span className="font-medium">{variant.nome}</span>
+                            <div className="text-sm text-muted-foreground">
+                              {variant.cor} •{' '}
+                              {variant.disponivel
+                                ? 'Disponível'
+                                : 'Indisponível'}
+                            </div>
                           </div>
+                          <span className="font-bold text-primary">
+                            {formatPrice(currentPrice)}
+                          </span>
                         </div>
-                        <span className="font-bold text-primary">
-                          {formatPrice(currentPrice)}
-                        </span>
-                      </div>
-                    </button>
-                  ))}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
 
             {/* Quantity and Origin Controls */}
             <div className="space-y-4">
@@ -335,6 +353,7 @@ const ProductPage: React.FC = () => {
               <button
                 onClick={handleWhatsAppClick}
                 disabled={
+                  product.availableVariations &&
                   product.availableVariations.length > 0 &&
                   selectedVariant === null
                 }
@@ -354,7 +373,8 @@ const ProductPage: React.FC = () => {
                 >
                   <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
                 </svg>
-                {product.availableVariations.length > 0 &&
+                {product.availableVariations &&
+                product.availableVariations.length > 0 &&
                 selectedVariant === null
                   ? 'Selecione uma opção para comprar'
                   : 'Comprar pelo WhatsApp'}
@@ -539,7 +559,7 @@ const ProductPage: React.FC = () => {
                 <div className="flex justify-between py-2">
                   <span className="text-muted-foreground">Disponível:</span>
                   <span className="font-medium">
-                    {product.isAvailable ? 'Sim' : 'Não'}
+                    {product.isActive ? 'Sim' : 'Não'}
                   </span>
                 </div>
               </div>

@@ -25,6 +25,7 @@ import {
   BotGwanPage,
   DebugPage,
   ThemePage,
+  MartAdminPage,
   AssistentesPage,
   PromptsPage,
   BibliotecaPage,
@@ -146,6 +147,16 @@ function App() {
 
           {/* Rota de Debug */}
           <Route path="/debug" element={<DebugPage />} />
+
+          {/* Rota de Administração do Mart */}
+          <Route
+            path="/admin/mart"
+            element={
+              <ProtectedRoute>
+                <MartAdminPage />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </AuthProvider>
     </ThemeProvider>

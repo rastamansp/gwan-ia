@@ -16,8 +16,10 @@ export const useFeaturedProducts = () => {
         setError(null);
 
         const featuredProducts = await fetchFeaturedProducts();
+        console.log('Featured products loaded:', featuredProducts);
         setProducts(featuredProducts);
       } catch (err) {
+        console.error('Error loading featured products:', err);
         setError(
           err instanceof Error
             ? err.message

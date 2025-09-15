@@ -19,13 +19,8 @@ export interface ProductData {
   gtinEan: string;
   gtinEanPackage: string;
   supplierProductDescription: string;
-  isAvailable: boolean;
-  hasValidGtinEan: boolean;
-  formattedPrice: string;
   thumbnail: string;
   imagens: string[];
-  hasValidImages: boolean;
-  imageCount: number;
   category: string;
   subcategory: string;
   originalPrice: number;
@@ -33,15 +28,17 @@ export interface ProductData {
   discountPercentage: number;
   averageRating: number;
   totalReviews: number;
-  variations: ProductVariation[];
+  variations: any;
   realImage: string;
-  formattedCurrentPrice: string;
-  formattedOriginalPrice: string;
-  isOnSale: boolean;
-  formattedRating: string;
-  formattedReviews: string;
-  availableVariations: ProductVariation[];
-  defaultVariation: ProductVariation;
+  name: string;
+  isActive: boolean;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+  // Campos opcionais para compatibilidade
+  availableVariations?: any[];
+  defaultVariation?: any;
 }
 
 export interface ApiResponse {
@@ -60,27 +57,32 @@ export interface FeaturedProduct {
   category: string;
   subcategory: string;
   discountPercentage: number;
-  currentPrice: number;
   originalPrice: number;
   promotionalPrice?: number | null;
-  formattedCurrentPrice: string;
-  formattedOriginalPrice: string;
   thumbnail: string;
   averageRating: number;
   totalReviews: number;
-  formattedRating: string;
-  formattedReviews: string;
   stock: number;
-  isAvailable: boolean;
+  isActive: boolean;
+  isFeatured: boolean;
+  // Campos adicionais da API
+  ncm: string;
+  costPrice: number;
+  supplier: string;
+  gtinEan: string;
+  gtinEanPackage: string;
+  supplierProductDescription: string;
+  realImage: string;
+  variations: any;
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
 }
 
 export interface FeaturedProductsResponse {
   status: string;
-  data: {
-    products: FeaturedProduct[];
-    total: number;
-    categories: string[];
-  };
+  data: FeaturedProduct[]; // A API retorna os produtos diretamente no data
   error: null | string;
   timestamp: string;
 }
@@ -101,7 +103,27 @@ export const fetchProduct = async (
     const result: ApiResponse = await response.json();
 
     if (result.status === 'success' && result.data) {
-      return result.data;
+      // Processar os dados para converter strings em números
+      const processedProduct = {
+        ...result.data,
+        costPrice: parseFloat(String(result.data.costPrice)) || 0,
+        originalPrice: parseFloat(String(result.data.originalPrice)) || 0,
+        promotionalPrice:
+          parseFloat(String(result.data.promotionalPrice || 0)) || 0,
+        discountPercentage:
+          parseFloat(String(result.data.discountPercentage)) || 0,
+        averageRating: parseFloat(String(result.data.averageRating)) || 0,
+        stock: parseInt(String(result.data.stock)) || 0,
+        totalReviews: parseInt(String(result.data.totalReviews)) || 0,
+        // Garantir que imagens seja um array
+        imagens: Array.isArray(result.data.imagens) ? result.data.imagens : [],
+        // Garantir que availableVariations seja um array
+        availableVariations: Array.isArray(result.data.availableVariations)
+          ? result.data.availableVariations
+          : [],
+      };
+
+      return processedProduct;
     }
 
     throw new Error(result.error || 'Erro ao buscar produto');
@@ -114,18 +136,36 @@ export const fetchProduct = async (
 // Função para buscar produtos em destaque
 export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
   try {
-    const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, 'products/featured')
-    );
+    const url = buildApiUrl(import.meta.env.VITE_API_URL, 'products/featured');
+    console.log('Fetching featured products from:', url);
+
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
 
     const result: FeaturedProductsResponse = await response.json();
+    console.log('Featured products API response:', result);
 
     if (result.status === 'success' && result.data) {
-      return result.data.products;
+      console.log('Products data:', result.data);
+      // A API retorna os produtos diretamente no data, não em data.products
+      const products = Array.isArray(result.data) ? result.data : [];
+
+      // Processar os dados para converter strings em números
+      const processedProducts = products.map((product: any) => ({
+        ...product,
+        costPrice: parseFloat(product.costPrice) || 0,
+        originalPrice: parseFloat(product.originalPrice) || 0,
+        promotionalPrice: parseFloat(product.promotionalPrice) || 0,
+        discountPercentage: parseFloat(product.discountPercentage) || 0,
+        averageRating: parseFloat(product.averageRating) || 0,
+        stock: parseInt(product.stock) || 0,
+        totalReviews: parseInt(product.totalReviews) || 0,
+      }));
+
+      return processedProducts;
     }
 
     throw new Error(result.error || 'Erro ao buscar produtos em destaque');
@@ -149,7 +189,9 @@ export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
     const result: FeaturedProductsResponse = await response.json();
 
     if (result.status === 'success' && result.data) {
-      return result.data.products;
+      console.log('Products data:', result.data);
+      // A API retorna os produtos diretamente no data, não em data.products
+      return Array.isArray(result.data) ? result.data : [];
     }
 
     throw new Error(result.error || 'Erro ao buscar produtos');

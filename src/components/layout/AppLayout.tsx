@@ -1,32 +1,33 @@
-import React, { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
-import AuthService from '../../services/auth.service'
+import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import AuthService from '../../services/auth.service';
 
 interface AppLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const location = useLocation()
-  const navigate = useNavigate()
-  const authService = AuthService.getInstance()
-  const { user, logout } = useAuth()
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const authService = AuthService.getInstance();
+  const { user, logout } = useAuth();
 
   const handleLogout = async () => {
     try {
-      await authService.logout()
-      logout() // Usa o logout do contexto
-      navigate('/auth')
+      await authService.logout();
+      logout(); // Usa o logout do contexto
+      navigate('/auth');
     } catch (error) {
-      console.error('Erro no logout:', error)
+      console.error('Erro no logout:', error);
     }
-  }
+  };
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: '🏠' },
     { path: '/minha-ia', label: 'Minha IA', icon: '🤖' },
+    { path: '/admin/mart', label: 'Mart Admin', icon: '🛍️' },
     { path: '/chatbots', label: 'Chatbots', icon: '💬' },
     { path: '/traducoes', label: 'Traduções', icon: '🌐' },
     { path: '/ia-texto', label: 'IA para Texto', icon: '📝' },
@@ -36,11 +37,11 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
     { path: '/assistentes', label: 'Assistentes Personalizados', icon: '👤' },
     { path: '/prompts', label: 'Prompts', icon: '💡' },
     { path: '/biblioteca', label: 'Biblioteca', icon: '📚' },
-  ]
+  ];
 
   const isActiveRoute = (path: string) => {
-    return location.pathname === path
-  }
+    return location.pathname === path;
+  };
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -53,25 +54,47 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
               className="text-gray-300 hover:text-white p-2 rounded-lg hover:bg-gray-700 transition-colors duration-200"
               aria-label={sidebarOpen ? 'Fechar menu' : 'Abrir menu'}
             >
-              <svg 
-                className="w-6 h-6 transition-transform duration-200" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className="w-6 h-6 transition-transform duration-200"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
-                style={{ transform: sidebarOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}
+                style={{
+                  transform: sidebarOpen ? 'rotate(90deg)' : 'rotate(0deg)',
+                }}
               >
                 {sidebarOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 )}
               </svg>
             </button>
-            
+
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
                 </svg>
               </div>
               <h1 className="text-xl font-semibold text-white">AI Admin</h1>
@@ -81,7 +104,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           <div className="flex items-center space-x-4">
             {user && (
               <>
-                <span className="text-gray-300 text-sm hidden md:block">{user.email}</span>
+                <span className="text-gray-300 text-sm hidden md:block">
+                  {user.email}
+                </span>
                 <button
                   onClick={handleLogout}
                   className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200"
@@ -95,12 +120,14 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       </div>
 
       {/* Sidebar */}
-      <div className={`fixed left-0 top-16 h-full bg-gray-800 border-r border-gray-700 w-64 transform transition-transform duration-300 ease-in-out z-40 ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } md:translate-x-0`}>
+      <div
+        className={`fixed left-0 top-16 h-full bg-gray-800 border-r border-gray-700 w-64 transform transition-transform duration-300 ease-in-out z-40 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:translate-x-0`}
+      >
         <nav className="mt-6 px-4">
           <ul className="space-y-2">
-            {menuItems.map((item) => (
+            {menuItems.map(item => (
               <li key={item.path}>
                 <Link
                   to={item.path}
@@ -129,7 +156,9 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-medium text-sm truncate">{user.name}</p>
+                <p className="text-white font-medium text-sm truncate">
+                  {user.name}
+                </p>
                 <p className="text-gray-400 text-xs truncate">{user.email}</p>
               </div>
             </div>
@@ -138,10 +167,10 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
       </div>
 
       {/* Main Content */}
-      <div className={`pt-16 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0'} md:ml-64`}>
-        <div className="p-6">
-          {children}
-        </div>
+      <div
+        className={`pt-16 transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-0'} md:ml-64`}
+      >
+        <div className="p-6">{children}</div>
       </div>
 
       {/* Mobile Overlay */}
@@ -152,7 +181,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

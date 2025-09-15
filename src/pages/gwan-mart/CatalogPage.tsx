@@ -131,7 +131,7 @@ const CatalogPage: React.FC = () => {
                       {/* Rating */}
                       <div className="flex items-center gap-1">
                         <span className="text-sm font-medium text-gray-900">
-                          {product.formattedRating || '4.9'}
+                          {product.averageRating.toFixed(1) || '4.9'}
                         </span>
                         <div className="flex text-blue-500">
                           {Array.from({ length: 5 }, (_, i) => (
@@ -167,7 +167,7 @@ const CatalogPage: React.FC = () => {
                             R${' '}
                             {(
                               product.promotionalPrice ||
-                              product.currentPrice ||
+                              product.originalPrice ||
                               0
                             ).toLocaleString('pt-BR')}
                           </span>

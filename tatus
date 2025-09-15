@@ -1,0 +1,3 @@
+[33m90603df[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat: reorganizar páginas em subpastas e corrigir imports
+[33mdc8dbee[m feat: separar host da configuração e endpoints dos serviços
+[33m7c803f9[m fix: remover método duplicado verifyLoginCode da interface IAuthService

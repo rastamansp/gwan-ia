@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import env from '../config/env';
+import { SessionService } from './session.service';
 
 export class HttpService {
   private static instance: HttpService;
@@ -16,11 +17,18 @@ export class HttpService {
 
     // Interceptor para requisições
     this.axiosInstance.interceptors.request.use(
-      (config) => {
+      config => {
+        // Adicionar token de autenticação se disponível
+        const sessionService = SessionService.getInstance();
+        const token = sessionService.getToken();
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+
         console.log('Request:', config.method?.toUpperCase(), config.url);
         return config;
       },
-      (error) => {
+      error => {
         console.error('Request error:', error);
         return Promise.reject(error);
       }
@@ -28,12 +36,29 @@ export class HttpService {
 
     // Interceptor para respostas
     this.axiosInstance.interceptors.response.use(
-      (response) => {
+      response => {
         console.log('Response:', response.status, response.config.url);
         return response;
       },
-      (error) => {
-        console.error('Response error:', error.response?.status, error.config?.url, error.message);
+      error => {
+        console.error(
+          'Response error:',
+          error.response?.status,
+          error.config?.url,
+          error.message
+        );
+
+        // Se receber 401 (Unauthorized), fazer logout automático
+        if (error.response?.status === 401) {
+          console.log('Token expirado ou inválido, fazendo logout...');
+          const sessionService = SessionService.getInstance();
+          sessionService.clearSession();
+          // Redirecionar para login se estiver em uma página protegida
+          if (window.location.pathname !== '/auth') {
+            window.location.href = '/auth';
+          }
+        }
+
         return Promise.reject(error);
       }
     );
@@ -46,23 +71,41 @@ export class HttpService {
     return HttpService.instance;
   }
 
-  public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public async get<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.get<T>(url, config);
   }
 
-  public async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public async post<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.post<T>(url, data, config);
   }
 
-  public async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public async put<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.put<T>(url, data, config);
   }
 
-  public async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public async delete<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.delete<T>(url, config);
   }
 
-  public async patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+  public async patch<T = any>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.patch<T>(url, data, config);
   }
 }

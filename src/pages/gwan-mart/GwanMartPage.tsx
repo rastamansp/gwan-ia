@@ -177,118 +177,148 @@ const GwanMartPage: React.FC = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {products.map(product => (
-              <Link
-                key={product.id}
-                to={`/gwan-mart/product/${product.id}`}
-                className="group block"
-              >
-                <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden relative">
-                  {/* Product Image Container */}
-                  <div className="relative">
-                    <img
-                      src={product.thumbnail}
-                      alt={
-                        product.name ||
-                        product.description ||
-                        `Produto ${product.code}`
-                      }
-                      className="w-full h-48 object-cover"
-                    />
+            {products && Array.isArray(products) && products.length > 0 ? (
+              products.map(product => (
+                <Link
+                  key={product.id}
+                  to={`/gwan-mart/product/${product.id}`}
+                  className="group block"
+                >
+                  <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden relative">
+                    {/* Product Image Container */}
+                    <div className="relative">
+                      <img
+                        src={product.thumbnail}
+                        alt={
+                          product.name ||
+                          product.description ||
+                          `Produto ${product.code}`
+                        }
+                        className="w-full h-48 object-cover"
+                        onError={e => {
+                          // Substituir por um SVG inline em vez de uma URL externa
+                          e.currentTarget.style.display = 'none';
+                          const parent = e.currentTarget.parentElement;
+                          if (
+                            parent &&
+                            !parent.querySelector('.placeholder-svg')
+                          ) {
+                            parent.innerHTML = `
+                            <div class="placeholder-svg w-full h-48 bg-gray-200 flex items-center justify-center">
+                              <svg class="w-16 h-16 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                              </svg>
+                            </div>
+                          `;
+                          }
+                        }}
+                      />
 
-                    {/* Favorite Button - Top Right */}
-                    <button
-                      className="absolute top-2 right-2 p-2 bg-white/80 hover:bg-white rounded-full shadow-sm transition-colors"
-                      onClick={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        // TODO: Implementar favoritos
-                      }}
-                    >
-                      <svg
-                        className="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                      {/* Favorite Button - Top Right */}
+                      <button
+                        className="absolute top-2 right-2 p-2 bg-white/80 hover:bg-white rounded-full shadow-sm transition-colors"
+                        onClick={e => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          // TODO: Implementar favoritos
+                        }}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Product Info */}
-                  <div className="p-4 space-y-3">
-                    {/* MAIS VENDIDO Badge */}
-                    <div className="inline-block">
-                      <span className="bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded">
-                        MAIS VENDIDO
-                      </span>
+                        <svg
+                          className="w-5 h-5 text-gray-400 hover:text-red-500 transition-colors"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                          />
+                        </svg>
+                      </button>
                     </div>
 
-                    {/* Product Title */}
-                    <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
-                      {product.name ||
-                        product.description ||
-                        `Produto ${product.code}`}
-                    </h3>
-
-                    {/* Rating */}
-                    <div className="flex items-center gap-1">
-                      <span className="text-sm font-medium text-gray-900">
-                        {product.formattedRating || '4.9'}
-                      </span>
-                      <div className="flex text-blue-500">
-                        {Array.from({ length: 5 }, (_, i) => (
-                          <svg
-                            key={i}
-                            className="w-3 h-3 fill-current"
-                            viewBox="0 0 15 15"
-                          >
-                            <path d="M7.5 0L9.5 5.5L15 5.5L10.5 9L12 15L7.5 11.5L3 15L4.5 9L0 5.5L5.5 5.5L7.5 0Z" />
-                          </svg>
-                        ))}
-                      </div>
-                      <span className="text-sm text-gray-500">
-                        ({product.totalReviews || '2866'})
-                      </span>
-                    </div>
-
-                    {/* Price Section */}
-                    <div className="space-y-1">
-                      {/* Original Price */}
-                      {product.discountPercentage > 0 && (
-                        <div className="text-sm text-gray-500 line-through">
-                          R${' '}
-                          {(product.originalPrice || 0).toLocaleString('pt-BR')}
-                        </div>
-                      )}
-
-                      {/* Current Price with Discount */}
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl font-bold text-gray-900">
-                          R${' '}
-                          {(
-                            product.promotionalPrice ||
-                            product.currentPrice ||
-                            0
-                          ).toLocaleString('pt-BR')}
+                    {/* Product Info */}
+                    <div className="p-4 space-y-3">
+                      {/* MAIS VENDIDO Badge */}
+                      <div className="inline-block">
+                        <span className="bg-orange-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                          MAIS VENDIDO
                         </span>
+                      </div>
+
+                      {/* Product Title */}
+                      <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        {product.name ||
+                          product.description ||
+                          `Produto ${product.code}`}
+                      </h3>
+
+                      {/* Rating */}
+                      <div className="flex items-center gap-1">
+                        <span className="text-sm font-medium text-gray-900">
+                          {product.averageRating || 0}
+                        </span>
+                        <div className="flex text-blue-500">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <svg
+                              key={i}
+                              className="w-3 h-3 fill-current"
+                              viewBox="0 0 15 15"
+                            >
+                              <path d="M7.5 0L9.5 5.5L15 5.5L10.5 9L12 15L7.5 11.5L3 15L4.5 9L0 5.5L5.5 5.5L7.5 0Z" />
+                            </svg>
+                          ))}
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          ({product.totalReviews || 0})
+                        </span>
+                      </div>
+
+                      {/* Price Section */}
+                      <div className="space-y-1">
+                        {/* Original Price */}
                         {product.discountPercentage > 0 && (
-                          <span className="text-sm font-semibold text-green-600">
-                            {product.discountPercentage}% OFF
-                          </span>
+                          <div className="text-sm text-gray-500 line-through">
+                            R${' '}
+                            {(product.originalPrice || 0).toLocaleString(
+                              'pt-BR'
+                            )}
+                          </div>
                         )}
+
+                        {/* Current Price with Discount */}
+                        <div className="flex items-center gap-2">
+                          <span className="text-2xl font-bold text-gray-900">
+                            R${' '}
+                            {(
+                              product.promotionalPrice ||
+                              product.originalPrice ||
+                              0
+                            ).toLocaleString('pt-BR')}
+                          </span>
+                          {product.discountPercentage > 0 && (
+                            <span className="text-sm font-semibold text-green-600">
+                              {product.discountPercentage}% OFF
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
+                </Link>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-16">
+                <div className="text-muted-foreground mb-4">
+                  📦 Nenhum produto encontrado
                 </div>
-              </Link>
-            ))}
+                <p className="text-sm text-muted-foreground">
+                  Não há produtos em destaque no momento.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </section>

@@ -1,0 +1,19 @@
+{
+  "name": "Smartphone Samsung Galaxy S23",
+  "code": "SAMS23-128GB",
+  "description": "Smartphone Samsung Galaxy S23 com 128GB de armazenamento",
+  "category": "Eletrônicos",
+  "subcategory": "Smartphones",
+  "costPrice": 1200.00,
+  "originalPrice": 1800.00,
+  "promotionalPrice": 1600.00,
+  "stock": 25,
+  "supplier": "Samsung Brasil",
+  "gtinEanPackage": "7891234567890",
+  "supplierProductDescription": "Smartphone premium com tela AMOLED de 6.1 polegadas",
+  "discountPercentage": 11.11,
+  "realImage": "https://images.samsung.com/br/smartphones/galaxy-s23/images/galaxy-s23-highlights-mo.jpg",
+  "ncm": "85171200",
+  "gtinEan": "7891234567890",
+  "thumbnail": "https://images.samsung.com/br/smartphones/galaxy-s23/images/galaxy-s23-highlights-mo.jpg"
+}
