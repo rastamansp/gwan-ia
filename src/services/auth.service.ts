@@ -36,7 +36,7 @@ export class AuthService implements IAuthService {
     whatsapp: string;
   }): Promise<void> {
     try {
-      await this.httpService.post('/api/v1/auth/register', userData);
+      await this.httpService.post('/auth/register', userData);
     } catch (error) {
       throw new AuthError('Failed to register user', error as Error);
     }
@@ -44,7 +44,7 @@ export class AuthService implements IAuthService {
 
   public async activateAccount(email: string, code: string): Promise<void> {
     try {
-      await this.httpService.post('/api/v1/auth/activate-account', {
+      await this.httpService.post('/auth/activate-account', {
         email,
         code,
       });
@@ -55,7 +55,7 @@ export class AuthService implements IAuthService {
 
   public async login(email: string): Promise<void> {
     try {
-      await this.httpService.post('/api/v1/auth/login', { email });
+      await this.httpService.post('/auth/login', { email });
     } catch (error) {
       throw new AuthError('Failed to initiate login', error as Error);
     }
@@ -68,7 +68,7 @@ export class AuthService implements IAuthService {
         data: { accessToken: string; user: User };
         error: any;
         timestamp: string;
-      }>('/api/v1/auth/verify-account-code', {
+      }>('/auth/verify-account-code', {
         email,
         code,
       });
