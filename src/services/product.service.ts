@@ -212,6 +212,9 @@ export const fetchProductsWithFilters = async (
       params as Record<string, string | number | boolean | undefined>
     );
 
+    console.log('fetchProductsWithFilters - URL:', url);
+    console.log('fetchProductsWithFilters - Params:', params);
+
     const response = await fetch(url);
 
     if (!response.ok) {

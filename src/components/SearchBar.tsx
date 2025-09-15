@@ -23,10 +23,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
     maxPrice: undefined,
     minDiscount: undefined,
     minRating: undefined,
-    inStock: false,
-    onSale: false,
     sortBy: 'name',
-    sortOrder: 'asc',
+    sortOrder: 'ASC',
     page: 1,
     limit: 20,
   });
@@ -61,10 +59,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
       maxPrice: undefined,
       minDiscount: undefined,
       minRating: undefined,
-      inStock: false,
-      onSale: false,
       sortBy: 'name',
-      sortOrder: 'asc',
+      sortOrder: 'ASC',
       page: 1,
       limit: 20,
     });
@@ -302,9 +298,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
               <option value="name">Nome</option>
-              <option value="price">Preço</option>
-              <option value="rating">Avaliação</option>
-              <option value="discount">Desconto</option>
+              <option value="originalPrice">Preço</option>
+              <option value="averageRating">Avaliação</option>
+              <option value="discountPercentage">Desconto</option>
               <option value="createdAt">Data de criação</option>
             </select>
           </div>
@@ -315,7 +311,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               Ordem
             </label>
             <select
-              value={searchParams.sortOrder || 'asc'}
+              value={searchParams.sortOrder || 'ASC'}
               onChange={e =>
                 handleInputChange(
                   'sortOrder',
@@ -324,8 +320,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
               }
               className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
-              <option value="asc">Crescente</option>
-              <option value="desc">Decrescente</option>
+              <option value="ASC">Crescente</option>
+              <option value="DESC">Decrescente</option>
             </select>
           </div>
         </div>
@@ -335,42 +331,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border">
         <button
           onClick={() => {
-            handleInputChange('inStock', !searchParams.inStock);
+            handleInputChange('minDiscount', 10);
             handleSearch();
           }}
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-            searchParams.inStock
-              ? 'bg-green-100 text-green-800 border border-green-200'
-              : 'bg-gray-100 text-gray-600 border border-gray-200 hover:bg-gray-200'
-          }`}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-3 w-3"
-          >
-            <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-          </svg>
-          Em Estoque
-        </button>
-
-        <button
-          onClick={() => {
-            handleInputChange('onSale', !searchParams.onSale);
-            handleSearch();
-          }}
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-            searchParams.onSale
-              ? 'bg-red-100 text-red-800 border border-red-200'
-              : 'bg-gray-100 text-gray-600 border border-gray-200 hover:bg-gray-200'
-          }`}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200 hover:bg-red-200 transition-colors"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -388,7 +352,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <path d="M3 6h18"></path>
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
-          Em Promoção
+          10%+ Desconto
         </button>
 
         <button

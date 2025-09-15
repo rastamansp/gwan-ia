@@ -7,10 +7,13 @@ export interface SearchParams {
   maxPrice?: number;
   minDiscount?: number;
   minRating?: number;
-  inStock?: boolean;
-  onSale?: boolean;
-  sortBy?: 'price' | 'name' | 'rating' | 'discount' | 'createdAt';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?:
+    | 'originalPrice'
+    | 'name'
+    | 'averageRating'
+    | 'discountPercentage'
+    | 'createdAt';
+  sortOrder?: 'ASC' | 'DESC';
   page?: number;
   limit?: number;
 }
