@@ -1,6 +1,69 @@
 # 📝 Changelog - Gwan IA
 
-## [2024-12-19] - Implementação Gwan Mart + Integração WhatsApp
+## [2024-12-19] - Versão 1.1.0 - Melhorias de Qualidade e URLs Amigáveis
+
+### 🚀 **Novas Funcionalidades**
+
+#### **🔗 URLs Amigáveis para Produtos**
+- **URLs com códigos** em vez de IDs numéricos (`/product/SAMS23-128GB` vs `/product/2`)
+- **Compatibilidade total** com URLs antigas (IDs numéricos ainda funcionam)
+- **Busca inteligente** que detecta automaticamente se é ID ou código
+- **Fallback automático** se busca por código falhar, tenta por ID
+- **Melhor SEO** com URLs mais descritivas e amigáveis
+
+#### **🔒 Validação Automática de Ambiente**
+- **Validação antes da inicialização** da aplicação
+- **Prevenção de falhas** por configurações incorretas
+- **Mensagens de erro detalhadas** com instruções de correção
+- **Validação específica por ambiente** (dev/prod/test)
+- **HTTPS obrigatório** em produção
+- **Falha rápida** - aplicação não inicia se houver problemas
+
+#### **📊 Sistema de Monitoramento APM**
+- **OpenTelemetry** configurado para telemetria
+- **Logs estruturados** em formato JSON
+- **Integração com Jaeger** para tracing distribuído
+- **Integração com Kibana** para análise de logs
+- **Integração com Prometheus** para métricas
+- **Health checks** configurados (`/health`)
+
+### 🐛 **Correções**
+- **Validação de ambiente** implementada para prevenir problemas em produção
+- **Sistema de logs** melhorado com estruturação adequada
+- **Configurações de monitoramento** organizadas e documentadas
+
+### 📁 **Arquivos Criados**
+- `src/utils/env-validation.ts` - Validação automática de ambiente
+- `src/utils/telemetry.ts` - Sistema de telemetria e monitoramento
+- `src/utils/logger.ts` - Sistema de logs estruturados
+- `src/hooks/useTelemetry.ts` - Hook para telemetria
+- `src/types/telemetry.ts` - Tipos TypeScript para telemetria
+
+### 📝 **Arquivos Modificados**
+- `src/services/product.service.ts` - Suporte a URLs amigáveis
+- `src/hooks/useProduct.ts` - Busca inteligente por ID/código
+- `src/pages/gwan-mart/ProductPage.tsx` - Parâmetro de rota atualizado
+- `src/App.tsx` - Rota atualizada para usar códigos
+- `src/main.tsx` - Validação de ambiente antes da inicialização
+- `package.json` - Versão incrementada para 1.1.0
+
+### 🎯 **Impacto**
+- **URLs mais amigáveis** melhoram SEO e experiência do usuário
+- **Validação de ambiente** previne problemas em produção
+- **Monitoramento completo** permite observabilidade total
+- **Logs estruturados** facilitam debugging e análise
+- **Compatibilidade mantida** com sistema anterior
+
+### 🔄 **Próximos Passos Sugeridos**
+- Implementar dashboard de monitoramento
+- Adicionar métricas de negócio personalizadas
+- Configurar alertas automáticos
+- Implementar cache de produtos
+- Adicionar testes automatizados
+
+---
+
+## [2024-12-19] - Versão 1.0.0 - Implementação Gwan Mart + Integração WhatsApp
 
 ### 🚀 **Novas Funcionalidades**
 

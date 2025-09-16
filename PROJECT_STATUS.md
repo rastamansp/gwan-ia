@@ -1,6 +1,6 @@
 # 📊 Status do Projeto Gwan IA
 
-## 🎯 **Versão Atual: 1.0.0**
+## 🎯 **Versão Atual: 1.1.0**
 
 ### ✅ **COMPLETADO (100%)**
 
@@ -79,6 +79,26 @@
 - [x] Configuração Portainer
 - [x] Variáveis de ambiente configuradas
 
+#### **🛒 Gwan Mart - E-commerce**
+- [x] Página principal da loja (`/gwan-mart`)
+- [x] Página de detalhes do produto (`/gwan-mart/product/:productCode`)
+- [x] URLs amigáveis com códigos de produto
+- [x] Compatibilidade com URLs antigas (IDs numéricos)
+- [x] Integração WhatsApp para compras
+- [x] Seleção de variantes obrigatória
+- [x] Controles de quantidade e origem do frete
+- [x] Campo CEP opcional com formatação automática
+- [x] Mensagens formatadas com dados completos
+
+#### **🔒 Validação e Monitoramento**
+- [x] Validação automática de ambiente
+- [x] Sistema de logs estruturados
+- [x] OpenTelemetry configurado
+- [x] Integração com Jaeger (tracing)
+- [x] Integração com Kibana (logs)
+- [x] Integração com Prometheus (métricas)
+- [x] Health checks configurados
+
 #### **📱 Páginas Implementadas**
 - [x] `/` - HomePage
 - [x] `/auth` - Login
@@ -87,6 +107,8 @@
 - [x] `/bot-jaiminho` - Chatbot Jaiminho
 - [x] `/bot-marley` - Chatbot Marley  
 - [x] `/bot-gwan` - Chatbot Gwan
+- [x] `/gwan-mart` - Loja online Gwan Mart
+- [x] `/gwan-mart/product/:productCode` - Página de detalhes do produto (URLs amigáveis)
 - [x] `/dashboard` - Dashboard (estrutura básica)
 - [x] `/debug` - Validação de variáveis de ambiente
 
@@ -144,6 +166,10 @@
 - **✅ Design System:** 100% implementado
 - **✅ Chatbots:** 100% funcionais
 - **✅ Autenticação:** 100% implementada
+- **✅ E-commerce:** 100% implementado
+- **✅ URLs Amigáveis:** 100% implementadas
+- **✅ Validação de Ambiente:** 100% implementada
+- **✅ Monitoramento APM:** 100% configurado
 - **✅ Docker/Deploy:** 100% configurado
 - **🚧 Dashboard:** 0% implementado
 - **🚧 Analytics:** 0% implementado
@@ -153,7 +179,7 @@
 
 **Status:** ✅ **MVP COMPLETO** - Pronto para produção
 
-**Progresso:** 75% das funcionalidades planejadas implementadas
+**Progresso:** 85% das funcionalidades planejadas implementadas
 
 **Próxima Milestone:** Dashboard administrativo e sistema de usuários
 

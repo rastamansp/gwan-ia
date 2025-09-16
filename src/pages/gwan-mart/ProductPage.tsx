@@ -5,9 +5,9 @@ import { openWhatsApp, WhatsAppProductData } from '../../utils/whatsapp';
 import { useProduct } from '../../hooks/useProduct';
 
 const ProductPage: React.FC = () => {
-  const { productId } = useParams<{ productId: string }>();
+  const { productCode } = useParams<{ productCode: string }>();
   const navigate = useNavigate();
-  const { product, loading, error } = useProduct(productId);
+  const { product, loading, error } = useProduct(productCode);
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);

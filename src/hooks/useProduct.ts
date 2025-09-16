@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { ProductData, fetchProduct } from '../services/product.service';
+import {
+  ProductData,
+  fetchProductUniversal,
+} from '../services/product.service';
 
-export const useProduct = (productId: string | undefined) => {
+export const useProduct = (param: string | undefined) => {
   const [product, setProduct] = useState<ProductData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadProduct = async () => {
-      if (!productId) {
-        setError('ID do produto não fornecido');
+      if (!param) {
+        setError('Parâmetro do produto não fornecido');
         setLoading(false);
         return;
       }
@@ -18,7 +21,7 @@ export const useProduct = (productId: string | undefined) => {
         setLoading(true);
         setError(null);
 
-        const productData = await fetchProduct(productId);
+        const productData = await fetchProductUniversal(param);
 
         if (productData) {
           setProduct(productData);
@@ -35,7 +38,7 @@ export const useProduct = (productId: string | undefined) => {
     };
 
     loadProduct();
-  }, [productId]);
+  }, [param]);
 
   return { product, loading, error };
 };

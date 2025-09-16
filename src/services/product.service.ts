@@ -251,3 +251,65 @@ export const fetchProductsWithFilters = async (
     throw error;
   }
 };
+
+// Função para determinar se o parâmetro é um ID numérico ou código
+export const isNumericId = (param: string): boolean => {
+  return /^\d+$/.test(param);
+};
+
+// Função para buscar produto por código
+export const fetchProductByCode = async (
+  productCode: string
+): Promise<ProductData | null> => {
+  try {
+    const response = await fetch(
+      buildApiUrl(import.meta.env.VITE_API_URL, `products/code/${productCode}`)
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro ${response.status}: ${response.statusText}`);
+    }
+
+    const result: ApiResponse = await response.json();
+
+    if (result.status === 'success' && result.data) {
+      // Processar os dados para converter strings em números
+      const processedProduct = {
+        ...result.data,
+        costPrice: parseFloat(String(result.data.costPrice)) || 0,
+        originalPrice: parseFloat(String(result.data.originalPrice)) || 0,
+        promotionalPrice:
+          parseFloat(String(result.data.promotionalPrice || 0)) || 0,
+        discountPercentage:
+          parseFloat(String(result.data.discountPercentage)) || 0,
+        averageRating: parseFloat(String(result.data.averageRating)) || 0,
+        stock: parseInt(String(result.data.stock)) || 0,
+        totalReviews: parseInt(String(result.data.totalReviews)) || 0,
+        imagens: Array.isArray(result.data.imagens) ? result.data.imagens : [],
+        availableVariations: Array.isArray(result.data.availableVariations)
+          ? result.data.availableVariations
+          : [],
+      };
+
+      return processedProduct;
+    }
+
+    throw new Error(result.error || 'Erro ao buscar produto por código');
+  } catch (error) {
+    console.error('Erro ao buscar produto por código:', error);
+    return null;
+  }
+};
+
+// Função universal para buscar produto (por ID ou código)
+export const fetchProductUniversal = async (
+  param: string
+): Promise<ProductData | null> => {
+  if (isNumericId(param)) {
+    // Se for numérico, buscar por ID
+    return fetchProduct(param);
+  } else {
+    // Se não for numérico, buscar por código
+    return fetchProductByCode(param);
+  }
+};

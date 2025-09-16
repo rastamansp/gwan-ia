@@ -41,7 +41,7 @@ function App() {
           <Route path="/gwan-mart" element={<GwanMartPage />} />
           <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
           <Route
-            path="/gwan-mart/product/:productId"
+            path="/gwan-mart/product/:productCode"
             element={<ProductPage />}
           />
           <Route path="/theme" element={<ThemePage />} />

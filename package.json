@@ -1,7 +1,7 @@
 {
   "name": "gwan-ia",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.205.0",
+    "@opentelemetry/instrumentation": "^0.205.0",
+    "@opentelemetry/instrumentation-fetch": "^0.205.0",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.205.0",
+    "@opentelemetry/sdk-trace-base": "^2.1.0",
+    "@opentelemetry/sdk-trace-web": "^2.1.0",
     "axios": "^1.6.2",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",

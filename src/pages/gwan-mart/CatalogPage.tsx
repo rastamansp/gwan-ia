@@ -73,7 +73,7 @@ const CatalogPage: React.FC = () => {
               {products.map(product => (
                 <Link
                   key={product.id}
-                  to={`/gwan-mart/product/${product.id}`}
+                  to={`/gwan-mart/product/${product.code}`}
                   className="group block"
                 >
                   <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group-hover:scale-105 overflow-hidden relative">

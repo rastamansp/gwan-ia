@@ -1,5 +1,8 @@
 # 🚀 Gwan IA - Plataforma de Inteligência Artificial
 
+**Versão:** 1.1.0  
+**Status:** ✅ Produção - Funcionalidades Core Implementadas
+
 ## 📋 Status do Projeto
 
 ### ✅ **Funcionalidades Implementadas**
@@ -25,9 +28,10 @@
 - Contexto de autenticação global
 - Rotas protegidas
 
-#### **🛒 Gwan Mart - E-commerce**
+#### **🛒 Gwan Mart - E-commerce Completo**
 - **Loja online** com produtos tecnológicos premium
 - **Página de produtos** com galeria de imagens
+- **URLs amigáveis** para produtos (usando códigos em vez de IDs)
 - **Páginas de detalhes** dinâmicas por produto
 - **Integração WhatsApp** para compras
 - **Seleção de opções** obrigatória (cores, armazenamento)
@@ -35,6 +39,7 @@
 - **Campo CEP** opcional para cálculo de frete
 - **Mensagens formatadas** com dados completos do produto
 - **Navegação unificada** em todas as páginas
+- **Compatibilidade total** com URLs antigas (IDs numéricos)
 
 #### **📱 Integração WhatsApp**
 - **Botões de compra** integrados ao WhatsApp
@@ -52,12 +57,15 @@
 - Sistema de tipografia e espaçamento
 - Suporte a temas claro/escuro
 
-#### **🏗️ Arquitetura**
+#### **🏗️ Arquitetura e Qualidade**
 - Clean Architecture implementada
 - Componentes modulares e reutilizáveis
 - Context API para gerenciamento de estado
 - Hooks customizados
 - TypeScript com configuração estrita
+- **Validação automática de ambiente** antes da inicialização
+- **Sistema de logs estruturados** com telemetria
+- **Monitoramento APM** configurado (Jaeger, Kibana, Prometheus)
 
 #### **🐳 Docker & Deploy**
 - Configuração para produção
@@ -82,7 +90,7 @@
 - `/bot-marley` - Chatbot Marley  
 - `/bot-gwan` - Chatbot Gwan
 - `/gwan-mart` - Loja online Gwan Mart
-- `/gwan-mart/product/:productId` - Página de detalhes do produto
+- `/gwan-mart/product/:productCode` - Página de detalhes do produto (URLs amigáveis)
 - `/dashboard` - Dashboard (estrutura básica)
 - `/debug` - Validação de variáveis de ambiente
 
@@ -168,7 +176,7 @@ http://localhost:8080
    ```env
    NODE_ENV=production
    VITE_APP_NAME=Gwan IA
-   VITE_APP_VERSION=1.0.0
+   VITE_APP_VERSION=1.1.0
    VITE_API_URL=https://api.gwan.com.br/api
    VITE_BUILD_TIME=
    VITE_GIT_COMMIT=
@@ -180,8 +188,8 @@ http://localhost:8080
    # Monitoramento APM
    OTEL_EXPORTER_OTLP_ENDPOINT=http://gwan.com.br:4317
    OTEL_SERVICE_NAME=gwan-ia-frontend
-   OTEL_SERVICE_VERSION=1.0.0
-   OTEL_RESOURCE_ATTRIBUTES=service.name=gwan-ia-frontend,service.version=1.0.0
+   OTEL_SERVICE_VERSION=1.1.0
+   OTEL_RESOURCE_ATTRIBUTES=service.name=gwan-ia-frontend,service.version=1.1.0
    
    # Logs
    LOG_LEVEL=info
