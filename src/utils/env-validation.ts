@@ -9,9 +9,9 @@ interface RequiredEnvConfig {
   VITE_APP_VERSION: string;
 
   // Configurações de monitoramento (obrigatórias em produção)
-  OTEL_EXPORTER_OTLP_ENDPOINT?: string;
-  OTEL_SERVICE_NAME?: string;
-  OTEL_SERVICE_VERSION?: string;
+  VITE_OTEL_EXPORTER_OTLP_ENDPOINT?: string;
+  VITE_OTEL_SERVICE_NAME?: string;
+  VITE_OTEL_SERVICE_VERSION?: string;
 
   // Configurações de log
   VITE_LOG_LEVEL?: string;
@@ -24,9 +24,9 @@ const REQUIRED_CONFIGS: Record<string, (keyof RequiredEnvConfig)[]> = {
     'VITE_API_URL',
     'VITE_APP_NAME',
     'VITE_APP_VERSION',
-    'OTEL_EXPORTER_OTLP_ENDPOINT',
-    'OTEL_SERVICE_NAME',
-    'OTEL_SERVICE_VERSION',
+    'VITE_OTEL_EXPORTER_OTLP_ENDPOINT',
+    'VITE_OTEL_SERVICE_NAME',
+    'VITE_OTEL_SERVICE_VERSION',
     'VITE_LOG_LEVEL',
   ],
   test: ['VITE_API_URL', 'VITE_APP_NAME', 'VITE_APP_VERSION'],
@@ -44,7 +44,7 @@ const VALIDATION_RULES: Record<string, (value: string) => boolean> = {
   },
   VITE_APP_NAME: (value: string) => value.length > 0,
   VITE_APP_VERSION: (value: string) => /^\d+\.\d+\.\d+/.test(value),
-  OTEL_EXPORTER_OTLP_ENDPOINT: (value: string) => {
+  VITE_OTEL_EXPORTER_OTLP_ENDPOINT: (value: string) => {
     try {
       new URL(value);
       return true;
@@ -52,8 +52,8 @@ const VALIDATION_RULES: Record<string, (value: string) => boolean> = {
       return false;
     }
   },
-  OTEL_SERVICE_NAME: (value: string) => value.length > 0,
-  OTEL_SERVICE_VERSION: (value: string) => /^\d+\.\d+\.\d+/.test(value),
+  VITE_OTEL_SERVICE_NAME: (value: string) => value.length > 0,
+  VITE_OTEL_SERVICE_VERSION: (value: string) => /^\d+\.\d+\.\d+/.test(value),
   VITE_LOG_LEVEL: (value: string) =>
     ['debug', 'info', 'warn', 'error'].includes(value),
 };
@@ -64,10 +64,10 @@ const ERROR_MESSAGES: Record<string, string> = {
     'URL da API deve ser uma URL válida (ex: https://api.gwan.com.br)',
   VITE_APP_NAME: 'Nome da aplicação não pode estar vazio',
   VITE_APP_VERSION: 'Versão deve seguir o formato semântico (ex: 1.0.0)',
-  OTEL_EXPORTER_OTLP_ENDPOINT:
+  VITE_OTEL_EXPORTER_OTLP_ENDPOINT:
     'Endpoint OpenTelemetry deve ser uma URL válida (ex: http://gwan.com.br:4317)',
-  OTEL_SERVICE_NAME: 'Nome do serviço OpenTelemetry não pode estar vazio',
-  OTEL_SERVICE_VERSION:
+  VITE_OTEL_SERVICE_NAME: 'Nome do serviço OpenTelemetry não pode estar vazio',
+  VITE_OTEL_SERVICE_VERSION:
     'Versão do serviço deve seguir o formato semântico (ex: 1.0.0)',
   VITE_LOG_LEVEL: 'Nível de log deve ser: debug, info, warn ou error',
 };
@@ -137,17 +137,19 @@ export const validateEnvironment = (): { valid: boolean; errors: string[] } => {
   }
 
   // Validar configurações de monitoramento
-  const otelEndpoint = getEnvValue('OTEL_EXPORTER_OTLP_ENDPOINT');
+  const otelEndpoint = getEnvValue('VITE_OTEL_EXPORTER_OTLP_ENDPOINT');
   if (otelEndpoint && currentEnv === 'production') {
     try {
       const url = new URL(otelEndpoint);
       if (url.protocol !== 'http:' && url.protocol !== 'https:') {
         errors.push(
-          '❌ OTEL_EXPORTER_OTLP_ENDPOINT deve usar protocolo HTTP ou HTTPS'
+          '❌ VITE_OTEL_EXPORTER_OTLP_ENDPOINT deve usar protocolo HTTP ou HTTPS'
         );
       }
     } catch {
-      errors.push('❌ OTEL_EXPORTER_OTLP_ENDPOINT deve ser uma URL válida');
+      errors.push(
+        '❌ VITE_OTEL_EXPORTER_OTLP_ENDPOINT deve ser uma URL válida'
+      );
     }
   }
 
@@ -182,10 +184,10 @@ Para desenvolvimento (.env):
 Para produção (env.production):
   VITE_API_URL=https://api.gwan.com.br
   VITE_APP_NAME=Gwan IA
-  VITE_APP_VERSION=1.0.0
-  OTEL_EXPORTER_OTLP_ENDPOINT=http://gwan.com.br:4317
-  OTEL_SERVICE_NAME=gwan-ia-frontend
-  OTEL_SERVICE_VERSION=1.0.0
+  VITE_APP_VERSION=1.1.0
+  VITE_OTEL_EXPORTER_OTLP_ENDPOINT=http://gwan.com.br:4317
+  VITE_OTEL_SERVICE_NAME=gwan-ia-frontend
+  VITE_OTEL_SERVICE_VERSION=1.1.0
   VITE_LOG_LEVEL=info
 
 🔧 COMO CORRIGIR:
