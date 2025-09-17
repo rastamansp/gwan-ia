@@ -27,8 +27,8 @@ export interface PaginatedResponse<T> {
     page: number;
     limit: number;
     totalPages: number;
-    categories: string[];
-    subcategories: string[];
+    categories?: string[];
+    subcategories?: string[];
   };
   error: null | string;
   timestamp: string;

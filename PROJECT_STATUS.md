@@ -109,6 +109,8 @@
 - [x] `/bot-gwan` - Chatbot Gwan
 - [x] `/gwan-mart` - Loja online Gwan Mart
 - [x] `/gwan-mart/product/:productCode` - Página de detalhes do produto (URLs amigáveis)
+- [x] `/gwan-mart/catalog` - Catálogo completo com paginação funcional
+- [x] `/admin/mart` - Painel administrativo para produtos
 - [x] `/dashboard` - Dashboard (estrutura básica)
 - [x] `/debug` - Validação de variáveis de ambiente
 

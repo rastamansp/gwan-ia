@@ -1,5 +1,49 @@
 # 📝 Changelog - Gwan IA
 
+## [2024-12-19] - Versão 1.1.1 - Correções de Paginação e Autenticação
+
+### 🐛 **Correções Críticas**
+
+#### **📄 Paginação do Catálogo Corrigida**
+- **Problema**: Paginação não funcionava ao clicar em "Próxima página"
+- **Causa**: Incompatibilidade entre estrutura da resposta da API e interface TypeScript
+- **Solução**: 
+  - Interface `PaginatedResponse` atualizada para corresponder à resposta real da API
+  - Processamento do serviço corrigido para incluir `page` e `limit` nos dados retornados
+  - Garantia de parâmetros essenciais sempre presentes
+- **Arquivos**: `src/types/search.types.ts`, `src/services/product.service.ts`
+
+#### **🔐 Autenticação Admin Corrigida**
+- **Problema**: Erro 401 "Token inválido ou expirado" ao cadastrar produtos no admin
+- **Causa**: Inconsistência na obtenção do token entre serviços
+- **Solução**:
+  - `ProductAdminService` agora usa `SessionService` para obter token
+  - Eliminada duplicação de lógica de autenticação
+  - Token obtido de forma consistente em todos os serviços
+- **Arquivos**: `src/services/product-admin.service.ts`
+
+### 🔧 **Melhorias Técnicas**
+- **Consistência de autenticação** entre todos os serviços
+- **Estrutura de dados alinhada** entre frontend e backend
+- **Robustez na paginação** com parâmetros sempre presentes
+- **Código mais limpo** sem duplicação de lógica
+
+### 📝 **Arquivos Modificados**
+- `src/types/search.types.ts` - Interface de paginação corrigida
+- `src/services/product.service.ts` - Processamento de dados de paginação
+- `src/services/product-admin.service.ts` - Autenticação unificada
+- `src/hooks/useProductsWithFilters.ts` - Lógica de paginação simplificada
+- `src/components/Pagination.tsx` - Componente de paginação otimizado
+- `src/pages/gwan-mart/CatalogPage.tsx` - Inicialização correta de parâmetros
+
+### 🎯 **Impacto**
+- **Paginação funcional** em todas as páginas de produtos
+- **Cadastro de produtos** funcionando corretamente no admin
+- **Experiência do usuário** melhorada com navegação fluida
+- **Sistema mais robusto** com menos pontos de falha
+
+---
+
 ## [2024-12-19] - Versão 1.1.0 - Melhorias de Qualidade e URLs Amigáveis
 
 ### 🚀 **Novas Funcionalidades**

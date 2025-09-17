@@ -17,16 +17,14 @@ const CatalogPage: React.FC = () => {
     searchProducts,
     changePage,
     changeLimit,
-  } = useProductsWithFilters();
-
-  // Debug: verificar produtos renderizados
-  console.log('CatalogPage - Products:', products);
-  if (products.length > 0) {
-    console.log('CatalogPage - First product:', products[0]);
-  }
+  } = useProductsWithFilters({ page: 1, limit: 20 });
 
   const handleSearch = (params: SearchParams) => {
     searchProducts(params);
+  };
+
+  const handlePageChange = (page: number) => {
+    changePage(page);
   };
 
   return (
@@ -191,7 +189,7 @@ const CatalogPage: React.FC = () => {
             totalPages={pagination.totalPages}
             totalItems={pagination.total}
             itemsPerPage={pagination.limit}
-            onPageChange={changePage}
+            onPageChange={handlePageChange}
             onLimitChange={changeLimit}
             loading={loading}
           />

@@ -1,4 +1,5 @@
 import { buildApiUrl } from '../utils/api-url';
+import { SessionService } from './session.service';
 
 // Interfaces para produtos
 export interface ProductFormData {
@@ -48,9 +49,11 @@ export interface ProductsListResponse {
 export class ProductAdminService {
   private static instance: ProductAdminService;
   private baseUrl: string;
+  private sessionService: SessionService;
 
   private constructor() {
     this.baseUrl = import.meta.env.VITE_API_URL;
+    this.sessionService = SessionService.getInstance();
   }
 
   public static getInstance(): ProductAdminService {
@@ -62,17 +65,7 @@ export class ProductAdminService {
 
   // Obter token de autenticação
   private getAuthToken(): string | null {
-    const session = localStorage.getItem('userSession');
-    if (session) {
-      try {
-        const parsedSession = JSON.parse(session);
-        return parsedSession.token;
-      } catch (error) {
-        console.error('Erro ao parsear sessão:', error);
-        return null;
-      }
-    }
-    return null;
+    return this.sessionService.getToken();
   }
 
   // Headers padrão com autenticação

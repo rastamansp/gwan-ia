@@ -17,8 +17,9 @@ export const useProductsWithFilters = (initialParams: SearchParams = {}) => {
   });
   const [categories, setCategories] = useState<string[]>([]);
   const [subcategories, setSubcategories] = useState<string[]>([]);
-  const [currentParams, setCurrentParams] =
-    useState<SearchParams>(initialParams);
+  const [currentParams, setCurrentParams] = useState<SearchParams>(() => {
+    return { page: 1, limit: 20, ...initialParams };
+  });
 
   const searchProducts = async (params: SearchParams = {}) => {
     try {
@@ -58,8 +59,8 @@ export const useProductsWithFilters = (initialParams: SearchParams = {}) => {
         limit: result.data.limit,
         totalPages: result.data.totalPages,
       });
-      setCategories(result.data.categories);
-      setSubcategories(result.data.subcategories);
+      setCategories(result.data.categories || []);
+      setSubcategories(result.data.subcategories || []);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : 'Erro ao carregar produtos'
@@ -70,11 +71,11 @@ export const useProductsWithFilters = (initialParams: SearchParams = {}) => {
   };
 
   const changePage = (page: number) => {
-    searchProducts({ ...currentParams, page });
+    searchProducts({ page });
   };
 
   const changeLimit = (limit: number) => {
-    searchProducts({ ...currentParams, page: 1, limit });
+    searchProducts({ page: 1, limit });
   };
 
   useEffect(() => {

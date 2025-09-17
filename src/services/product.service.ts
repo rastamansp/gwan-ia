@@ -206,14 +206,25 @@ export const fetchProductsWithFilters = async (
   params: SearchParams = {}
 ): Promise<PaginatedResponse<FeaturedProduct>> => {
   try {
+    // Garantir que os parâmetros essenciais estejam presentes
+    const processedParams = {
+      page: 1,
+      limit: 20,
+      ...params,
+    };
+
+    console.log(
+      'fetchProductsWithFilters - Processed params:',
+      processedParams
+    );
+
     const url = buildApiUrlWithQuery(
       import.meta.env.VITE_API_URL,
       'products',
-      params as Record<string, string | number | boolean | undefined>
+      processedParams as Record<string, string | number | boolean | undefined>
     );
 
     console.log('fetchProductsWithFilters - URL:', url);
-    console.log('fetchProductsWithFilters - Params:', params);
 
     const response = await fetch(url);
 
@@ -222,6 +233,14 @@ export const fetchProductsWithFilters = async (
     }
 
     const result: PaginatedResponse<FeaturedProduct> = await response.json();
+
+    console.log('fetchProductsWithFilters - API Response:', result);
+    console.log('fetchProductsWithFilters - Response pagination:', {
+      total: result.data?.total,
+      page: result.data?.page,
+      limit: result.data?.limit,
+      totalPages: result.data?.totalPages,
+    });
 
     if (result.status === 'success') {
       // Processar os dados para converter strings em números
@@ -241,6 +260,8 @@ export const fetchProductsWithFilters = async (
         data: {
           ...result.data,
           products: processedProducts,
+          page: processedParams.page || 1,
+          limit: processedParams.limit || 20,
         },
       };
     }
