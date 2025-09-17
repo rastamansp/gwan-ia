@@ -53,6 +53,12 @@ ENV VITE_OTEL_RESOURCE_ATTRIBUTES=$VITE_OTEL_RESOURCE_ATTRIBUTES
 # Build da aplicação
 RUN pnpm build
 
+# Verificar se o build foi bem-sucedido
+RUN ls -la /app/dist && \
+    echo "Build completed successfully" && \
+    echo "Dist directory contents:" && \
+    find /app/dist -type f -name "*.html" -o -name "*.js" -o -name "*.css" | head -10
+
 # Stage de produção
 FROM nginx:alpine AS production
 
