@@ -6,7 +6,7 @@ Configure as seguintes variáveis no Portainer em **Environment variables**:
 
 ### **Aplicação**
 ```
-VITE_API_URL=https://api.gwan.com.br
+VITE_API_URL=https://api.gwan.com.br/api/v1/
 VITE_APP_NAME=Gwan IA
 VITE_APP_VERSION=1.1.0
 VITE_BUILD_TIME=
