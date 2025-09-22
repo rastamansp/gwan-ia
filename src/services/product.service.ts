@@ -225,10 +225,21 @@ export const fetchProductsWithFilters = async (
     );
 
     console.log('fetchProductsWithFilters - URL:', url);
+    console.log('fetchProductsWithFilters - Request headers:', {
+      'Content-Type': 'application/json',
+    });
 
     const response = await fetch(url);
 
+    console.log('fetchProductsWithFilters - Response status:', response.status);
+    console.log(
+      'fetchProductsWithFilters - Response headers:',
+      Object.fromEntries(response.headers.entries())
+    );
+
     if (!response.ok) {
+      const errorText = await response.text();
+      console.error('fetchProductsWithFilters - Error response:', errorText);
       throw new Error(`Erro ${response.status}: ${response.statusText}`);
     }
 
@@ -241,6 +252,14 @@ export const fetchProductsWithFilters = async (
       limit: result.data?.limit,
       totalPages: result.data?.totalPages,
     });
+    console.log(
+      'fetchProductsWithFilters - Products count:',
+      result.data?.products?.length
+    );
+    console.log(
+      'fetchProductsWithFilters - First product:',
+      result.data?.products?.[0]
+    );
 
     if (result.status === 'success') {
       // Processar os dados para converter strings em números
@@ -283,9 +302,12 @@ export const fetchProductByCode = async (
   productCode: string
 ): Promise<ProductData | null> => {
   try {
-    const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, `products/code/${productCode}`)
+    const url = buildApiUrl(
+      import.meta.env.VITE_API_URL,
+      `products/${productCode}`
     );
+
+    const response = await fetch(url);
 
     if (!response.ok) {
       throw new Error(`Erro ${response.status}: ${response.statusText}`);

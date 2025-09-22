@@ -20,7 +20,7 @@ declare global {
 
 const env = {
   // API
-  API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3001',
+  API_URL: import.meta.env.VITE_API_URL || 'http://localhost:3000',
   APP_NAME: import.meta.env.VITE_APP_NAME || 'Gwan IA',
   APP_VERSION: import.meta.env.VITE_APP_VERSION || '1.0.0',
   // Environment
