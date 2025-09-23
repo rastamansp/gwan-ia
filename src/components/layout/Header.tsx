@@ -110,6 +110,12 @@ const Header: React.FC<HeaderProps> = ({
                   >
                     🏢 Gwan - Institucional
                   </Link>
+                  <Link
+                    to="/bot-gwan-mart"
+                    className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+                  >
+                    🛒 Gwan Mart - E-commerce
+                  </Link>
                 </div>
               </div>
             </div>

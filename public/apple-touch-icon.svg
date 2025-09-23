@@ -1,0 +1,10 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with rounded corners -->
+  <rect width="180" height="180" rx="40" fill="#3B82F6"/>
+  
+  <!-- Lightning bolt -->
+  <path d="M67.5 45L112.5 67.5L90 90L135 112.5L67.5 135L90 90L45 67.5L67.5 45Z" fill="white" stroke="white" stroke-width="2"/>
+  
+  <!-- AI accent -->
+  <circle cx="90" cy="90" r="11" fill="#60A5FA"/>
+</svg>

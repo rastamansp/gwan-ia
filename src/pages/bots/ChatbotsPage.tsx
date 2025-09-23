@@ -1,9 +1,11 @@
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import AppLayout from '../../components/layout/AppLayout';
+import { useNavigate } from 'react-router-dom';
 
 const ChatbotsPage: React.FC = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   if (!user) {
     return null;
@@ -72,6 +74,44 @@ const ChatbotsPage: React.FC = () => {
               <span className="text-green-400 text-sm">Online</span>
               <button className="text-blue-400 hover:text-blue-300 text-sm">
                 Configurar
+              </button>
+            </div>
+          </div>
+
+          {/* Chatbot Gwan Mart */}
+          <div
+            className="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-green-500 transition-colors duration-200 cursor-pointer"
+            onClick={() => navigate('/bot-gwan-mart')}
+          >
+            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Gwan Mart</h3>
+            <p className="text-gray-400 text-sm">
+              Atendente virtual para e-commerce
+            </p>
+            <div className="mt-4 flex items-center justify-between">
+              <span className="text-green-400 text-sm">Online</span>
+              <button
+                className="text-blue-400 hover:text-blue-300 text-sm"
+                onClick={e => {
+                  e.stopPropagation();
+                  navigate('/bot-gwan-mart');
+                }}
+              >
+                Acessar
               </button>
             </div>
           </div>

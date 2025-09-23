@@ -23,6 +23,7 @@ import {
   BotJaiminhoPage,
   BotMarleyPage,
   BotGwanPage,
+  BotGwanMartPage,
   DebugPage,
   ThemePage,
   MartAdminPage,
@@ -144,6 +145,7 @@ function App() {
           <Route path="/bot-jaiminho" element={<BotJaiminhoPage />} />
           <Route path="/bot-marley" element={<BotMarleyPage />} />
           <Route path="/bot-gwan" element={<BotGwanPage />} />
+          <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
 
           {/* Rota de Debug */}
           <Route path="/debug" element={<DebugPage />} />

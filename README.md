@@ -89,6 +89,7 @@
 - `/bot-jaiminho` - Chatbot Jaiminho
 - `/bot-marley` - Chatbot Marley  
 - `/bot-gwan` - Chatbot Gwan
+- `/bot-gwan-mart` - Chatbot Gwan Mart (Atendente E-commerce)
 - `/gwan-mart` - Loja online Gwan Mart
 - `/gwan-mart/product/:productCode` - Página de detalhes do produto (URLs amigáveis)
 - `/dashboard` - Dashboard (estrutura básica)

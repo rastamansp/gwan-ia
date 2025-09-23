@@ -193,7 +193,7 @@ const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {/* Jaiminho */}
             <div className="bg-card rounded-xl p-8 border border-border hover:border-border/80 transition-all duration-300 hover:shadow-elevated hover:-translate-y-2 text-center flex flex-col h-full">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
@@ -286,6 +286,38 @@ const HomePage: React.FC = () => {
               </p>
               <Link
                 to="/bot-gwan"
+                className="block w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors duration-300 mt-auto"
+              >
+                Experimentar
+              </Link>
+            </div>
+
+            {/* Gwan Mart */}
+            <div className="bg-card rounded-xl p-8 border border-border hover:border-border/80 transition-all duration-300 hover:shadow-elevated hover:-translate-y-2 text-center flex flex-col h-full">
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                <svg
+                  className="w-8 h-8 text-emerald-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+              </div>
+              <h4 className="text-2xl font-bold text-card-foreground mb-4">
+                Gwan Mart
+              </h4>
+              <p className="text-muted-foreground text-base mb-6 leading-relaxed flex-grow">
+                Atendente virtual especializado em e-commerce. Tire dúvidas
+                sobre produtos, pedidos, entrega e muito mais!
+              </p>
+              <Link
+                to="/bot-gwan-mart"
                 className="block w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors duration-300 mt-auto"
               >
                 Experimentar
