@@ -13,6 +13,7 @@ services:
         VITE_GIT_COMMIT: ${VITE_GIT_COMMIT:-}
         VITE_GIT_BRANCH: ${VITE_GIT_BRANCH:-main}
         VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
+        VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-https://mcp.gwan.com.br/api/ai-agent/chat}
         VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}
         VITE_OTEL_SERVICE_NAME: ${VITE_OTEL_SERVICE_NAME:-gwan-ia-frontend}
         VITE_OTEL_SERVICE_VERSION: ${VITE_OTEL_SERVICE_VERSION:-1.1.0}
@@ -50,6 +51,7 @@ services:
       - VITE_DEBUG=${VITE_DEBUG}
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL}
       - VITE_SHOW_DEV_TOOLS=${VITE_SHOW_DEV_TOOLS}
+      - VITE_GWAN_MART_AI_URL=${VITE_GWAN_MART_AI_URL}
       
       # Monitoramento APM (com prefixo VITE_)
       - VITE_OTEL_EXPORTER_OTLP_ENDPOINT=${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}

@@ -9,6 +9,7 @@ services:
         VITE_API_URL: ${VITE_API_URL:-http://localhost:3000/api}
         VITE_APP_NAME: ${VITE_APP_NAME:-Gwan IA}
         VITE_APP_VERSION: ${VITE_APP_VERSION:-1.0.0}
+        VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-http://localhost:7410/api/ai-agent/chat}
         VITE_BUILD_TIME: ${VITE_BUILD_TIME:-}
         VITE_GIT_COMMIT: ${VITE_GIT_COMMIT:-}
         VITE_GIT_BRANCH: ${VITE_GIT_BRANCH:-}
@@ -26,6 +27,9 @@ services:
       
       # API (local)
       - VITE_API_URL=${VITE_API_URL:-http://localhost:3000/api}
+      
+      # Gwan Mart AI Agent (local)
+      - VITE_GWAN_MART_AI_URL=${VITE_GWAN_MART_AI_URL:-http://localhost:7410/api/ai-agent/chat}
       
       # Build
       - VITE_BUILD_TIME=${VITE_BUILD_TIME:-}
