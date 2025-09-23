@@ -187,7 +187,8 @@ const GwanMartChatWidget: React.FC<GwanMartChatWidgetProps> = ({
                           <button
                             key={index}
                             onClick={() => {
-                              sendMessage(suggestion);
+                              setInputMessage(suggestion);
+                              inputRef.current?.focus();
                             }}
                             className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full border border-gray-300 transition-colors duration-200 hover:border-gray-400"
                           >
