@@ -177,6 +177,26 @@ const GwanMartChatWidget: React.FC<GwanMartChatWidgetProps> = ({
                       </ReactMarkdown>
                     </div>
                   )}
+
+                  {/* Botões de sugestões */}
+                  {!message.isUser &&
+                    message.suggestions &&
+                    message.suggestions.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {message.suggestions.map((suggestion, index) => (
+                          <button
+                            key={index}
+                            onClick={() => {
+                              sendMessage(suggestion);
+                            }}
+                            className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full border border-gray-300 transition-colors duration-200 hover:border-gray-400"
+                          >
+                            {suggestion}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
                   <p
                     className={`text-xs mt-1 ${
                       message.isUser ? 'text-blue-100' : 'text-gray-500'

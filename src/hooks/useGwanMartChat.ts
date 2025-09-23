@@ -6,6 +6,7 @@ interface Message {
   text: string;
   isUser: boolean;
   timestamp: Date;
+  suggestions?: string[];
 }
 
 export const useGwanMartChat = (endpoint?: string) => {
@@ -73,6 +74,7 @@ export const useGwanMartChat = (endpoint?: string) => {
             'Desculpe, não consegui processar sua mensagem.',
           isUser: false,
           timestamp: new Date(),
+          suggestions: data.suggestions || undefined,
         };
 
         setMessages(prev => [...prev, botMessage]);
