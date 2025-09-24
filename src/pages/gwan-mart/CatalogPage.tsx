@@ -8,13 +8,42 @@ import { SearchParams } from '../../types/search.types';
 import { useToast } from '../../hooks/useToast';
 import ToastContainer from '../../components/ui/ToastContainer';
 
+interface AIProduct {
+  id: number;
+  name: string;
+  code: string;
+  description?: string;
+  category: string;
+  subcategory: string;
+  costPrice: number;
+  originalPrice: number;
+  promotionalPrice?: number;
+  stock: number;
+  supplier: string;
+  gtinEan: string;
+  gtinEanPackage: string;
+  supplierProductDescription: string;
+  discountPercentage: number;
+  averageRating: number;
+  totalReviews: number;
+  thumbnail: string;
+  realImage: string;
+  ncm: string;
+  isActive: boolean;
+  isFeatured: boolean;
+  createdAt: string;
+  updatedAt: string;
+  images: string[];
+  variations?: unknown;
+  similarity: number;
+}
+
 const CatalogPage: React.FC = () => {
   // Estados para busca com IA
   const [isAISearch, setIsAISearch] = useState(false);
-  const [aiSearchResults, setAiSearchResults] = useState<any[]>([]);
+  const [aiSearchResults, setAiSearchResults] = useState<AIProduct[]>([]);
   const [aiSearchLoading, setAiSearchLoading] = useState(false);
   const [aiSearchError, setAiSearchError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const {
     products,
@@ -140,18 +169,7 @@ const CatalogPage: React.FC = () => {
     }
   };
 
-  // Função para atualizar resultados da busca
-  const handleRefreshSearch = () => {
-    if (isAISearch && searchQuery.trim()) {
-      handleAISearch(searchQuery.trim());
-    } else {
-      searchProducts({ page: 1, limit: 20, search: searchQuery });
-      showSuccess('Resultados da busca atualizados!');
-    }
-  };
-
   const handleSearch = (params: SearchParams) => {
-    setSearchQuery(params.search || '');
     if (isAISearch && params.search?.trim()) {
       handleAISearch(params.search.trim());
     } else {
@@ -183,64 +201,14 @@ const CatalogPage: React.FC = () => {
           </div>
 
           {/* Barra de pesquisa */}
-          <div className="mb-6">
-            <SearchBar
-              onSearch={handleSearch}
-              loading={loading || aiSearchLoading}
-              categories={categories}
-              subcategories={subcategories}
-            />
-
-            {/* Toggle para busca com IA */}
-            <div className="mt-4 flex items-center justify-between bg-gray-100 p-4 rounded-lg">
-              <div className="flex items-center space-x-3">
-                <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-700">
-                    Busca Normal
-                  </span>
-                  <button
-                    onClick={toggleSearchMode}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-                      isAISearch ? 'bg-purple-600' : 'bg-gray-600'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        isAISearch ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
-                  <span className="text-sm font-medium text-gray-700">
-                    Busca com IA
-                  </span>
-                </div>
-              </div>
-
-              <button
-                onClick={handleRefreshSearch}
-                disabled={loading || aiSearchLoading}
-                className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-                title="Buscar produtos"
-              >
-                <svg
-                  className={`w-4 h-4 ${loading || aiSearchLoading ? 'animate-spin' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                  />
-                </svg>
-                <span>
-                  {loading || aiSearchLoading ? 'Buscando...' : 'Buscar'}
-                </span>
-              </button>
-            </div>
-          </div>
+          <SearchBar
+            onSearch={handleSearch}
+            loading={loading || aiSearchLoading}
+            categories={categories}
+            subcategories={subcategories}
+            isAISearch={isAISearch}
+            onToggleAISearch={toggleSearchMode}
+          />
 
           {loading || aiSearchLoading ? (
             <div className="flex justify-center items-center py-16">
@@ -327,13 +295,15 @@ const CatalogPage: React.FC = () => {
                       </div>
 
                       {/* Mostrar similaridade para busca com IA */}
-                      {isAISearch && product.similarity && (
-                        <div className="inline-block">
-                          <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                            {`${(product.similarity * 100).toFixed(1)}% similar`}
-                          </span>
-                        </div>
-                      )}
+                      {isAISearch &&
+                        'similarity' in product &&
+                        product.similarity && (
+                          <div className="inline-block">
+                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                              {`${(product.similarity * 100).toFixed(1)}% similar`}
+                            </span>
+                          </div>
+                        )}
 
                       {/* Product Title */}
                       <h3 className="font-semibold text-gray-900 text-sm line-clamp-2 group-hover:text-blue-600 transition-colors">

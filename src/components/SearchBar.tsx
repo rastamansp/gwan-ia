@@ -6,6 +6,9 @@ interface SearchBarProps {
   loading?: boolean;
   categories?: string[];
   subcategories?: string[];
+  // Props para busca com IA
+  isAISearch?: boolean;
+  onToggleAISearch?: () => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -13,6 +16,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   loading = false,
   categories = [],
   subcategories = [],
+  isAISearch = false,
+  onToggleAISearch,
 }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [searchParams, setSearchParams] = useState<SearchParams>({
@@ -136,28 +141,47 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </svg>
           Filtros
         </button>
-        <button
-          onClick={handleReset}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4"
+        {onToggleAISearch ? (
+          <div className="flex items-center space-x-2">
+            <span className="text-sm font-medium text-gray-700">Normal</span>
+            <button
+              onClick={onToggleAISearch}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
+                isAISearch ? 'bg-purple-600' : 'bg-gray-600'
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  isAISearch ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+            <span className="text-sm font-medium text-gray-700">IA</span>
+          </div>
+        ) : (
+          <button
+            onClick={handleReset}
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md"
           >
-            <path d="M3 6h18"></path>
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-          </svg>
-          Limpar
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="h-4 w-4"
+            >
+              <path d="M3 6h18"></path>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+            </svg>
+            Limpar
+          </button>
+        )}
       </div>
 
       {/* Filtros avançados */}
