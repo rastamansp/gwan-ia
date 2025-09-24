@@ -389,7 +389,7 @@ const MartAdminPage: React.FC = () => {
                 onClick={handleRefreshSearch}
                 disabled={loading || aiSearchLoading}
                 className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-                title="Atualizar resultados da busca"
+                title="Buscar produtos"
               >
                 <svg
                   className={`w-4 h-4 ${loading || aiSearchLoading ? 'animate-spin' : ''}`}
@@ -405,7 +405,7 @@ const MartAdminPage: React.FC = () => {
                   />
                 </svg>
                 <span>
-                  {loading || aiSearchLoading ? 'Atualizando...' : 'Atualizar'}
+                  {loading || aiSearchLoading ? 'Buscando...' : 'Buscar'}
                 </span>
               </button>
             </div>
