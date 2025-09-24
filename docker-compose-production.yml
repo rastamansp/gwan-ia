@@ -12,7 +12,9 @@ services:
         VITE_BUILD_TIME: ${VITE_BUILD_TIME:-}
         VITE_GIT_COMMIT: ${VITE_GIT_COMMIT:-}
         VITE_GIT_BRANCH: ${VITE_GIT_BRANCH:-main}
+        VITE_DEBUG: ${VITE_DEBUG:-false}
         VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
+        VITE_SHOW_DEV_TOOLS: ${VITE_SHOW_DEV_TOOLS:-false}
         VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-https://mcp.gwan.com.br/api/ai-agent/chat}
         VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}
         VITE_OTEL_SERVICE_NAME: ${VITE_OTEL_SERVICE_NAME:-gwan-ia-frontend}
