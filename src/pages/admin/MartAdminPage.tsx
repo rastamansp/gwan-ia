@@ -91,7 +91,7 @@ const MartAdminPage: React.FC = () => {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/api/v1/products/search/similar',
+        `${import.meta.env.VITE_API_URL}products/search/similar`,
         {
           method: 'POST',
           headers: {
@@ -229,7 +229,7 @@ const MartAdminPage: React.FC = () => {
       showSuccess('Iniciando atualização do catálogo...');
 
       const response = await fetch(
-        'http://localhost:3000/api/v1/products/catalog/update/123',
+        `${import.meta.env.VITE_API_URL}products/catalog/update/123`,
         {
           method: 'POST',
           headers: {
