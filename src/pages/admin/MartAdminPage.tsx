@@ -80,11 +80,6 @@ const MartAdminPage: React.FC = () => {
   // Função para buscar produtos
   const handleSearch = (searchTerm: string) => {
     setSearchParams(prev => ({ ...prev, search: searchTerm, page: 1 }));
-
-    // Se estiver em modo IA, fazer busca com IA
-    if (isAISearch && searchTerm.trim()) {
-      handleAISearch(searchTerm.trim());
-    }
   };
 
   // Função para busca com IA
