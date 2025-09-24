@@ -96,7 +96,7 @@ const MartAdminPage: React.FC = () => {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/api/products/search-similar',
+        'http://localhost:3000/api/v1/products/search/similar',
         {
           method: 'POST',
           headers: {
