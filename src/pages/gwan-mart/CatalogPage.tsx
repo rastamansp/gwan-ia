@@ -192,13 +192,15 @@ const CatalogPage: React.FC = () => {
             />
 
             {/* Toggle para busca com IA */}
-            <div className="mt-4 flex items-center justify-between">
+            <div className="mt-4 flex items-center justify-between bg-gray-100 p-4 rounded-lg">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-300">Busca Normal</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    Busca Normal
+                  </span>
                   <button
                     onClick={toggleSearchMode}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900 ${
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
                       isAISearch ? 'bg-purple-600' : 'bg-gray-600'
                     }`}
                   >
@@ -208,7 +210,9 @@ const CatalogPage: React.FC = () => {
                       }`}
                     />
                   </button>
-                  <span className="text-sm text-gray-300">Busca com IA</span>
+                  <span className="text-sm font-medium text-gray-700">
+                    Busca com IA
+                  </span>
                 </div>
               </div>
 
