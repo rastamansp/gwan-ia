@@ -223,6 +223,46 @@ const MartAdminPage: React.FC = () => {
     setShowImportModal(true);
   };
 
+  // Função para atualizar catálogo
+  const handleUpdateCatalog = async () => {
+    try {
+      showSuccess('Iniciando atualização do catálogo...');
+
+      const response = await fetch(
+        'http://localhost:3000/api/v1/products/catalog/update/123',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            catalogo: 123,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Erro na atualização do catálogo');
+      }
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        showSuccess(
+          `Catálogo atualizado com sucesso! ${data.data.totalProducts} produtos processados. ` +
+            `VectorDB: ${data.data.vectorDBResult.saved} salvos, ${data.data.vectorDBResult.errors} erros.`
+        );
+      } else {
+        throw new Error(data.error || 'Erro na atualização do catálogo');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar catálogo:', error);
+      showError(
+        error instanceof Error ? error.message : 'Erro ao atualizar catálogo'
+      );
+    }
+  };
+
   // Função para abrir modal de edição
   const handleEditProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -355,6 +395,26 @@ const MartAdminPage: React.FC = () => {
                   />
                 </svg>
                 <span>Importar JSON</span>
+              </button>
+
+              <button
+                onClick={handleUpdateCatalog}
+                className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors flex items-center space-x-2"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                <span>Atualizar Catálogo</span>
               </button>
             </div>
           </div>
