@@ -47,6 +47,14 @@ const MartAdminPage: React.FC = () => {
     subcategory: '',
   });
 
+  // Estado para controlar o tipo de busca (normal ou IA)
+  const [isAISearch, setIsAISearch] = useState(false);
+
+  // Estado para armazenar resultados da busca com IA
+  const [aiSearchResults, setAiSearchResults] = useState<Product[]>([]);
+  const [aiSearchLoading, setAiSearchLoading] = useState(false);
+  const [aiSearchError, setAiSearchError] = useState<string | null>(null);
+
   const {
     products,
     loading,
@@ -58,6 +66,7 @@ const MartAdminPage: React.FC = () => {
     createProduct,
     updateProduct,
     changePage,
+    searchProducts,
   } = useProductAdmin(searchParams);
 
   const { toasts, showSuccess, showError } = useToast();
@@ -71,6 +80,106 @@ const MartAdminPage: React.FC = () => {
   // Função para buscar produtos
   const handleSearch = (searchTerm: string) => {
     setSearchParams(prev => ({ ...prev, search: searchTerm, page: 1 }));
+
+    // Se estiver em modo IA, fazer busca com IA
+    if (isAISearch && searchTerm.trim()) {
+      handleAISearch(searchTerm.trim());
+    }
+  };
+
+  // Função para busca com IA
+  const handleAISearch = async (query: string) => {
+    if (!query.trim()) return;
+
+    setAiSearchLoading(true);
+    setAiSearchError(null);
+
+    try {
+      const response = await fetch(
+        'http://localhost:3000/api/products/search-similar',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            query: query.trim(),
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Erro na busca com IA');
+      }
+
+      const data = await response.json();
+
+      if (data.status === 'success') {
+        // Converter resultados da IA para o formato esperado
+        const formattedResults = data.data.results.map(
+          (result: {
+            productId: number;
+            productName: string;
+            productCode: string;
+            similarity: number;
+            metadata: {
+              price: string;
+              stock: number;
+              category: string;
+              isActive: boolean;
+              supplier: string;
+              createdAt: string;
+              updatedAt: string;
+              isFeatured: boolean;
+              subcategory: string;
+            };
+          }) => ({
+            id: result.productId,
+            name: result.productName,
+            code: result.productCode,
+            description: `Similaridade: ${(result.similarity * 100).toFixed(1)}%`,
+            category: result.metadata.category,
+            subcategory: result.metadata.subcategory,
+            costPrice: 0,
+            originalPrice: parseFloat(result.metadata.price),
+            promotionalPrice: undefined,
+            stock: result.metadata.stock,
+            supplier: result.metadata.supplier,
+            gtinEan: '',
+            gtinEanPackage: '',
+            supplierProductDescription: '',
+            discountPercentage: 0,
+            averageRating: 0,
+            totalReviews: 0,
+            thumbnail: '',
+            realImage: '',
+            ncm: '',
+            isActive: result.metadata.isActive,
+            isFeatured: result.metadata.isFeatured,
+            createdAt: result.metadata.createdAt,
+            updatedAt: result.metadata.updatedAt,
+            images: [],
+            variations: undefined,
+            similarity: result.similarity, // Campo adicional para mostrar similaridade
+          })
+        );
+
+        setAiSearchResults(formattedResults);
+        showSuccess(
+          `Busca com IA realizada! Encontrados ${formattedResults.length} produtos similares.`
+        );
+      } else {
+        throw new Error(data.error || 'Erro na busca com IA');
+      }
+    } catch (error) {
+      console.error('Erro na busca com IA:', error);
+      setAiSearchError(
+        error instanceof Error ? error.message : 'Erro na busca com IA'
+      );
+      showError('Erro ao realizar busca com IA. Tente novamente.');
+    } finally {
+      setAiSearchLoading(false);
+    }
   };
 
   // Função para filtrar por categoria
@@ -81,6 +190,31 @@ const MartAdminPage: React.FC = () => {
   // Função para filtrar por subcategoria
   const handleSubcategoryFilter = (subcategory: string) => {
     setSearchParams(prev => ({ ...prev, subcategory, page: 1 }));
+  };
+
+  // Função para atualizar resultados da busca
+  const handleRefreshSearch = () => {
+    if (isAISearch && searchParams.search?.trim()) {
+      handleAISearch(searchParams.search.trim());
+    } else {
+      searchProducts(searchParams);
+      showSuccess('Resultados da busca atualizados!');
+    }
+  };
+
+  // Função para alternar entre busca normal e IA
+  const toggleSearchMode = () => {
+    setIsAISearch(!isAISearch);
+    setAiSearchResults([]);
+    setAiSearchError(null);
+
+    if (!isAISearch) {
+      showSuccess(
+        'Modo de busca com IA ativado! Digite sua consulta para encontrar produtos similares.'
+      );
+    } else {
+      showSuccess('Modo de busca normal ativado!');
+    }
   };
 
   // Função para abrir modal de criação
@@ -233,6 +367,55 @@ const MartAdminPage: React.FC = () => {
 
         {/* Filtros e busca */}
         <div className="bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-white">
+              Filtros e Busca
+            </h2>
+            <div className="flex items-center space-x-3">
+              {/* Toggle para busca com IA */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-300">Busca Normal</span>
+                <button
+                  onClick={toggleSearchMode}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 ${
+                    isAISearch ? 'bg-purple-600' : 'bg-gray-600'
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      isAISearch ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className="text-sm text-gray-300">Busca com IA</span>
+              </div>
+
+              <button
+                onClick={handleRefreshSearch}
+                disabled={loading || aiSearchLoading}
+                className="flex items-center space-x-2 px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                title="Atualizar resultados da busca"
+              >
+                <svg
+                  className={`w-4 h-4 ${loading || aiSearchLoading ? 'animate-spin' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                  />
+                </svg>
+                <span>
+                  {loading || aiSearchLoading ? 'Atualizando...' : 'Atualizar'}
+                </span>
+              </button>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Busca */}
             <div>
@@ -289,18 +472,28 @@ const MartAdminPage: React.FC = () => {
 
         {/* Lista de produtos */}
         <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
-          {loading ? (
+          {loading || aiSearchLoading ? (
             <div className="p-8 text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500 mx-auto"></div>
-              <p className="text-gray-400 mt-2">Carregando produtos...</p>
+              <p className="text-gray-400 mt-2">
+                {aiSearchLoading
+                  ? 'Buscando produtos similares com IA...'
+                  : 'Carregando produtos...'}
+              </p>
             </div>
-          ) : error ? (
+          ) : error || aiSearchError ? (
             <div className="p-8 text-center">
-              <p className="text-red-400">Erro ao carregar produtos: {error}</p>
+              <p className="text-red-400">
+                {aiSearchError || `Erro ao carregar produtos: ${error}`}
+              </p>
             </div>
-          ) : products.length === 0 ? (
+          ) : (isAISearch ? aiSearchResults : products).length === 0 ? (
             <div className="p-8 text-center">
-              <p className="text-gray-400">Nenhum produto encontrado</p>
+              <p className="text-gray-400">
+                {isAISearch
+                  ? 'Nenhum produto similar encontrado'
+                  : 'Nenhum produto encontrado'}
+              </p>
             </div>
           ) : (
             <>
@@ -320,7 +513,7 @@ const MartAdminPage: React.FC = () => {
 
               {/* Lista de produtos */}
               <div className="divide-y divide-gray-600">
-                {products.map(product => {
+                {(isAISearch ? aiSearchResults : products).map(product => {
                   const status = getProductStatus(product);
                   return (
                     <div
@@ -371,6 +564,14 @@ const MartAdminPage: React.FC = () => {
                             <p className="text-xs text-gray-400 mt-1 line-clamp-2">
                               {product.description}
                             </p>
+                          )}
+                          {/* Mostrar similaridade para busca com IA */}
+                          {isAISearch && product.similarity && (
+                            <div className="mt-1">
+                              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                {`${(product.similarity * 100).toFixed(1)}% similar`}
+                              </span>
+                            </div>
                           )}
                         </div>
 
