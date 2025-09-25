@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useGwanMartChat } from '../../hooks/useGwanMartChat';
 import ReactMarkdown from 'react-markdown';
+import ProductCarousel from './ProductCarousel';
 
 interface GwanMartChatWidgetProps {
   isOpen: boolean;
@@ -177,6 +178,13 @@ const GwanMartChatWidget: React.FC<GwanMartChatWidgetProps> = ({
                       </ReactMarkdown>
                     </div>
                   )}
+
+                  {/* Carrossel de produtos */}
+                  {!message.isUser &&
+                    message.products &&
+                    message.products.length > 0 && (
+                      <ProductCarousel products={message.products} />
+                    )}
 
                   {/* Botões de sugestões */}
                   {!message.isUser &&

@@ -1,12 +1,23 @@
 import { useState, useCallback } from 'react';
 import env from '../config/env';
 
+interface Product {
+  id: number;
+  name: string;
+  code: string;
+  price: number;
+  category: string;
+  similarity: number;
+  formattedPrice: string;
+}
+
 interface Message {
   id: string;
   text: string;
   isUser: boolean;
   timestamp: Date;
   suggestions?: string[];
+  products?: Product[];
 }
 
 export const useGwanMartChat = (endpoint?: string) => {
@@ -75,6 +86,7 @@ export const useGwanMartChat = (endpoint?: string) => {
           isUser: false,
           timestamp: new Date(),
           suggestions: data.suggestions || undefined,
+          products: data.products || undefined,
         };
 
         setMessages(prev => [...prev, botMessage]);
