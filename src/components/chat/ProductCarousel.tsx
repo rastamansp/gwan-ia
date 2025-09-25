@@ -17,7 +17,7 @@ interface ProductCarouselProps {
 
 const ProductCarousel: React.FC<ProductCarouselProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerPage = 3; // Mostrar 3 produtos por vez
+  const itemsPerPage = 1; // Mostrar 1 produto por vez
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   const nextPage = () => {
@@ -89,7 +89,7 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ products }) => {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 gap-3">
         {getCurrentProducts().map(product => (
           <Link
             key={product.id}
