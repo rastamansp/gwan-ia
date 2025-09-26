@@ -27,6 +27,7 @@ import {
   DebugPage,
   ThemePage,
   MartAdminPage,
+  EditProductPage,
   AssistentesPage,
   PromptsPage,
   BibliotecaPage,
@@ -156,6 +157,16 @@ function App() {
             element={
               <ProtectedRoute>
                 <MartAdminPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Rota de Edição de Produto */}
+          <Route
+            path="/admin/mart/product/:code/edit"
+            element={
+              <ProtectedRoute>
+                <EditProductPage />
               </ProtectedRoute>
             }
           />

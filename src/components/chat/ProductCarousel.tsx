@@ -9,6 +9,8 @@ interface Product {
   category: string;
   similarity: number;
   formattedPrice: string;
+  image?: string;
+  thumbnail?: string;
 }
 
 interface ProductCarouselProps {
@@ -111,6 +113,21 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ products }) => {
               <h5 className="font-medium text-sm text-gray-900 line-clamp-2">
                 {product.name}
               </h5>
+
+              {/* Imagem do produto */}
+              {(product.image || product.thumbnail) && (
+                <div className="w-full h-32 bg-gray-100 rounded-lg overflow-hidden">
+                  <img
+                    src={product.image || product.thumbnail}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                    onError={e => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
 
               {/* Código */}
               <p className="text-xs text-gray-500">Código: {product.code}</p>

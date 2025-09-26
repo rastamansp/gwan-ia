@@ -34,8 +34,18 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
     stock: 0,
     supplier: '',
     gtinEan: '',
+    gtinEanPackage: '',
+    supplierProductDescription: '',
+    discountPercentage: 0,
     ncm: '',
     thumbnail: '',
+    realImage: '',
+    isActive: true,
+    isFeatured: false,
+    averageRating: 0,
+    totalReviews: 0,
+    variations: null,
+    images: [],
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -56,8 +66,19 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
         stock: product.stock || 0,
         supplier: product.supplier || '',
         gtinEan: product.gtinEan || '',
+        gtinEanPackage: product.gtinEanPackage || '',
+        supplierProductDescription: product.supplierProductDescription || '',
+        discountPercentage: product.discountPercentage || 0,
         ncm: product.ncm || '',
         thumbnail: product.thumbnail || '',
+        realImage: product.realImage || '',
+        isActive: product.isActive !== undefined ? product.isActive : true,
+        isFeatured:
+          product.isFeatured !== undefined ? product.isFeatured : false,
+        averageRating: product.averageRating || 0,
+        totalReviews: product.totalReviews || 0,
+        variations: product.variations || null,
+        images: product.images || [],
       });
     } else {
       // Resetar formulário para criação
@@ -73,8 +94,18 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
         stock: 0,
         supplier: '',
         gtinEan: '',
+        gtinEanPackage: '',
+        supplierProductDescription: '',
+        discountPercentage: 0,
         ncm: '',
         thumbnail: '',
+        realImage: '',
+        isActive: true,
+        isFeatured: false,
+        averageRating: 0,
+        totalReviews: 0,
+        variations: null,
+        images: [],
       });
     }
     setErrors({});
@@ -123,7 +154,7 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
   // Manipular mudanças nos campos
   const handleInputChange = (
     field: keyof ProductFormData,
-    value: string | number
+    value: string | number | boolean
   ) => {
     setFormData(prev => ({ ...prev, [field]: value }));
 
@@ -484,7 +515,7 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
               </div>
             </div>
 
-            {/* URL da Imagem */}
+            {/* URL da Imagem Principal */}
             <div>
               <label className="block text-sm font-medium text-white mb-2">
                 URL da Imagem Principal
@@ -496,6 +527,168 @@ const ProductFormModal: React.FC<ProductFormModalProps> = ({
                 className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
                 placeholder="https://exemplo.com/imagem.jpg"
               />
+            </div>
+
+            {/* URL da Imagem Real */}
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                URL da Imagem Real
+              </label>
+              <input
+                type="url"
+                value={formData.realImage || ''}
+                onChange={e => handleInputChange('realImage', e.target.value)}
+                className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
+                placeholder="https://exemplo.com/imagem-real.jpg"
+              />
+            </div>
+
+            {/* GTIN/EAN Package */}
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                GTIN/EAN Package
+              </label>
+              <input
+                type="text"
+                value={formData.gtinEanPackage || ''}
+                onChange={e =>
+                  handleInputChange('gtinEanPackage', e.target.value)
+                }
+                className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
+                placeholder="Código de barras do pacote"
+              />
+            </div>
+
+            {/* Descrição do Fornecedor */}
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                Descrição do Fornecedor
+              </label>
+              <textarea
+                value={formData.supplierProductDescription || ''}
+                onChange={e =>
+                  handleInputChange(
+                    'supplierProductDescription',
+                    e.target.value
+                  )
+                }
+                rows={3}
+                className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white resize-none"
+                placeholder="Descrição fornecida pelo fornecedor..."
+              />
+            </div>
+
+            {/* Percentual de Desconto */}
+            <div>
+              <label className="block text-sm font-medium text-white mb-2">
+                Percentual de Desconto (%)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                min="0"
+                max="100"
+                value={formData.discountPercentage || ''}
+                onChange={e =>
+                  handleInputChange(
+                    'discountPercentage',
+                    parseFloat(e.target.value) || 0
+                  )
+                }
+                className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
+
+          {/* Configurações do Produto */}
+          <div className="mt-6 space-y-4">
+            <h3 className="text-lg font-medium text-white border-b border-gray-600 pb-2">
+              Configurações do Produto
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Status Ativo */}
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="isActive"
+                  checked={formData.isActive || false}
+                  onChange={e =>
+                    handleInputChange('isActive', e.target.checked)
+                  }
+                  className="w-4 h-4 text-purple-600 bg-gray-700 border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
+                />
+                <label
+                  htmlFor="isActive"
+                  className="text-sm font-medium text-white"
+                >
+                  Produto Ativo
+                </label>
+              </div>
+
+              {/* Produto em Destaque */}
+              <div className="flex items-center space-x-3">
+                <input
+                  type="checkbox"
+                  id="isFeatured"
+                  checked={formData.isFeatured || false}
+                  onChange={e =>
+                    handleInputChange('isFeatured', e.target.checked)
+                  }
+                  className="w-4 h-4 text-purple-600 bg-gray-700 border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
+                />
+                <label
+                  htmlFor="isFeatured"
+                  className="text-sm font-medium text-white"
+                >
+                  Produto em Destaque
+                </label>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Avaliação Média */}
+              <div>
+                <label className="block text-sm font-medium text-white mb-2">
+                  Avaliação Média
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  max="5"
+                  value={formData.averageRating || ''}
+                  onChange={e =>
+                    handleInputChange(
+                      'averageRating',
+                      parseFloat(e.target.value) || 0
+                    )
+                  }
+                  className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
+                  placeholder="0.00"
+                />
+              </div>
+
+              {/* Total de Avaliações */}
+              <div>
+                <label className="block text-sm font-medium text-white mb-2">
+                  Total de Avaliações
+                </label>
+                <input
+                  type="number"
+                  min="0"
+                  value={formData.totalReviews || ''}
+                  onChange={e =>
+                    handleInputChange(
+                      'totalReviews',
+                      parseInt(e.target.value) || 0
+                    )
+                  }
+                  className="w-full px-3 py-2 bg-gray-700 border-gray-600 text-white"
+                  placeholder="0"
+                />
+              </div>
             </div>
           </div>
 

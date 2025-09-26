@@ -21,6 +21,13 @@ export interface ProductFormData {
   gtinEan?: string;
   ncm?: string;
   thumbnail?: string;
+  // Campos adicionais da API
+  isActive?: boolean;
+  isFeatured?: boolean;
+  averageRating?: number;
+  totalReviews?: number;
+  variations?: any;
+  images?: string[];
 }
 
 export interface ProductResponse {

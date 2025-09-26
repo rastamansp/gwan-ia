@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useProductAdmin } from '../../hooks/useProductAdmin';
 import { SearchParams } from '../../types/search.types';
 import { ProductFormData } from '../../services/product-admin.service';
@@ -35,10 +36,11 @@ interface Product {
   updatedAt: string;
   deletedAt?: string;
   images: string[];
-  variations?: any;
+  variations?: Record<string, unknown>;
 }
 
 const MartAdminPage: React.FC = () => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useState<SearchParams>({
     page: 1,
     limit: 20,
@@ -64,7 +66,6 @@ const MartAdminPage: React.FC = () => {
     subcategories,
     deleteProduct,
     createProduct,
-    updateProduct,
     changePage,
     searchProducts,
   } = useProductAdmin(searchParams);
@@ -263,10 +264,9 @@ const MartAdminPage: React.FC = () => {
     }
   };
 
-  // Função para abrir modal de edição
+  // Função para navegar para página de edição
   const handleEditProduct = (product: Product) => {
-    setSelectedProduct(product);
-    setShowProductModal(true);
+    navigate(`/admin/mart/product/${product.code}/edit`);
   };
 
   // Função para abrir modal de exclusão
@@ -275,32 +275,25 @@ const MartAdminPage: React.FC = () => {
     setShowDeleteModal(true);
   };
 
-  // Função para lidar com envio do formulário
+  // Função para lidar com envio do formulário (apenas criação)
   const handleProductSubmit = async (formData: ProductFormData) => {
     try {
-      let result;
+      // Criar novo produto
+      const result = await createProduct(formData);
 
-      if (selectedProduct) {
-        // Editar produto existente
-        result = await updateProduct(selectedProduct.id.toString(), formData);
-        if (result.success) {
-          showSuccess(`Produto "${formData.name}" atualizado com sucesso!`);
-        }
+      if (result.success) {
+        showSuccess(`Produto "${formData.name}" criado com sucesso!`);
+        setShowProductModal(false);
+        setSelectedProduct(null);
+        return { success: true };
       } else {
-        // Criar novo produto
-        result = await createProduct(formData);
-        if (result.success) {
-          showSuccess(`Produto "${formData.name}" criado com sucesso!`);
-        }
-      }
-
-      if (!result.success) {
+        showError(result.error || 'Erro ao criar produto');
         return { success: false, error: result.error };
       }
-
-      return { success: true };
     } catch (error) {
-      return { success: false, error: 'Erro inesperado ao salvar produto' };
+      const errorMessage = 'Erro inesperado ao salvar produto';
+      showError(errorMessage);
+      return { success: false, error: errorMessage };
     }
   };
 

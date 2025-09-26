@@ -9,6 +9,8 @@ interface Product {
   category: string;
   similarity: number;
   formattedPrice: string;
+  image?: string;
+  thumbnail?: string;
 }
 
 interface Message {
@@ -77,6 +79,30 @@ export const useGwanMartChat = (endpoint?: string) => {
 
         const data = await response.json();
 
+        // Transformar produtos da API para o formato esperado
+        const transformProducts = (apiProducts: any[]): Product[] => {
+          if (!apiProducts || !Array.isArray(apiProducts)) return [];
+
+          return apiProducts.map((item: any) => {
+            const metadata = item.metadata || {};
+            const price = parseFloat(
+              metadata.promotionalPrice || metadata.originalPrice || '0'
+            );
+
+            return {
+              id: item.productId || item.id,
+              name: item.productName || item.name,
+              code: item.productCode || item.code,
+              price: price,
+              category: metadata.category || item.category || '',
+              similarity: item.similarity || 0,
+              formattedPrice: `R$ ${price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`,
+              image: metadata.realImage || item.image,
+              thumbnail: metadata.thumbnail || item.thumbnail,
+            };
+          });
+        };
+
         const botMessage: Message = {
           id: `bot_${Date.now()}`,
           text:
@@ -86,7 +112,9 @@ export const useGwanMartChat = (endpoint?: string) => {
           isUser: false,
           timestamp: new Date(),
           suggestions: data.suggestions || undefined,
-          products: data.products || undefined,
+          products: data.data?.results
+            ? transformProducts(data.data.results)
+            : undefined,
         };
 
         setMessages(prev => [...prev, botMessage]);

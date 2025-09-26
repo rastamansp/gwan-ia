@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   productAdminService,
   ProductFormData,
@@ -175,21 +175,33 @@ export const useProductAdmin = (initialParams: SearchParams = {}) => {
   };
 
   // Função para buscar produto por ID
-  const getProductById = async (id: string) => {
+  const getProductById = useCallback(async (id: string) => {
     try {
       const result = await productAdminService.getProductById(id);
 
       if (result.status === 'success') {
-        return { success: true, data: result.data };
+        // Processar dados do produto (converter preços de string para número)
+        const processedProduct = {
+          ...result.data,
+          costPrice: parseFloat(result.data.costPrice) || 0,
+          originalPrice: parseFloat(result.data.originalPrice) || 0,
+          promotionalPrice: parseFloat(result.data.promotionalPrice) || 0,
+          discountPercentage: parseFloat(result.data.discountPercentage) || 0,
+          averageRating: parseFloat(result.data.averageRating) || 0,
+          stock: parseInt(result.data.stock) || 0,
+          totalReviews: parseInt(result.data.totalReviews) || 0,
+        };
+
+        return processedProduct;
       } else {
         throw new Error(result.error || 'Erro ao buscar produto');
       }
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : 'Erro ao buscar produto';
-      return { success: false, error: errorMessage };
+      throw new Error(errorMessage);
     }
-  };
+  }, []);
 
   // Função para mudar página
   const changePage = (page: number) => {
