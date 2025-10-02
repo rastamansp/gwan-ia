@@ -24,6 +24,7 @@ import {
   BotMarleyPage,
   BotGwanPage,
   BotGwanMartPage,
+  BibleChatbotPage,
   DebugPage,
   ThemePage,
   MartAdminPage,
@@ -147,6 +148,7 @@ function App() {
           <Route path="/bot-marley" element={<BotMarleyPage />} />
           <Route path="/bot-gwan" element={<BotGwanPage />} />
           <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
+          <Route path="/bot-biblia" element={<BibleChatbotPage />} />
 
           {/* Rota de Debug */}
           <Route path="/debug" element={<DebugPage />} />
