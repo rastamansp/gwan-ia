@@ -1,5 +1,60 @@
 # 📝 Changelog - Gwan IA
 
+## [2024-12-19] - Versão 1.2.0 - Chatbot Bíblico com Player de Vídeo
+
+### 🚀 **Novas Funcionalidades**
+
+#### **📖 Chatbot Bíblico - Geração de Vídeos**
+- **Página dedicada** (`/bot-biblia`) com interface de chat completa
+- **Conversa de exemplo** com 37 mensagens demonstrando o fluxo completo
+- **Fluxo de criação de vídeos bíblicos** passo a passo
+- **Player de vídeo integrado** com exemplo "Davi vs Golias - A Fé Triunfa"
+- **Suporte a tags, elementos de código** e preview de prompt formatado
+- **Interface responsiva** seguindo padrão dos outros chatbots
+- **Navegação integrada** no menu de chatbots (Header e ChatbotsPage)
+
+#### **🎬 Player de Vídeo HTML5**
+- **Player nativo** com controles de reprodução
+- **Vídeo de exemplo** "Davi vs Golias - A Fé Triunfa"
+- **Design responsivo** com largura máxima e centralização
+- **Fallback para navegadores** sem suporte a vídeo
+- **Estilo consistente** com o design system da aplicação
+
+### 🔧 **Melhorias Técnicas**
+- **Conversa completa visível** como exemplo de uso
+- **Fluxo de criação de vídeo** implementado com lógica inteligente
+- **Respostas contextuais** baseadas nas entradas do usuário
+- **Indicador de digitação** para melhor experiência
+- **Tags e elementos de código** estilizados adequadamente
+
+### 📁 **Arquivos Criados**
+- `src/pages/bots/BibleChatbotPage.tsx` - Página do chatbot bíblico
+- `resources/Davi_vs_Golias_A_Fé_Triunfa.mp4` - Vídeo de exemplo
+
+### 📝 **Arquivos Modificados**
+- `src/App.tsx` - Rota `/bot-biblia` adicionada
+- `src/components/layout/Header.tsx` - Link no dropdown de chatbots
+- `src/pages/bots/ChatbotsPage.tsx` - Card do chatbot bíblico
+- `src/pages/bots/index.ts` - Exportação da nova página
+- `PROJECT_STATUS.md` - Documentação atualizada
+- `CHANGELOG.md` - Registro das mudanças
+
+### 🎯 **Impacto**
+- **Novo chatbot especializado** para criação de vídeos bíblicos
+- **Exemplo prático** de uso com conversa completa
+- **Player de vídeo** demonstrando o resultado final
+- **Integração completa** no sistema de navegação
+- **Documentação atualizada** refletindo nova funcionalidade
+
+### 🔄 **Próximos Passos Sugeridos**
+- Implementar geração real de vídeos com IA
+- Adicionar mais histórias bíblicas
+- Integrar com API de geração de vídeo
+- Implementar sistema de downloads
+- Adicionar mais exemplos de vídeos
+
+---
+
 ## [2024-12-19] - Versão 1.1.1 - Correções de Paginação e Autenticação
 
 ### 🐛 **Correções Críticas**

@@ -1,6 +1,6 @@
 # 📊 Status do Projeto Gwan IA
 
-## 🎯 **Versão Atual: 1.1.0**
+## 🎯 **Versão Atual: 1.2.0**
 
 ### ✅ **COMPLETADO (100%)**
 
@@ -30,6 +30,15 @@
   - [x] Header compartilhado
   - [x] Chat widget integrado
   - [x] Endpoint: `https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat`
+
+- [x] **Bíblia** - Geração de Vídeo (📖)
+  - [x] Página dedicada com design consistente
+  - [x] Header compartilhado
+  - [x] Conversa completa de exemplo (37 mensagens)
+  - [x] Fluxo de criação de vídeos bíblicos
+  - [x] Player de vídeo integrado
+  - [x] Exemplo prático: "Davi vs Golias - A Fé Triunfa"
+  - [x] Suporte a tags, elementos de código e preview de prompt
 
 #### **🔐 Sistema de Autenticação**
 - [x] Login com OTP via email
@@ -107,6 +116,7 @@
 - [x] `/bot-jaiminho` - Chatbot Jaiminho
 - [x] `/bot-marley` - Chatbot Marley  
 - [x] `/bot-gwan` - Chatbot Gwan
+- [x] `/bot-biblia` - Chatbot Bíblico com player de vídeo
 - [x] `/gwan-mart` - Loja online Gwan Mart
 - [x] `/gwan-mart/product/:productCode` - Página de detalhes do produto (URLs amigáveis)
 - [x] `/gwan-mart/catalog` - Catálogo completo com paginação funcional
@@ -166,7 +176,7 @@
 
 - **✅ Funcionalidades Core:** 100% implementadas
 - **✅ Design System:** 100% implementado
-- **✅ Chatbots:** 100% funcionais
+- **✅ Chatbots:** 100% funcionais (incluindo novo chatbot bíblico)
 - **✅ Autenticação:** 100% implementada
 - **✅ E-commerce:** 100% implementado
 - **✅ URLs Amigáveis:** 100% implementadas
@@ -181,7 +191,7 @@
 
 **Status:** ✅ **MVP COMPLETO** - Pronto para produção
 
-**Progresso:** 85% das funcionalidades planejadas implementadas
+**Progresso:** 90% das funcionalidades planejadas implementadas
 
 **Próxima Milestone:** Dashboard administrativo e sistema de usuários
 

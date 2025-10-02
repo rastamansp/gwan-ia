@@ -655,6 +655,40 @@ Se quiser, posso reutilizar suas preferências para o próximo vídeo.`,
           </div>
         </div>
 
+        {/* Video Player Section */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="bg-card border border-border rounded-2xl p-6 shadow-lg">
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-bold text-card-foreground mb-2">
+                Exemplo: Davi vs Golias - A Fé Triunfa
+              </h3>
+              <p className="text-muted-foreground">
+                Veja um exemplo de vídeo bíblico gerado com IA
+              </p>
+            </div>
+
+            <div className="relative w-full max-w-2xl mx-auto">
+              <video
+                controls
+                className="w-full h-auto rounded-lg shadow-lg"
+                poster="/api/placeholder/800/450"
+              >
+                <source
+                  src="/resources/Davi_vs_Golias_A_Fé_Triunfa.mp4"
+                  type="video/mp4"
+                />
+                Seu navegador não suporta o elemento de vídeo.
+              </video>
+            </div>
+
+            <div className="mt-4 text-center">
+              <p className="text-sm text-muted-foreground">
+                Este vídeo foi criado seguindo o fluxo de conversa acima
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* About Section */}
         <section className="mb-16">
           <div className="bg-card rounded-xl p-8 border border-border">
