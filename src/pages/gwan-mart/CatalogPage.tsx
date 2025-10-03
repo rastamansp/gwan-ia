@@ -7,6 +7,9 @@ import { useProductsWithFilters } from '../../hooks/useProductsWithFilters';
 import { SearchParams } from '../../types/search.types';
 import { useToast } from '../../hooks/useToast';
 import ToastContainer from '../../components/ui/ToastContainer';
+import GwanMartChatWidget from '../../components/chat/GwanMartChatWidget';
+import { useGwanMartChat } from '../../hooks/useGwanMartChat';
+import env from '../../config/env';
 
 interface AIProduct {
   id: number;
@@ -44,6 +47,9 @@ const CatalogPage: React.FC = () => {
   const [aiSearchResults, setAiSearchResults] = useState<AIProduct[]>([]);
   const [aiSearchLoading, setAiSearchLoading] = useState(false);
   const [aiSearchError, setAiSearchError] = useState<string | null>(null);
+
+  // Estados para chat Gwan Mart
+  const { isOpen, toggleChat, openChat } = useGwanMartChat();
 
   const {
     products,
@@ -188,9 +194,37 @@ const CatalogPage: React.FC = () => {
       <main className="px-4 pb-16">
         <div className="container mx-auto">
           <div className="mb-8 scroll-reveal">
-            <h2 className="text-2xl font-semibold gradient-text mb-2">
-              Catálogo Completo
-            </h2>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-semibold gradient-text mb-2">
+                  Catálogo completo
+                </h2>
+              </div>
+              <div className="flex gap-4 items-center mt-4 md:mt-0">
+                <span className="text-sm text-muted-foreground">
+                  Precisa de ajuda?
+                </span>
+                <button
+                  onClick={openChat}
+                  className="bg-gradient-primary text-primary-foreground px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-glow-primary transition-all duration-300 flex items-center gap-2"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    />
+                  </svg>
+                  Falar com o Atendente
+                </button>
+              </div>
+            </div>
             <p className="text-muted-foreground">
               {loading || aiSearchLoading
                 ? 'Carregando...'
@@ -384,6 +418,16 @@ const CatalogPage: React.FC = () => {
 
       {/* Toast Container */}
       <ToastContainer toasts={toasts} />
+
+      {/* Gwan Mart Chat Widget */}
+      <GwanMartChatWidget
+        isOpen={isOpen}
+        onToggle={toggleChat}
+        chatbotName="Gwan Mart"
+        chatbotIcon="🛒"
+        chatbotColor="#10b981"
+        endpoint={env.VITE_GWAN_MART_AI_URL}
+      />
     </div>
   );
 };
