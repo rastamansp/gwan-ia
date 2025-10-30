@@ -15,8 +15,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "prepare": "husky",
-    "preinstall": "node preinstall.js"
+    "prepare": "husky"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
