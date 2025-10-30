@@ -23,3 +23,5 @@ export { default as AssistentesPage } from './AssistentesPage';
 export { default as BibliotecaPage } from './BibliotecaPage';
 export { default as PromptsPage } from './PromptsPage';
 export { default as TraducoesPage } from './TraducoesPage';
+export { default as EventsPage } from './EventsPage';
+export { default as LegalPage } from './LegalPage';

@@ -3,6 +3,8 @@ interface ImportMetaEnv {
   readonly VITE_APP_NAME: string;
   readonly VITE_APP_VERSION: string;
   readonly VITE_GWAN_MART_AI_URL: string;
+  readonly VITE_GWAN_EVENT_URL: string;
+  readonly VITE_GWAN_LEGAL_AI_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
   readonly VITE_LOG_LEVEL: string;
@@ -28,6 +30,12 @@ const env = {
   VITE_GWAN_MART_AI_URL:
     import.meta.env.VITE_GWAN_MART_AI_URL ||
     'http://localhost:7410/api/ai-agent/chat',
+  // Gwan Events URL
+  VITE_GWAN_EVENT_URL:
+    import.meta.env.VITE_GWAN_EVENT_URL || 'https://events.gwan.com.br/',
+  // Gwan Legal AI URL
+  VITE_GWAN_LEGAL_AI_URL:
+    import.meta.env.VITE_GWAN_LEGAL_AI_URL || 'https://legal-ai.gwan.com.br/',
   // Environment
   NODE_ENV: import.meta.env.MODE || 'development',
   IS_DEV: import.meta.env.DEV || false,

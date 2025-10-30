@@ -66,9 +66,49 @@ const Header: React.FC<HeaderProps> = ({
               🏠 Home
             </Link>
 
-            <Link to="/gwan-mart" className="text-primary font-medium">
-              🛒 Gwan Mart
-            </Link>
+            {/* Menu Dropdown de Produtos */}
+            <div className="relative group">
+              <button className="text-muted-foreground hover:text-primary font-medium flex items-center gap-1 transition-colors duration-200 whitespace-nowrap">
+                📦 Produtos
+                <svg
+                  className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown Menu */}
+              <div className="absolute top-full left-0 mt-2 w-48 bg-card border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="py-2">
+                  <Link
+                    to="/gwan-mart"
+                    className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+                  >
+                    🛒 Gwan Mart - Loja Online
+                  </Link>
+                  <Link
+                    to="/gwan-events"
+                    className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+                  >
+                    📅 Gwan Events - Plataforma de Eventos
+                  </Link>
+                  <Link
+                    to="/gwan-legal"
+                    className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary hover:bg-primary/5 transition-colors duration-200"
+                  >
+                    ⚖️ Gwan Legal - Automação Jurídica
+                  </Link>
+                </div>
+              </div>
+            </div>
 
             {/* Menu Dropdown de Chatbots */}
             <div className="relative group">
@@ -130,13 +170,7 @@ const Header: React.FC<HeaderProps> = ({
               to="/auth"
               className="text-muted-foreground hover:text-primary font-medium"
             >
-              🔐 Login
-            </Link>
-            <Link
-              to="/register-account"
-              className="text-muted-foreground hover:text-primary font-medium"
-            >
-              📝 Inscreva-se
+              🔐 Entrar
             </Link>
           </nav>
         </div>

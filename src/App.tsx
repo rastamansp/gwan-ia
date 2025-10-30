@@ -33,6 +33,8 @@ import {
   PromptsPage,
   BibliotecaPage,
   TraducoesPage,
+  EventsPage,
+  LegalPage,
 } from './pages';
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/gwan-events" element={<EventsPage />} />
+          <Route path="/gwan-legal" element={<LegalPage />} />
           <Route path="/gwan-mart" element={<GwanMartPage />} />
           <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
           <Route
