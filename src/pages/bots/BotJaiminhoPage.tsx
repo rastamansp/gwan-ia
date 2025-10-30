@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatWidget from '../../components/chat/ChatWidget';
 import { useChat } from '../../hooks/useChat';
 import Header from '../../components/layout/Header';
@@ -7,11 +7,107 @@ const BotJaiminhoPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
     'https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat'
   );
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   return (
     <div className="min-h-screen bg-gradient-hero">
       {/* Header Compartilhado */}
       <Header showBackButton={true} backButtonText="Voltar ao Início" />
+
+      {/* Disclaimer - Dicas de Navegação */}
+      {showDisclaimer && (
+        <section className="bg-muted/50 border-b border-border">
+          <div className="container py-5">
+            <div className="flex items-start gap-3 max-w-7xl mx-auto relative">
+              <div className="flex-shrink-0 mt-0.5">
+                <svg
+                  className="w-5 h-5 text-muted-foreground"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1 pr-8">
+                <h4 className="text-sm font-semibold text-card-foreground mb-2">
+                  ℹ️ Sobre o Jaiminho
+                </h4>
+                <div className="text-sm text-muted-foreground space-y-2">
+                  <p>
+                    Trata-se de um{' '}
+                    <span className="font-medium text-primary">
+                      Chatbot de Inteligência Artificial
+                    </span>{' '}
+                    especializado em{' '}
+                    <span className="font-medium text-primary">
+                      naturopatia
+                    </span>
+                    , desenvolvido para fornecer orientações sobre bem-estar e
+                    saúde. O chatbot utiliza uma base de conhecimento (
+                    <span className="font-medium text-primary">RAG</span>)
+                    fundamentada na obra do renomado{' '}
+                    <span className="font-medium text-primary">
+                      Jaime Bruning
+                    </span>
+                    , terapeuta naturopata reconhecido, oferecendo sugestões e
+                    tratamentos naturais baseados em sintomas e doenças
+                    apresentadas.
+                  </p>
+                  <p>
+                    <span className="font-semibold text-card-foreground">
+                      Exemplos de perguntas que você pode fazer:
+                    </span>
+                  </p>
+                  <ul className="ml-4 space-y-1 list-disc">
+                    <li>"Estou com dor de barriga, o que pode ser?"</li>
+                    <li>"Como posso tratar prisão de ventre?"</li>
+                    <li>
+                      "Quais são os sintomas de ansiedade e como tratá-los
+                      naturalmente?"
+                    </li>
+                    <li>"Qual o melhor chá para dores de cabeça?"</li>
+                  </ul>
+                  <p className="pt-1">
+                    <span className="font-semibold text-card-foreground">
+                      🚀 Comece agora:
+                    </span>{' '}
+                    Clique em{' '}
+                    <span className="font-medium text-primary">
+                      "Experimentar"
+                    </span>{' '}
+                    e comece a se consultar com a IA!
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowDisclaimer(false)}
+                className="absolute top-0 right-0 text-muted-foreground hover:text-card-foreground transition-colors duration-200 p-1 rounded-md hover:bg-muted"
+                aria-label="Fechar dicas de navegação"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Main Content */}
       <main className="container py-20">
@@ -89,25 +185,6 @@ const BotJaiminhoPage: React.FC = () => {
                 consulte um profissional de saúde.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Try Now Section */}
-        <section className="mb-16">
-          <div className="bg-gradient-primary rounded-xl p-8 text-center">
-            <h3 className="text-3xl font-bold text-primary-foreground mb-4">
-              Experimente agora!
-            </h3>
-            <p className="text-primary-foreground/90 text-lg mb-6">
-              Inicie uma conversa com nosso chatbot para obter ajuda
-              instantânea.
-            </p>
-            <button
-              onClick={openChat}
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors duration-300"
-            >
-              Iniciar Conversa
-            </button>
           </div>
         </section>
 

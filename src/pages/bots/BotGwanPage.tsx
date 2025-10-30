@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatWidget from '../../components/chat/ChatWidget';
 import { useChat } from '../../hooks/useChat';
 import Header from '../../components/layout/Header';
@@ -7,11 +7,100 @@ const BotGwanPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
     'https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat'
   );
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   return (
     <div className="min-h-screen bg-gradient-hero">
       {/* Header Compartilhado */}
       <Header showBackButton={true} backButtonText="Voltar ao Início" />
+
+      {/* Disclaimer - Dicas de Navegação */}
+      {showDisclaimer && (
+        <section className="bg-muted/50 border-b border-border">
+          <div className="container py-5">
+            <div className="flex items-start gap-3 max-w-7xl mx-auto relative">
+              <div className="flex-shrink-0 mt-0.5">
+                <svg
+                  className="w-5 h-5 text-muted-foreground"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1 pr-8">
+                <h4 className="text-sm font-semibold text-card-foreground mb-2">
+                  ℹ️ Sobre o Gwan
+                </h4>
+                <div className="text-sm text-muted-foreground space-y-2">
+                  <p>
+                    Trata-se de um{' '}
+                    <span className="font-medium text-primary">
+                      Chatbot de Inteligência Artificial
+                    </span>{' '}
+                    <span className="font-medium text-primary">
+                      institucional
+                    </span>
+                    , desenvolvido para fornecer informações sobre nossa
+                    empresa, detalhes de contato, parcerias e serviços de
+                    desenvolvimento de Chatbot de IA e inovação tecnológica.
+                    Utilize nossa base de conhecimento para obter respostas
+                    sobre nossos produtos e soluções.
+                  </p>
+                  <p>
+                    <span className="font-semibold text-card-foreground">
+                      Exemplos de perguntas que você pode fazer:
+                    </span>
+                  </p>
+                  <ul className="ml-4 space-y-1 list-disc">
+                    <li>"Quais são os serviços oferecidos pela Gwan?"</li>
+                    <li>"Como posso entrar em contato com vocês?"</li>
+                    <li>"Vocês fazem parcerias?"</li>
+                    <li>
+                      "Como funciona o desenvolvimento de chatbots de IA?"
+                    </li>
+                  </ul>
+                  <p className="pt-1">
+                    <span className="font-semibold text-card-foreground">
+                      🚀 Comece agora:
+                    </span>{' '}
+                    Clique em{' '}
+                    <span className="font-medium text-primary">
+                      "Experimentar"
+                    </span>{' '}
+                    e comece a se consultar com a IA!
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowDisclaimer(false)}
+                className="absolute top-0 right-0 text-muted-foreground hover:text-card-foreground transition-colors duration-200 p-1 rounded-md hover:bg-muted"
+                aria-label="Fechar dicas de navegação"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Main Content */}
       <main className="container py-20">
@@ -88,32 +177,6 @@ const BotGwanPage: React.FC = () => {
                 </span>
               </li>
             </ul>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <p className="text-yellow-800 text-sm">
-                <strong>Observação:</strong> Este chatbot fornece informações e
-                orientações gerais. Para aconselhamento médico específico,
-                consulte um profissional de saúde.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Try Now Section */}
-        <section className="mb-16">
-          <div className="bg-gradient-primary rounded-xl p-8 text-center">
-            <h3 className="text-3xl font-bold text-primary-foreground mb-4">
-              Experimente agora!
-            </h3>
-            <p className="text-primary-foreground/90 text-lg mb-6">
-              Inicie uma conversa com nosso chatbot para obter ajuda
-              instantânea.
-            </p>
-            <button
-              onClick={openChat}
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors duration-300"
-            >
-              Iniciar Conversa
-            </button>
           </div>
         </section>
 
@@ -126,22 +189,39 @@ const BotGwanPage: React.FC = () => {
             <div className="space-y-6">
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  O que é integração de API?
+                  O que é Consultoria de Arquitetura de IA?
                 </h4>
                 <p className="text-muted-foreground">
-                  Integração de API é o processo de conectar diferentes
-                  aplicações de software através de suas APIs para compartilhar
-                  dados e funcionalidades.
+                  Consultoria de Arquitetura de IA é o processo de planejar e
+                  estruturar soluções de inteligência artificial que atendam às
+                  necessidades específicas do seu negócio, considerando
+                  escalabilidade, performance e integração com sistemas
+                  existentes.
                 </p>
               </div>
               <div className="border-b border-border pb-6">
                 <h4 className="text-xl font-semibold text-card-foreground mb-3">
-                  Como posso melhorar o desempenho da minha API?
+                  Como a Gwan pode ajudar na arquitetura de IA para minha
+                  empresa?
                 </h4>
                 <p className="text-muted-foreground">
-                  Para melhorar o desempenho da API, implemente cache, otimize
-                  consultas ao banco de dados e use estruturas de dados
-                  eficientes.
+                  A Gwan oferece consultoria especializada para projetar
+                  arquiteturas de IA personalizadas, incluindo análise de
+                  requisitos, seleção de tecnologias adequadas, definição de
+                  pipelines de dados e estratégias de implementação e
+                  manutenção.
+                </p>
+              </div>
+              <div className="border-b border-border pb-6">
+                <h4 className="text-xl font-semibold text-card-foreground mb-3">
+                  Quais tecnologias de IA a Gwan utiliza?
+                </h4>
+                <p className="text-muted-foreground">
+                  Trabalhamos com diversas tecnologias de IA, incluindo modelos
+                  de linguagem (LLMs), sistemas RAG (Retrieval-Augmented
+                  Generation), processamento de linguagem natural (NLP), machine
+                  learning e arquiteturas híbridas conforme as necessidades do
+                  projeto.
                 </p>
               </div>
             </div>

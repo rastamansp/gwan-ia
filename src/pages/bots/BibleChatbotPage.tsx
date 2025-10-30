@@ -249,64 +249,11 @@ Deseja <strong>aprovar</strong> ou <strong>editar</strong> alguma seção?`,
       meta: 'Resultado',
       timestamp: new Date(),
     },
-    {
-      id: '31',
-      type: 'bot',
-      content: `Gostaria de adquirir uma <strong>cópia das Escrituras</strong> para aprofundar-se nesta história?
-Temos formato <em>Digital</em> (PDF/ePub) e <em>Físico</em>.`,
-      meta: 'Oferta',
-      timestamp: new Date(),
-    },
-    {
-      id: '32',
-      type: 'user',
-      content: 'Quero o formato digital.',
-      meta: 'Usuário',
-      timestamp: new Date(),
-    },
-    {
-      id: '33',
-      type: 'bot',
-      content:
-        'Perfeito! Informe um e-mail para receber o link de download e a licença de uso.',
-      meta: 'Checkout',
-      timestamp: new Date(),
-    },
-    {
-      id: '34',
-      type: 'user',
-      content: 'meuemail@example.com',
-      meta: 'Usuário',
-      timestamp: new Date(),
-    },
-    {
-      id: '35',
-      type: 'bot',
-      content: `Pagamento concluído via PIX. ✅
-Enviamos o link de download para <strong>meuemail@example.com</strong>.
-Precisa de algo mais?`,
-      meta: 'Confirmação & Encerramento',
-      timestamp: new Date(),
-    },
-    {
-      id: '36',
-      type: 'user',
-      content: 'Tudo certo. Obrigado!',
-      meta: 'Usuário',
-      timestamp: new Date(),
-    },
-    {
-      id: '37',
-      type: 'bot',
-      content: `Obrigado você! 🙏
-Se quiser, posso reutilizar suas preferências para o próximo vídeo.`,
-      meta: 'Fim',
-      timestamp: new Date(),
-    },
   ]);
 
   const [currentInput, setCurrentInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(true);
 
   const handleSendMessage = async (content: string) => {
     if (!content.trim()) return;
@@ -508,26 +455,9 @@ Deseja <strong>aprovar</strong> ou <strong>editar</strong> alguma seção?`,
 
     if (input.includes('baixar') || input.includes('compartilhar')) {
       return {
-        content: `Gostaria de adquirir uma <strong>cópia das Escrituras</strong> para aprofundar-se nesta história?
-Temos formato <em>Digital</em> (PDF/ePub) e <em>Físico</em>.`,
-        meta: 'Oferta',
-      };
-    }
-
-    if (input.includes('digital')) {
-      return {
         content:
-          'Perfeito! Informe um e-mail para receber o link de download e a licença de uso.',
-        meta: 'Checkout',
-      };
-    }
-
-    if (input.includes('@') && input.includes('.')) {
-      return {
-        content: `Pagamento concluído via PIX. ✅
-Enviamos o link de download para <strong>${userInput}</strong>.
-Precisa de algo mais?`,
-        meta: 'Confirmação & Encerramento',
+          'Perfeito! Você pode baixar o vídeo ou compartilhá-lo nas suas redes sociais. Deseja criar outro vídeo?',
+        meta: 'Finalização',
       };
     }
 
@@ -554,6 +484,98 @@ Se quiser, posso reutilizar suas preferências para o próximo vídeo.`,
     <div className="min-h-screen bg-gradient-hero">
       {/* Header Compartilhado */}
       <Header showBackButton={true} backButtonText="Voltar ao Início" />
+
+      {/* Disclaimer - Dicas de Navegação */}
+      {showDisclaimer && (
+        <section className="bg-muted/50 border-b border-border">
+          <div className="container py-5">
+            <div className="flex items-start gap-3 max-w-7xl mx-auto relative">
+              <div className="flex-shrink-0 mt-0.5">
+                <svg
+                  className="w-5 h-5 text-muted-foreground"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <div className="flex-1 pr-8">
+                <h4 className="text-sm font-semibold text-card-foreground mb-2">
+                  ℹ️ Sobre o Chatbot Bíblico
+                </h4>
+                <div className="text-sm text-muted-foreground space-y-2">
+                  <p>
+                    Trata-se de um{' '}
+                    <span className="font-medium text-primary">
+                      Chatbot de Inteligência Artificial
+                    </span>{' '}
+                    especializado em{' '}
+                    <span className="font-medium text-primary">
+                      geração de vídeos bíblicos
+                    </span>
+                    , desenvolvido para ajudá-lo a criar vídeos profissionais
+                    baseados em histórias das Escrituras. O chatbot guia você
+                    através de um processo interativo para personalizar estilo,
+                    personagens, cenários, iluminação e outros elementos
+                    técnicos, gerando prompts otimizados para criação de vídeos
+                    com IA.
+                  </p>
+                  <p>
+                    <span className="font-semibold text-card-foreground">
+                      Exemplos de perguntas que você pode fazer:
+                    </span>
+                  </p>
+                  <ul className="ml-4 space-y-1 list-disc">
+                    <li>"Quero criar um vídeo sobre Davi e Golias"</li>
+                    <li>
+                      "Como personalizar o estilo cinematográfico do vídeo?"
+                    </li>
+                    <li>"Quais histórias bíblicas estão disponíveis?"</li>
+                    <li>
+                      "Posso ajustar a iluminação e os ângulos de câmera?"
+                    </li>
+                  </ul>
+                  <p className="pt-1">
+                    <span className="font-semibold text-card-foreground">
+                      🚀 Comece agora:
+                    </span>{' '}
+                    Clique em{' '}
+                    <span className="font-medium text-primary">
+                      "Experimentar"
+                    </span>{' '}
+                    e comece a se consultar com a IA!
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowDisclaimer(false)}
+                className="absolute top-0 right-0 text-muted-foreground hover:text-card-foreground transition-colors duration-200 p-1 rounded-md hover:bg-muted"
+                aria-label="Fechar dicas de navegação"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Main Content */}
       <main className="container py-20">
@@ -732,31 +754,6 @@ Se quiser, posso reutilizar suas preferências para o próximo vídeo.`,
                 geração de vídeo utilizada.
               </p>
             </div>
-          </div>
-        </section>
-
-        {/* Try Now Section */}
-        <section className="mb-16">
-          <div className="bg-gradient-primary rounded-xl p-8 text-center">
-            <h3 className="text-3xl font-bold text-primary-foreground mb-4">
-              Experimente agora!
-            </h3>
-            <p className="text-primary-foreground/90 text-lg mb-6">
-              Inicie uma conversa para criar seu primeiro vídeo bíblico com IA.
-            </p>
-            <button
-              onClick={() => {
-                const input = document.querySelector(
-                  'input[type="text"]'
-                ) as HTMLInputElement;
-                if (input) {
-                  input.focus();
-                }
-              }}
-              className="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-50 transition-colors duration-300"
-            >
-              Iniciar Conversa
-            </button>
           </div>
         </section>
 

@@ -1,25 +1,16 @@
 # Multi-stage build para otimizar o tamanho da imagem
 FROM node:18-alpine AS base
 
-# Instalar pnpm globalmente
-RUN npm install -g pnpm
-
-# Stage de dependências
-FROM base AS deps
-WORKDIR /app
-
-# Copiar arquivos de dependências
-COPY package.json pnpm-lock.yaml ./
-
-# Instalar dependências
-RUN pnpm install --frozen-lockfile
-
 # Stage de build
 FROM base AS builder
 WORKDIR /app
 
-# Copiar dependências instaladas
-COPY --from=deps /app/node_modules ./node_modules
+# Copiar arquivos de dependências
+COPY package.json package-lock.json* ./
+
+# Instalar todas as dependências (incluindo devDependencies) para o build
+# Usa npm ci se package-lock.json existir, caso contrário usa npm install
+RUN if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
 
 # Copiar código fonte
 COPY . .
@@ -51,7 +42,7 @@ ENV VITE_OTEL_SERVICE_VERSION=$VITE_OTEL_SERVICE_VERSION
 ENV VITE_OTEL_RESOURCE_ATTRIBUTES=$VITE_OTEL_RESOURCE_ATTRIBUTES
 
 # Build da aplicação
-RUN pnpm build
+RUN npm run build
 
 # Verificar se o build foi bem-sucedido
 RUN ls -la /app/dist && \
