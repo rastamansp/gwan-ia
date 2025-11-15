@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_MART_AI_URL: string;
   readonly VITE_GWAN_EVENT_URL: string;
   readonly VITE_GWAN_LEGAL_AI_URL: string;
+  readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
   readonly VITE_LOG_LEVEL: string;
@@ -36,6 +37,10 @@ const env = {
   // Gwan Legal AI URL
   VITE_GWAN_LEGAL_AI_URL:
     import.meta.env.VITE_GWAN_LEGAL_AI_URL || 'https://legal-ai.gwan.com.br/',
+  // Chat Health API URL
+  VITE_CHAT_HEALTH_API_URL:
+    import.meta.env.VITE_CHAT_HEALTH_API_URL ||
+    'http://localhost:3001/api/chat-health',
   // Environment
   NODE_ENV: import.meta.env.MODE || 'development',
   IS_DEV: import.meta.env.DEV || false,

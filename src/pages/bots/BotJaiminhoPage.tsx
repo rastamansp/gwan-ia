@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import ChatWidget from '../../components/chat/ChatWidget';
 import { useChat } from '../../hooks/useChat';
 import Header from '../../components/layout/Header';
+import env from '../../config/env';
 
 const BotJaiminhoPage: React.FC = () => {
   const { isOpen, toggleChat, openChat } = useChat(
-    'https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat'
+    env.VITE_CHAT_HEALTH_API_URL
   );
   const [showDisclaimer, setShowDisclaimer] = useState(true);
 
@@ -236,7 +237,7 @@ const BotJaiminhoPage: React.FC = () => {
         chatbotName="BotJaiminho"
         chatbotIcon="🌿"
         chatbotColor="#10b981"
-        endpoint="https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat"
+        endpoint={env.VITE_CHAT_HEALTH_API_URL}
       />
     </div>
   );
