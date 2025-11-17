@@ -10,7 +10,13 @@ COPY package.json package-lock.json* ./
 
 # Instalar todas as dependências (incluindo devDependencies) para o build
 # Usa npm ci se package-lock.json existir, caso contrário usa npm install
-RUN if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
+RUN if [ -f package-lock.json ]; then \
+      echo "Using package-lock.json" && npm ci --ignore-scripts || (echo "npm ci failed, trying npm install" && npm install --ignore-scripts); \
+    else \
+      echo "No package-lock.json found, running npm install" && npm install --ignore-scripts; \
+    fi && \
+    echo "Dependencies installed successfully" && \
+    npm list --depth=0 || true
 
 # Copiar código fonte
 COPY . .
@@ -49,8 +55,8 @@ ENV VITE_GWAN_EVENT_URL=$VITE_GWAN_EVENT_URL
 ENV VITE_GWAN_LEGAL_AI_URL=$VITE_GWAN_LEGAL_AI_URL
 ENV VITE_CHAT_HEALTH_API_URL=$VITE_CHAT_HEALTH_API_URL
 
-# Build da aplicação
-RUN npm run build
+# Build da aplicação (tsc && vite build)
+RUN echo "Building application..." && npm run build
 
 # Verificar se o build foi bem-sucedido
 RUN ls -la /app/dist && \
