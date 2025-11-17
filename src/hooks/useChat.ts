@@ -1,10 +1,17 @@
 import { useState, useCallback } from 'react';
+import type { Property } from '../components/chat/PropertyCard';
 
 interface Message {
   id: string;
   text: string;
   isUser: boolean;
   timestamp: Date;
+  formattedResponse?: {
+    data?: {
+      type?: string;
+      items?: Property[];
+    };
+  };
 }
 
 export const useChat = (endpoint: string) => {
@@ -41,8 +48,8 @@ export const useChat = (endpoint: string) => {
 
       try {
         // Prepara o body da requisição
-        const requestBody: { query: string; sessionId?: string } = {
-          query: text.trim(),
+        const requestBody: { message: string; sessionId?: string } = {
+          message: text.trim(),
         };
 
         // Só envia sessionId se já tiver sido retornado pelo backend
@@ -75,6 +82,7 @@ export const useChat = (endpoint: string) => {
 
         // Prioriza markdownAnswer, depois tenta outros campos possíveis da resposta da API
         const responseText =
+          data.formattedResponse?.answer ||
           data.markdownAnswer ||
           data.answer ||
           data.response ||
@@ -88,6 +96,7 @@ export const useChat = (endpoint: string) => {
           text: responseText,
           isUser: false,
           timestamp: new Date(),
+          formattedResponse: data.formattedResponse,
         };
 
         setMessages(prev => [...prev, botMessage]);

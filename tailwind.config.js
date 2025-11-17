@@ -75,6 +75,8 @@ module.exports = {
 				'glow-primary': 'var(--glow-primary)',
 				'glow-secondary': 'var(--glow-secondary)',
 				'elevated': 'var(--shadow-elevated)',
+				'card': 'var(--shadow-card)',
+				'hover': 'var(--shadow-hover)',
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',

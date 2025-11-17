@@ -25,3 +25,4 @@ export { default as PromptsPage } from './PromptsPage';
 export { default as TraducoesPage } from './TraducoesPage';
 export { default as EventsPage } from './EventsPage';
 export { default as LegalPage } from './LegalPage';
+export { default as ImoveisPage } from './ImoveisPage';

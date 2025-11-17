@@ -44,6 +44,8 @@
     --glow-primary: 0 0 20px hsl(221.2 83.2% 53.3% / 0.3);
     --glow-secondary: 0 0 20px hsl(210 40% 96% / 0.3);
     --shadow-elevated: 0 10px 25px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-card: 0 4px 6px -1px hsl(221.2 83.2% 53.3% / 0.1), 0 2px 4px -1px hsl(221.2 83.2% 53.3% / 0.06);
+    --shadow-hover: 0 10px 15px -3px hsl(221.2 83.2% 53.3% / 0.2), 0 4px 6px -2px hsl(221.2 83.2% 53.3% / 0.1);
     
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
@@ -88,6 +90,8 @@
     --glow-primary: 0 0 20px hsl(217.2 91.2% 59.8% / 0.3);
     --glow-secondary: 0 0 20px hsl(217.2 32.6% 17.5% / 0.3);
     --shadow-elevated: 0 10px 25px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-hover: 0 10px 15px -3px hsl(0 0% 0% / 0.4), 0 4px 6px -2px hsl(0 0% 0% / 0.3);
     
     /* Sidebar para tema escuro */
     --sidebar-background: 222.2 84% 4.9%;
@@ -282,5 +286,25 @@
 }
 
 @layer utilities {
-  /* Utilitários customizados podem ser adicionados aqui */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

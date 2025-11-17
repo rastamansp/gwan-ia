@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useChat } from '../../hooks/useChat';
+import PropertyCard from './PropertyCard';
 
 interface ChatWidgetProps {
   isOpen: boolean;
@@ -73,7 +74,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-lg shadow-2xl border border-gray-200 z-40 flex flex-col">
+        <div className="fixed bottom-24 right-6 w-[420px] max-w-[90vw] h-[600px] max-h-[85vh] bg-white rounded-lg shadow-2xl border border-gray-200 z-40 flex flex-col">
           {/* Header */}
           <div
             className="flex items-center justify-between p-4 rounded-t-lg text-white"
@@ -123,7 +124,7 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                 className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`${message.isUser ? 'max-w-xs' : 'max-w-md'} px-4 py-2 rounded-lg ${
+                  className={`${message.isUser ? 'max-w-xs' : message.formattedResponse?.data?.type === 'property_list' || message.formattedResponse?.data?.type === 'property_detail' ? 'max-w-full w-full' : 'max-w-md'} px-4 py-2 rounded-lg ${
                     message.isUser
                       ? 'bg-blue-500 text-white'
                       : 'bg-white text-gray-800 border border-gray-200'
@@ -133,6 +134,27 @@ const ChatWidget: React.FC<ChatWidgetProps> = ({
                     <p className="text-sm">{message.text}</p>
                   ) : (
                     <div className="text-sm prose prose-sm max-w-none">
+                      {/* Renderiza cards de imóveis se houver */}
+                      {(message.formattedResponse?.data?.type ===
+                        'property_list' ||
+                        message.formattedResponse?.data?.type ===
+                          'property_detail') &&
+                        message.formattedResponse.data.items && (
+                          <div className="mb-4 space-y-3 -mx-2">
+                            {message.formattedResponse.data.items.map(
+                              property => (
+                                <div
+                                  key={property.id}
+                                  className="transform scale-95 origin-left"
+                                >
+                                  <PropertyCard property={property} />
+                                </div>
+                              )
+                            )}
+                          </div>
+                        )}
+
+                      {/* Renderiza o texto markdown */}
                       <ReactMarkdown
                         components={{
                           h2: ({ children }) => (

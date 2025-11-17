@@ -24,6 +24,7 @@ import {
   BotMarleyPage,
   BotGwanPage,
   BotGwanMartPage,
+  BotGwanImoveisPage,
   BibleChatbotPage,
   DebugPage,
   ThemePage,
@@ -35,6 +36,7 @@ import {
   TraducoesPage,
   EventsPage,
   LegalPage,
+  ImoveisPage,
 } from './pages';
 
 function App() {
@@ -45,6 +47,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/gwan-events" element={<EventsPage />} />
           <Route path="/gwan-legal" element={<LegalPage />} />
+          <Route path="/gwan-imoveis" element={<ImoveisPage />} />
           <Route path="/gwan-mart" element={<GwanMartPage />} />
           <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
           <Route
@@ -152,6 +155,7 @@ function App() {
           <Route path="/bot-marley" element={<BotMarleyPage />} />
           <Route path="/bot-gwan" element={<BotGwanPage />} />
           <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
+          <Route path="/bot-gwan-imoveis" element={<BotGwanImoveisPage />} />
           <Route path="/bot-biblia" element={<BibleChatbotPage />} />
 
           {/* Rota de Debug */}
