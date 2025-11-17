@@ -11,9 +11,9 @@ COPY package.json package-lock.json* ./
 # Instalar todas as dependências (incluindo devDependencies) para o build
 # Usa npm ci se package-lock.json existir, caso contrário usa npm install
 RUN if [ -f package-lock.json ]; then \
-      echo "Using package-lock.json" && npm ci --ignore-scripts || (echo "npm ci failed, trying npm install" && npm install --ignore-scripts); \
+      echo "Using package-lock.json" && npm ci --ignore-scripts --legacy-peer-deps || (echo "npm ci failed, trying npm install" && npm install --ignore-scripts --legacy-peer-deps); \
     else \
-      echo "No package-lock.json found, running npm install" && npm install --ignore-scripts; \
+      echo "No package-lock.json found, running npm install" && npm install --ignore-scripts --legacy-peer-deps; \
     fi && \
     echo "Dependencies installed successfully" && \
     npm list --depth=0 || true
