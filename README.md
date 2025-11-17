@@ -3,6 +3,43 @@
 **Versão:** 1.1.0  
 **Status:** ✅ Produção - Funcionalidades Core Implementadas
 
+## 📋 Requisitos
+
+### **Node.js e npm**
+- **Node.js:** 18.x (mesma versão usada no Docker)
+- **npm:** >= 9.0.0
+
+### **Configurar a versão do Node localmente:**
+
+#### **Usando NVM (Node Version Manager):**
+```bash
+# Instalar Node 18 (se ainda não tiver)
+nvm install 18
+
+# Usar Node 18 no projeto
+nvm use 18
+
+# O arquivo .nvmrc será lido automaticamente
+nvm use
+```
+
+#### **Usando Volta:**
+```bash
+# Instalar Volta (se ainda não tiver)
+# https://volta.sh/
+
+# O arquivo .node-version será lido automaticamente
+volta install node@18
+```
+
+#### **Verificar versão:**
+```bash
+node --version  # Deve retornar v18.x.x
+npm --version   # Deve retornar >= 9.0.0
+```
+
+> **Nota:** A versão do Node no Docker (`node:18-alpine`) deve corresponder à versão local para evitar problemas de compatibilidade durante o desenvolvimento.
+
 ## 📋 Status do Projeto
 
 ### ✅ **Funcionalidades Implementadas**
