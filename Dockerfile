@@ -1,18 +1,16 @@
 # Multi-stage build para otimizar o tamanho da imagem
 FROM node:18-alpine AS base
 
-# Instalar pnpm globalmente
-RUN npm install -g pnpm@latest
-
 # Stage de build
 FROM base AS builder
 WORKDIR /app
 
 # Copiar arquivos de dependências
-COPY package.json pnpm-lock.yaml ./
+COPY package.json package-lock.json* ./
 
 # Instalar todas as dependências (incluindo devDependencies) para o build
-RUN pnpm install --frozen-lockfile --ignore-scripts
+# Usa npm ci se package-lock.json existir, caso contrário usa npm install
+RUN if [ -f package-lock.json ]; then npm ci --ignore-scripts; else npm install --ignore-scripts; fi
 
 # Copiar código fonte
 COPY . .
@@ -52,7 +50,7 @@ ENV VITE_GWAN_LEGAL_AI_URL=$VITE_GWAN_LEGAL_AI_URL
 ENV VITE_CHAT_HEALTH_API_URL=$VITE_CHAT_HEALTH_API_URL
 
 # Build da aplicação
-RUN pnpm run build
+RUN npm run build
 
 # Verificar se o build foi bem-sucedido
 RUN ls -la /app/dist && \
