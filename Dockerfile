@@ -1,5 +1,5 @@
 # Multi-stage build para otimizar o tamanho da imagem
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 
 # Stage de build
 FROM base AS builder
