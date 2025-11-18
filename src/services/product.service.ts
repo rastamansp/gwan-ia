@@ -1,5 +1,6 @@
 import { SearchParams, PaginatedResponse } from '../types/search.types';
 import { buildApiUrl, buildApiUrlWithQuery } from '../utils/api-url';
+import env from '../config/env';
 
 // Serviço para buscar produtos da API
 export interface ProductVariation {
@@ -93,7 +94,7 @@ export const fetchProduct = async (
 ): Promise<ProductData | null> => {
   try {
     const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, `products/${productId}`)
+      buildApiUrl(env.GWAN_MART_API_URL, `products/${productId}`)
     );
 
     if (!response.ok) {
@@ -136,7 +137,7 @@ export const fetchProduct = async (
 // Função para buscar produtos em destaque
 export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
   try {
-    const url = buildApiUrl(import.meta.env.VITE_API_URL, 'products/featured');
+    const url = buildApiUrl(env.GWAN_MART_API_URL, 'products/featured');
     console.log('Fetching featured products from:', url);
 
     const response = await fetch(url);
@@ -179,7 +180,7 @@ export const fetchFeaturedProducts = async (): Promise<FeaturedProduct[]> => {
 export const fetchAllProducts = async (): Promise<FeaturedProduct[]> => {
   try {
     const response = await fetch(
-      buildApiUrl(import.meta.env.VITE_API_URL, 'products')
+      buildApiUrl(env.GWAN_MART_API_URL, 'products')
     );
 
     if (!response.ok) {
@@ -219,7 +220,7 @@ export const fetchProductsWithFilters = async (
     );
 
     const url = buildApiUrlWithQuery(
-      import.meta.env.VITE_API_URL,
+      env.GWAN_MART_API_URL,
       'products',
       processedParams as Record<string, string | number | boolean | undefined>
     );
@@ -302,10 +303,7 @@ export const fetchProductByCode = async (
   productCode: string
 ): Promise<ProductData | null> => {
   try {
-    const url = buildApiUrl(
-      import.meta.env.VITE_API_URL,
-      `products/${productCode}`
-    );
+    const url = buildApiUrl(env.GWAN_MART_API_URL, `products/${productCode}`);
 
     const response = await fetch(url);
 

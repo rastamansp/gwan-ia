@@ -73,18 +73,16 @@ const CatalogPage: React.FC = () => {
     setAiSearchError(null);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}products/search/similar`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            query: query.trim(),
-          }),
-        }
-      );
+      const apiUrl = env.GWAN_MART_API_URL;
+      const response = await fetch(`${apiUrl}/products/search/similar`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: query.trim(),
+        }),
+      });
 
       if (!response.ok) {
         throw new Error('Erro na busca com IA');
