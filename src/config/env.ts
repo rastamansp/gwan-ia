@@ -36,8 +36,7 @@ const env = {
     'http://localhost:3009/api',
   // Gwan Mart Chat URL
   GWAN_MART_CHAT_URL:
-    import.meta.env.VITE_GWAN_MART_CHAT_URL ||
-    'http://localhost:3009/api/api/chat',
+    import.meta.env.VITE_GWAN_MART_CHAT_URL || 'http://localhost:3009/api/chat',
   // Gwan Mart AI Agent
   VITE_GWAN_MART_AI_URL:
     import.meta.env.VITE_GWAN_MART_AI_URL ||

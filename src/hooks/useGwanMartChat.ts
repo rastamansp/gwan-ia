@@ -27,12 +27,7 @@ export const useGwanMartChat = (endpoint?: string) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [sessionId] = useState(
-    `session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  );
-  const [userId] = useState(
-    `user-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  );
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
   const toggleChat = useCallback(() => {
     setIsOpen(prev => !prev);
@@ -61,23 +56,49 @@ export const useGwanMartChat = (endpoint?: string) => {
       setIsLoading(true);
 
       try {
+        // Prepara o body da requisição - formato similar ao useChat
+        const requestBody: { message: string; sessionId?: string } = {
+          message: text.trim(),
+        };
+
+        // Só envia sessionId se já tiver sido retornado pelo backend ou se for a primeira mensagem
+        if (sessionId) {
+          requestBody.sessionId = sessionId;
+        }
+
+        console.log('Enviando mensagem para:', apiEndpoint);
+        console.log('Body da requisição:', requestBody);
+
         const response = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            message: text.trim(),
-            sessionId: sessionId,
-            userId: userId,
-          }),
+          body: JSON.stringify(requestBody),
         });
 
+        console.log('Response status:', response.status);
+        console.log(
+          'Response headers:',
+          Object.fromEntries(response.headers.entries())
+        );
+
         if (!response.ok) {
-          throw new Error('Erro na resposta da API');
+          const errorText = await response.text();
+          console.error('Erro na resposta:', errorText);
+          throw new Error(`Erro ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
+        console.log('Dados recebidos:', data);
+
+        // Se a API retornar um sessionId, armazena para usar nas próximas requisições
+        if (data.sessionId) {
+          setSessionId(prevSessionId => {
+            // Só atualiza se ainda não tiver um sessionId
+            return prevSessionId || data.sessionId;
+          });
+        }
 
         // Transformar produtos da API para o formato esperado
         const transformProducts = (apiProducts: any[]): Product[] => {
@@ -103,15 +124,26 @@ export const useGwanMartChat = (endpoint?: string) => {
           });
         };
 
+        // Prioriza diferentes campos possíveis da resposta da API
+        const responseText =
+          data.formattedResponse?.answer ||
+          data.markdownAnswer ||
+          data.answer ||
+          data.response ||
+          data.message ||
+          data.output ||
+          data.text ||
+          'Desculpe, não consegui processar sua mensagem.';
+
         const botMessage: Message = {
           id: `bot_${Date.now()}`,
-          text:
-            data.response ||
-            data.message ||
-            'Desculpe, não consegui processar sua mensagem.',
+          text: responseText,
           isUser: false,
           timestamp: new Date(),
-          suggestions: data.suggestions || undefined,
+          suggestions:
+            data.suggestions ||
+            data.formattedResponse?.data?.suggestions ||
+            undefined,
           products: data.data?.results
             ? transformProducts(data.data.results)
             : undefined,
@@ -133,7 +165,7 @@ export const useGwanMartChat = (endpoint?: string) => {
         setIsLoading(false);
       }
     },
-    [sessionId, userId, apiEndpoint]
+    [sessionId, apiEndpoint]
   );
 
   const clearMessages = useCallback(() => {
@@ -145,7 +177,6 @@ export const useGwanMartChat = (endpoint?: string) => {
     messages,
     isLoading,
     sessionId,
-    userId,
     toggleChat,
     openChat,
     closeChat,
