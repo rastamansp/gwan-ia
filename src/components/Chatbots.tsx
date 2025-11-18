@@ -57,10 +57,14 @@ const Chatbots = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {chatbots.map((chatbot, index) => (
-            <ChatbotCard key={index} {...chatbot} />
-          ))}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl place-items-center">
+            {chatbots.map((chatbot, index) => (
+              <div key={index} className="w-full max-w-sm">
+                <ChatbotCard {...chatbot} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
