@@ -18,14 +18,17 @@ const Header: React.FC<HeaderProps> = () => {
   const produtos = [
     { name: 'Gwan Mart', href: '/gwan-mart' },
     { name: 'Gwan Events', href: '/gwan-events' },
-    { name: 'Gwan Legal', href: '/gwan-legal' },
+    // Temporariamente desabilitado - produto indisponível
+    // { name: 'Gwan Legal', href: '/gwan-legal' },
     { name: 'Gwan Imóveis', href: '/gwan-imoveis' },
   ];
 
   const chatbots = [
     { name: 'Jaiminho', href: '/bot-jaiminho' },
-    { name: 'Marley', href: '/bot-marley' },
-    { name: 'Gwan', href: '/bot-gwan' },
+    // Temporariamente desabilitado - chatbot indisponível
+    // { name: 'Marley', href: '/bot-marley' },
+    // Temporariamente desabilitado - chatbot indisponível
+    // { name: 'Gwan', href: '/bot-gwan' },
     { name: 'Gwan Mart', href: '/bot-gwan-mart' },
     { name: 'Gwan Imóveis', href: '/bot-gwan-imoveis' },
     { name: 'Bíblia', href: '/bot-biblia' },

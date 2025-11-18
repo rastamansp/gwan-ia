@@ -9,20 +9,22 @@ const Chatbots = () => {
       accent: 'bg-gradient-to-br from-secondary to-secondary/70',
       link: '/bot-jaiminho',
     },
-    {
-      name: 'Marley',
-      description:
-        'Obtenha informações sobre a carreira do Junior Dread, shows, turnês, rider técnico, próximas datas, informações para contratação e oportunidades de parceria.',
-      accent: 'bg-gradient-to-br from-primary to-primary/70',
-      link: '/bot-marley',
-    },
-    {
-      name: 'Gwan',
-      description:
-        'Nosso chatbot institucional, fornecendo informações sobre a empresa, detalhes de contato, parcerias e serviços de desenvolvimento de Chatbot de IA e inovação tecnológica.',
-      accent: 'bg-gradient-primary',
-      link: '/bot-gwan',
-    },
+    // Temporariamente desabilitado - chatbot indisponível
+    // {
+    //   name: 'Marley',
+    //   description:
+    //     'Obtenha informações sobre a carreira do Junior Dread, shows, turnês, rider técnico, próximas datas, informações para contratação e oportunidades de parceria.',
+    //   accent: 'bg-gradient-to-br from-primary to-primary/70',
+    //   link: '/bot-marley',
+    // },
+    // Temporariamente desabilitado - chatbot indisponível
+    // {
+    //   name: 'Gwan',
+    //   description:
+    //     'Nosso chatbot institucional, fornecendo informações sobre a empresa, detalhes de contato, parcerias e serviços de desenvolvimento de Chatbot de IA e inovação tecnológica.',
+    //   accent: 'bg-gradient-primary',
+    //   link: '/bot-gwan',
+    // },
     {
       name: 'Gwan Mart',
       description:
@@ -55,7 +57,7 @@ const Chatbots = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {chatbots.map((chatbot, index) => (
             <ChatbotCard key={index} {...chatbot} />
           ))}

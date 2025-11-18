@@ -1,5 +1,6 @@
 import ProductCard from './ProductCard';
-import { ShoppingBag, Calendar, Scale, Home } from 'lucide-react';
+import { ShoppingBag, Calendar, Home } from 'lucide-react';
+// import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
 const Products = () => {
   const products = [
@@ -31,20 +32,21 @@ const Products = () => {
       icon: Calendar,
       gradient: 'from-secondary to-secondary/70',
     },
-    {
-      title: 'Gwan Legal',
-      description:
-        'O futuro do Direito brasileiro começa aqui. Plataforma de automação jurídica inteligente que utiliza IA para gerar contratos, petições e documentos jurídicos com precisão e eficiência.',
-      features: [
-        'Geração de contratos com IA',
-        'Criação de petições jurídicas',
-        'Documentos jurídicos precisos',
-        'Automação jurídica inteligente',
-      ],
-      link: '/gwan-legal',
-      icon: Scale,
-      gradient: 'from-primary via-secondary to-primary',
-    },
+    // Temporariamente desabilitado - produto indisponível
+    // {
+    //   title: 'Gwan Legal',
+    //   description:
+    //     'O futuro do Direito brasileiro começa aqui. Plataforma de automação jurídica inteligente que utiliza IA para gerar contratos, petições e documentos jurídicos com precisão e eficiência.',
+    //   features: [
+    //     'Geração de contratos com IA',
+    //     'Criação de petições jurídicas',
+    //     'Documentos jurídicos precisos',
+    //     'Automação jurídica inteligente',
+    //   ],
+    //   link: '/gwan-legal',
+    //   icon: Scale,
+    //   gradient: 'from-primary via-secondary to-primary',
+    // },
     {
       title: 'Gwan Imóveis',
       description:
@@ -76,7 +78,7 @@ const Products = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((product, index) => (
             <ProductCard key={index} {...product} />
           ))}
