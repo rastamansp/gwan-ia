@@ -23,7 +23,7 @@ interface Message {
 }
 
 export const useGwanMartChat = (endpoint?: string) => {
-  const apiEndpoint = endpoint || env.VITE_GWAN_MART_AI_URL;
+  const apiEndpoint = endpoint || env.GWAN_MART_CHAT_URL;
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);

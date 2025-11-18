@@ -9,7 +9,7 @@ interface RequiredEnvConfig {
   VITE_APP_VERSION: string;
 
   // Configurações de IA
-  VITE_GWAN_MART_AI_URL?: string;
+  VITE_GWAN_MART_CHAT_URL?: string;
 
   // Configurações de monitoramento (obrigatórias em produção)
   VITE_OTEL_EXPORTER_OTLP_ENDPOINT?: string;
@@ -26,13 +26,13 @@ const REQUIRED_CONFIGS: Record<string, (keyof RequiredEnvConfig)[]> = {
     'VITE_API_URL',
     'VITE_APP_NAME',
     'VITE_APP_VERSION',
-    'VITE_GWAN_MART_AI_URL',
+    'VITE_GWAN_MART_CHAT_URL',
   ],
   production: [
     'VITE_API_URL',
     'VITE_APP_NAME',
     'VITE_APP_VERSION',
-    'VITE_GWAN_MART_AI_URL',
+    'VITE_GWAN_MART_CHAT_URL',
     'VITE_OTEL_EXPORTER_OTLP_ENDPOINT',
     'VITE_OTEL_SERVICE_NAME',
     'VITE_OTEL_SERVICE_VERSION',
@@ -42,7 +42,7 @@ const REQUIRED_CONFIGS: Record<string, (keyof RequiredEnvConfig)[]> = {
     'VITE_API_URL',
     'VITE_APP_NAME',
     'VITE_APP_VERSION',
-    'VITE_GWAN_MART_AI_URL',
+    'VITE_GWAN_MART_CHAT_URL',
   ],
 };
 
@@ -58,7 +58,7 @@ const VALIDATION_RULES: Record<string, (value: string) => boolean> = {
   },
   VITE_APP_NAME: (value: string) => value.length > 0,
   VITE_APP_VERSION: (value: string) => /^\d+\.\d+\.\d+/.test(value),
-  VITE_GWAN_MART_AI_URL: (value: string) => {
+  VITE_GWAN_MART_CHAT_URL: (value: string) => {
     try {
       new URL(value);
       return true;
@@ -86,8 +86,8 @@ const ERROR_MESSAGES: Record<string, string> = {
     'URL da API deve ser uma URL válida (ex: https://api.gwan.com.br)',
   VITE_APP_NAME: 'Nome da aplicação não pode estar vazio',
   VITE_APP_VERSION: 'Versão deve seguir o formato semântico (ex: 1.0.0)',
-  VITE_GWAN_MART_AI_URL:
-    'URL do Gwan Mart AI Agent deve ser uma URL válida (ex: https://mcp.gwan.com.br/api/ai-agent/chat)',
+  VITE_GWAN_MART_CHAT_URL:
+    'URL do Gwan Mart Chat deve ser uma URL válida (ex: http://api-mart.gwan.com.br/api/chat)',
   VITE_OTEL_EXPORTER_OTLP_ENDPOINT:
     'Endpoint OpenTelemetry deve ser uma URL válida (ex: http://gwan.com.br:4317)',
   VITE_OTEL_SERVICE_NAME: 'Nome do serviço OpenTelemetry não pode estar vazio',
@@ -204,13 +204,13 @@ Para desenvolvimento (.env):
   VITE_API_URL=https://api.gwan.com.br
   VITE_APP_NAME=Gwan IA
   VITE_APP_VERSION=1.0.0
-  VITE_GWAN_MART_AI_URL=http://localhost:7410/api/ai-agent/chat
+  VITE_GWAN_MART_CHAT_URL=http://localhost:3009/api/chat
 
 Para produção (env.production):
   VITE_API_URL=https://api.gwan.com.br
   VITE_APP_NAME=Gwan IA
   VITE_APP_VERSION=1.1.0
-  VITE_GWAN_MART_AI_URL=https://mcp.gwan.com.br/api/ai-agent/chat
+  VITE_GWAN_MART_CHAT_URL=http://api-mart.gwan.com.br/api/chat
   VITE_OTEL_EXPORTER_OTLP_ENDPOINT=http://gwan.com.br:4317
   VITE_OTEL_SERVICE_NAME=gwan-ia-frontend
   VITE_OTEL_SERVICE_VERSION=1.1.0

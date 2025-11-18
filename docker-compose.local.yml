@@ -9,7 +9,6 @@ services:
         VITE_API_URL: ${VITE_API_URL:-http://localhost:3000/api/v1/}
         VITE_APP_NAME: ${VITE_APP_NAME:-Gwan IA}
         VITE_APP_VERSION: ${VITE_APP_VERSION:-1.1.0}
-        VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-http://localhost:7410/api/ai-agent/chat}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
         VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-http://localhost:3004/api/chat-health}
@@ -37,9 +36,6 @@ services:
       
       # API (local)
       - VITE_API_URL=${VITE_API_URL:-http://localhost:3000/api/v1/}
-      
-      # Gwan Mart AI Agent (local)
-      - VITE_GWAN_MART_AI_URL=${VITE_GWAN_MART_AI_URL:-http://localhost:7410/api/ai-agent/chat}
       
       # Gwan Event AI Agent
       - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}

@@ -17,7 +17,6 @@ services:
         VITE_SHOW_DEV_TOOLS: ${VITE_SHOW_DEV_TOOLS:-false}
         VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://api.gwan.com.br/api/v1/}
         VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-http://api-mart.gwan.com.br/api/chat}
-        VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-https://mcp.gwan.com.br/api/ai-agent/chat}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
         VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-http://api-events.gwan.com.br/api/chat-health}
@@ -60,7 +59,6 @@ services:
       - VITE_SHOW_DEV_TOOLS=${VITE_SHOW_DEV_TOOLS}
       - VITE_GWAN_MART_API_URL=${VITE_GWAN_MART_API_URL}
       - VITE_GWAN_MART_CHAT_URL=${VITE_GWAN_MART_CHAT_URL}
-      - VITE_GWAN_MART_AI_URL=${VITE_GWAN_MART_AI_URL}
       - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL}
       - VITE_GWAN_LEGAL_AI_URL=${VITE_GWAN_LEGAL_AI_URL}
       - VITE_CHAT_HEALTH_API_URL=${VITE_CHAT_HEALTH_API_URL}

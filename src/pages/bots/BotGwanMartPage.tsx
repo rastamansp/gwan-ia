@@ -260,7 +260,7 @@ const BotGwanMartPage: React.FC = () => {
         chatbotName="Gwan Mart"
         chatbotIcon="🛒"
         chatbotColor="#10b981"
-        endpoint={env.VITE_GWAN_MART_AI_URL}
+        endpoint={env.GWAN_MART_CHAT_URL}
       />
     </div>
   );
