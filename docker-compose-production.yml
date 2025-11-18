@@ -15,6 +15,8 @@ services:
         VITE_DEBUG: ${VITE_DEBUG:-false}
         VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
         VITE_SHOW_DEV_TOOLS: ${VITE_SHOW_DEV_TOOLS:-false}
+        VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://api.gwan.com.br/api/v1/}
+        VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://api.gwan.com.br/api/chat}
         VITE_GWAN_MART_AI_URL: ${VITE_GWAN_MART_AI_URL:-https://mcp.gwan.com.br/api/ai-agent/chat}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
@@ -56,6 +58,8 @@ services:
       - VITE_DEBUG=${VITE_DEBUG}
       - VITE_LOG_LEVEL=${VITE_LOG_LEVEL}
       - VITE_SHOW_DEV_TOOLS=${VITE_SHOW_DEV_TOOLS}
+      - VITE_GWAN_MART_API_URL=${VITE_GWAN_MART_API_URL}
+      - VITE_GWAN_MART_CHAT_URL=${VITE_GWAN_MART_CHAT_URL}
       - VITE_GWAN_MART_AI_URL=${VITE_GWAN_MART_AI_URL}
       - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL}
       - VITE_GWAN_LEGAL_AI_URL=${VITE_GWAN_LEGAL_AI_URL}
