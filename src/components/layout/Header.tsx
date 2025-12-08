@@ -31,6 +31,7 @@ const Header: React.FC<HeaderProps> = () => {
     // { name: 'Gwan', href: '/bot-gwan' },
     { name: 'Gwan Mart', href: '/bot-gwan-mart' },
     { name: 'Gwan Imóveis', href: '/bot-gwan-imoveis' },
+    { name: 'Gwan Events', href: '/bot-gwan-events' },
     // Temporariamente desabilitado - chatbot indisponível
   ];
 

@@ -47,6 +47,10 @@
     --shadow-card: 0 4px 6px -1px hsl(221.2 83.2% 53.3% / 0.1), 0 2px 4px -1px hsl(221.2 83.2% 53.3% / 0.06);
     --shadow-hover: 0 10px 15px -3px hsl(221.2 83.2% 53.3% / 0.2), 0 4px 6px -2px hsl(221.2 83.2% 53.3% / 0.1);
     
+    /* Chatbot - Cores das bolhas de chat */
+    --chat-bubble-sent: 90 50% 88%;
+    --chat-bubble-received: 0 0% 100%;
+    
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 222.2 84% 4.9%;

@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -25,6 +26,7 @@ import {
   BotGwanPage,
   BotGwanMartPage,
   BotGwanImoveisPage,
+  BotGwanEventsPage,
   BibleChatbotPage,
   DebugPage,
   ThemePage,
@@ -43,6 +45,7 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
+        <Toaster position="top-right" />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gwan-events" element={<EventsPage />} />
@@ -156,6 +159,7 @@ function App() {
           <Route path="/bot-gwan" element={<BotGwanPage />} />
           <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
           <Route path="/bot-gwan-imoveis" element={<BotGwanImoveisPage />} />
+          <Route path="/bot-gwan-events" element={<BotGwanEventsPage />} />
           <Route path="/bot-biblia" element={<BibleChatbotPage />} />
 
           {/* Rota de Debug */}

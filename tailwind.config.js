@@ -63,6 +63,10 @@ module.exports = {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				chat: {
+					sent: 'hsl(var(--chat-bubble-sent))',
+					received: 'hsl(var(--chat-bubble-received))'
 				}
 			},
 			backgroundImage: {
@@ -84,6 +88,8 @@ module.exports = {
 				'pulse-slow': 'pulse 3s ease-in-out infinite',
 				'fade-in': 'fadeIn 0.5s ease-in-out',
 				'slide-up': 'slideUp 0.3s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'gradient': 'gradient 3s ease infinite',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -114,6 +120,14 @@ module.exports = {
 				slideUp: {
 					'0%': { opacity: '0', transform: 'translateY(20px)' },
 					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-20px)' }
+				},
+				gradient: {
+					'0%, 100%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' }
 				}
 			},
 		}

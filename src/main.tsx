@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
+import './styles/chatbot-styles.css';
 
 // Validar configurações de ambiente ANTES de tudo
 import { initializeEnvironmentValidation } from './utils/env-validation';

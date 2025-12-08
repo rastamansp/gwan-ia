@@ -6,7 +6,7 @@ const Chatbots = () => {
       name: 'Jaiminho',
       description:
         'Seu médico naturopata, fornecendo informações sobre causas, sintomas e tratamentos naturais para doenças do século XXI.',
-      accent: 'bg-gradient-to-br from-secondary to-secondary/70',
+      accent: 'bg-gradient-to-br from-blue-500 to-blue-600',
       link: '/bot-jaiminho',
     },
     // Temporariamente desabilitado - chatbot indisponível
@@ -29,7 +29,7 @@ const Chatbots = () => {
       name: 'Gwan Mart',
       description:
         'Atendente virtual especializado em e-commerce. Tire dúvidas sobre produtos, pedidos, entrega e muito mais!',
-      accent: 'bg-gradient-to-br from-primary via-secondary to-primary',
+      accent: 'bg-gradient-to-br from-blue-500 to-blue-600',
       link: '/bot-gwan-mart',
     },
     {
@@ -38,6 +38,13 @@ const Chatbots = () => {
         'Assistente virtual especializado em imóveis. Busque propriedades, tire dúvidas sobre compra, venda e aluguel, agende visitas e muito mais!',
       accent: 'bg-gradient-to-br from-blue-500 to-blue-600',
       link: '/bot-gwan-imoveis',
+    },
+    {
+      name: 'Gwan Events',
+      description:
+        'Assistente virtual especializado em eventos. Busque eventos, tire dúvidas sobre inscrições, agendas, programações e muito mais!',
+      accent: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      link: '/bot-gwan-events',
     },
   ];
 
@@ -58,9 +65,9 @@ const Chatbots = () => {
         </div>
 
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl items-stretch">
             {chatbots.map((chatbot, index) => (
-              <div key={index} className="w-full max-w-sm h-full">
+              <div key={index} className="w-full h-full">
                 <ChatbotCard {...chatbot} />
               </div>
             ))}

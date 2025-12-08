@@ -5,6 +5,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_MART_API_URL: string;
   readonly VITE_GWAN_MART_CHAT_URL: string;
   readonly VITE_GWAN_EVENT_URL: string;
+  readonly VITE_GWAN_EVENTS_CHAT_URL: string;
   readonly VITE_GWAN_LEGAL_AI_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
@@ -39,6 +40,11 @@ const env = {
   // Gwan Events URL
   VITE_GWAN_EVENT_URL:
     import.meta.env.VITE_GWAN_EVENT_URL || 'https://events.gwan.com.br/',
+  // Gwan Events Chat URL
+  VITE_GWAN_EVENTS_CHAT_URL:
+    import.meta.env.VITE_GWAN_EVENTS_CHAT_URL ||
+    `${import.meta.env.VITE_GWAN_EVENT_URL || 'https://events.gwan.com.br'}/api` ||
+    'http://localhost:3001/api',
   // Gwan Legal AI URL
   VITE_GWAN_LEGAL_AI_URL:
     import.meta.env.VITE_GWAN_LEGAL_AI_URL || 'https://legal-ai.gwan.com.br/',
