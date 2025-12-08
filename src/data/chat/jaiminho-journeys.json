@@ -1,0 +1,80 @@
+{
+  "journey": [
+    {
+      "name": "1 - Primeira Consulta",
+      "description": "Primeiro contato e entendimento dos sintomas do paciente",
+      "messages": [
+        { "from": "user", "text": "Olá, estou me sentindo mal e gostaria de uma orientação." },
+        { "from": "concierge", "text": "Olá! Seja muito bem-vindo. 😊\n\nSou o Jaiminho, seu assistente de saúde especializado em naturopatia.\n\nEstou aqui para te ajudar com orientações sobre bem-estar e tratamentos naturais.\n\nPara começar, posso saber seu nome?" },
+        { "from": "user", "text": "Claro, meu nome é Maria." },
+        { "from": "concierge", "text": "Ótimo, Maria. Obrigado pela confiança.\n\nFico feliz que tenha nos procurado — muitas pessoas chegam até nós buscando alternativas naturais para cuidar da saúde.\n\nPara começarmos, me diga: o que você está sentindo hoje?\n\nVocê prefere:\n\n1️⃣ Descrever seus sintomas\n\n2️⃣ Falar sobre um problema de saúde específico\n\n3️⃣ Ou prefere que eu te ajude a entender melhor seu estado de saúde?" },
+        { "from": "user", "text": "Acho que preciso descrever meus sintomas." },
+        { "from": "concierge", "text": "Perfeito, Maria.\n\nIsso é muito importante — entender os sintomas é o primeiro passo para um tratamento adequado.\n\nQuando converso com pessoas sobre saúde, normalmente os sintomas podem estar relacionados a:\n\n• Problemas digestivos\n• Dores e desconfortos\n• Ansiedade e estresse\n• Problemas de sono\n• Cansaço e fadiga\n• Outros sintomas\n\nQual dessas categorias melhor descreve o que você está sentindo?" },
+        { "from": "user", "text": "Estou com problemas digestivos." },
+        { "from": "concierge", "text": "Entendi, Maria. Problemas digestivos são muito comuns.\n\nCom base nisso, posso te ajudar com orientações sobre tratamentos naturais e mudanças no estilo de vida que podem melhorar sua digestão.\n\nQuer que eu te ajude com isso?" },
+        { "from": "user", "text": "Sim, por favor." }
+      ]
+    },
+    {
+      "name": "2 - Tratamento de Dor de Barriga",
+      "description": "Diagnóstico e tratamento natural para dor de barriga",
+      "messages": [
+        { "from": "user", "text": "Estou com dor de barriga, o que pode ser?" },
+        { "from": "concierge", "text": "Olá! Entendo que você está com dor de barriga.\n\nVou te ajudar a entender melhor o que pode estar causando isso.\n\nPara te dar as melhores orientações, preciso saber:\n\n• Há quanto tempo você está sentindo essa dor?\n• A dor é constante ou vem e vai?\n• Você sente outros sintomas junto, como náusea ou febre?\n• Você comeu algo diferente recentemente?" },
+        { "from": "user", "text": "A dor começou hoje de manhã, é constante e sinto um pouco de náusea." },
+        { "from": "concierge", "text": "Obrigado pelas informações, isso me ajuda muito.\n\nCom base no que você descreveu, pode ser uma indigestão ou irritação estomacal.\n\nVou te sugerir algumas opções de tratamento natural:\n\n🔹 **Chá de camomila:**\n\n• Acalma o estômago\n• Reduz inflamação\n• Alivia náusea\n\n🔹 **Chá de gengibre:**\n\n• Melhora a digestão\n• Reduz náusea\n• Tem propriedades anti-inflamatórias\n\n🔹 **Repouso e hidratação:**\n\n• Evite alimentos pesados\n• Beba bastante água\n• Descanse\n\nQuer que eu detalhe mais alguma dessas opções?" },
+        { "from": "user", "text": "Sim, quero saber mais sobre o chá de gengibre." },
+        { "from": "concierge", "text": "Excelente escolha!\n\nO chá de gengibre é muito eficaz para problemas digestivos.\n\n**Como preparar:**\n\n• Ferva 200ml de água\n• Adicione 2-3 fatias finas de gengibre fresco\n• Deixe em infusão por 5-10 minutos\n• Coe e beba morno\n\n**Quando tomar:**\n\n• Pode tomar 2-3 vezes ao dia\n• Melhor tomar entre as refeições\n• Evite tomar antes de dormir\n\n**Benefícios:**\n\n• Alivia náusea e vômito\n• Melhora a digestão\n• Reduz inflamação\n• Ajuda com gases\n\nSe a dor persistir por mais de 2 dias ou piorar, recomendo consultar um profissional de saúde." }
+      ]
+    },
+    {
+      "name": "3 - Tratamento de Prisão de Ventre",
+      "description": "Orientações naturais para prisão de ventre",
+      "messages": [
+        { "from": "user", "text": "Como posso tratar prisão de ventre de forma natural?" },
+        { "from": "concierge", "text": "Ótima pergunta! Vou te ajudar com orientações naturais para prisão de ventre.\n\nPara te dar as melhores recomendações, preciso saber:\n\n• Há quanto tempo você está com esse problema?\n• Você já tentou algum tratamento?\n• Sua alimentação é rica em fibras?" },
+        { "from": "user", "text": "Está acontecendo há alguns dias, não tentei nada ainda e minha alimentação não é muito rica em fibras." },
+        { "from": "concierge", "text": "Entendi. Vou te ajudar com algumas soluções naturais.\n\n🔹 **Aumentar ingestão de fibras:**\n\n• Frutas: mamão, ameixa, figo\n• Verduras: espinafre, couve, brócolis\n• Grãos integrais: aveia, quinoa\n• Sementes: linhaça, chia\n\n🔹 **Hidratação:**\n\n• Beba pelo menos 2 litros de água por dia\n• Água morna com limão pela manhã ajuda\n\n🔹 **Chás medicinais:**\n\n• Chá de sene (cuidado: não usar por mais de 7 dias)\n• Chá de dente-de-leão\n• Chá de boldo\n\n🔹 **Atividade física:**\n\n• Caminhadas ajudam o intestino\n• Exercícios leves estimulam o trânsito intestinal\n\nQuer que eu detalhe mais alguma dessas opções?" },
+        { "from": "user", "text": "Sim, quero saber mais sobre os chás." },
+        { "from": "concierge", "text": "Claro! Vou te explicar sobre os chás medicinais.\n\n**Chá de Sene:**\n\n• Muito eficaz para prisão de ventre\n• Use com moderação (máximo 7 dias)\n• Preparo: 1 colher de chá para 200ml de água\n• Tome antes de dormir\n\n**Chá de Dente-de-Leão:**\n\n• Estimula o fígado e intestino\n• Preparo: 1 colher de chá para 200ml de água\n• Pode tomar 2-3 vezes ao dia\n\n**Chá de Boldo:**\n\n• Ajuda na digestão e trânsito intestinal\n• Preparo: 1 colher de chá para 200ml de água\n• Tome após as refeições\n\n**Importante:** Se o problema persistir por mais de uma semana, consulte um profissional de saúde." }
+      ]
+    },
+    {
+      "name": "4 - Ansiedade e Estresse",
+      "description": "Sintomas e tratamentos naturais para ansiedade",
+      "messages": [
+        { "from": "user", "text": "Quais são os sintomas de ansiedade e como tratá-los naturalmente?" },
+        { "from": "concierge", "text": "Excelente pergunta! Vou te ajudar a entender a ansiedade e seus tratamentos naturais.\n\n**Sintomas comuns de ansiedade:**\n\n• Preocupação excessiva\n• Inquietação\n• Dificuldade para dormir\n• Tensão muscular\n• Palpitações\n• Sudorese\n• Dificuldade de concentração\n\nVocê está sentindo algum desses sintomas?" },
+        { "from": "user", "text": "Sim, sinto preocupação excessiva, dificuldade para dormir e tensão muscular." },
+        { "from": "concierge", "text": "Entendo, Maria. Esses são sintomas comuns de ansiedade.\n\nVou te sugerir algumas opções de tratamento natural:\n\n🔹 **Chás calmantes:**\n\n• Chá de camomila (calmante natural)\n• Chá de valeriana (ajuda no sono)\n• Chá de passiflora (reduz ansiedade)\n• Chá de melissa (relaxante)\n\n🔹 **Técnicas de relaxamento:**\n\n• Respiração profunda\n• Meditação\n• Yoga\n• Exercícios físicos leves\n\n🔹 **Mudanças no estilo de vida:**\n\n• Dormir bem (7-8 horas)\n• Alimentação balanceada\n• Reduzir cafeína\n• Evitar álcool\n\nQuer que eu detalhe mais alguma dessas opções?" },
+        { "from": "user", "text": "Sim, quero saber mais sobre os chás calmantes." },
+        { "from": "concierge", "text": "Perfeito! Os chás calmantes são muito eficazes.\n\n**Chá de Camomila:**\n\n• Preparo: 1 colher de chá para 200ml de água\n• Tome 2-3 vezes ao dia\n• Melhor tomar antes de dormir\n• Acalma e relaxa\n\n**Chá de Valeriana:**\n\n• Preparo: 1 colher de chá para 200ml de água\n• Tome antes de dormir\n• Ajuda com insônia\n• Reduz ansiedade\n\n**Chá de Passiflora:**\n\n• Preparo: 1 colher de chá para 200ml de água\n• Pode tomar 2-3 vezes ao dia\n• Reduz ansiedade e estresse\n• Melhora o sono\n\n**Chá de Melissa:**\n\n• Preparo: 1 colher de chá para 200ml de água\n• Tome quando sentir ansiedade\n• Relaxa e acalma\n• Melhora o humor\n\nLembre-se: se os sintomas persistirem ou piorarem, é importante consultar um profissional de saúde." }
+      ]
+    },
+    {
+      "name": "5 - Dores de Cabeça",
+      "description": "Causas e chás medicinais para dores de cabeça",
+      "messages": [
+        { "from": "user", "text": "Qual o melhor chá para dores de cabeça?" },
+        { "from": "concierge", "text": "Ótima pergunta! Vou te ajudar com opções de chás para dores de cabeça.\n\nPara te dar a melhor recomendação, preciso saber:\n\n• A dor é constante ou latejante?\n• Você sente a dor em que parte da cabeça?\n• A dor começou há quanto tempo?\n• Você tem outros sintomas, como náusea ou sensibilidade à luz?" },
+        { "from": "user", "text": "A dor é latejante, está na testa e começou há algumas horas. Não tenho outros sintomas." },
+        { "from": "concierge", "text": "Entendi. Com base no que você descreveu, pode ser uma dor de cabeça tensional.\n\nVou te sugerir alguns chás medicinais eficazes:\n\n🔹 **Chá de hortelã:**\n\n• Alivia dores de cabeça\n• Tem efeito refrescante\n• Reduz tensão\n\n🔹 **Chá de gengibre:**\n\n• Anti-inflamatório natural\n• Reduz dor e inflamação\n• Melhora circulação\n\n🔹 **Chá de camomila:**\n\n• Calmante e relaxante\n• Reduz tensão muscular\n• Ajuda com dores de cabeça por estresse\n\n🔹 **Chá de erva-cidreira:**\n\n• Relaxante\n• Alivia tensão\n• Melhora o bem-estar\n\nQuer que eu detalhe como preparar algum desses chás?" },
+        { "from": "user", "text": "Sim, quero saber como preparar o chá de hortelã." },
+        { "from": "concierge", "text": "Perfeito! O chá de hortelã é excelente para dores de cabeça.\n\n**Como preparar:**\n\n• Ferva 200ml de água\n• Adicione 1 colher de sopa de folhas frescas de hortelã (ou 1 colher de chá de hortelã seca)\n• Deixe em infusão por 5-10 minutos\n• Coe e beba morno\n\n**Quando tomar:**\n\n• Pode tomar quando sentir a dor\n• Pode tomar 2-3 vezes ao dia se necessário\n• Melhor tomar morno ou quente\n\n**Benefícios:**\n\n• Alivia dores de cabeça\n• Tem efeito refrescante e calmante\n• Reduz tensão muscular\n• Melhora a circulação\n\n**Dica extra:** Você também pode aplicar compressas de hortelã na testa para alívio imediato.\n\nSe a dor persistir por mais de 2 dias ou piorar, recomendo consultar um profissional de saúde." }
+      ]
+    },
+    {
+      "name": "6 - Bem-estar Geral",
+      "description": "Dicas de estilo de vida saudável",
+      "messages": [
+        { "from": "user", "text": "Gostaria de dicas para ter uma vida mais saudável." },
+        { "from": "concierge", "text": "Excelente! Vou te ajudar com dicas para uma vida mais saudável.\n\nPara te dar orientações mais personalizadas, me diga:\n\n• Você pratica alguma atividade física regularmente?\n• Como está sua alimentação?\n• Você tem alguma rotina de sono estabelecida?\n• Você sente algum problema de saúde específico?" },
+        { "from": "user", "text": "Não pratico atividade física regularmente, minha alimentação poderia ser melhor e não tenho uma rotina de sono muito boa." },
+        { "from": "concierge", "text": "Obrigado por compartilhar, Maria. Isso me ajuda muito.\n\nVou te dar algumas dicas práticas para melhorar seu bem-estar:\n\n🔹 **Alimentação Saudável:**\n\n• Consuma mais frutas e verduras\n• Beba bastante água (2-3 litros por dia)\n• Reduza alimentos processados\n• Prefira alimentos naturais e integrais\n• Faça refeições em horários regulares\n\n🔹 **Atividade Física:**\n\n• Comece com caminhadas de 30 minutos, 3 vezes por semana\n• Pratique exercícios que você goste\n• Aumente gradualmente a intensidade\n• Exercícios ao ar livre são ainda melhores\n\n🔹 **Sono de Qualidade:**\n\n• Durma 7-8 horas por noite\n• Estabeleça um horário fixo para dormir\n• Evite telas antes de dormir\n• Crie um ambiente tranquilo no quarto\n• Chás calmantes antes de dormir ajudam\n\nQuer que eu detalhe mais alguma dessas áreas?" },
+        { "from": "user", "text": "Sim, quero saber mais sobre alimentação saudável." },
+        { "from": "concierge", "text": "Perfeito! A alimentação é fundamental para o bem-estar.\n\n**Princípios de uma alimentação saudável:**\n\n🔹 **Variedade:**\n\n• Consuma diferentes tipos de alimentos\n• Inclua frutas, verduras, grãos, proteínas\n• Varie as cores no prato\n\n🔹 **Equilíbrio:**\n\n• Não pule refeições\n• Faça 3 refeições principais + 2 lanches\n• Evite exageros\n\n🔹 **Naturalidade:**\n\n• Prefira alimentos naturais\n• Evite alimentos ultraprocessados\n• Leia os rótulos dos alimentos\n\n🔹 **Hidratação:**\n\n• Beba água regularmente\n• Evite bebidas açucaradas\n• Chás naturais são ótimos\n\n**Exemplo de prato saudável:**\n\n• 50% do prato: verduras e legumes\n• 25% do prato: proteína (carne, peixe, ovos, leguminosas)\n• 25% do prato: carboidratos (arroz, batata, quinoa)\n\nLembre-se: mudanças graduais são mais sustentáveis do que mudanças radicais!" }
+      ]
+    }
+  ]
+}
+

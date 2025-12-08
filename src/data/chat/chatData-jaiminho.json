@@ -1,0 +1,82 @@
+{
+  "conversation": {
+    "participants": {
+      "mentor": {
+        "name": "Jaiminho",
+        "avatar": "🌿",
+        "role": "Assistente de Saúde"
+      },
+      "mentee": {
+        "name": "Você",
+        "avatar": "👤",
+        "role": "Usuário"
+      }
+    },
+    "messages": [
+      {
+        "id": 1,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Olá! Bem-vindo ao Jaiminho. Como posso ajudar você hoje?",
+        "timestamp": "10:30"
+      },
+      {
+        "id": 2,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Oi! Estou me sentindo um pouco indisposto e gostaria de uma orientação.",
+        "timestamp": "10:32"
+      },
+      {
+        "id": 3,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Entendo. Vou te ajudar com orientações sobre bem-estar e tratamentos naturais. Para começar, me diga: o que você está sentindo?",
+        "timestamp": "10:33"
+      },
+      {
+        "id": 4,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Estou com uma dor de cabeça e me sinto um pouco cansado.",
+        "timestamp": "10:35"
+      },
+      {
+        "id": 5,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Compreendo. Dor de cabeça e cansaço podem estar relacionados a várias causas. Você tem dormido bem ultimamente?",
+        "timestamp": "10:36"
+      },
+      {
+        "id": 6,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Não muito, tenho tido dificuldade para dormir.",
+        "timestamp": "10:38"
+      },
+      {
+        "id": 7,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Entendi. A falta de sono pode estar causando esses sintomas. Vou te sugerir algumas opções naturais para melhorar o sono e aliviar a dor de cabeça.",
+        "timestamp": "10:39"
+      },
+      {
+        "id": 8,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Isso seria ótimo! Quais são as opções?",
+        "timestamp": "10:40"
+      },
+      {
+        "id": 9,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Para o sono, recomendo chá de camomila ou valeriana antes de dormir. Para a dor de cabeça, chá de hortelã ou gengibre pode ajudar. Quer que eu detalhe como preparar algum desses chás?",
+        "timestamp": "10:42"
+      }
+    ]
+  }
+}
+
