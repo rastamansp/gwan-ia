@@ -1,0 +1,75 @@
+{
+  "journey": [
+    {
+      "name": "1 - Busca de Imóveis",
+      "description": "Primeiro contato e entendimento das necessidades do cliente",
+      "messages": [
+        { "from": "user", "text": "Olá, estou procurando um imóvel para comprar." },
+        { "from": "concierge", "text": "Olá! Seja muito bem-vindo ao Gwan Imóveis. 😊\n\nÉ um prazer enorme falar com você.\n\nAqui você encontra os melhores imóveis e posso te ajudar a encontrar a propriedade ideal.\n\nPara deixar sua busca mais personalizada, posso saber seu nome?" },
+        { "from": "user", "text": "Claro, meu nome é Ana." },
+        { "from": "concierge", "text": "Ótimo, Ana. Obrigado pela confiança.\n\nFico feliz que tenha nos procurado — muitas pessoas chegam até nós buscando o imóvel perfeito.\n\nPara começarmos, me diga: o que você busca hoje?\n\nVocê prefere:\n\n1️⃣ Ver imóveis disponíveis para compra\n\n2️⃣ Saber mais sobre financiamento\n\n3️⃣ Ou prefere que eu te ajude a encontrar imóveis do seu interesse?" },
+        { "from": "user", "text": "Acho que preciso de ajuda para encontrar imóveis do meu interesse." },
+        { "from": "concierge", "text": "Perfeito, Ana.\n\nIsso é mais comum do que imagina — e é exatamente por isso que existe o Gwan Imóveis.\n\nQuando converso com pessoas que buscam imóveis, normalmente as necessidades caem em algumas categorias:\n\n• Apartamentos\n• Casas\n• Terrenos\n• Comércio\n• Aluguel\n• Compra\n\nQual dessas opções te representa hoje?" },
+        { "from": "user", "text": "Estou procurando um apartamento para comprar." },
+        { "from": "concierge", "text": "Excelente, Ana. Já estamos no caminho certo.\n\nCom base nisso, posso te mostrar os melhores apartamentos disponíveis e ajudar você a escolher o imóvel ideal.\n\nQuer que eu faça isso?" },
+        { "from": "user", "text": "Sim, por favor." }
+      ]
+    },
+    {
+      "name": "2 - Agendamento de Visita",
+      "description": "Processo de agendamento de visita ao imóvel",
+      "messages": [
+        { "from": "concierge", "text": "Ana, encontrei alguns apartamentos que podem te interessar.\n\nCom base no seu perfil, recomendo os seguintes imóveis:\n\n🔹 Apartamento recomendado:\n\nApartamento 3 quartos - Centro\n\n✔ 120m²\n✔ 2 vagas de garagem\n✔ Localização privilegiada\n✔ Pronto para morar\n\n🔹 Outras opções:\n\n• Apartamento 2 quartos - Zona Sul\n• Apartamento 4 quartos - Zona Norte\n• Apartamento com varanda - Centro\n\nEsses imóveis costumam ter ótima aceitação entre quem busca apartamentos.\n\nVocê gostaria de agendar uma visita?" },
+        { "from": "user", "text": "Sim, quero agendar uma visita para o apartamento de 3 quartos." },
+        { "from": "concierge", "text": "Excelente escolha.\n\nPara agendar a visita, preciso saber sua disponibilidade.\n\nVocê prefere:\n\n• Manhã (9h às 12h)\n• Tarde (14h às 18h)\n• Finais de semana" },
+        { "from": "user", "text": "Prefiro tarde, durante a semana." },
+        { "from": "concierge", "text": "Perfeito! Vou verificar a disponibilidade.\n\n⏳ 1 minuto depois\n\nÓtima notícia: temos disponibilidade na quinta-feira às 15h ou na sexta-feira às 16h.\n\nQual horário prefere?" },
+        { "from": "user", "text": "Quinta-feira às 15h está perfeito." },
+        { "from": "concierge", "text": "Ótimo, visita agendada! ✔️\n\nAqui estão os detalhes:\n\n📅 Data: Quinta-feira\n🕐 Horário: 15h\n📍 Endereço: Rua Exemplo, 123 - Centro\n\nTambém enviei para o seu e-mail todas as informações e o contato do corretor.\n\nSe precisar de mais alguma coisa, é só me chamar por aqui. Estou à disposição." }
+      ]
+    },
+    {
+      "name": "3 - Informações sobre Financiamento",
+      "description": "Esclarecimento de dúvidas sobre financiamento imobiliário",
+      "messages": [
+        { "from": "user", "text": "Gostaria de saber mais sobre financiamento." },
+        { "from": "concierge", "text": "Claro! Vou te ajudar com informações sobre financiamento imobiliário.\n\nPara te dar as melhores opções, preciso saber:\n\n• Qual o valor do imóvel que você está interessado?\n• Você já tem entrada?\n• Qual sua faixa de renda?" },
+        { "from": "user", "text": "O imóvel custa R$ 500.000, tenho R$ 100.000 de entrada e minha renda é de R$ 15.000 por mês." },
+        { "from": "concierge", "text": "Perfeito! Com essas informações, posso te ajudar.\n\nCom entrada de R$ 100.000 (20%) e renda de R$ 15.000, você tem algumas opções:\n\n🔹 Financiamento pelo SFH (Sistema Financeiro da Habitação):\n\n• Taxa: A partir de 8,5% ao ano\n• Prazo: Até 35 anos\n• Valor financiado: R$ 400.000\n• Parcela estimada: R$ 2.800/mês\n\n🔹 Financiamento pela Caixa:\n\n• Taxa: A partir de 8,0% ao ano\n• Prazo: Até 30 anos\n• Parcela estimada: R$ 2.650/mês\n\nQuer que eu detalhe mais alguma opção?" },
+        { "from": "user", "text": "Sim, quero saber mais sobre o financiamento pela Caixa." },
+        { "from": "concierge", "text": "Excelente escolha.\n\nPara o financiamento pela Caixa, você precisará:\n\n• Comprovar renda (últimos 3 meses)\n• CPF e RG\n• Comprovante de residência\n• Comprovante de entrada\n• Documentação do imóvel\n\nA aprovação costuma levar de 15 a 30 dias.\n\nQuer que eu te ajude a iniciar o processo?" }
+      ]
+    },
+    {
+      "name": "4 - Documentação",
+      "description": "Esclarecimento sobre documentos necessários",
+      "messages": [
+        { "from": "user", "text": "Quais documentos são necessários para comprar um imóvel?" },
+        { "from": "concierge", "text": "Ótima pergunta! Vou te listar todos os documentos necessários para a compra de um imóvel.\n\n📋 Documentos do Comprador:\n\n• RG e CPF (cópias autenticadas)\n• Comprovante de residência\n• Comprovante de renda (últimos 3 meses)\n• Certidão de casamento (se casado)\n• Certidão de nascimento dos filhos (se houver)\n• Comprovante de entrada\n\n📋 Documentos do Imóvel:\n\n• Matrícula atualizada do imóvel\n• Certidão de ônus e ações\n• IPTU atualizado\n• Habite-se (se for construção nova)\n\nQuer que eu detalhe algum documento específico?" },
+        { "from": "user", "text": "O que é a matrícula do imóvel?" },
+        { "from": "concierge", "text": "A matrícula do imóvel é o documento que comprova a propriedade do bem.\n\nEla contém:\n\n• Histórico completo do imóvel\n• Proprietários anteriores\n• Ônus e gravames\n• Área e localização\n• Descrição completa do imóvel\n\nÉ emitida pelo Cartório de Registro de Imóveis e deve estar atualizada (últimos 30 dias).\n\nÉ um documento essencial para garantir que você está comprando um imóvel sem problemas legais." }
+      ]
+    },
+    {
+      "name": "5 - Características do Imóvel",
+      "description": "Detalhamento das características de uma propriedade",
+      "messages": [
+        { "from": "user", "text": "Quero saber mais detalhes sobre o apartamento de 3 quartos." },
+        { "from": "concierge", "text": "Claro! Vou te passar todos os detalhes do apartamento de 3 quartos no Centro.\n\n🏠 Características do Imóvel:\n\n• Área total: 120m²\n• Área privativa: 95m²\n• 3 quartos (1 suíte)\n• 2 banheiros\n• Sala de estar e jantar integradas\n• Cozinha planejada\n• Varanda\n• 2 vagas de garagem cobertas\n• Depósito\n\n🏢 Condomínio:\n\n• Portaria 24h\n• Academia\n• Piscina\n• Salão de festas\n• Playground\n• Área de churrasqueira\n\n💰 Valores:\n\n• Preço: R$ 500.000\n• Condomínio: R$ 800/mês\n• IPTU: R$ 350/mês\n\nQuer saber mais sobre algum aspecto específico?" },
+        { "from": "user", "text": "O apartamento está em bom estado? Precisa de reforma?" },
+        { "from": "concierge", "text": "Ótima pergunta!\n\nO apartamento está em excelente estado de conservação:\n\n✔ Pintura recente\n✔ Piso em ótimo estado\n✔ Instalações elétricas e hidráulicas revisadas\n✔ Portas e janelas em perfeito estado\n✔ Pronto para morar\n\nNão é necessária nenhuma reforma urgente. O imóvel está completamente habitável e bem cuidado.\n\nDurante a visita, você poderá verificar pessoalmente todos esses detalhes." }
+      ]
+    },
+    {
+      "name": "6 - Processo de Compra/Venda",
+      "description": "Etapas do processo de compra e venda de imóvel",
+      "messages": [
+        { "from": "user", "text": "Como funciona o processo de compra do imóvel?" },
+        { "from": "concierge", "text": "Ótima pergunta! Vou te explicar todo o processo de compra de imóvel.\n\n📋 Etapas do Processo:\n\n1️⃣ **Negociação e Proposta**\n• Definição do valor\n• Condições de pagamento\n• Prazo de entrega\n\n2️⃣ **Documentação**\n• Reunião de todos os documentos\n• Análise da documentação do imóvel\n• Verificação de pendências\n\n3️⃣ **Contrato de Compra e Venda**\n• Elaboração do contrato\n• Assinatura pelas partes\n• Registro do contrato\n\n4️⃣ **Financiamento (se aplicável)**\n• Aprovação do financiamento\n• Liberação do crédito\n\n5️⃣ **Escritura e Registro**\n• Escritura pública\n• Registro no cartório\n• Transferência de propriedade\n\nQuer que eu detalhe alguma etapa específica?" },
+        { "from": "user", "text": "Quanto tempo leva todo o processo?" },
+        { "from": "concierge", "text": "O tempo total do processo varia conforme algumas situações:\n\n⏱️ **Com Financiamento:**\n• Negociação: 1-2 semanas\n• Aprovação do financiamento: 15-30 dias\n• Escritura e registro: 10-15 dias\n• **Total: 2 a 3 meses**\n\n⏱️ **À Vista ou com Entrada Alta:**\n• Negociação: 1 semana\n• Documentação: 1 semana\n• Escritura e registro: 10-15 dias\n• **Total: 1 a 2 meses**\n\nO processo pode ser mais rápido se toda a documentação estiver em ordem desde o início.\n\nPosso te ajudar a organizar a documentação para agilizar o processo?" }
+      ]
+    }
+  ]
+}
+
