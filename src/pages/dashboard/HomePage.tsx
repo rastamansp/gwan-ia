@@ -69,20 +69,11 @@ const HomePage: React.FC = () => {
                         - Plataforma de eventos
                       </li>
                       <li>
-                        <Link
-                          to="/gwan-legal"
-                          className="text-primary hover:underline"
-                        >
-                          ⚖️ Gwan Legal
-                        </Link>{' '}
-                        - Automação jurídica
-                      </li>
-                      <li>
                         <span className="font-medium text-primary">
                           🤖 Chatbots
                         </span>{' '}
-                        - Menu dropdown com nossos chatbots (Jaiminho, Marley,
-                        Gwan, Gwan Mart, Bíblia)
+                        - Menu dropdown com nossos chatbots (Jaiminho, Gwan Mart,
+                        Gwan Imóveis, Gwan Events)
                       </li>
                       <li>
                         <Link
@@ -105,16 +96,18 @@ const HomePage: React.FC = () => {
                         Chatbot naturopata especializado em tratamentos naturais
                       </li>
                       <li>
-                        <span className="font-medium">🎵 Marley</span> - Chatbot
-                        sobre a carreira do Junior Dread e informações musicais
-                      </li>
-                      <li>
-                        <span className="font-medium">🏢 Gwan</span> - Chatbot
-                        institucional com informações sobre nossa empresa
-                      </li>
-                      <li>
                         <span className="font-medium">🛒 Gwan Mart</span> -
                         Atendente virtual especializado em e-commerce
+                      </li>
+                      <li>
+                        <span className="font-medium">🏠 Gwan Imóveis</span> -
+                        Assistente virtual especializado em imóveis. Busque
+                        propriedades, tire dúvidas sobre compra, venda e aluguel
+                      </li>
+                      <li>
+                        <span className="font-medium">📅 Gwan Events</span> -
+                        Assistente virtual especializado em eventos. Busque
+                        eventos, tire dúvidas sobre inscrições e programações
                       </li>
                     </ul>
                   </div>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowLeft, MoreVertical, Phone, Video } from 'lucide-react';
 
 interface WhatsAppHeaderProps {
