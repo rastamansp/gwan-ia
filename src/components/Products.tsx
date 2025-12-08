@@ -30,7 +30,7 @@ const Products = () => {
       ],
       link: '/gwan-events',
       icon: Calendar,
-      gradient: 'from-secondary to-secondary/70',
+      gradient: 'from-purple-500 to-purple-600',
     },
     // Temporariamente desabilitado - produto indisponível
     // {

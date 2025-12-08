@@ -19,7 +19,7 @@ interface ChatbotCardProps {
 const ChatbotCard = ({ name, description, accent, link }: ChatbotCardProps) => {
   return (
     <Card className="group hover:shadow-hover transition-all duration-300 border-2 hover:border-primary/50 bg-card/50 backdrop-blur-sm flex flex-col h-full">
-      <CardHeader>
+      <CardHeader className="flex-shrink-0">
         <div className="flex items-center gap-4 mb-2">
           <div
             className={`w-12 h-12 rounded-xl ${accent} flex items-center justify-center group-hover:scale-110 transition-transform`}
@@ -32,7 +32,7 @@ const ChatbotCard = ({ name, description, accent, link }: ChatbotCardProps) => {
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow flex flex-col justify-end mt-auto">
+      <CardContent className="flex-grow flex flex-col justify-end pt-6">
         <Button variant="outline" className="w-full group/btn" asChild>
           <Link to={link}>
             Experimentar
