@@ -24,4 +24,74 @@ export default defineConfig({
     open: true,
     host: true,
   },
+  build: {
+    // Aumenta o limite de aviso para 600KB (opcional, mas ajuda a reduzir avisos)
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        // Code-splitting manual para otimizar o tamanho dos chunks
+        manualChunks: (id) => {
+          // React e React DOM
+          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+            return 'react-vendor';
+          }
+
+          // React Router
+          if (id.includes('node_modules/react-router')) {
+            return 'react-router-vendor';
+          }
+
+          // Radix UI components
+          if (id.includes('node_modules/@radix-ui')) {
+            return 'radix-ui-vendor';
+          }
+
+          // Lucide React (ícones)
+          if (id.includes('node_modules/lucide-react')) {
+            return 'lucide-vendor';
+          }
+
+          // OpenTelemetry (monitoramento)
+          if (id.includes('node_modules/@opentelemetry')) {
+            return 'opentelemetry-vendor';
+          }
+
+          // Axios e outras bibliotecas HTTP
+          if (id.includes('node_modules/axios')) {
+            return 'http-vendor';
+          }
+
+          // Lodash
+          if (id.includes('node_modules/lodash')) {
+            return 'lodash-vendor';
+          }
+
+          // React Markdown
+          if (id.includes('node_modules/react-markdown')) {
+            return 'markdown-vendor';
+          }
+
+          // React Hot Toast
+          if (id.includes('node_modules/react-hot-toast')) {
+            return 'toast-vendor';
+          }
+
+          // Date-fns
+          if (id.includes('node_modules/date-fns')) {
+            return 'date-vendor';
+          }
+
+          // Zustand
+          if (id.includes('node_modules/zustand')) {
+            return 'zustand-vendor';
+          }
+
+          // Outras dependências do node_modules
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 });

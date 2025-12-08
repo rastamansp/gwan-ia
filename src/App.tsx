@@ -1,52 +1,60 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
-// Imports organizados por categoria
-import {
-  HomePage,
-  DashboardPage,
-  AuthPage,
-  RegisterPage,
-  VerifyLoginPage,
-  VerifyAccountPage,
-  GwanMartPage,
-  CatalogPage,
-  ProductPage,
-  MinhaIAPage,
-  IAImagensPage,
-  IATextoPage,
-  IAVideoPage,
-  IAAudioPage,
-  ChatbotsPage,
-  BotJaiminhoPage,
-  BotMarleyPage,
-  BotGwanPage,
-  BotGwanMartPage,
-  BotGwanImoveisPage,
-  BotGwanEventsPage,
-  BibleChatbotPage,
-  DebugPage,
-  ThemePage,
-  MartAdminPage,
-  EditProductPage,
-  AssistentesPage,
-  PromptsPage,
-  BibliotecaPage,
-  TraducoesPage,
-  EventsPage,
-  LegalPage,
-  ImoveisPage,
-} from './pages';
+// Imports críticos (carregados imediatamente)
+import { HomePage, AuthPage, RegisterPage, VerifyLoginPage, VerifyAccountPage } from './pages';
+
+// Lazy loading para páginas menos críticas (code-splitting)
+const DashboardPage = lazy(() => import('./pages/dashboard/DashboardPage'));
+const GwanMartPage = lazy(() => import('./pages/gwan-mart/GwanMartPage'));
+const CatalogPage = lazy(() => import('./pages/gwan-mart/CatalogPage'));
+const ProductPage = lazy(() => import('./pages/gwan-mart/ProductPage'));
+const MinhaIAPage = lazy(() => import('./pages/ia/MinhaIAPage'));
+const IAImagensPage = lazy(() => import('./pages/ia/IAImagensPage'));
+const IATextoPage = lazy(() => import('./pages/ia/IATextoPage'));
+const IAVideoPage = lazy(() => import('./pages/ia/IAVideoPage'));
+const IAAudioPage = lazy(() => import('./pages/ia/IAAudioPage'));
+const ChatbotsPage = lazy(() => import('./pages/bots/ChatbotsPage'));
+const BotJaiminhoPage = lazy(() => import('./pages/bots/BotJaiminhoPage'));
+const BotMarleyPage = lazy(() => import('./pages/bots/BotMarleyPage'));
+const BotGwanPage = lazy(() => import('./pages/bots/BotGwanPage'));
+const BotGwanMartPage = lazy(() => import('./pages/bots/BotGwanMartPage'));
+const BotGwanImoveisPage = lazy(() => import('./pages/bots/BotGwanImoveisPage'));
+const BotGwanEventsPage = lazy(() => import('./pages/bots/BotGwanEventsPage'));
+const BibleChatbotPage = lazy(() => import('./pages/bots/BibleChatbotPage'));
+const DebugPage = lazy(() => import('./pages/admin/DebugPage'));
+const ThemePage = lazy(() => import('./pages/admin/ThemePage'));
+const MartAdminPage = lazy(() => import('./pages/admin/MartAdminPage'));
+const EditProductPage = lazy(() => import('./pages/admin/EditProductPage'));
+const AssistentesPage = lazy(() => import('./pages/AssistentesPage'));
+const PromptsPage = lazy(() => import('./pages/PromptsPage'));
+const BibliotecaPage = lazy(() => import('./pages/BibliotecaPage'));
+const TraducoesPage = lazy(() => import('./pages/TraducoesPage'));
+const EventsPage = lazy(() => import('./pages/EventsPage'));
+const LegalPage = lazy(() => import('./pages/LegalPage'));
+const ImoveisPage = lazy(() => import('./pages/ImoveisPage'));
+
+// Componente de loading para Suspense
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+      <p className="text-muted-foreground">Carregando...</p>
+    </div>
+  </div>
+);
 
 function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <Toaster position="top-right" />
-        <Routes>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/gwan-events" element={<EventsPage />} />
           <Route path="/gwan-legal" element={<LegalPage />} />
@@ -184,7 +192,8 @@ function App() {
               </ProtectedRoute>
             }
           />
-        </Routes>
+          </Routes>
+        </Suspense>
       </AuthProvider>
     </ThemeProvider>
   );
