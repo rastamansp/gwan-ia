@@ -1,0 +1,82 @@
+{
+  "conversation": {
+    "participants": {
+      "mentor": {
+        "name": "Gwan Imóveis",
+        "avatar": "🏠",
+        "role": "Assistente"
+      },
+      "mentee": {
+        "name": "Você",
+        "avatar": "👤",
+        "role": "Usuário"
+      }
+    },
+    "messages": [
+      {
+        "id": 1,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Olá! Bem-vindo ao Gwan Imóveis. Como posso ajudar você hoje?",
+        "timestamp": "10:30"
+      },
+      {
+        "id": 2,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Oi! Estou procurando um apartamento para comprar.",
+        "timestamp": "10:32"
+      },
+      {
+        "id": 3,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Perfeito! Vou te ajudar a encontrar o apartamento ideal. Para começar, me diga: qual região você prefere?",
+        "timestamp": "10:33"
+      },
+      {
+        "id": 4,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Prefiro algo no centro ou zona sul.",
+        "timestamp": "10:35"
+      },
+      {
+        "id": 5,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Ótima escolha! Essas são regiões muito procuradas. Quantos quartos você precisa?",
+        "timestamp": "10:36"
+      },
+      {
+        "id": 6,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Preciso de pelo menos 2 quartos.",
+        "timestamp": "10:38"
+      },
+      {
+        "id": 7,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Perfeito! Com base no que você me disse, tenho algumas opções excelentes para você. Quer que eu mostre os imóveis disponíveis?",
+        "timestamp": "10:39"
+      },
+      {
+        "id": 8,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Sim, por favor!",
+        "timestamp": "10:40"
+      },
+      {
+        "id": 9,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Ótimo! Vou preparar uma seleção especial para você. Enquanto isso, você tem alguma preferência sobre garagem, área de lazer ou outros detalhes?",
+        "timestamp": "10:42"
+      }
+    ]
+  }
+}
+

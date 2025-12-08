@@ -18,11 +18,30 @@ interface JourneyMessage {
   events?: EventItem[];
 }
 
+export interface ChatData {
+  conversation: {
+    participants: {
+      mentor: {
+        name: string;
+        avatar: string;
+        role: string;
+      };
+      mentee: {
+        name: string;
+        avatar: string;
+        role: string;
+      };
+    };
+    messages: JourneyMessage[];
+  };
+}
+
 interface ChatInterfaceProps {
   journeyMessages?: ConvertedMessage[];
   headerName?: string;
   headerAvatar?: string;
   chatRepository: IChatRepository;
+  defaultChatData?: ChatData;
 }
 
 export const ChatInterface = ({
@@ -30,10 +49,12 @@ export const ChatInterface = ({
   headerName,
   headerAvatar,
   chatRepository,
+  defaultChatData,
 }: ChatInterfaceProps) => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const messagesRef = useRef<JourneyMessage[]>([]);
-  const { conversation } = chatData;
+  const chatDataToUse = defaultChatData || chatData;
+  const { conversation } = chatDataToUse;
   const [visibleMessagesCount, setVisibleMessagesCount] = useState(0);
   const messagesKeyRef = useRef<string>('');
   const [inputValue, setInputValue] = useState('');

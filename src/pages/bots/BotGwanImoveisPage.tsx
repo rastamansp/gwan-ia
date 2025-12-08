@@ -6,6 +6,8 @@ import { useImoveisInteractions } from '../../application/chat/useImoveisInterac
 import { ChatRepository } from '../../infrastructure/chat/ChatRepository';
 import { createEventsHttpClient } from '../../infrastructure/http/eventsHttpClient';
 import Header from '../../components/layout/Header';
+import imoveisChatDataRaw from '../../data/chat/chatData-imoveis.json';
+import type { ChatData } from '../../presentation/chatbot-showcase/ChatInterface';
 import type { Journey } from '../../domain/chat/types';
 
 const BotGwanImoveisPage = () => {
@@ -15,7 +17,7 @@ const BotGwanImoveisPage = () => {
 
   // Criar instância do repository com HTTP client configurado
   // Usando o endpoint atual de imóveis
-  const httpClient = createEventsHttpClient('https://api-events.gwan.com.br/ap/api');
+  const httpClient = createEventsHttpClient('https://api-imoveis.gwan.com.br/api');
   const chatRepository = new ChatRepository(httpClient);
 
   const handleSelectJourney = (journey: Journey) => {
@@ -107,6 +109,7 @@ const BotGwanImoveisPage = () => {
                 headerName={headerName}
                 headerAvatar={headerAvatar}
                 chatRepository={chatRepository}
+                defaultChatData={imoveisChatDataRaw as ChatData}
               />
             </PhoneMockup>
           </div>
