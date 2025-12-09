@@ -56,7 +56,7 @@ const env = {
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||
-    'http://localhost:3001/api/chat-health',
+    'http://localhost:3010/api/chat-health',
   // Environment
   NODE_ENV: import.meta.env.MODE || 'development',
   IS_DEV: import.meta.env.DEV || false,

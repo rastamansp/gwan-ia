@@ -24,10 +24,13 @@ const BotJaiminhoPage = () => {
   const httpClient = createEventsHttpClient(healthApiUrl);
   
   // Criar repository customizado que usa /chat-health em vez de /chat
+  // E converte "message" para "query" no payload
   const chatRepository = new (class extends ChatRepository {
     async sendMessage(data: SendMessageRequest): Promise<SendMessageResponse> {
       try {
-        const response = await httpClient.post('/chat-health', data);
+        // Converter "message" para "query" conforme esperado pelo endpoint /chat-health
+        const payload = { query: data.message };
+        const response = await httpClient.post('/chat-health', payload);
         return response.data;
       } catch (error) {
         if (axios.isAxiosError(error)) {
