@@ -6,7 +6,6 @@ import { useMartInteractions } from '../../application/chat/useMartInteractions'
 import { ChatRepository } from '../../infrastructure/chat/ChatRepository';
 import { createEventsHttpClient } from '../../infrastructure/http/eventsHttpClient';
 import Header from '../../components/layout/Header';
-import env from '../../config/env';
 import martChatDataRaw from '../../data/chat/chatData-mart.json';
 import type { ChatData } from '../../presentation/chatbot-showcase/ChatInterface';
 import type { Journey } from '../../domain/chat/types';
@@ -19,7 +18,9 @@ const BotGwanMartPage = () => {
   // Criar instância do repository com HTTP client configurado
   // Usando a variável de ambiente para o endpoint do Gwan Mart
   // Força o uso da URL de produção mesmo em desenvolvimento local
-  const martChatUrl = import.meta.env.VITE_GWAN_MART_CHAT_URL || 'https://api-mart.gwan.com.br/api';
+  const martChatUrl =
+    import.meta.env.VITE_GWAN_MART_CHAT_URL ||
+    'https://api-mart.gwan.com.br/api';
   const httpClient = createEventsHttpClient(martChatUrl);
   const chatRepository = new ChatRepository(httpClient);
 
@@ -34,9 +35,7 @@ const BotGwanMartPage = () => {
   const journeyMessages = selectedJourney
     ? convertJourneyToMessages(selectedJourney)
     : undefined;
-  const headerName = selectedJourney
-    ? 'Gwan Mart — Assistente'
-    : undefined;
+  const headerName = selectedJourney ? 'Gwan Mart — Assistente' : undefined;
   const headerAvatar = selectedJourney ? '🛒' : undefined;
 
   return (

@@ -1,17 +1,14 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
 echo "🔍 Executando validações antes do commit..."
 
 # Executar lint-staged
-pnpm lint-staged
+npx lint-staged
 
 # Verificar se há erros de TypeScript
 echo "📝 Verificando tipos TypeScript..."
-pnpm type-check
+npm run type-check
 
 # Verificar se o build funciona
 echo "🏗️ Verificando build..."
-pnpm build
+npm run build
 
 echo "✅ Todas as validações passaram! Commit permitido."
