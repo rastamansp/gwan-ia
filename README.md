@@ -245,6 +245,25 @@ http://localhost:8080
 - **`env.production`** - Variáveis de ambiente de produção
 - **`MONITORING.md`** - Configuração de monitoramento APM
 
+## 📚 Documentação
+
+### Casos de Uso dos Chatbots
+
+A documentação completa de casos de uso dos chatbots está disponível em [`doc/use-cases/`](./doc/use-cases/README.md).
+
+Cada chatbot possui documentação detalhada incluindo:
+- Jornadas de conversação
+- Diagramas Mermaid (flowchart e sequence)
+- Casos de uso detalhados
+- Integrações e endpoints
+- Componentes visuais
+
+**Chatbots documentados:**
+- [Gwan Mart](./doc/use-cases/gwan-mart.md) - E-commerce
+- [Gwan Imóveis](./doc/use-cases/gwan-imoveis.md) - Imóveis
+- [Gwan Events](./doc/use-cases/gwan-events.md) - Eventos
+- [Jaiminho](./doc/use-cases/jaiminho.md) - Saúde e Naturopatia
+
 ## 📝 Licença
 
 MIT License
