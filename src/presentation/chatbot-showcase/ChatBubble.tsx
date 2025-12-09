@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { EventCard } from './EventCard';
-import type { EventItem } from '../../domain/chat/types';
+import { PropertyCard } from './PropertyCard';
+import type { EventItem, PropertyItem } from '../../domain/chat/types';
 
 interface ChatBubbleProps {
-  type: 'text' | 'image' | 'audio' | 'event_list';
+  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list';
   content: string;
   sender: 'mentor' | 'mentee';
   timestamp: string;
@@ -12,6 +13,7 @@ interface ChatBubbleProps {
   duration?: string;
   suggestions?: string[];
   events?: EventItem[];
+  properties?: PropertyItem[];
   onSuggestionClick?: (suggestion: string) => void;
 }
 
@@ -24,6 +26,7 @@ export const ChatBubble = ({
   duration,
   suggestions,
   events,
+  properties,
   onSuggestionClick,
 }: ChatBubbleProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -65,6 +68,23 @@ export const ChatBubble = ({
       >
         <div className={`${bubbleClass} px-4 py-3 shadow-sm`}>
           <EventCard event={event} />
+          <span className="text-xs text-gray-600 mt-2 block text-right">
+            {timestamp}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'property_list' && properties && properties.length > 0) {
+    // Cada imóvel é uma mensagem separada, então sempre haverá apenas um imóvel
+    const property = properties[0];
+    return (
+      <div
+        className={`max-w-[85%] ${isSent ? 'ml-auto' : 'mr-auto'} mb-2 animate-fade-in`}
+      >
+        <div className={`${bubbleClass} px-4 py-3 shadow-sm`}>
+          <PropertyCard property={property} />
           <span className="text-xs text-gray-600 mt-2 block text-right">
             {timestamp}
           </span>

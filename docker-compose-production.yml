@@ -18,6 +18,8 @@ services:
         VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://api-mart.gwan.com.br/api/}
         VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://api-mart.gwan.com.br/api/chat}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
+        VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-https://api-events.gwan.com.br/api}
+        VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-https://api-imoveis.gwan.com.br/api}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
         VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-https://api-events.gwan.com.br/api/chat-health}
         VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}
@@ -60,6 +62,8 @@ services:
       - VITE_GWAN_MART_API_URL=${VITE_GWAN_MART_API_URL}
       - VITE_GWAN_MART_CHAT_URL=${VITE_GWAN_MART_CHAT_URL}
       - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL}
+      - VITE_GWAN_EVENTS_CHAT_URL=${VITE_GWAN_EVENTS_CHAT_URL}
+      - VITE_GWAN_IMOVEIS_CHAT_URL=${VITE_GWAN_IMOVEIS_CHAT_URL}
       - VITE_GWAN_LEGAL_AI_URL=${VITE_GWAN_LEGAL_AI_URL}
       - VITE_CHAT_HEALTH_API_URL=${VITE_CHAT_HEALTH_API_URL}
       

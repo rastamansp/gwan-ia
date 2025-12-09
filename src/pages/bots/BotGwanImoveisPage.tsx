@@ -6,6 +6,7 @@ import { useImoveisInteractions } from '../../application/chat/useImoveisInterac
 import { ChatRepository } from '../../infrastructure/chat/ChatRepository';
 import { createEventsHttpClient } from '../../infrastructure/http/eventsHttpClient';
 import Header from '../../components/layout/Header';
+import env from '../../config/env';
 import imoveisChatDataRaw from '../../data/chat/chatData-imoveis.json';
 import type { ChatData } from '../../presentation/chatbot-showcase/ChatInterface';
 import type { Journey } from '../../domain/chat/types';
@@ -16,8 +17,8 @@ const BotGwanImoveisPage = () => {
     useImoveisInteractions();
 
   // Criar instância do repository com HTTP client configurado
-  // Usando o endpoint atual de imóveis
-  const httpClient = createEventsHttpClient('https://api-imoveis.gwan.com.br/api');
+  // Usando a variável de ambiente para o endpoint de imóveis
+  const httpClient = createEventsHttpClient(env.VITE_GWAN_IMOVEIS_CHAT_URL);
   const chatRepository = new ChatRepository(httpClient);
 
   const handleSelectJourney = (journey: Journey) => {

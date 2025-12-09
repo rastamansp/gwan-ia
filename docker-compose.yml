@@ -10,6 +10,8 @@ services:
         VITE_APP_NAME: ${VITE_APP_NAME:-Gwan IA}
         VITE_APP_VERSION: ${VITE_APP_VERSION:-1.1.0}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://api-events.gwan.com.br/}
+        VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-http://localhost:3010/api}
+        VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-http://localhost:3009/api}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
         VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-http://localhost:3004/api/chat-health}
         VITE_BUILD_TIME: ${VITE_BUILD_TIME:-}
@@ -38,6 +40,8 @@ services:
       - VITE_LOG_LEVEL=debug
       - VITE_SHOW_DEV_TOOLS=true
       - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
+      - VITE_GWAN_EVENTS_CHAT_URL=${VITE_GWAN_EVENTS_CHAT_URL:-http://localhost:3010/api}
+      - VITE_GWAN_IMOVEIS_CHAT_URL=${VITE_GWAN_IMOVEIS_CHAT_URL:-http://localhost:3009/api}
       - VITE_GWAN_LEGAL_AI_URL=${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
       - VITE_CHAT_HEALTH_API_URL=${VITE_CHAT_HEALTH_API_URL:-http://localhost:3004/api/chat-health}
       - VITE_OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317

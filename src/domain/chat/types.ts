@@ -15,6 +15,23 @@ export interface EventItem {
   eventLink?: string;
 }
 
+export interface PropertyItem {
+  id: string;
+  title: string;
+  type: string;
+  purpose: string;
+  price: number;
+  city: string;
+  neighborhood: string;
+  area?: number;
+  bedrooms?: number | null;
+  bathrooms?: number | null;
+  garageSpaces?: number | null;
+  amenities?: string[];
+  coverImageUrl?: string;
+  url?: string;
+}
+
 export interface JourneyMessage {
   from: 'user' | 'concierge';
   text: string;
@@ -29,12 +46,13 @@ export interface Journey {
 export interface ConvertedMessage {
   id: number;
   sender: 'mentor' | 'mentee';
-  type: 'text' | 'image' | 'audio' | 'event_list';
+  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list';
   content: string;
   timestamp: string;
   caption?: string;
   duration?: string;
   suggestions?: string[];
   events?: EventItem[];
+  properties?: PropertyItem[];
 }
 
