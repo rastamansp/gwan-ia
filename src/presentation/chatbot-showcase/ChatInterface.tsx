@@ -1,15 +1,32 @@
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import { ChatBubble } from './ChatBubble';
 import { WhatsAppHeader } from './WhatsAppHeader';
 import chatData from '../../data/chat/chatData.json';
 import { toast } from 'react-hot-toast';
 import { IChatRepository } from '../../domain/chat/IChatRepository';
-import type { EventItem, PropertyItem, ProductItem, ConvertedMessage } from '../../domain/chat/types';
+import type {
+  EventItem,
+  PropertyItem,
+  ProductItem,
+  ConvertedMessage,
+} from '../../domain/chat/types';
 
 interface JourneyMessage {
   id: number;
   sender: 'mentor' | 'mentee';
-  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list';
+  type:
+    | 'text'
+    | 'image'
+    | 'audio'
+    | 'event_list'
+    | 'property_list'
+    | 'product_list';
   content: string;
   timestamp: string;
   caption?: string;
@@ -61,11 +78,13 @@ export const ChatInterface = ({
   const messagesKeyRef = useRef<string>('');
   const [inputValue, setInputValue] = useState('');
   const [isSending, setIsSending] = useState(false);
-  const [realTimeMessages, setRealTimeMessages] = useState<JourneyMessage[]>([]);
+  const [realTimeMessages, setRealTimeMessages] = useState<JourneyMessage[]>(
+    []
+  );
 
   // Converter ConvertedMessage[] para JourneyMessage[] se necessário
   const convertedJourneyMessages: JourneyMessage[] | undefined = journeyMessages
-    ? journeyMessages.map((msg) => ({
+    ? journeyMessages.map(msg => ({
         id: msg.id,
         sender: msg.sender,
         type: msg.type,
@@ -84,16 +103,14 @@ export const ChatInterface = ({
     (realTimeMessages.length > 0
       ? realTimeMessages
       : (conversation.messages as JourneyMessage[]));
-  const mentorName =
-    headerName || conversation.participants.mentor.name;
-  const mentorAvatar =
-    headerAvatar || conversation.participants.mentor.avatar;
+  const mentorName = headerName || conversation.participants.mentor.name;
+  const mentorAvatar = headerAvatar || conversation.participants.mentor.avatar;
   const isJourneyMode = !!convertedJourneyMessages;
 
   // Create a unique key for the current messages set
   const messagesKey = useMemo(() => {
     return allMessages
-      .map((m) => `${m.id}-${m.content.substring(0, 20)}`)
+      .map(m => `${m.id}-${m.content.substring(0, 20)}`)
       .join('|');
   }, [allMessages]);
 
@@ -123,7 +140,7 @@ export const ChatInterface = ({
       // Mentor messages take longer to "type", user messages are faster
       const delay = nextMessage.sender === 'mentor' ? 1500 : 800;
       const timer = setTimeout(() => {
-        setVisibleMessagesCount((prev) => prev + 1);
+        setVisibleMessagesCount(prev => prev + 1);
       }, delay);
       return () => clearTimeout(timer);
     }
@@ -163,7 +180,7 @@ export const ChatInterface = ({
         }),
       };
 
-      setRealTimeMessages((prev) => {
+      setRealTimeMessages(prev => {
         const newMessages = [...prev, userMessage];
         setVisibleMessagesCount(newMessages.length);
         return newMessages;
@@ -182,7 +199,9 @@ export const ChatInterface = ({
         const events = (response.formattedResponse?.data?.rawData ||
           response.formattedResponse?.data?.items) as EventItem[] | undefined;
         const properties = (response.formattedResponse?.data?.rawData ||
-          response.formattedResponse?.data?.items) as PropertyItem[] | undefined;
+          response.formattedResponse?.data?.items) as
+          | PropertyItem[]
+          | undefined;
         const products = (response.formattedResponse?.data?.rawData ||
           response.formattedResponse?.data?.items) as ProductItem[] | undefined;
 
@@ -191,7 +210,11 @@ export const ChatInterface = ({
           response.formattedResponse?.answer || response.answer;
 
         // Se for lista de imóveis, criar múltiplas mensagens
-        if (responseType === 'property_list' && properties && properties.length > 0) {
+        if (
+          responseType === 'property_list' &&
+          properties &&
+          properties.length > 0
+        ) {
           const newMessages: JourneyMessage[] = [];
 
           // Primeira mensagem: texto introdutório (opcional, pode ser vazio se não houver)
@@ -241,30 +264,32 @@ export const ChatInterface = ({
             newMessages.push(suggestionsMessage);
           }
 
-          setRealTimeMessages((prev) => {
+          setRealTimeMessages(prev => {
             const updatedMessages = [...prev, ...newMessages];
             setVisibleMessagesCount(updatedMessages.length);
             return updatedMessages;
           });
         }
         // Se for lista de produtos, criar múltiplas mensagens
-        else if (responseType === 'product_list' && products && products.length > 0) {
+        else if (
+          responseType === 'product_list' &&
+          products &&
+          products.length > 0
+        ) {
           const newMessages: JourneyMessage[] = [];
 
-          // Primeira mensagem: texto introdutório (opcional, pode ser vazio se não houver)
-          if (answerText && answerText.trim()) {
-            const introMessage: JourneyMessage = {
-              id: Date.now() + 1,
-              sender: 'mentor',
-              type: 'text',
-              content: answerText,
-              timestamp: new Date().toLocaleTimeString('pt-BR', {
-                hour: '2-digit',
-                minute: '2-digit',
-              }),
-            };
-            newMessages.push(introMessage);
-          }
+          // Primeira mensagem: texto introdutório simples
+          const introMessage: JourneyMessage = {
+            id: Date.now() + 1,
+            sender: 'mentor',
+            type: 'text',
+            content: `🛍️ Produtos Encontrados (${products.length})`,
+            timestamp: new Date().toLocaleTimeString('pt-BR', {
+              hour: '2-digit',
+              minute: '2-digit',
+            }),
+          };
+          newMessages.push(introMessage);
 
           // Uma mensagem para cada produto
           products.forEach((product, index) => {
@@ -298,7 +323,7 @@ export const ChatInterface = ({
             newMessages.push(suggestionsMessage);
           }
 
-          setRealTimeMessages((prev) => {
+          setRealTimeMessages(prev => {
             const updatedMessages = [...prev, ...newMessages];
             setVisibleMessagesCount(updatedMessages.length);
             return updatedMessages;
@@ -367,7 +392,7 @@ export const ChatInterface = ({
             newMessages.push(suggestionsMessage);
           }
 
-          setRealTimeMessages((prev) => {
+          setRealTimeMessages(prev => {
             const updatedMessages = [...prev, ...newMessages];
             setVisibleMessagesCount(updatedMessages.length);
             return updatedMessages;
@@ -386,7 +411,7 @@ export const ChatInterface = ({
             suggestions: suggestions,
           };
 
-          setRealTimeMessages((prev) => {
+          setRealTimeMessages(prev => {
             const newMessages = [...prev, botMessage];
             setVisibleMessagesCount(newMessages.length);
             return newMessages;
@@ -408,7 +433,7 @@ export const ChatInterface = ({
           }),
         };
 
-        setRealTimeMessages((prev) => {
+        setRealTimeMessages(prev => {
           const newMessages = [...prev, errorBotMessage];
           setVisibleMessagesCount(newMessages.length);
           return newMessages;
@@ -429,11 +454,7 @@ export const ChatInterface = ({
 
   return (
     <div className="flex flex-col h-full min-h-0">
-      <WhatsAppHeader
-        name={mentorName}
-        avatar={mentorAvatar}
-        status="online"
-      />
+      <WhatsAppHeader name={mentorName} avatar={mentorAvatar} status="online" />
 
       <div
         ref={chatContainerRef}
@@ -446,10 +467,18 @@ export const ChatInterface = ({
           backgroundColor: '#e5ddd5',
         }}
       >
-        {visibleMessages.map((message) => (
+        {visibleMessages.map(message => (
           <ChatBubble
             key={message.id}
-            type={message.type as 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list'}
+            type={
+              message.type as
+                | 'text'
+                | 'image'
+                | 'audio'
+                | 'event_list'
+                | 'property_list'
+                | 'product_list'
+            }
             content={message.content}
             sender={message.sender as 'mentor' | 'mentee'}
             timestamp={message.timestamp}
@@ -459,7 +488,7 @@ export const ChatInterface = ({
             events={message.events}
             properties={message.properties}
             products={message.products}
-            onSuggestionClick={(suggestion) => {
+            onSuggestionClick={suggestion => {
               // Disparar envio automático da sugestão
               const syntheticEvent = {
                 preventDefault: () => {},
@@ -478,7 +507,7 @@ export const ChatInterface = ({
           <input
             type="text"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={e => setInputValue(e.target.value)}
             placeholder="Mensagem"
             className="bg-transparent text-gray-900 text-sm w-full outline-none border-0 focus:outline-none focus:ring-0 focus:border-0 placeholder:text-gray-500 appearance-none"
             disabled={isSending}
@@ -498,4 +527,3 @@ export const ChatInterface = ({
     </div>
   );
 };
-
