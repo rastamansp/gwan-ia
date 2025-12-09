@@ -8,7 +8,12 @@ const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      // Garante que o React seja tratado corretamente em produção
+      jsxRuntime: 'automatic',
+    }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -31,9 +36,14 @@ export default defineConfig({
       output: {
         // Code-splitting manual para otimizar o tamanho dos chunks
         manualChunks: (id) => {
-          // React e React DOM
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
-            return 'react-vendor';
+          // React e React DOM - sempre no chunk principal (index.js) para evitar problemas de lazy loading
+          // Não separar React para garantir que esteja sempre disponível
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom')
+          ) {
+            // Não retornar nada (ou retornar null) faz com que fique no chunk principal
+            return;
           }
 
           // React Router

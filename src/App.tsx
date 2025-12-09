@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './contexts/ThemeContext';
@@ -39,7 +39,7 @@ const LegalPage = lazy(() => import('./pages/LegalPage'));
 const ImoveisPage = lazy(() => import('./pages/ImoveisPage'));
 
 // Componente de loading para Suspense
-const PageLoader = () => (
+const PageLoader: React.FC = () => (
   <div className="flex items-center justify-center min-h-screen">
     <div className="text-center">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
