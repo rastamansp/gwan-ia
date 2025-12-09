@@ -16,7 +16,7 @@ services:
         VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
         VITE_SHOW_DEV_TOOLS: ${VITE_SHOW_DEV_TOOLS:-false}
         VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://api-mart.gwan.com.br/api/}
-        VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://api-mart.gwan.com.br/api/chat}
+        VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://api-mart.gwan.com.br/api}
         VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
         VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-https://api-events.gwan.com.br/api}
         VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-https://api-imoveis.gwan.com.br/api}

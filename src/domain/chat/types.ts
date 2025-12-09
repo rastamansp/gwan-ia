@@ -32,6 +32,25 @@ export interface PropertyItem {
   url?: string;
 }
 
+export interface ProductItem {
+  id: number;
+  code: string;
+  name: string;
+  description?: string;
+  category: string;
+  subcategory?: string;
+  originalPrice: number;
+  promotionalPrice?: number;
+  discountPercentage?: string;
+  stock?: number;
+  thumbnail?: string;
+  realImage?: string;
+  averageRating?: number;
+  totalReviews?: number;
+  isFeatured?: boolean;
+  url?: string;
+}
+
 export interface JourneyMessage {
   from: 'user' | 'concierge';
   text: string;
@@ -46,7 +65,7 @@ export interface Journey {
 export interface ConvertedMessage {
   id: number;
   sender: 'mentor' | 'mentee';
-  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list';
+  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list';
   content: string;
   timestamp: string;
   caption?: string;
@@ -54,5 +73,6 @@ export interface ConvertedMessage {
   suggestions?: string[];
   events?: EventItem[];
   properties?: PropertyItem[];
+  products?: ProductItem[];
 }
 

@@ -35,9 +35,9 @@ const env = {
     import.meta.env.VITE_GWAN_MART_API_URL ||
     import.meta.env.VITE_API_URL ||
     'http://localhost:3009/api',
-  // Gwan Mart Chat URL
+  // Gwan Mart Chat URL (base URL sem /chat, pois o ChatRepository adiciona)
   GWAN_MART_CHAT_URL:
-    import.meta.env.VITE_GWAN_MART_CHAT_URL || 'http://localhost:3009/api/chat',
+    import.meta.env.VITE_GWAN_MART_CHAT_URL || 'http://localhost:3009/api',
   // Gwan Events URL
   VITE_GWAN_EVENT_URL:
     import.meta.env.VITE_GWAN_EVENT_URL || 'https://events.gwan.com.br/',

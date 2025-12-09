@@ -4,12 +4,12 @@ import { WhatsAppHeader } from './WhatsAppHeader';
 import chatData from '../../data/chat/chatData.json';
 import { toast } from 'react-hot-toast';
 import { IChatRepository } from '../../domain/chat/IChatRepository';
-import type { EventItem, PropertyItem, ConvertedMessage } from '../../domain/chat/types';
+import type { EventItem, PropertyItem, ProductItem, ConvertedMessage } from '../../domain/chat/types';
 
 interface JourneyMessage {
   id: number;
   sender: 'mentor' | 'mentee';
-  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list';
+  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list';
   content: string;
   timestamp: string;
   caption?: string;
@@ -17,6 +17,7 @@ interface JourneyMessage {
   suggestions?: string[];
   events?: EventItem[];
   properties?: PropertyItem[];
+  products?: ProductItem[];
 }
 
 export interface ChatData {
@@ -182,6 +183,8 @@ export const ChatInterface = ({
           response.formattedResponse?.data?.items) as EventItem[] | undefined;
         const properties = (response.formattedResponse?.data?.rawData ||
           response.formattedResponse?.data?.items) as PropertyItem[] | undefined;
+        const products = (response.formattedResponse?.data?.rawData ||
+          response.formattedResponse?.data?.items) as ProductItem[] | undefined;
 
         // Usar o answer completo sem processamento
         const answerText =
@@ -226,6 +229,63 @@ export const ChatInterface = ({
           if (suggestions && suggestions.length > 0) {
             const suggestionsMessage: JourneyMessage = {
               id: Date.now() + 2 + properties.length,
+              sender: 'mentor',
+              type: 'text',
+              content: '',
+              timestamp: new Date().toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit',
+              }),
+              suggestions: suggestions,
+            };
+            newMessages.push(suggestionsMessage);
+          }
+
+          setRealTimeMessages((prev) => {
+            const updatedMessages = [...prev, ...newMessages];
+            setVisibleMessagesCount(updatedMessages.length);
+            return updatedMessages;
+          });
+        }
+        // Se for lista de produtos, criar múltiplas mensagens
+        else if (responseType === 'product_list' && products && products.length > 0) {
+          const newMessages: JourneyMessage[] = [];
+
+          // Primeira mensagem: texto introdutório (opcional, pode ser vazio se não houver)
+          if (answerText && answerText.trim()) {
+            const introMessage: JourneyMessage = {
+              id: Date.now() + 1,
+              sender: 'mentor',
+              type: 'text',
+              content: answerText,
+              timestamp: new Date().toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit',
+              }),
+            };
+            newMessages.push(introMessage);
+          }
+
+          // Uma mensagem para cada produto
+          products.forEach((product, index) => {
+            const productMessage: JourneyMessage = {
+              id: Date.now() + 2 + index,
+              sender: 'mentor',
+              type: 'product_list',
+              content: '',
+              timestamp: new Date().toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit',
+              }),
+              products: [product], // Apenas um produto por mensagem
+            };
+            newMessages.push(productMessage);
+          });
+
+          // Mensagem final: sugestões (se houver)
+          if (suggestions && suggestions.length > 0) {
+            const suggestionsMessage: JourneyMessage = {
+              id: Date.now() + 2 + products.length,
               sender: 'mentor',
               type: 'text',
               content: '',
@@ -389,7 +449,7 @@ export const ChatInterface = ({
         {visibleMessages.map((message) => (
           <ChatBubble
             key={message.id}
-            type={message.type as 'text' | 'image' | 'audio' | 'event_list' | 'property_list'}
+            type={message.type as 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list'}
             content={message.content}
             sender={message.sender as 'mentor' | 'mentee'}
             timestamp={message.timestamp}
@@ -398,6 +458,7 @@ export const ChatInterface = ({
             suggestions={message.suggestions}
             events={message.events}
             properties={message.properties}
+            products={message.products}
             onSuggestionClick={(suggestion) => {
               // Disparar envio automático da sugestão
               const syntheticEvent = {

@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { EventCard } from './EventCard';
 import { PropertyCard } from './PropertyCard';
-import type { EventItem, PropertyItem } from '../../domain/chat/types';
+import { ProductCard } from './ProductCard';
+import type { EventItem, PropertyItem, ProductItem } from '../../domain/chat/types';
 
 interface ChatBubbleProps {
-  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list';
+  type: 'text' | 'image' | 'audio' | 'event_list' | 'property_list' | 'product_list';
   content: string;
   sender: 'mentor' | 'mentee';
   timestamp: string;
@@ -14,6 +15,7 @@ interface ChatBubbleProps {
   suggestions?: string[];
   events?: EventItem[];
   properties?: PropertyItem[];
+  products?: ProductItem[];
   onSuggestionClick?: (suggestion: string) => void;
 }
 
@@ -27,6 +29,7 @@ export const ChatBubble = ({
   suggestions,
   events,
   properties,
+  products,
   onSuggestionClick,
 }: ChatBubbleProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -85,6 +88,23 @@ export const ChatBubble = ({
       >
         <div className={`${bubbleClass} px-4 py-3 shadow-sm`}>
           <PropertyCard property={property} />
+          <span className="text-xs text-gray-600 mt-2 block text-right">
+            {timestamp}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  if (type === 'product_list' && products && products.length > 0) {
+    // Cada produto é uma mensagem separada, então sempre haverá apenas um produto
+    const product = products[0];
+    return (
+      <div
+        className={`max-w-[85%] ${isSent ? 'ml-auto' : 'mr-auto'} mb-2 animate-fade-in`}
+      >
+        <div className={`${bubbleClass} px-4 py-3 shadow-sm`}>
+          <ProductCard product={product} />
           <span className="text-xs text-gray-600 mt-2 block text-right">
             {timestamp}
           </span>

@@ -1,0 +1,84 @@
+{
+  "journey": [
+    {
+      "name": "1 - Busca de Produtos",
+      "description": "Primeiro contato e busca de produtos no e-commerce",
+      "messages": [
+        { "from": "user", "text": "Olá, estou procurando um produto." },
+        { "from": "concierge", "text": "Olá! Seja muito bem-vindo ao Gwan Mart. 😊\n\nÉ um prazer enorme falar com você.\n\nAqui você encontra os melhores produtos e posso te ajudar a encontrar exatamente o que você precisa.\n\nPara deixar sua busca mais personalizada, posso saber seu nome?" },
+        { "from": "user", "text": "Claro, meu nome é João." },
+        { "from": "concierge", "text": "Ótimo, João. Obrigado pela confiança.\n\nFico feliz que tenha nos procurado — muitas pessoas chegam até nós buscando produtos de qualidade.\n\nPara começarmos, me diga: o que você busca hoje?\n\nVocê prefere:\n\n1️⃣ Ver produtos disponíveis\n\n2️⃣ Buscar por categoria\n\n3️⃣ Ou prefere que eu te ajude a encontrar produtos do seu interesse?" },
+        { "from": "user", "text": "Acho que preciso de ajuda para encontrar produtos do meu interesse." },
+        { "from": "concierge", "text": "Perfeito, João.\n\nIsso é mais comum do que imagina — e é exatamente por isso que existe o Gwan Mart.\n\nQuando converso com pessoas que buscam produtos, normalmente os interesses caem em algumas categorias:\n\n• Eletrônicos\n• Roupas e Acessórios\n• Casa e Decoração\n• Beleza e Cuidados Pessoais\n• Esportes e Lazer\n• Livros e Mídia\n\nQual dessas categorias te interessa mais?" },
+        { "from": "user", "text": "Estou procurando produtos de eletrônicos." },
+        { "from": "concierge", "text": "Excelente, João. Já estamos no caminho certo.\n\nCom base nisso, posso te mostrar os melhores produtos de eletrônicos disponíveis e ajudar você a escolher o ideal.\n\nQuer que eu faça isso?" },
+        { "from": "user", "text": "Sim, por favor." }
+      ]
+    },
+    {
+      "name": "2 - Informações sobre Pedido",
+      "description": "Consulta sobre status e detalhes de um pedido",
+      "messages": [
+        { "from": "user", "text": "Quero saber sobre meu pedido." },
+        { "from": "concierge", "text": "Claro, João! Vou te ajudar com informações sobre seu pedido.\n\nPara localizar seu pedido, preciso de algumas informações:\n\n• Número do pedido\n• Ou seu e-mail cadastrado\n\nVocê tem o número do pedido?" },
+        { "from": "user", "text": "Sim, o número é 12345." },
+        { "from": "concierge", "text": "Perfeito! Encontrei seu pedido #12345.\n\n📦 **Status do Pedido:**\n\n• Pedido confirmado em 15/01/2024\n• Pagamento aprovado\n• Produto em preparação para envio\n• Previsão de envio: 18/01/2024\n\n📋 **Itens do Pedido:**\n\n• 1x Smartphone XYZ - R$ 1.500,00\n• 1x Capa Protetora - R$ 50,00\n\n💰 **Valor Total:** R$ 1.550,00\n\nQuer saber mais sobre algum item específico ou sobre o envio?" },
+        { "from": "user", "text": "Quero saber sobre o envio." },
+        { "from": "concierge", "text": "Claro! Vou te passar todas as informações sobre o envio.\n\n🚚 **Informações de Envio:**\n\n• Método: Transportadora Express\n• Previsão de entrega: 20/01/2024\n• Endereço de entrega: Rua Exemplo, 123 - Centro, São Paulo/SP\n• Código de rastreamento: será enviado por e-mail quando o pedido for despachado\n\nVocê receberá um e-mail com o código de rastreamento assim que o pedido sair do nosso estoque.\n\nQuer que eu te avise quando o pedido for enviado?" }
+      ]
+    },
+    {
+      "name": "3 - Rastreamento de Pedido",
+      "description": "Acompanhamento e rastreamento de pedido em trânsito",
+      "messages": [
+        { "from": "user", "text": "Como faço para rastrear meu pedido?" },
+        { "from": "concierge", "text": "Ótima pergunta! Vou te ajudar a rastrear seu pedido.\n\nPara rastrear, você pode:\n\n1️⃣ **Usar o código de rastreamento:**\n\n• Você recebeu um e-mail com o código\n• Acesse o site da transportadora\n• Digite o código de rastreamento\n\n2️⃣ **Pelo nosso site:**\n\n• Acesse \"Meus Pedidos\"\n• Clique no pedido desejado\n• Veja o status atualizado\n\nVocê já tem o código de rastreamento?" },
+        { "from": "user", "text": "Sim, o código é ABC123456789." },
+        { "from": "concierge", "text": "Perfeito! Vou verificar o status do seu pedido.\n\n📦 **Status Atual do Rastreamento:**\n\n• Pedido em trânsito\n• Última atualização: 19/01/2024 às 14:30\n• Localização atual: Centro de Distribuição - São Paulo/SP\n• Previsão de entrega: 20/01/2024\n\n🕐 **Histórico de Movimentação:**\n\n• 18/01/2024 10:00 - Pedido despachado\n• 18/01/2024 15:30 - Em trânsito para São Paulo\n• 19/01/2024 08:00 - Chegou ao centro de distribuição\n• 19/01/2024 14:30 - Saiu para entrega\n\nSeu pedido está quase chegando! 🎉\n\nQuer receber notificações sobre atualizações do rastreamento?" },
+        { "from": "user", "text": "Sim, quero receber notificações." },
+        { "from": "concierge", "text": "Perfeito! Vou configurar as notificações para você.\n\nVocê receberá atualizações por:\n\n• 📧 E-mail\n• 📱 WhatsApp (se cadastrado)\n\nVocê será notificado sobre:\n\n• Quando o pedido sair para entrega\n• Quando o pedido estiver próximo do seu endereço\n• Quando o pedido for entregue\n\nTudo configurado! Você receberá todas as atualizações automaticamente. 😊" }
+      ]
+    },
+    {
+      "name": "4 - Política de Troca e Devolução",
+      "description": "Esclarecimento sobre políticas de troca e devolução",
+      "messages": [
+        { "from": "user", "text": "Quero saber sobre a política de troca e devolução." },
+        { "from": "concierge", "text": "Claro! Vou te explicar nossa política de troca e devolução.\n\n📋 **Política de Troca e Devolução:**\n\n• Prazo: 30 dias corridos a partir do recebimento\n• Produto deve estar em perfeito estado\n• Embalagem original (se aplicável)\n• Nota fiscal ou comprovante de compra\n\nVocê quer trocar ou devolver um produto?" },
+        { "from": "user", "text": "Quero trocar um produto." },
+        { "from": "concierge", "text": "Perfeito! Vou te ajudar com a troca.\n\nPara processar a troca, preciso saber:\n\n• Número do pedido\n• Qual produto você quer trocar\n• Motivo da troca\n• Qual produto você quer no lugar\n\nVocê tem essas informações?" },
+        { "from": "user", "text": "Sim, o pedido é 12345, quero trocar o Smartphone XYZ por outro modelo." },
+        { "from": "concierge", "text": "Entendi! Vou processar sua solicitação de troca.\n\n📦 **Detalhes da Troca:**\n\n• Pedido: #12345\n• Produto a trocar: Smartphone XYZ\n• Novo produto: [você pode escolher outro modelo]\n\n**Próximos Passos:**\n\n1. Você receberá um código de postagem\n2. Envie o produto pelos Correios\n3. Após recebermos, enviaremos o novo produto\n4. O frete de retorno é por nossa conta\n\nQual modelo você gostaria de receber no lugar?" },
+        { "from": "user", "text": "Quero o Smartphone ABC." },
+        { "from": "concierge", "text": "Perfeito! Vou processar a troca.\n\n🔄 **Troca Processada:**\n\n• Produto antigo: Smartphone XYZ\n• Produto novo: Smartphone ABC\n• Diferença de valor: R$ 200,00 (será cobrado/creditado)\n\nVocê receberá um e-mail com:\n\n• Código de postagem para envio\n• Instruções detalhadas\n• Prazo estimado para receber o novo produto\n\nA troca será processada assim que recebermos o produto. Obrigado pela preferência! 😊" }
+      ]
+    },
+    {
+      "name": "5 - Suporte Técnico",
+      "description": "Atendimento para dúvidas técnicas sobre produtos",
+      "messages": [
+        { "from": "user", "text": "Preciso de ajuda técnica com um produto." },
+        { "from": "concierge", "text": "Claro! Estou aqui para te ajudar com suporte técnico.\n\nPara te dar o melhor atendimento, preciso saber:\n\n• Qual produto você comprou?\n• Qual é o problema ou dúvida?\n• Quando você comprou o produto?" },
+        { "from": "user", "text": "Comprei um Smartphone XYZ há uma semana e ele está travando muito." },
+        { "from": "concierge", "text": "Entendi, João. Vou te ajudar a resolver esse problema.\n\nCom base no que você descreveu, pode ser algumas coisas:\n\n🔹 **Possíveis Causas:**\n\n• Muitos aplicativos abertos\n• Memória cheia\n• Atualizações pendentes\n• Aplicativos com problemas\n\n🔹 **Soluções Rápidas:**\n\n1. Reinicie o aparelho\n2. Feche aplicativos não utilizados\n3. Limpe o cache\n4. Verifique atualizações do sistema\n5. Desinstale aplicativos problemáticos\n\nVocê já tentou alguma dessas soluções?" },
+        { "from": "user", "text": "Já tentei reiniciar, mas não resolveu." },
+        { "from": "concierge", "text": "Entendi. Vamos tentar outras soluções.\n\n🔧 **Soluções Avançadas:**\n\n1. **Limpar Cache:**\n   • Vá em Configurações > Aplicativos\n   • Selecione cada app e limpe o cache\n\n2. **Atualizar Sistema:**\n   • Vá em Configurações > Sobre o telefone\n   • Verifique atualizações disponíveis\n\n3. **Reset de Fábrica (último recurso):**\n   • Faça backup dos seus dados\n   • Vá em Configurações > Reset\n   • Escolha \"Restaurar configurações de fábrica\"\n\nSe nenhuma dessas soluções funcionar, podemos:\n\n• Agendar uma assistência técnica\n• Ou processar uma troca/garantia\n\nQual opção você prefere?" },
+        { "from": "user", "text": "Prefiro agendar uma assistência técnica." },
+        { "from": "concierge", "text": "Perfeito! Vou agendar a assistência técnica para você.\n\n📅 **Agendamento de Assistência:**\n\n• Produto: Smartphone XYZ\n• Problema: Travamentos frequentes\n• Prazo de garantia: 12 meses (ainda dentro do prazo)\n\nVocê pode escolher:\n\n• Levar em uma de nossas lojas físicas\n• Enviar pelos Correios (frete grátis)\n• Agendar visita técnica (se disponível na sua região)\n\nQual opção você prefere?" }
+      ]
+    },
+    {
+      "name": "6 - Recomendações Personalizadas",
+      "description": "Sistema de recomendações baseado em preferências do usuário",
+      "messages": [
+        { "from": "user", "text": "Você pode me recomendar produtos?" },
+        { "from": "concierge", "text": "Claro, João! Adoro fazer recomendações personalizadas.\n\nPara te recomendar os melhores produtos, preciso entender melhor seus interesses.\n\nMe diga:\n\n• Quais categorias de produtos você mais gosta?\n• Você tem algum orçamento em mente?\n• Você está procurando algo específico hoje?" },
+        { "from": "user", "text": "Gosto de eletrônicos e tecnologia, meu orçamento é até R$ 2.000 e estou procurando um tablet." },
+        { "from": "concierge", "text": "Perfeito! Com base no que você me disse, tenho algumas recomendações excelentes.\n\n📱 **Tablets Recomendados (até R$ 2.000):**\n\n🔹 **Tablet Pro 10\" - R$ 1.800,00**\n\n• Tela de 10 polegadas Full HD\n• Processador octa-core\n• 128GB de armazenamento\n• Bateria de longa duração\n• Ideal para trabalho e entretenimento\n\n🔹 **Tablet Lite 8\" - R$ 1.200,00**\n\n• Tela de 8 polegadas HD\n• Processador quad-core\n• 64GB de armazenamento\n• Leve e portátil\n• Ótimo custo-benefício\n\n🔹 **Tablet Premium 12\" - R$ 1.950,00**\n\n• Tela de 12 polegadas 2K\n• Processador de última geração\n• 256GB de armazenamento\n• Compatível com caneta digital\n• Perfeito para criadores de conteúdo\n\nQual desses tablets mais te interessa?" },
+        { "from": "user", "text": "O Tablet Pro 10\" parece interessante." },
+        { "from": "concierge", "text": "Excelente escolha, João! O Tablet Pro 10\" é realmente uma ótima opção.\n\n📱 **Detalhes do Tablet Pro 10\":**\n\n• Tela: 10 polegadas Full HD (1920x1200)\n• Processador: Octa-core 2.0GHz\n• Memória RAM: 4GB\n• Armazenamento: 128GB (expansível até 512GB)\n• Bateria: 8.000mAh (até 10 horas de uso)\n• Sistema: Android 13\n• Câmera: 8MP traseira + 5MP frontal\n• Conectividade: Wi-Fi, Bluetooth 5.0\n\n💰 **Valor:** R$ 1.800,00\n\n📦 **Inclui:**\n\n• Tablet\n• Carregador\n• Cabo USB-C\n• Manual\n• Garantia de 12 meses\n\n🎁 **Ofertas Especiais:**\n\n• Capa protetora: +R$ 50,00\n• Caneta digital: +R$ 150,00\n• Pacote completo: R$ 1.950,00 (economia de R$ 50,00)\n\nQuer adicionar algum acessório ou finalizar a compra?" }
+      ]
+    }
+  ]
+}
+

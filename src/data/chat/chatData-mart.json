@@ -1,0 +1,82 @@
+{
+  "conversation": {
+    "participants": {
+      "mentor": {
+        "name": "Gwan Mart",
+        "avatar": "🛒",
+        "role": "Assistente"
+      },
+      "mentee": {
+        "name": "Você",
+        "avatar": "👤",
+        "role": "Usuário"
+      }
+    },
+    "messages": [
+      {
+        "id": 1,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Olá! Bem-vindo ao Gwan Mart. Como posso ajudar você hoje?",
+        "timestamp": "10:30"
+      },
+      {
+        "id": 2,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Oi! Estou procurando um smartphone.",
+        "timestamp": "10:32"
+      },
+      {
+        "id": 3,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Perfeito! Vou te ajudar a encontrar o smartphone ideal. Para começar, me diga: qual é o seu orçamento?",
+        "timestamp": "10:33"
+      },
+      {
+        "id": 4,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Até R$ 2.000,00.",
+        "timestamp": "10:35"
+      },
+      {
+        "id": 5,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Ótimo! Com esse orçamento, temos excelentes opções. Você tem alguma preferência de marca ou sistema operacional?",
+        "timestamp": "10:36"
+      },
+      {
+        "id": 6,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Prefiro Android.",
+        "timestamp": "10:38"
+      },
+      {
+        "id": 7,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Perfeito! Com base no que você me disse, tenho algumas opções excelentes de smartphones Android. Quer que eu mostre os modelos disponíveis?",
+        "timestamp": "10:39"
+      },
+      {
+        "id": 8,
+        "sender": "mentee",
+        "type": "text",
+        "content": "Sim, por favor!",
+        "timestamp": "10:40"
+      },
+      {
+        "id": 9,
+        "sender": "mentor",
+        "type": "text",
+        "content": "Ótimo! Vou preparar uma seleção especial para você. Enquanto isso, você tem alguma preferência sobre câmera, bateria ou armazenamento?",
+        "timestamp": "10:42"
+      }
+    ]
+  }
+}
+
