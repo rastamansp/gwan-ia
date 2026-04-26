@@ -23,13 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment variables
+# Environment variables (NUNCA commitar .env real)
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .env.production
+# Exceção: manter .env.example versionado como template
+!.env.example
 
 # Testing
 coverage
