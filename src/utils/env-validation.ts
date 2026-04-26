@@ -33,10 +33,8 @@ const REQUIRED_CONFIGS: Record<string, (keyof RequiredEnvConfig)[]> = {
     'VITE_APP_NAME',
     'VITE_APP_VERSION',
     'VITE_GWAN_MART_CHAT_URL',
-    'VITE_OTEL_EXPORTER_OTLP_ENDPOINT',
-    'VITE_OTEL_SERVICE_NAME',
-    'VITE_OTEL_SERVICE_VERSION',
     'VITE_LOG_LEVEL',
+    // OTEL é opcional em produção - usar valor padrão se não configurado
   ],
   test: [
     'VITE_API_URL',
