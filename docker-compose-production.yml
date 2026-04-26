@@ -1,95 +1,85 @@
-version: '3.8'
-
 services:
-  gwan-site:
+  gwan-ia:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        VITE_API_URL: ${VITE_API_URL:-https://api.gwan.com.br/api/v1/}
+        VITE_API_URL: ${VITE_API_URL:-https://api.gwan.cloud}
         VITE_APP_NAME: ${VITE_APP_NAME:-Gwan IA}
-        VITE_APP_VERSION: ${VITE_APP_VERSION:-1.1.0}
+        VITE_APP_VERSION: ${VITE_APP_VERSION:-1.1.1}
         VITE_BUILD_TIME: ${VITE_BUILD_TIME:-}
         VITE_GIT_COMMIT: ${VITE_GIT_COMMIT:-}
         VITE_GIT_BRANCH: ${VITE_GIT_BRANCH:-main}
         VITE_DEBUG: ${VITE_DEBUG:-false}
-        VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-info}
+        VITE_LOG_LEVEL: ${VITE_LOG_LEVEL:-warn}
         VITE_SHOW_DEV_TOOLS: ${VITE_SHOW_DEV_TOOLS:-false}
-        VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://api-mart.gwan.com.br/api/}
-        VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://api-mart.gwan.com.br/api}
-        VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.com.br/}
-        VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-https://api-events.gwan.com.br/api}
-        VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-https://api-imoveis.gwan.com.br/api}
-        VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-ai.gwan.com.br/}
-        VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-https://api-events.gwan.com.br/api/chat-health}
-        VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}
+        VITE_GWAN_MART_API_URL: ${VITE_GWAN_MART_API_URL:-https://mart-api.gwan.cloud/api/}
+        VITE_GWAN_MART_CHAT_URL: ${VITE_GWAN_MART_CHAT_URL:-https://mart-api.gwan.cloud/api}
+        VITE_GWAN_EVENT_URL: ${VITE_GWAN_EVENT_URL:-https://events.gwan.cloud/}
+        VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-https://events-api.gwan.cloud/api}
+        VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-https://imoveis-api.gwan.cloud/api}
+        VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-api.gwan.cloud/}
+        VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-https://api.gwan.cloud/api/chat-health}
+        VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-}
         VITE_OTEL_SERVICE_NAME: ${VITE_OTEL_SERVICE_NAME:-gwan-ia-frontend}
-        VITE_OTEL_SERVICE_VERSION: ${VITE_OTEL_SERVICE_VERSION:-1.1.0}
-        VITE_OTEL_RESOURCE_ATTRIBUTES: ${VITE_OTEL_RESOURCE_ATTRIBUTES:-service.name=gwan-ia-frontend,service.version=1.1.0}
-    container_name: gwan-site
+        VITE_OTEL_SERVICE_VERSION: ${VITE_OTEL_SERVICE_VERSION:-1.1.1}
+        VITE_OTEL_RESOURCE_ATTRIBUTES: ${VITE_OTEL_RESOURCE_ATTRIBUTES:-service.name=gwan-ia-frontend,service.version=1.1.1}
+    container_name: gwan-ia
     restart: unless-stopped
     networks:
-      - gwan
+      - gwan-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.gwan-site.rule=Host(`gwan.com.br`)"
-      - "traefik.http.routers.gwan-site.entrypoints=websecure"
-      - "traefik.http.routers.gwan-site.tls.certresolver=letsencrypt"
-      - "traefik.http.services.gwan-site.loadbalancer.server.port=80"
-      - "traefik.docker.network=gwan"
-      
-      # Monitoramento Prometheus
-      - "prometheus.enable=true"
-      - "prometheus.port=80"
-      - "prometheus.path=/metrics"
+      - "traefik.docker.network=gwan-network"
+
+      # Frontend principal — gwan.cloud (domínio raiz)
+      - "traefik.http.routers.gwan-ia.rule=Host(`${IA_HOST:-gwan.cloud}`)"
+      - "traefik.http.routers.gwan-ia.entrypoints=websecure"
+      - "traefik.http.routers.gwan-ia.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gwan-ia.loadbalancer.server.port=80"
+
+      # Redirect HTTP → HTTPS
+      - "traefik.http.routers.gwan-ia-http.rule=Host(`${IA_HOST:-gwan.cloud}`)"
+      - "traefik.http.routers.gwan-ia-http.entrypoints=web"
+      - "traefik.http.routers.gwan-ia-http.middlewares=gwan-ia-https-redirect"
+      - "traefik.http.middlewares.gwan-ia-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.gwan-ia-https-redirect.redirectscheme.permanent=true"
+
+      # www → gwan.cloud redirect
+      - "traefik.http.routers.gwan-ia-www.rule=Host(`www.${IA_HOST:-gwan.cloud}`)"
+      - "traefik.http.routers.gwan-ia-www.entrypoints=websecure"
+      - "traefik.http.routers.gwan-ia-www.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.gwan-ia-www.middlewares=gwan-ia-www-redirect"
+      - "traefik.http.middlewares.gwan-ia-www-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.gwan-ia-www-redirect.redirectscheme.permanent=true"
+
+      # Security headers
+      - "traefik.http.middlewares.gwan-ia-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
+      - "traefik.http.routers.gwan-ia.middlewares=gwan-ia-headers"
+
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 40s
+      start_period: 60s
     environment:
       - NODE_ENV=production
-      - VITE_API_URL=${VITE_API_URL}
-      - VITE_APP_NAME=${VITE_APP_NAME}
-      - VITE_APP_VERSION=${VITE_APP_VERSION}
-      - VITE_BUILD_TIME=${VITE_BUILD_TIME}
-      - VITE_GIT_COMMIT=${VITE_GIT_COMMIT}
-      - VITE_GIT_BRANCH=${VITE_GIT_BRANCH}
-      - VITE_DEBUG=${VITE_DEBUG}
-      - VITE_LOG_LEVEL=${VITE_LOG_LEVEL}
-      - VITE_SHOW_DEV_TOOLS=${VITE_SHOW_DEV_TOOLS}
-      - VITE_GWAN_MART_API_URL=${VITE_GWAN_MART_API_URL}
-      - VITE_GWAN_MART_CHAT_URL=${VITE_GWAN_MART_CHAT_URL}
-      - VITE_GWAN_EVENT_URL=${VITE_GWAN_EVENT_URL}
-      - VITE_GWAN_EVENTS_CHAT_URL=${VITE_GWAN_EVENTS_CHAT_URL}
-      - VITE_GWAN_IMOVEIS_CHAT_URL=${VITE_GWAN_IMOVEIS_CHAT_URL}
-      - VITE_GWAN_LEGAL_AI_URL=${VITE_GWAN_LEGAL_AI_URL}
-      - VITE_CHAT_HEALTH_API_URL=${VITE_CHAT_HEALTH_API_URL}
-      
-      # Monitoramento APM (com prefixo VITE_)
-      - VITE_OTEL_EXPORTER_OTLP_ENDPOINT=${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-http://gwan.com.br:4317}
-      - VITE_OTEL_SERVICE_NAME=${VITE_OTEL_SERVICE_NAME:-gwan-ia-frontend}
-      - VITE_OTEL_SERVICE_VERSION=${VITE_OTEL_SERVICE_VERSION:-1.1.0}
-      - VITE_OTEL_RESOURCE_ATTRIBUTES=${VITE_OTEL_RESOURCE_ATTRIBUTES:-service.name=gwan-ia-frontend,service.version=1.1.0}
-      
-      # Logs
-      - LOG_LEVEL=${LOG_LEVEL:-info}
-      - LOG_FORMAT=${LOG_FORMAT:-json}
+      - LOG_LEVEL=${LOG_LEVEL:-warn}
+      - LOG_FORMAT=json
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
     deploy:
       resources:
         limits:
-          memory: 512M
-          cpus: '0.5'
-        reservations:
           memory: 256M
-          cpus: '0.25'
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
+        reservations:
+          memory: 128M
 
 networks:
-  gwan:
+  gwan-network:
     external: true
+    name: gwan-network
