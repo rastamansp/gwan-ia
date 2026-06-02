@@ -1,124 +1,152 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import {
+  Award,
+  Bot,
+  CalendarDays,
+  CalendarRange,
+  ClipboardList,
+  ExternalLink,
+  Headphones,
+  Layers,
+  Sparkles,
+} from 'lucide-react';
 import Header from '../components/layout/Header';
+import Footer from '../components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import env from '../config/env';
+
+const features = [
+  {
+    title: 'Informações detalhadas',
+    description:
+      'Tudo sobre cada evento em um só lugar: descrição, local, data e palestrantes.',
+    icon: CalendarDays,
+  },
+  {
+    title: 'Inscrições online',
+    description: 'Garanta sua vaga em poucos cliques, sem filas nem papelada.',
+    icon: ClipboardList,
+  },
+  {
+    title: 'Agenda e programação',
+    description: 'Acompanhe a grade completa e organize sua participação.',
+    icon: CalendarRange,
+  },
+  {
+    title: 'Certificados e materiais',
+    description: 'Acesse certificados e conteúdos de apoio após o evento.',
+    icon: Award,
+  },
+  {
+    title: 'Diversos tipos de evento',
+    description: 'Presencial, online ou híbrido — a plataforma se adapta.',
+    icon: Layers,
+  },
+  {
+    title: 'Suporte especializado',
+    description: 'Atendimento dedicado para tirar dúvidas a qualquer momento.',
+    icon: Headphones,
+  },
+];
 
 const EventsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header Compartilhado */}
-      <Header showBackButton={true} backButtonText="Voltar ao Início" />
+      <Header />
 
-      {/* Main Content */}
-      <main className="container py-20">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mb-8 mx-auto">
-            <svg
-              className="w-6 h-6 text-purple-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
+      <main>
+        {/* Hero */}
+        <section className="relative overflow-hidden pt-32 pb-20">
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
+          <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+
+          <div className="container relative z-10">
+            <div className="mx-auto max-w-3xl space-y-8 text-center animate-fade-in">
+              <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-4 py-2 text-sm font-medium text-purple-600 backdrop-blur-sm dark:text-purple-400">
+                <Sparkles className="h-4 w-4" />
+                Plataforma de eventos
+              </div>
+
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg shadow-purple-500/30">
+                <CalendarDays className="h-10 w-10 text-white" />
+              </div>
+
+              <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
+                <span className="bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
+                  Gwan Events
+                </span>
+              </h1>
+
+              <p className="mx-auto max-w-2xl text-xl leading-relaxed text-muted-foreground">
+                Nossa plataforma completa de eventos. Acesse informações,
+                inscrições, agendas e muito mais — tudo em um só lugar.
+              </p>
+
+              <div className="flex flex-col justify-center gap-4 pt-2 sm:flex-row">
+                <Button size="lg" className="group text-lg" asChild>
+                  <a
+                    href={env.VITE_GWAN_EVENT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Acessar Plataforma
+                    <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" className="text-lg" asChild>
+                  <Link to="/bot-gwan-events">
+                    <Bot className="mr-2 h-5 w-5" />
+                    Falar com o Assistente
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
-          <h2 className="text-5xl font-bold text-card-foreground mb-6">
-            Gwan Events
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Nossa plataforma completa de eventos. Acesse informações sobre
-            eventos, inscrições, agendas e muito mais!
-          </p>
-          <a
-            href={env.VITE_GWAN_EVENT_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors duration-300"
-          >
-            Acessar Plataforma de Eventos
-            <svg
-              className="w-5 h-5 inline-block ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          </a>
-        </div>
+        </section>
 
-        {/* Features Section */}
-        <section className="mb-16">
-          <div className="bg-card rounded-xl p-8 border border-border">
-            <h3 className="text-3xl font-bold text-card-foreground mb-6">
-              O que você encontra na plataforma
-            </h3>
-            <p className="text-muted-foreground text-lg mb-6">
-              A plataforma Gwan Events oferece uma experiência completa para
-              gerenciamento e participação em eventos:
-            </p>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Informações detalhadas sobre eventos
+        {/* Features */}
+        <section className="bg-background px-4 py-24">
+          <div className="container mx-auto">
+            <div className="mb-16 space-y-4 text-center">
+              <h2 className="text-4xl font-bold md:text-5xl">
+                O que você encontra na{' '}
+                <span className="bg-gradient-to-r from-purple-500 to-purple-600 bg-clip-text text-transparent">
+                  plataforma
                 </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Sistema de inscrições online
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Agenda e programação dos eventos
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Certificados e materiais
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Integração com diferentes tipos de eventos
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Suporte e atendimento especializado
-                </span>
-              </li>
-            </ul>
+              </h2>
+              <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+                Uma experiência completa para gerenciar e participar de eventos
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ title, description, icon: Icon }) => (
+                <Card
+                  key={title}
+                  className="group h-full border-2 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 hover:shadow-hover"
+                >
+                  <CardContent className="space-y-4 p-6">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-card-foreground">
+                      {title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-card border-t border-border">
-        <div className="container py-12">
-          <div className="text-center">
-            <p className="text-muted-foreground">
-              © 2024 Gwan Company. Todos os direitos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

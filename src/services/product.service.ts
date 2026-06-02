@@ -2,6 +2,20 @@ import { SearchParams, PaginatedResponse } from '../types/search.types';
 import { buildApiUrl, buildApiUrlWithQuery } from '../utils/api-url';
 import env from '../config/env';
 
+/** API persiste `variations`; UI usa `availableVariations`. */
+function resolveAvailableVariations(data: {
+  availableVariations?: unknown;
+  variations?: unknown;
+}): unknown[] {
+  if (Array.isArray(data.availableVariations)) {
+    return data.availableVariations;
+  }
+  if (Array.isArray(data.variations)) {
+    return data.variations;
+  }
+  return [];
+}
+
 // Serviço para buscar produtos da API
 export interface ProductVariation {
   nome: string;
@@ -118,10 +132,7 @@ export const fetchProduct = async (
         totalReviews: parseInt(String(result.data.totalReviews)) || 0,
         // Garantir que imagens seja um array
         imagens: Array.isArray(result.data.imagens) ? result.data.imagens : [],
-        // Garantir que availableVariations seja um array
-        availableVariations: Array.isArray(result.data.availableVariations)
-          ? result.data.availableVariations
-          : [],
+        availableVariations: resolveAvailableVariations(result.data),
       };
 
       return processedProduct;
@@ -327,9 +338,7 @@ export const fetchProductByCode = async (
         stock: parseInt(String(result.data.stock)) || 0,
         totalReviews: parseInt(String(result.data.totalReviews)) || 0,
         imagens: Array.isArray(result.data.imagens) ? result.data.imagens : [],
-        availableVariations: Array.isArray(result.data.availableVariations)
-          ? result.data.availableVariations
-          : [],
+        availableVariations: resolveAvailableVariations(result.data),
       };
 
       return processedProduct;

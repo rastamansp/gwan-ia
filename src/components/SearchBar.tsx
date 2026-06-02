@@ -1,4 +1,22 @@
 import React, { useState } from 'react';
+import {
+  Search,
+  SlidersHorizontal,
+  Trash2,
+  Tag,
+  Star,
+  Sparkles,
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { SearchParams } from '../types/search.types';
 
 interface SearchBarProps {
@@ -11,6 +29,22 @@ interface SearchBarProps {
   onToggleAISearch?: () => void;
 }
 
+const ALL = '__all__';
+
+const DEFAULT_PARAMS: SearchParams = {
+  search: '',
+  category: '',
+  subcategory: '',
+  minPrice: undefined,
+  maxPrice: undefined,
+  minDiscount: undefined,
+  minRating: undefined,
+  sortBy: 'name',
+  sortOrder: 'ASC',
+  page: 1,
+  limit: 20,
+};
+
 const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
   loading = false,
@@ -21,17 +55,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [searchParams, setSearchParams] = useState<SearchParams>({
-    search: '',
-    category: '',
-    subcategory: '',
-    minPrice: undefined,
-    maxPrice: undefined,
-    minDiscount: undefined,
-    minRating: undefined,
-    sortBy: 'name',
-    sortOrder: 'ASC',
-    page: 1,
-    limit: 20,
+    ...DEFAULT_PARAMS,
   });
 
   const handleInputChange = (
@@ -44,10 +68,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }));
   };
 
-  const handleSearch = () => {
+  const handleSearch = (overrides?: Partial<SearchParams>) => {
+    const merged = { ...searchParams, ...overrides };
     // Remove campos vazios antes de enviar
     const cleanParams = Object.fromEntries(
-      Object.entries(searchParams).filter(
+      Object.entries(merged).filter(
         ([, value]) => value !== '' && value !== undefined && value !== null
       )
     ) as SearchParams;
@@ -56,19 +81,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleReset = () => {
-    setSearchParams({
-      search: '',
-      category: '',
-      subcategory: '',
-      minPrice: undefined,
-      maxPrice: undefined,
-      minDiscount: undefined,
-      minRating: undefined,
-      sortBy: 'name',
-      sortOrder: 'ASC',
-      page: 1,
-      limit: 20,
-    });
+    setSearchParams({ ...DEFAULT_PARAMS });
     onSearch({});
   };
 
@@ -79,329 +92,271 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   return (
-    <div className="bg-gradient-card border border-border rounded-lg p-6 shadow-soft mb-6">
+    <div className="mb-6 rounded-xl border border-border bg-card/50 p-6 shadow-soft backdrop-blur-sm">
       {/* Barra de pesquisa principal */}
-      <div className="flex gap-4 mb-4">
-        <div className="flex-1">
-          <input
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
             type="text"
             placeholder="Buscar por nome ou código do produto..."
             value={searchParams.search || ''}
             onChange={e => handleInputChange('search', e.target.value)}
             onKeyPress={handleKeyPress}
-            className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            className="pl-9"
             disabled={loading}
           />
         </div>
-        <button
-          onClick={handleSearch}
-          disabled={loading}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary-foreground h-10 px-4 py-2 bg-primary hover:bg-primary/90 rounded-md"
-        >
+
+        <Button onClick={() => handleSearch()} disabled={loading}>
           {loading ? (
-            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+            <span className="h-4 w-4 animate-spin rounded-full border-b-2 border-current" />
           ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.35-4.35"></path>
-            </svg>
+            <Search className="h-4 w-4" />
           )}
           Buscar
-        </button>
-        <button
+        </Button>
+
+        <Button
+          variant="outline"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md"
+          aria-expanded={showAdvanced}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4"
-          >
-            <path d="M3 6h18"></path>
-            <path d="M7 12h10"></path>
-            <path d="M10 18h4"></path>
-          </svg>
+          <SlidersHorizontal className="h-4 w-4" />
           Filtros
-        </button>
+        </Button>
+
         {onToggleAISearch ? (
-          <div className="flex items-center space-x-2">
-            <span className="text-sm font-medium text-gray-700">Normal</span>
+          <div className="inline-flex items-center rounded-md border border-input bg-background p-0.5">
             <button
-              onClick={onToggleAISearch}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 ${
-                isAISearch ? 'bg-purple-600' : 'bg-gray-600'
+              type="button"
+              onClick={() => isAISearch && onToggleAISearch()}
+              className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+                !isAISearch
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                  isAISearch ? 'translate-x-6' : 'translate-x-1'
-                }`}
-              />
+              Normal
             </button>
-            <span className="text-sm font-medium text-gray-700">IA</span>
+            <button
+              type="button"
+              onClick={() => !isAISearch && onToggleAISearch()}
+              className={`inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-sm font-medium transition-colors ${
+                isAISearch
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              IA
+            </button>
           </div>
         ) : (
-          <button
-            onClick={handleReset}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 rounded-md"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <path d="M3 6h18"></path>
-              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
-              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
-            </svg>
+          <Button variant="outline" onClick={handleReset}>
+            <Trash2 className="h-4 w-4" />
             Limpar
-          </button>
+          </Button>
         )}
       </div>
 
       {/* Filtros avançados */}
       {showAdvanced && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 pt-4 border-t border-border">
+        <div className="mt-4 grid grid-cols-1 gap-4 border-t border-border pt-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {/* Categoria */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Categoria
-            </label>
-            <select
-              value={searchParams.category || ''}
-              onChange={e => handleInputChange('category', e.target.value)}
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          <div className="space-y-2">
+            <Label>Categoria</Label>
+            <Select
+              value={searchParams.category || ALL}
+              onValueChange={value =>
+                handleInputChange('category', value === ALL ? '' : value)
+              }
             >
-              <option value="">Todas as categorias</option>
-              {categories.map(category => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger>
+                <SelectValue placeholder="Todas as categorias" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>Todas as categorias</SelectItem>
+                {categories.map(category => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Subcategoria */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Subcategoria
-            </label>
-            <select
-              value={searchParams.subcategory || ''}
-              onChange={e => handleInputChange('subcategory', e.target.value)}
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          <div className="space-y-2">
+            <Label>Subcategoria</Label>
+            <Select
+              value={searchParams.subcategory || ALL}
+              onValueChange={value =>
+                handleInputChange('subcategory', value === ALL ? '' : value)
+              }
             >
-              <option value="">Todas as subcategorias</option>
-              {subcategories.map(subcategory => (
-                <option key={subcategory} value={subcategory}>
-                  {subcategory}
-                </option>
-              ))}
-            </select>
+              <SelectTrigger>
+                <SelectValue placeholder="Todas as subcategorias" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={ALL}>Todas as subcategorias</SelectItem>
+                {subcategories.map(subcategory => (
+                  <SelectItem key={subcategory} value={subcategory}>
+                    {subcategory}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Preço mínimo */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Preço Mínimo (R$)
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="minPrice">Preço Mínimo (R$)</Label>
+            <Input
+              id="minPrice"
               type="number"
               placeholder="0"
-              value={searchParams.minPrice || ''}
+              value={searchParams.minPrice ?? ''}
               onChange={e =>
                 handleInputChange(
                   'minPrice',
                   e.target.value ? Number(e.target.value) : undefined
                 )
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
 
           {/* Preço máximo */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Preço Máximo (R$)
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="maxPrice">Preço Máximo (R$)</Label>
+            <Input
+              id="maxPrice"
               type="number"
               placeholder="9999"
-              value={searchParams.maxPrice || ''}
+              value={searchParams.maxPrice ?? ''}
               onChange={e =>
                 handleInputChange(
                   'maxPrice',
                   e.target.value ? Number(e.target.value) : undefined
                 )
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
 
           {/* Desconto mínimo */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Desconto Mínimo (%)
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="minDiscount">Desconto Mínimo (%)</Label>
+            <Input
+              id="minDiscount"
               type="number"
               placeholder="0"
               min="0"
               max="100"
-              value={searchParams.minDiscount || ''}
+              value={searchParams.minDiscount ?? ''}
               onChange={e =>
                 handleInputChange(
                   'minDiscount',
                   e.target.value ? Number(e.target.value) : undefined
                 )
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
 
           {/* Avaliação mínima */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Avaliação Mínima
-            </label>
-            <input
+          <div className="space-y-2">
+            <Label htmlFor="minRating">Avaliação Mínima</Label>
+            <Input
+              id="minRating"
               type="number"
               placeholder="0"
               min="0"
               max="5"
               step="0.1"
-              value={searchParams.minRating || ''}
+              value={searchParams.minRating ?? ''}
               onChange={e =>
                 handleInputChange(
                   'minRating',
                   e.target.value ? Number(e.target.value) : undefined
                 )
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             />
           </div>
 
           {/* Ordenar por */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Ordenar por
-            </label>
-            <select
+          <div className="space-y-2">
+            <Label>Ordenar por</Label>
+            <Select
               value={searchParams.sortBy || 'name'}
-              onChange={e =>
-                handleInputChange(
-                  'sortBy',
-                  e.target.value as SearchParams['sortBy']
-                )
+              onValueChange={value =>
+                handleInputChange('sortBy', value as SearchParams['sortBy'])
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
-              <option value="name">Nome</option>
-              <option value="originalPrice">Preço</option>
-              <option value="averageRating">Avaliação</option>
-              <option value="discountPercentage">Desconto</option>
-              <option value="createdAt">Data de criação</option>
-            </select>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="name">Nome</SelectItem>
+                <SelectItem value="originalPrice">Preço</SelectItem>
+                <SelectItem value="averageRating">Avaliação</SelectItem>
+                <SelectItem value="discountPercentage">Desconto</SelectItem>
+                <SelectItem value="createdAt">Data de criação</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Ordem */}
-          <div>
-            <label className="text-sm font-medium text-card-foreground mb-2 block">
-              Ordem
-            </label>
-            <select
+          <div className="space-y-2">
+            <Label>Ordem</Label>
+            <Select
               value={searchParams.sortOrder || 'ASC'}
-              onChange={e =>
+              onValueChange={value =>
                 handleInputChange(
                   'sortOrder',
-                  e.target.value as SearchParams['sortOrder']
+                  value as SearchParams['sortOrder']
                 )
               }
-              className="w-full h-10 px-3 py-2 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
             >
-              <option value="ASC">Crescente</option>
-              <option value="DESC">Decrescente</option>
-            </select>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ASC">Crescente</SelectItem>
+                <SelectItem value="DESC">Decrescente</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
       )}
 
       {/* Filtros rápidos */}
-      <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-border">
-        <button
+      <div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-4">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="rounded-full"
           onClick={() => {
             handleInputChange('minDiscount', 10);
-            handleSearch();
+            handleSearch({ minDiscount: 10 });
           }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200 hover:bg-red-200 transition-colors"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-3 w-3"
-          >
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
-            <path d="M3 6h18"></path>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
+          <Tag className="h-3.5 w-3.5 text-rose-500" />
           10%+ Desconto
-        </button>
+        </Button>
 
-        <button
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="rounded-full"
           onClick={() => {
             handleInputChange('minRating', 4.0);
-            handleSearch();
+            handleSearch({ minRating: 4.0 });
           }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200 hover:bg-yellow-200 transition-colors"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-3 w-3"
-          >
-            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
-          </svg>
+          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
           4+ Estrelas
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,128 +1,148 @@
 import React from 'react';
+import {
+  ExternalLink,
+  FileText,
+  Gavel,
+  Headphones,
+  Scale,
+  ScrollText,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react';
 import Header from '../components/layout/Header';
+import Footer from '../components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
 import env from '../config/env';
+
+const features = [
+  {
+    title: 'Geração de contratos',
+    description: 'Crie contratos completos com IA em minutos, não em horas.',
+    icon: FileText,
+  },
+  {
+    title: 'Petições jurídicas',
+    description: 'Elabore petições com estrutura e linguagem técnica precisas.',
+    icon: ScrollText,
+  },
+  {
+    title: 'Documentos precisos',
+    description: 'Documentos jurídicos consistentes e prontos para uso.',
+    icon: Gavel,
+  },
+  {
+    title: 'Automação inteligente',
+    description: 'Fluxos jurídicos automatizados que economizam seu tempo.',
+    icon: Sparkles,
+  },
+  {
+    title: 'Conformidade legal',
+    description: 'Aderência à legislação brasileira e modelos atualizados.',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Suporte especializado',
+    description: 'Atendimento dedicado para apoiar o seu dia a dia jurídico.',
+    icon: Headphones,
+  },
+];
 
 const LegalPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header Compartilhado */}
-      <Header showBackButton={true} backButtonText="Voltar ao Início" />
+      <Header />
 
-      {/* Main Content */}
-      <main className="container py-20">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-8 mx-auto">
-            <svg
-              className="w-6 h-6 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              />
-            </svg>
+      <main>
+        {/* Hero */}
+        <section className="relative overflow-hidden pt-32 pb-20">
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
+          <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-blue-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-primary/20 blur-3xl" />
+
+          <div className="container relative z-10">
+            <div className="mx-auto max-w-3xl space-y-8 text-center animate-fade-in">
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-600 backdrop-blur-sm dark:text-blue-400">
+                <Sparkles className="h-4 w-4" />
+                Automação jurídica com IA
+              </div>
+
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/30">
+                <Scale className="h-10 w-10 text-white" />
+              </div>
+
+              <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+                  Gwan Legal
+                </span>
+              </h1>
+
+              <p className="mx-auto max-w-2xl text-xl font-medium text-foreground">
+                O futuro do Direito brasileiro começa aqui.
+              </p>
+              <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                Plataforma de automação jurídica inteligente que utiliza IA para
+                gerar contratos, petições e documentos jurídicos com precisão e
+                eficiência.
+              </p>
+
+              <div className="flex justify-center pt-2">
+                <Button size="lg" className="group text-lg" asChild>
+                  <a
+                    href={env.VITE_GWAN_LEGAL_AI_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Acessar Plataforma
+                    <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </Button>
+              </div>
+            </div>
           </div>
-          <h2 className="text-5xl font-bold text-card-foreground mb-6">
-            Gwan Legal
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-4">
-            O futuro do Direito brasileiro começa aqui
-          </p>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
-            Plataforma de automação jurídica inteligente que utiliza IA para
-            gerar contratos, petições e documentos jurídicos com precisão e
-            eficiência.
-          </p>
-          <a
-            href={env.VITE_GWAN_LEGAL_AI_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary/90 transition-colors duration-300"
-          >
-            Acessar Plataforma Gwan Legal
-            <svg
-              className="w-5 h-5 inline-block ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-              />
-            </svg>
-          </a>
-        </div>
+        </section>
 
-        {/* Features Section */}
-        <section className="mb-16">
-          <div className="bg-card rounded-xl p-8 border border-border">
-            <h3 className="text-3xl font-bold text-card-foreground mb-6">
-              O que você encontra na plataforma
-            </h3>
-            <p className="text-muted-foreground text-lg mb-6">
-              A plataforma Gwan Legal oferece soluções completas para automação
-              jurídica com inteligência artificial:
-            </p>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Geração automatizada de contratos
+        {/* Features */}
+        <section className="bg-background px-4 py-24">
+          <div className="container mx-auto">
+            <div className="mb-16 space-y-4 text-center">
+              <h2 className="text-4xl font-bold md:text-5xl">
+                O que você encontra na{' '}
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+                  plataforma
                 </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Criação de petições jurídicas
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Documentos jurídicos precisos
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Automação jurídica inteligente
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Modelos jurídicos atualizados
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span className="text-muted-foreground">
-                  Conformidade com legislação brasileira
-                </span>
-              </li>
-            </ul>
+              </h2>
+              <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+                Soluções completas de automação jurídica com inteligência
+                artificial
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ title, description, icon: Icon }) => (
+                <Card
+                  key={title}
+                  className="group h-full border-2 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-blue-500/50 hover:shadow-hover"
+                >
+                  <CardContent className="space-y-4 p-6">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-card-foreground">
+                      {title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-card border-t border-border">
-        <div className="container py-12">
-          <div className="text-center">
-            <p className="text-muted-foreground">
-              © 2024 Gwan Company. Todos os direitos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

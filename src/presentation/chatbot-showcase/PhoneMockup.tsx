@@ -7,7 +7,7 @@ interface PhoneMockupProps {
 
 export const PhoneMockup = ({ children }: PhoneMockupProps) => {
   return (
-    <div className="relative w-[375px] h-[812px] bg-black rounded-[3rem] p-3 shadow-2xl animate-float">
+    <div className="relative w-[375px] h-[812px] bg-black rounded-[3rem] p-3 shadow-2xl">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-7 bg-black rounded-b-3xl z-10" />
 
       <div className="w-full h-full bg-background rounded-[2.5rem] overflow-hidden flex flex-col">
@@ -25,4 +25,3 @@ export const PhoneMockup = ({ children }: PhoneMockupProps) => {
     </div>
   );
 };
-

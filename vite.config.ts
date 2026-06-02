@@ -24,7 +24,8 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(packageJson.version),
   },
   server: {
-    port: 3001,
+    // gwan-site = slot 0 do padrao de portas do gwan-infra (web 5173).
+    port: 5173,
     strictPort: true,
     open: true,
     host: true,
@@ -35,7 +36,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Code-splitting manual para otimizar o tamanho dos chunks
-        manualChunks: (id) => {
+        manualChunks: id => {
           // React e React DOM - sempre no chunk principal (index.js) para evitar problemas de lazy loading
           // Não separar React para garantir que esteja sempre disponível
           if (

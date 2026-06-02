@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ShoppingBag, MessageSquareText, RotateCcw } from 'lucide-react';
 import { PhoneMockup } from '../../presentation/chatbot-showcase/PhoneMockup';
 import { ChatInterface } from '../../presentation/chatbot-showcase/ChatInterface';
 import { MartInteractionsSelector } from '../../presentation/chatbot-showcase/MartInteractionsSelector';
@@ -6,6 +7,8 @@ import { useMartInteractions } from '../../application/chat/useMartInteractions'
 import { ChatRepository } from '../../infrastructure/chat/ChatRepository';
 import { createEventsHttpClient } from '../../infrastructure/http/eventsHttpClient';
 import Header from '../../components/layout/Header';
+import Footer from '../../components/Footer';
+import { Button } from '@/components/ui/button';
 import martChatDataRaw from '../../data/chat/chatData-mart.json';
 import type { ChatData } from '../../presentation/chatbot-showcase/ChatInterface';
 import type { Journey } from '../../domain/chat/types';
@@ -40,17 +43,15 @@ const BotGwanMartPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-hero">
-      {/* Header Compartilhado */}
-      <Header showBackButton={true} backButtonText="Voltar ao Início" />
+      <Header />
 
       {/* Conteúdo Principal */}
       <div className="container mx-auto px-4 py-8 pt-24">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 min-h-[calc(100vh-6rem)]">
           <div className="flex-1 max-w-2xl text-center lg:text-left space-y-6 animate-fade-in">
-            <div className="inline-block">
-              <span className="bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm">
-                🛒 Chatbot Gwan Mart
-              </span>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm">
+              <ShoppingBag className="h-4 w-4" />
+              Chatbot Gwan Mart
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-foreground leading-tight">
@@ -67,19 +68,24 @@ const BotGwanMartPage = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button
+              <Button
+                size="lg"
+                className="text-base shadow-glow-primary"
                 onClick={() => setIsInteractionsOpen(true)}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-primary/50 transition-all duration-300 hover:scale-105"
               >
+                <MessageSquareText className="mr-2 h-5 w-5" />
                 Ver Jornadas de Conversação
-              </button>
+              </Button>
               {selectedJourney && (
-                <button
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-base"
                   onClick={handleResetChat}
-                  className="bg-muted hover:bg-muted/80 text-muted-foreground px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105"
                 >
+                  <RotateCcw className="mr-2 h-5 w-5" />
                   Voltar ao Chat Padrão
-                </button>
+                </Button>
               )}
             </div>
 
@@ -123,6 +129,8 @@ const BotGwanMartPage = () => {
         onOpenChange={setIsInteractionsOpen}
         onSelectJourney={handleSelectJourney}
       />
+
+      <Footer />
     </div>
   );
 };

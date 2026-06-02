@@ -1,4 +1,13 @@
 import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface PaginationProps {
   currentPage: number;
@@ -17,7 +26,7 @@ const Pagination: React.FC<PaginationProps> = ({
   itemsPerPage,
   onPageChange,
   onLimitChange,
-  loading = false
+  loading = false,
 }) => {
   // Calcular informações de exibição
   const startItem = (currentPage - 1) * itemsPerPage + 1;
@@ -27,9 +36,13 @@ const Pagination: React.FC<PaginationProps> = ({
   const getVisiblePages = () => {
     const delta = 2; // Número de páginas para mostrar antes e depois da atual
     const range = [];
-    const rangeWithDots = [];
+    const rangeWithDots: (number | string)[] = [];
 
-    for (let i = Math.max(2, currentPage - delta); i <= Math.min(totalPages - 1, currentPage + delta); i++) {
+    for (
+      let i = Math.max(2, currentPage - delta);
+      i <= Math.min(totalPages - 1, currentPage + delta);
+      i++
+    ) {
       range.push(i);
     }
 
@@ -57,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-border">
+    <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row">
       {/* Informações de exibição */}
       <div className="text-sm text-muted-foreground">
         Mostrando {startItem} a {endItem} de {totalItems} produtos
@@ -65,28 +78,15 @@ const Pagination: React.FC<PaginationProps> = ({
 
       {/* Controles de paginação */}
       <div className="flex items-center gap-2">
-        {/* Botão Anterior */}
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1 || loading}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-md"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4"
-          >
-            <path d="m15 18-6-6 6-6"></path>
-          </svg>
+          <ChevronLeft className="h-4 w-4" />
           Anterior
-        </button>
+        </Button>
 
         {/* Números das páginas */}
         <div className="flex items-center gap-1">
@@ -95,7 +95,7 @@ const Pagination: React.FC<PaginationProps> = ({
               return (
                 <span
                   key={`dots-${index}`}
-                  className="inline-flex items-center justify-center h-9 w-9 text-sm text-muted-foreground"
+                  className="inline-flex h-9 w-9 items-center justify-center text-sm text-muted-foreground"
                 >
                   ...
                 </span>
@@ -106,65 +106,52 @@ const Pagination: React.FC<PaginationProps> = ({
             const isCurrentPage = pageNumber === currentPage;
 
             return (
-              <button
+              <Button
                 key={pageNumber}
+                variant={isCurrentPage ? 'default' : 'outline'}
+                size="icon"
+                className="h-9 w-9"
                 onClick={() => onPageChange(pageNumber)}
                 disabled={loading}
-                className={`inline-flex items-center justify-center h-9 w-9 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-md ${
-                  isCurrentPage
-                    ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                    : 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'
-                }`}
+                aria-current={isCurrentPage ? 'page' : undefined}
               >
                 {pageNumber}
-              </button>
+              </Button>
             );
           })}
         </div>
 
-        {/* Botão Próximo */}
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages || loading}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3 rounded-md"
         >
           Próximo
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-4 w-4"
-          >
-            <path d="m9 18 6-6-6-6"></path>
-          </svg>
-        </button>
+          <ChevronRight className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Seletor de itens por página */}
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">Itens por página:</span>
-        <select
-          onChange={(e) => {
-            const newLimit = Number(e.target.value);
-            if (onLimitChange) {
-              onLimitChange(newLimit);
-            }
-          }}
-          value={itemsPerPage}
+        <span className="whitespace-nowrap text-sm text-muted-foreground">
+          Itens por página:
+        </span>
+        <Select
+          value={String(itemsPerPage)}
+          onValueChange={value => onLimitChange?.(Number(value))}
           disabled={loading || !onLimitChange}
-          className="h-9 px-3 py-1 text-sm border border-input bg-background rounded-md focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
         >
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </select>
+          <SelectTrigger className="h-9 w-[72px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="10">10</SelectItem>
+            <SelectItem value="20">20</SelectItem>
+            <SelectItem value="50">50</SelectItem>
+            <SelectItem value="100">100</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
