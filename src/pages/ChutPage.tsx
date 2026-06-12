@@ -35,7 +35,7 @@ const features = [
   },
   {
     title: 'Carteira digital',
-    description: 'Gerencie seu saldo CHUT direto pelo aplicativo.',
+    description: 'Gerencie seu saldo Gwan Social direto pelo aplicativo.',
     icon: Wallet,
   },
   {
@@ -75,7 +75,7 @@ const ChutPage: React.FC = () => {
 
               <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
                 <span className="bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">
-                  CHUT
+                  Gwan Social
                 </span>
               </h1>
 
@@ -107,7 +107,7 @@ const ChutPage: React.FC = () => {
               <h2 className="text-4xl font-bold md:text-5xl">
                 O que o{' '}
                 <span className="bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent">
-                  CHUT
+                  Gwan Social
                 </span>{' '}
                 oferece
               </h2>

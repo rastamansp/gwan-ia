@@ -74,7 +74,7 @@ const LitoralRidePage: React.FC = () => {
 
               <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
                 <span className="bg-gradient-to-r from-sky-500 to-sky-600 bg-clip-text text-transparent">
-                  Litoral Ride
+                  Gwan Ride
                 </span>
               </h1>
 
@@ -106,7 +106,7 @@ const LitoralRidePage: React.FC = () => {
               <h2 className="text-4xl font-bold md:text-5xl">
                 Por que usar o{' '}
                 <span className="bg-gradient-to-r from-sky-500 to-sky-600 bg-clip-text text-transparent">
-                  Litoral Ride
+                  Gwan Ride
                 </span>
               </h2>
               <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
