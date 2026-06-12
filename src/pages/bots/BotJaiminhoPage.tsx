@@ -58,7 +58,7 @@ const BotJaiminhoPage = () => {
   const journeyMessages = selectedJourney
     ? convertJourneyToMessages(selectedJourney)
     : undefined;
-  const headerName = selectedJourney ? 'Jaiminho — Assistente' : undefined;
+  const headerName = selectedJourney ? 'Gwan Saúde — Assistente' : undefined;
   const headerAvatar = selectedJourney ? '🌿' : undefined;
 
   return (
@@ -71,13 +71,13 @@ const BotJaiminhoPage = () => {
           <div className="flex-1 max-w-2xl text-center lg:text-left space-y-6 animate-fade-in">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary backdrop-blur-sm">
               <Leaf className="h-4 w-4" />
-              Chatbot Jaiminho
+              Chatbot Gwan Saúde
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-bold text-foreground leading-tight">
               Experimente o
               <span className="block text-primary animate-gradient">
-                Chatbot Jaiminho
+                Chatbot Gwan Saúde
               </span>
             </h1>
 

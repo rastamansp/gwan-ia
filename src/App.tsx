@@ -45,6 +45,8 @@ const TraducoesPage = lazy(() => import('./pages/TraducoesPage'));
 const EventsPage = lazy(() => import('./pages/EventsPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
 const ImoveisPage = lazy(() => import('./pages/ImoveisPage'));
+const LitoralRidePage = lazy(() => import('./pages/LitoralRidePage'));
+const ChutPage = lazy(() => import('./pages/ChutPage'));
 const PortalPage = lazy(() => import('./pages/PortalPage'));
 const WorkPage = lazy(() => import('./pages/WorkPage'));
 
@@ -71,6 +73,8 @@ function App() {
             <Route path="/gwan-imoveis" element={<ImoveisPage />} />
             <Route path="/gwan-portal" element={<PortalPage />} />
             <Route path="/gwan-work" element={<WorkPage />} />
+            <Route path="/litoral-ride" element={<LitoralRidePage />} />
+            <Route path="/chut" element={<ChutPage />} />
             <Route path="/gwan-mart" element={<GwanMartPage />} />
             <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
             <Route

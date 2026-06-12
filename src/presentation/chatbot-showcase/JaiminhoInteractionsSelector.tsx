@@ -33,7 +33,7 @@ export const JaiminhoInteractionsSelector = ({
           <DialogTitle>Jornadas de Conversação</DialogTitle>
           <DialogDescription>
             Selecione uma jornada para visualizar no chat. Cada jornada
-            representa um cenário diferente de uso do Jaiminho.
+            representa um cenário diferente de uso do Gwan Saúde.
           </DialogDescription>
         </DialogHeader>
 
@@ -82,4 +82,3 @@ export const JaiminhoInteractionsSelector = ({
     </Dialog>
   );
 };
-

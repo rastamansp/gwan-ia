@@ -2,7 +2,7 @@
   "conversation": {
     "participants": {
       "mentor": {
-        "name": "Jaiminho",
+        "name": "Gwan Saúde",
         "avatar": "🌿",
         "role": "Assistente de Saúde"
       },
@@ -17,7 +17,7 @@
         "id": 1,
         "sender": "mentor",
         "type": "text",
-        "content": "Olá! Bem-vindo ao Jaiminho. Como posso ajudar você hoje?",
+        "content": "Olá! Bem-vindo ao Gwan Saúde. Como posso ajudar você hoje?",
         "timestamp": "10:30"
       },
       {

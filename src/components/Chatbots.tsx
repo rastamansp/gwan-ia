@@ -3,7 +3,7 @@ import ChatbotCard from './ChatbotCard';
 const Chatbots = () => {
   const chatbots = [
     {
-      name: 'Jaiminho',
+      name: 'Gwan Saúde',
       description:
         'Seu médico naturopata, fornecendo informações sobre causas, sintomas e tratamentos naturais para doenças do século XXI.',
       accent: 'bg-gradient-to-br from-blue-500 to-blue-600',

@@ -21,16 +21,25 @@ interface HeaderProps {
   backButtonText?: string;
 }
 
-const produtos = [
+interface NavItem {
+  name: string;
+  href: string;
+  /** Link externo (outro app/domínio) — abre em nova aba. */
+  external?: boolean;
+}
+
+const produtos: NavItem[] = [
   { name: 'Gwan Mart', href: '/gwan-mart' },
   { name: 'Gwan Events', href: '/gwan-events' },
-  // Temporariamente desabilitado - produto indisponível
-  // { name: 'Gwan Legal', href: '/gwan-legal' },
+  { name: 'Gwan Legal', href: '/gwan-legal' },
   { name: 'Gwan Imóveis', href: '/gwan-imoveis' },
+  { name: 'Gwan Work', href: '/gwan-work' },
+  { name: 'Gwan Ride', href: '/litoral-ride' },
+  { name: 'Gwan Social', href: '/chut' },
 ];
 
 const chatbots = [
-  { name: 'Jaiminho', href: '/bot-jaiminho' },
+  { name: 'Gwan Saúde', href: '/bot-jaiminho' },
   // Temporariamente desabilitado - chatbot indisponível
   // { name: 'Marley', href: '/bot-marley' },
   // { name: 'Gwan', href: '/bot-gwan' },
@@ -73,12 +82,23 @@ const Header: React.FC<HeaderProps> = () => {
               <DropdownMenuContent className="bg-popover/95 backdrop-blur-xl border-border/50">
                 {produtos.map(produto => (
                   <DropdownMenuItem key={produto.name} asChild>
-                    <Link
-                      to={produto.href}
-                      className="cursor-pointer hover:bg-accent/50"
-                    >
-                      {produto.name}
-                    </Link>
+                    {produto.external ? (
+                      <a
+                        href={produto.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="cursor-pointer hover:bg-accent/50"
+                      >
+                        {produto.name}
+                      </a>
+                    ) : (
+                      <Link
+                        to={produto.href}
+                        className="cursor-pointer hover:bg-accent/50"
+                      >
+                        {produto.name}
+                      </Link>
+                    )}
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -148,16 +168,29 @@ const Header: React.FC<HeaderProps> = () => {
                       Produtos
                     </p>
                     <div className="flex flex-col gap-2">
-                      {produtos.map(produto => (
-                        <Link
-                          key={produto.name}
-                          to={produto.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="text-sm text-foreground/80 hover:text-primary transition-colors"
-                        >
-                          {produto.name}
-                        </Link>
-                      ))}
+                      {produtos.map(produto =>
+                        produto.external ? (
+                          <a
+                            key={produto.name}
+                            href={produto.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setMobileOpen(false)}
+                            className="text-sm text-foreground/80 hover:text-primary transition-colors"
+                          >
+                            {produto.name}
+                          </a>
+                        ) : (
+                          <Link
+                            key={produto.name}
+                            to={produto.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-sm text-foreground/80 hover:text-primary transition-colors"
+                          >
+                            {produto.name}
+                          </Link>
+                        )
+                      )}
                     </div>
                   </div>
 

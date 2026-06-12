@@ -5,7 +5,7 @@
       "description": "Primeiro contato e entendimento dos sintomas do paciente",
       "messages": [
         { "from": "user", "text": "Olá, estou me sentindo mal e gostaria de uma orientação." },
-        { "from": "concierge", "text": "Olá! Seja muito bem-vindo. 😊\n\nSou o Jaiminho, seu assistente de saúde especializado em naturopatia.\n\nEstou aqui para te ajudar com orientações sobre bem-estar e tratamentos naturais.\n\nPara começar, posso saber seu nome?" },
+        { "from": "concierge", "text": "Olá! Seja muito bem-vindo. 😊\n\nSou o Gwan Saúde, seu assistente de saúde especializado em naturopatia.\n\nEstou aqui para te ajudar com orientações sobre bem-estar e tratamentos naturais.\n\nPara começar, posso saber seu nome?" },
         { "from": "user", "text": "Claro, meu nome é Maria." },
         { "from": "concierge", "text": "Ótimo, Maria. Obrigado pela confiança.\n\nFico feliz que tenha nos procurado — muitas pessoas chegam até nós buscando alternativas naturais para cuidar da saúde.\n\nPara começarmos, me diga: o que você está sentindo hoje?\n\nVocê prefere:\n\n1️⃣ Descrever seus sintomas\n\n2️⃣ Falar sobre um problema de saúde específico\n\n3️⃣ Ou prefere que eu te ajude a entender melhor seu estado de saúde?" },
         { "from": "user", "text": "Acho que preciso descrever meus sintomas." },
