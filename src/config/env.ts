@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_EVENTS_CHAT_URL: string;
   readonly VITE_GWAN_IMOVEIS_CHAT_URL: string;
   readonly VITE_GWAN_LEGAL_AI_URL: string;
+  readonly VITE_GWAN_PORTAL_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -48,11 +49,13 @@ const env = {
     'http://localhost:3010/api',
   // Gwan Imóveis Chat URL
   VITE_GWAN_IMOVEIS_CHAT_URL:
-    import.meta.env.VITE_GWAN_IMOVEIS_CHAT_URL ||
-    'http://localhost:3009/api',
+    import.meta.env.VITE_GWAN_IMOVEIS_CHAT_URL || 'http://localhost:3009/api',
   // Gwan Legal AI URL
   VITE_GWAN_LEGAL_AI_URL:
     import.meta.env.VITE_GWAN_LEGAL_AI_URL || 'https://legal-ai.gwan.com.br/',
+  // Gwan Portal URL
+  VITE_GWAN_PORTAL_URL:
+    import.meta.env.VITE_GWAN_PORTAL_URL || 'https://portal.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

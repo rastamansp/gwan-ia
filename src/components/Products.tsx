@@ -1,5 +1,5 @@
 import ProductCard from './ProductCard';
-import { ShoppingBag, Calendar, Home } from 'lucide-react';
+import { ShoppingBag, Calendar, Home, Newspaper } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
 const Products = () => {
@@ -60,6 +60,20 @@ const Products = () => {
       link: '/gwan-imoveis',
       icon: Home,
       gradient: 'from-blue-500 to-blue-600',
+    },
+    {
+      title: 'Gwan Portal',
+      description:
+        'Portal de cultura reggae e entretenimento. Notícias, loja, eventos, rádio ao vivo e comunidade — tudo em um só lugar, com a vibe Gwan.',
+      features: [
+        'Notícias e posts da cena',
+        'Loja e eventos integrados',
+        'Rádio ao vivo (AzuraCast)',
+        'Comunidade e social',
+      ],
+      link: '/gwan-portal',
+      icon: Newspaper,
+      gradient: 'from-amber-500 to-amber-600',
     },
   ];
 

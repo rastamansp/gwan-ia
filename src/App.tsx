@@ -6,7 +6,13 @@ import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 
 // Imports críticos (carregados imediatamente)
-import { HomePage, AuthPage, RegisterPage, VerifyLoginPage, VerifyAccountPage } from './pages';
+import {
+  HomePage,
+  AuthPage,
+  RegisterPage,
+  VerifyLoginPage,
+  VerifyAccountPage,
+} from './pages';
 
 // Lazy loading para páginas menos críticas (code-splitting)
 const DashboardPage = lazy(() => import('./pages/dashboard/DashboardPage'));
@@ -23,7 +29,9 @@ const BotJaiminhoPage = lazy(() => import('./pages/bots/BotJaiminhoPage'));
 const BotMarleyPage = lazy(() => import('./pages/bots/BotMarleyPage'));
 const BotGwanPage = lazy(() => import('./pages/bots/BotGwanPage'));
 const BotGwanMartPage = lazy(() => import('./pages/bots/BotGwanMartPage'));
-const BotGwanImoveisPage = lazy(() => import('./pages/bots/BotGwanImoveisPage'));
+const BotGwanImoveisPage = lazy(
+  () => import('./pages/bots/BotGwanImoveisPage')
+);
 const BotGwanEventsPage = lazy(() => import('./pages/bots/BotGwanEventsPage'));
 const BibleChatbotPage = lazy(() => import('./pages/bots/BibleChatbotPage'));
 const DebugPage = lazy(() => import('./pages/admin/DebugPage'));
@@ -37,6 +45,7 @@ const TraducoesPage = lazy(() => import('./pages/TraducoesPage'));
 const EventsPage = lazy(() => import('./pages/EventsPage'));
 const LegalPage = lazy(() => import('./pages/LegalPage'));
 const ImoveisPage = lazy(() => import('./pages/ImoveisPage'));
+const PortalPage = lazy(() => import('./pages/PortalPage'));
 
 // Componente de loading para Suspense
 const PageLoader: React.FC = () => (
@@ -55,143 +64,147 @@ function App() {
         <Toaster position="top-right" />
         <Suspense fallback={<PageLoader />}>
           <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/gwan-events" element={<EventsPage />} />
-          <Route path="/gwan-legal" element={<LegalPage />} />
-          <Route path="/gwan-imoveis" element={<ImoveisPage />} />
-          <Route path="/gwan-mart" element={<GwanMartPage />} />
-          <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
-          <Route
-            path="/gwan-mart/product/:productCode"
-            element={<ProductPage />}
-          />
-          <Route path="/theme" element={<ThemePage />} />
-          <Route path="/auth" element={<AuthPage />} />
-          <Route path="/register-account" element={<RegisterPage />} />
-          <Route path="/auth/verify-login" element={<VerifyLoginPage />} />
-          <Route path="/auth/verify-account" element={<VerifyAccountPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/gwan-events" element={<EventsPage />} />
+            <Route path="/gwan-legal" element={<LegalPage />} />
+            <Route path="/gwan-imoveis" element={<ImoveisPage />} />
+            <Route path="/gwan-portal" element={<PortalPage />} />
+            <Route path="/gwan-mart" element={<GwanMartPage />} />
+            <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
+            <Route
+              path="/gwan-mart/product/:productCode"
+              element={<ProductPage />}
+            />
+            <Route path="/theme" element={<ThemePage />} />
+            <Route path="/auth" element={<AuthPage />} />
+            <Route path="/register-account" element={<RegisterPage />} />
+            <Route path="/auth/verify-login" element={<VerifyLoginPage />} />
+            <Route
+              path="/auth/verify-account"
+              element={<VerifyAccountPage />}
+            />
 
-          {/* Rotas protegidas */}
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <DashboardPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/minha-ia"
-            element={
-              <ProtectedRoute>
-                <MinhaIAPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/chatbots"
-            element={
-              <ProtectedRoute>
-                <ChatbotsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/traducoes"
-            element={
-              <ProtectedRoute>
-                <TraducoesPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ia-imagens"
-            element={
-              <ProtectedRoute>
-                <IAImagensPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ia-texto"
-            element={
-              <ProtectedRoute>
-                <IATextoPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ia-video"
-            element={
-              <ProtectedRoute>
-                <IAVideoPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ia-audio"
-            element={
-              <ProtectedRoute>
-                <IAAudioPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/assistentes"
-            element={
-              <ProtectedRoute>
-                <AssistentesPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/prompts"
-            element={
-              <ProtectedRoute>
-                <PromptsPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/biblioteca"
-            element={
-              <ProtectedRoute>
-                <BibliotecaPage />
-              </ProtectedRoute>
-            }
-          />
+            {/* Rotas protegidas */}
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <DashboardPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/minha-ia"
+              element={
+                <ProtectedRoute>
+                  <MinhaIAPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/chatbots"
+              element={
+                <ProtectedRoute>
+                  <ChatbotsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/traducoes"
+              element={
+                <ProtectedRoute>
+                  <TraducoesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ia-imagens"
+              element={
+                <ProtectedRoute>
+                  <IAImagensPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ia-texto"
+              element={
+                <ProtectedRoute>
+                  <IATextoPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ia-video"
+              element={
+                <ProtectedRoute>
+                  <IAVideoPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ia-audio"
+              element={
+                <ProtectedRoute>
+                  <IAAudioPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/assistentes"
+              element={
+                <ProtectedRoute>
+                  <AssistentesPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/prompts"
+              element={
+                <ProtectedRoute>
+                  <PromptsPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/biblioteca"
+              element={
+                <ProtectedRoute>
+                  <BibliotecaPage />
+                </ProtectedRoute>
+              }
+            />
 
-          {/* Rotas dos Chatbots */}
-          <Route path="/bot-jaiminho" element={<BotJaiminhoPage />} />
-          <Route path="/bot-marley" element={<BotMarleyPage />} />
-          <Route path="/bot-gwan" element={<BotGwanPage />} />
-          <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
-          <Route path="/bot-gwan-imoveis" element={<BotGwanImoveisPage />} />
-          <Route path="/bot-gwan-events" element={<BotGwanEventsPage />} />
-          <Route path="/bot-biblia" element={<BibleChatbotPage />} />
+            {/* Rotas dos Chatbots */}
+            <Route path="/bot-jaiminho" element={<BotJaiminhoPage />} />
+            <Route path="/bot-marley" element={<BotMarleyPage />} />
+            <Route path="/bot-gwan" element={<BotGwanPage />} />
+            <Route path="/bot-gwan-mart" element={<BotGwanMartPage />} />
+            <Route path="/bot-gwan-imoveis" element={<BotGwanImoveisPage />} />
+            <Route path="/bot-gwan-events" element={<BotGwanEventsPage />} />
+            <Route path="/bot-biblia" element={<BibleChatbotPage />} />
 
-          {/* Rota de Debug */}
-          <Route path="/debug" element={<DebugPage />} />
+            {/* Rota de Debug */}
+            <Route path="/debug" element={<DebugPage />} />
 
-          {/* Rota de Administração do Mart */}
-          <Route
-            path="/admin/mart"
-            element={
-              <ProtectedRoute>
-                <MartAdminPage />
-              </ProtectedRoute>
-            }
-          />
+            {/* Rota de Administração do Mart */}
+            <Route
+              path="/admin/mart"
+              element={
+                <ProtectedRoute>
+                  <MartAdminPage />
+                </ProtectedRoute>
+              }
+            />
 
-          {/* Rota de Edição de Produto */}
-          <Route
-            path="/admin/mart/product/:code/edit"
-            element={
-              <ProtectedRoute>
-                <EditProductPage />
-              </ProtectedRoute>
-            }
-          />
+            {/* Rota de Edição de Produto */}
+            <Route
+              path="/admin/mart/product/:code/edit"
+              element={
+                <ProtectedRoute>
+                  <EditProductPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Suspense>
       </AuthProvider>
