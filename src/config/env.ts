@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_IMOVEIS_CHAT_URL: string;
   readonly VITE_GWAN_LEGAL_AI_URL: string;
   readonly VITE_GWAN_PORTAL_URL: string;
+  readonly VITE_GWAN_WORK_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -56,6 +57,9 @@ const env = {
   // Gwan Portal URL
   VITE_GWAN_PORTAL_URL:
     import.meta.env.VITE_GWAN_PORTAL_URL || 'https://portal.gwan.cloud/',
+  // Gwan Work URL (voluntariado com banco de tempo)
+  VITE_GWAN_WORK_URL:
+    import.meta.env.VITE_GWAN_WORK_URL || 'https://work.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

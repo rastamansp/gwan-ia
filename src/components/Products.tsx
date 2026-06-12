@@ -1,5 +1,11 @@
 import ProductCard from './ProductCard';
-import { ShoppingBag, Calendar, Home, Newspaper } from 'lucide-react';
+import {
+  ShoppingBag,
+  Calendar,
+  Home,
+  Newspaper,
+  HeartHandshake,
+} from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
 const Products = () => {
@@ -74,6 +80,20 @@ const Products = () => {
       link: '/gwan-portal',
       icon: Newspaper,
       gradient: 'from-amber-500 to-amber-600',
+    },
+    {
+      title: 'Gwan Work',
+      description:
+        'Plataforma de voluntariado com banco de tempo. Conecte voluntários a projetos sociais e transforme cada hora doada em crédito numa economia comunitária de tempo.',
+      features: [
+        'Gestão de voluntariado e projetos',
+        'Banco de tempo (1h = 1 crédito)',
+        'Validação dupla de horas',
+        'Carteira e histórico auditável',
+      ],
+      link: '/gwan-work',
+      icon: HeartHandshake,
+      gradient: 'from-emerald-500 to-emerald-600',
     },
   ];
 
