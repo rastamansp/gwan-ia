@@ -6,6 +6,7 @@ import {
   Newspaper,
   HeartHandshake,
   Sticker,
+  Megaphone,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -109,6 +110,20 @@ const Products = () => {
       link: '/gwan-worldcup',
       icon: Sticker,
       gradient: 'from-sky-500 to-indigo-600',
+    },
+    {
+      title: 'Gwan AdGen',
+      description:
+        'Gerador de anúncios e criativos com IA para e-commerce. Crie textos, imagens e variações de campanha a partir do seu produto e publique mais rápido — com exemplo pronto para o Mercado Livre.',
+      features: [
+        'Geração de anúncios com IA (texto + imagem)',
+        'Variações de campanha automáticas',
+        'Catálogo de produtos integrado',
+        'Exemplo pronto para Mercado Livre',
+      ],
+      link: '/gwan-adgen',
+      icon: Megaphone,
+      gradient: 'from-fuchsia-500 to-pink-600',
     },
   ];
 

@@ -35,6 +35,7 @@ const produtos: NavItem[] = [
   { name: 'Gwan Imóveis', href: '/gwan-imoveis' },
   { name: 'Gwan Work', href: '/gwan-work' },
   { name: 'Gwan World Cup', href: '/gwan-worldcup' },
+  { name: 'Gwan AdGen', href: '/gwan-adgen' },
   { name: 'Gwan Ride', href: '/litoral-ride' },
   { name: 'Gwan Social', href: '/chut' },
 ];
