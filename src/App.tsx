@@ -49,6 +49,7 @@ const LitoralRidePage = lazy(() => import('./pages/LitoralRidePage'));
 const ChutPage = lazy(() => import('./pages/ChutPage'));
 const PortalPage = lazy(() => import('./pages/PortalPage'));
 const WorkPage = lazy(() => import('./pages/WorkPage'));
+const FifaPage = lazy(() => import('./pages/FifaPage'));
 
 // Componente de loading para Suspense
 const PageLoader: React.FC = () => (
@@ -73,6 +74,7 @@ function App() {
             <Route path="/gwan-imoveis" element={<ImoveisPage />} />
             <Route path="/gwan-portal" element={<PortalPage />} />
             <Route path="/gwan-work" element={<WorkPage />} />
+            <Route path="/gwan-fifa" element={<FifaPage />} />
             <Route path="/litoral-ride" element={<LitoralRidePage />} />
             <Route path="/chut" element={<ChutPage />} />
             <Route path="/gwan-mart" element={<GwanMartPage />} />

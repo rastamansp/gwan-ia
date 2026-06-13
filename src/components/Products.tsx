@@ -5,6 +5,7 @@ import {
   Home,
   Newspaper,
   HeartHandshake,
+  Sticker,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -94,6 +95,20 @@ const Products = () => {
       link: '/gwan-work',
       icon: HeartHandshake,
       gradient: 'from-emerald-500 to-emerald-600',
+    },
+    {
+      title: 'Gwan FIFA',
+      description:
+        'Gerador de figurinhas no estilo álbum esportivo FIFA/Panini. Envie uma foto e seus dados pessoais e receba uma figurinha personalizada, com análise de imagem por IA e composição em alta resolução pronta para download.',
+      features: [
+        'Upload de foto + dados pessoais',
+        'Análise de imagem com IA (Claude)',
+        'Composição estilo FIFA/Panini',
+        'Download da figurinha em alta resolução',
+      ],
+      link: '/gwan-fifa',
+      icon: Sticker,
+      gradient: 'from-sky-500 to-indigo-600',
     },
   ];
 
