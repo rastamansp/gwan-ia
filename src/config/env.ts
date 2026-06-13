@@ -10,7 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_LEGAL_AI_URL: string;
   readonly VITE_GWAN_PORTAL_URL: string;
   readonly VITE_GWAN_WORK_URL: string;
-  readonly VITE_GWAN_FIFA_URL: string;
+  readonly VITE_GWAN_WORLDCUP_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -61,9 +61,9 @@ const env = {
   // Gwan Work URL (voluntariado com banco de tempo)
   VITE_GWAN_WORK_URL:
     import.meta.env.VITE_GWAN_WORK_URL || 'https://work.gwan.cloud/',
-  // Gwan FIFA URL (gerador de figurinhas estilo FIFA/Panini)
-  VITE_GWAN_FIFA_URL:
-    import.meta.env.VITE_GWAN_FIFA_URL || 'https://fifa.gwan.cloud/',
+  // Gwan World Cup URL (gerador de figurinhas estilo álbum de copa)
+  VITE_GWAN_WORLDCUP_URL:
+    import.meta.env.VITE_GWAN_WORLDCUP_URL || 'https://worldcup.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

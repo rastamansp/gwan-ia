@@ -29,9 +29,9 @@ const features = [
     icon: Wand2,
   },
   {
-    title: 'Estilo FIFA/Panini',
+    title: 'Estilo álbum de copa',
     description:
-      'Composição automática no visual de álbum esportivo, com seus dados e identidade do clube e país.',
+      'Composição automática no visual de álbum de copa do mundo, com seus dados e identidade do clube e país.',
     icon: Trophy,
   },
   {
@@ -54,7 +54,7 @@ const features = [
   },
 ];
 
-const FifaPage: React.FC = () => {
+const WorldCupPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Header />
@@ -70,7 +70,7 @@ const FifaPage: React.FC = () => {
             <div className="mx-auto max-w-3xl space-y-8 text-center animate-fade-in">
               <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/20 bg-sky-500/10 px-4 py-2 text-sm font-medium text-sky-600 backdrop-blur-sm dark:text-sky-400">
                 <Sparkles className="h-4 w-4" />
-                Figurinhas estilo FIFA/Panini com IA
+                Figurinhas estilo álbum de copa do mundo com IA
               </div>
 
               <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-sky-500 to-indigo-600 shadow-lg shadow-sky-500/30">
@@ -79,7 +79,7 @@ const FifaPage: React.FC = () => {
 
               <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
                 <span className="bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
-                  Gwan FIFA
+                  Gwan World Cup
                 </span>
               </h1>
 
@@ -93,7 +93,7 @@ const FifaPage: React.FC = () => {
               <div className="flex flex-col justify-center gap-4 pt-2 sm:flex-row">
                 <Button size="lg" className="group text-lg" asChild>
                   <a
-                    href={env.VITE_GWAN_FIFA_URL}
+                    href={env.VITE_GWAN_WORLDCUP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -152,4 +152,4 @@ const FifaPage: React.FC = () => {
   );
 };
 
-export default FifaPage;
+export default WorldCupPage;
