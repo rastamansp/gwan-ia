@@ -36,6 +36,7 @@ const produtos: NavItem[] = [
   { name: 'Gwan Work', href: '/gwan-work' },
   { name: 'Gwan World Cup', href: '/gwan-worldcup' },
   { name: 'Gwan AdGen', href: '/gwan-adgen' },
+  { name: 'Cinematic', href: '/cinematic' },
   { name: 'Gwan Ride', href: '/litoral-ride' },
   { name: 'Gwan Social', href: '/chut' },
 ];

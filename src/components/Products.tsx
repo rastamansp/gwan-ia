@@ -7,6 +7,7 @@ import {
   HeartHandshake,
   Sticker,
   Megaphone,
+  Clapperboard,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -124,6 +125,20 @@ const Products = () => {
       link: '/gwan-adgen',
       icon: Megaphone,
       gradient: 'from-fuchsia-500 to-pink-600',
+    },
+    {
+      title: 'Cinematic',
+      description:
+        'Playground de edição de vídeo com IA. Suba seu footage bruto, descreva em uma frase o que quer e receba um vídeo editado — cortes em fronteira de palavra, remoção de fillers, color grade e legendas, sempre com a sua aprovação antes do corte.',
+      features: [
+        'Edição por linguagem natural',
+        'Aprovação humana antes do corte',
+        'Remoção de fillers e silêncios',
+        'Legendas, color grade e self-eval',
+      ],
+      link: '/cinematic',
+      icon: Clapperboard,
+      gradient: 'from-violet-500 to-purple-600',
     },
   ];
 
