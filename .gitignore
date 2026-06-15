@@ -44,3 +44,7 @@ out/
 # Temporary files
 *.tmp
 *.temp
+
+# MkDocs — site estatico gerado (publicado no CI)
+site/
+.cache/
