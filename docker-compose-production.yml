@@ -19,7 +19,7 @@ services:
         VITE_GWAN_EVENTS_CHAT_URL: ${VITE_GWAN_EVENTS_CHAT_URL:-https://events-api.gwan.cloud/api}
         VITE_GWAN_IMOVEIS_CHAT_URL: ${VITE_GWAN_IMOVEIS_CHAT_URL:-https://imoveis-api.gwan.cloud/api}
         VITE_GWAN_LEGAL_AI_URL: ${VITE_GWAN_LEGAL_AI_URL:-https://legal-api.gwan.cloud/}
-        VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-https://api.gwan.cloud/api/chat-health}
+        VITE_CHAT_HEALTH_API_URL: ${VITE_CHAT_HEALTH_API_URL:-https://events-api.gwan.cloud/api/chat-health}
         VITE_OTEL_EXPORTER_OTLP_ENDPOINT: ${VITE_OTEL_EXPORTER_OTLP_ENDPOINT:-}
         VITE_OTEL_SERVICE_NAME: ${VITE_OTEL_SERVICE_NAME:-gwan-ia-frontend}
         VITE_OTEL_SERVICE_VERSION: ${VITE_OTEL_SERVICE_VERSION:-1.1.1}
