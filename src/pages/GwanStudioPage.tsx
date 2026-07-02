@@ -1,0 +1,154 @@
+import React from 'react';
+import {
+  ExternalLink,
+  Film,
+  Scissors,
+  Image,
+  Tags,
+  Upload,
+  Radio,
+} from 'lucide-react';
+import Header from '../components/layout/Header';
+import Footer from '../components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import env from '../config/env';
+
+const features = [
+  {
+    title: 'Upload multi-câmera',
+    description:
+      'Suba os clipes brutos organizados por câmera/take, reordene e deixe o pipeline cuidar do merge.',
+    icon: Upload,
+  },
+  {
+    title: 'Merge e export sem re-encode',
+    description:
+      'Concatenação via FFmpeg stream-copy — rápido e sem perda de qualidade, com opções de export configuráveis.',
+    icon: Scissors,
+  },
+  {
+    title: 'Thumbnails por IA',
+    description:
+      'Claude Vision analisa os frames e planeja 3 variantes de thumbnail, renderizadas automaticamente para A/B test.',
+    icon: Image,
+  },
+  {
+    title: 'SEO automático',
+    description:
+      'Título, descrição e tags gerados por IA a partir do contexto do vídeo — revise e publique com um clique.',
+    icon: Tags,
+  },
+  {
+    title: 'Publicação direta',
+    description:
+      'Upload no YouTube via Data API v3 com OAuth 2.0 persistido — sem copiar/colar metadados manualmente.',
+    icon: Radio,
+  },
+  {
+    title: 'Acompanhamento em tempo real',
+    description:
+      'Logs do pipeline transmitidos ao vivo por WebSocket — reiniciar o browser não perde o progresso.',
+    icon: Film,
+  },
+];
+
+const GwanStudioPage: React.FC = () => {
+  return (
+    <div className="min-h-screen bg-gradient-hero">
+      <Header />
+
+      <main>
+        {/* Hero */}
+        <section className="relative overflow-hidden pt-32 pb-20">
+          <div className="absolute inset-0 bg-grid-pattern opacity-[0.07]" />
+          <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-rose-500/20 blur-3xl" />
+          <div className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-orange-500/20 blur-3xl" />
+
+          <div className="container relative z-10">
+            <div className="mx-auto max-w-3xl space-y-8 text-center animate-fade-in">
+              <div className="inline-flex items-center gap-2 rounded-full border border-rose-500/20 bg-rose-500/10 px-4 py-2 text-sm font-medium text-rose-600 backdrop-blur-sm dark:text-rose-400">
+                <Film className="h-4 w-4" />
+                Produção de vídeo para YouTube com IA
+              </div>
+
+              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-rose-500 to-orange-500 shadow-lg shadow-rose-500/30">
+                <Film className="h-10 w-10 text-white" />
+              </div>
+
+              <h1 className="text-5xl font-bold tracking-tight md:text-6xl">
+                <span className="bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent">
+                  Gwan Studio
+                </span>
+              </h1>
+
+              <p className="mx-auto max-w-2xl text-xl leading-relaxed text-muted-foreground">
+                Suba o footage bruto e o sistema cuida do resto: merge com
+                FFmpeg, thumbnails geradas por IA, título/descrição/tags para
+                SEO e upload direto no seu canal — tudo acompanhado em tempo
+                real numa interface limpa.
+              </p>
+
+              <div className="flex flex-col justify-center gap-4 pt-2 sm:flex-row">
+                <Button size="lg" className="group text-lg" asChild>
+                  <a
+                    href={env.VITE_GWAN_STUDIO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Acessar Gwan Studio
+                    <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features */}
+        <section className="bg-background px-4 py-24">
+          <div className="container mx-auto">
+            <div className="mb-16 space-y-4 text-center">
+              <h2 className="text-4xl font-bold md:text-5xl">
+                Como o{' '}
+                <span className="bg-gradient-to-r from-rose-500 to-orange-500 bg-clip-text text-transparent">
+                  Gwan Studio
+                </span>{' '}
+                funciona
+              </h2>
+              <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+                Do footage bruto multi-câmera ao vídeo publicado — um pipeline
+                guiado com IA em cada etapa que exigia trabalho manual
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {features.map(({ title, description, icon: Icon }) => (
+                <Card
+                  key={title}
+                  className="group h-full border-2 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:border-rose-500/50 hover:shadow-hover"
+                >
+                  <CardContent className="space-y-4 p-6">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-rose-500 to-orange-500 transition-transform duration-300 group-hover:scale-110">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-card-foreground">
+                      {title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default GwanStudioPage;
