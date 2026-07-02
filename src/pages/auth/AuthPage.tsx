@@ -32,7 +32,24 @@ const AuthPage: React.FC = () => {
     } catch (error) {
       console.error('Erro no login:', error);
 
-      if (error instanceof AuthError) {
+      if (error instanceof AuthError && error.code === 'USER_NOT_VERIFIED') {
+        // Conta existe mas nunca foi ativada: reenvia o código de ativação
+        // e leva o usuário direto para a tela de verificação da conta.
+        try {
+          await authService.resendActivationCode(email);
+          setSuccess(
+            'Sua conta ainda não foi verificada. Reenviamos o código de ativação para seu email!'
+          );
+          setTimeout(() => {
+            navigate('/auth/verify-account', { state: { email } });
+          }, 2000);
+        } catch (resendError) {
+          console.error('Erro ao reenviar código de ativação:', resendError);
+          setError(
+            'Sua conta ainda não foi verificada e não conseguimos reenviar o código. Tente novamente em instantes.'
+          );
+        }
+      } else if (error instanceof AuthError) {
         setError(error.message);
       } else {
         setError('Erro ao enviar código de acesso. Tente novamente.');

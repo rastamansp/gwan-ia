@@ -49,7 +49,15 @@ export class AuthService implements IAuthService {
         code,
       });
     } catch (error) {
-      throw new AuthError('Failed to activate account', error as Error);
+      throw this.toAuthError(error, 'Failed to activate account');
+    }
+  }
+
+  public async resendActivationCode(email: string): Promise<void> {
+    try {
+      await this.httpService.post('/auth/resend-activation-code', { email });
+    } catch (error) {
+      throw this.toAuthError(error, 'Failed to resend activation code');
     }
   }
 
@@ -57,8 +65,16 @@ export class AuthService implements IAuthService {
     try {
       await this.httpService.post('/auth/login', { email });
     } catch (error) {
-      throw new AuthError('Failed to initiate login', error as Error);
+      throw this.toAuthError(error, 'Failed to initiate login');
     }
+  }
+
+  /** Extrai message/code do corpo de erro da API (payload das exceptions do Nest) para o AuthError. */
+  private toAuthError(error: unknown, fallbackMessage: string): AuthError {
+    const apiError = (error as any)?.response?.data;
+    const message = apiError?.message || fallbackMessage;
+    const code = apiError?.code;
+    return new AuthError(message, error as Error, code);
   }
 
   public async verifyLogin(email: string, code: string): Promise<UserSession> {

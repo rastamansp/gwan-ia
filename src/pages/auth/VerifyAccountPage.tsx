@@ -55,12 +55,17 @@ const VerifyAccountPage: React.FC = () => {
   const handleResendCode = async () => {
     setIsLoading(true);
     setError(null);
+    setSuccess(null);
 
     try {
-      // Aqui você pode implementar o reenvio do código
+      await authService.resendActivationCode(email);
       setSuccess('Código reenviado com sucesso!');
     } catch (error) {
-      setError('Erro ao reenviar código. Tente novamente.');
+      if (error instanceof AuthError) {
+        setError(error.message);
+      } else {
+        setError('Erro ao reenviar código. Tente novamente.');
+      }
     } finally {
       setIsLoading(false);
     }
