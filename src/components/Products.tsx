@@ -8,6 +8,8 @@ import {
   Sticker,
   Megaphone,
   Clapperboard,
+  Film,
+  Glasses,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -139,6 +141,34 @@ const Products = () => {
       link: '/cinematic',
       icon: Clapperboard,
       gradient: 'from-violet-500 to-purple-600',
+    },
+    {
+      title: 'Gwan Studio',
+      description:
+        'Estúdio web de produção de vídeo para YouTube. Suba o footage bruto e o sistema cuida do resto: merge com FFmpeg, thumbnails por IA, SEO com IA e upload direto no canal, tudo acompanhado em tempo real.',
+      features: [
+        'Merge de clipes multi-câmera via FFmpeg',
+        'Thumbnails geradas por IA (Claude Vision)',
+        'Título, descrição e tags via IA',
+        'Publicação direta no YouTube',
+      ],
+      link: '/gwan-studio',
+      icon: Film,
+      gradient: 'from-rose-500 to-orange-500',
+    },
+    {
+      title: 'Gwan AR',
+      description:
+        'Playground de Realidade Aumentada e WebXR direto no navegador, sem instalar app: cena de marketplace com avatares, visualizador AR de modelos 3D e geração de modelo 3D a partir de uma foto (IA).',
+      features: [
+        'AR Avatar Marketplace com modo VR',
+        'Visualizador AR de modelos .glb',
+        'Image-to-3D com IA (TRELLIS)',
+        'Funciona no navegador, sem app',
+      ],
+      link: '/gwan-ar',
+      icon: Glasses,
+      gradient: 'from-cyan-500 to-blue-600',
     },
   ];
 

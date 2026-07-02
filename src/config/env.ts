@@ -13,6 +13,8 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_WORLDCUP_URL: string;
   readonly VITE_GWAN_ADGEN_URL: string;
   readonly VITE_CINEMATIC_URL: string;
+  readonly VITE_GWAN_STUDIO_URL: string;
+  readonly VITE_GWAN_AR_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -72,6 +74,12 @@ const env = {
   // Cinematic URL (edição de vídeo com IA por linguagem natural)
   VITE_CINEMATIC_URL:
     import.meta.env.VITE_CINEMATIC_URL || 'https://cinematic.gwan.cloud/',
+  // Gwan Studio URL (estúdio web de produção de vídeo para YouTube)
+  VITE_GWAN_STUDIO_URL:
+    import.meta.env.VITE_GWAN_STUDIO_URL || 'https://studio.gwan.cloud/',
+  // Gwan AR URL (playground de AR/WebXR — avatares, viewer, image-to-3D)
+  VITE_GWAN_AR_URL:
+    import.meta.env.VITE_GWAN_AR_URL || 'https://ar.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||
