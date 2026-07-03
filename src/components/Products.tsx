@@ -10,6 +10,7 @@ import {
   Clapperboard,
   Film,
   Glasses,
+  Wallet,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -169,6 +170,20 @@ const Products = () => {
       link: '/gwan-ar',
       icon: Glasses,
       gradient: 'from-cyan-500 to-blue-600',
+    },
+    {
+      title: 'Gwan Crypto',
+      description:
+        'Login sem senha via carteira cripto (wallet), multi-chain EVM e Solana, com dashboard das transações on-chain do endereço autenticado.',
+      features: [
+        'Login via wallet (QR Code ou extensão)',
+        'Multi-chain: EVM e Solana',
+        'Sem custódia de chaves privadas',
+        'Dashboard de transações on-chain',
+      ],
+      link: '/gwan-crypto',
+      icon: Wallet,
+      gradient: 'from-emerald-500 to-teal-600',
     },
   ];
 

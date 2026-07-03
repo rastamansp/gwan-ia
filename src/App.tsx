@@ -54,6 +54,7 @@ const AdGenPage = lazy(() => import('./pages/AdGenPage'));
 const CinematicPage = lazy(() => import('./pages/CinematicPage'));
 const GwanStudioPage = lazy(() => import('./pages/GwanStudioPage'));
 const GwanArPage = lazy(() => import('./pages/GwanArPage'));
+const GwanCryptoPage = lazy(() => import('./pages/GwanCryptoPage'));
 
 // Componente de loading para Suspense
 const PageLoader: React.FC = () => (
@@ -83,6 +84,7 @@ function App() {
             <Route path="/cinematic" element={<CinematicPage />} />
             <Route path="/gwan-studio" element={<GwanStudioPage />} />
             <Route path="/gwan-ar" element={<GwanArPage />} />
+            <Route path="/gwan-crypto" element={<GwanCryptoPage />} />
             <Route path="/litoral-ride" element={<LitoralRidePage />} />
             <Route path="/chut" element={<ChutPage />} />
             <Route path="/gwan-mart" element={<GwanMartPage />} />

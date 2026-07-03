@@ -15,6 +15,7 @@ interface ImportMetaEnv {
   readonly VITE_CINEMATIC_URL: string;
   readonly VITE_GWAN_STUDIO_URL: string;
   readonly VITE_GWAN_AR_URL: string;
+  readonly VITE_GWAN_CRYPTO_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -80,6 +81,9 @@ const env = {
   // Gwan AR URL (playground de AR/WebXR — avatares, viewer, image-to-3D)
   VITE_GWAN_AR_URL:
     import.meta.env.VITE_GWAN_AR_URL || 'https://ar.gwan.cloud/',
+  // Gwan Crypto URL (login via wallet + dashboard de transações on-chain)
+  VITE_GWAN_CRYPTO_URL:
+    import.meta.env.VITE_GWAN_CRYPTO_URL || 'https://crypto.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

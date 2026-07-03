@@ -41,6 +41,7 @@ const produtos: NavItem[] = [
   { name: 'Gwan Ride', href: '/litoral-ride' },
   { name: 'Gwan Social', href: '/chut' },
   { name: 'Gwan AR', href: '/gwan-ar' },
+  { name: 'Gwan Crypto', href: '/gwan-crypto' },
 ];
 
 const chatbots = [
