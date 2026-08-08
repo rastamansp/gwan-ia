@@ -1,0 +1,49 @@
+schema: spec-driven
+
+context: |
+  gwan-ia — frontend do site institucional GWAN (gwan-site, slot 0), servido em gwan.cloud
+  (www.gwan.cloud redirect); deploy exclusivamente via Portainer (stack gwan-ia no gwan-infra).
+  Stack: React 18 + Vite + TypeScript + Tailwind; design system shadcn/ui (ADR em
+  docs/spec/40-padroes/design-system-shadcn.md do gwan-infra).
+  Arquitetura: SPA estática (build multi-stage node:20 → nginx:alpine, fallback SPA +
+  security headers); consome a API gwan-backend em api.gwan.cloud/api/v1; variáveis VITE_*
+  são build args (baked no bundle).
+  Features: F01–F10 do SDD (institucional, vitrine de produtos do ecossistema
+  Mart/Events/Imóveis/Portal, página de produto rica <ProductPage>, auth OTP via backend).
+  Regras não negociáveis: domínio canônico é gwan.cloud (nunca gwan.com.br, legado);
+  nunca commitar .env*/credenciais; dev roda em :5173 (slot 0 do mapa de portas GWAN).
+  Convenções: requisitos REQ-FXX-NN / RN-FXX-NN; conventional commits.
+  Estado: produto v1.2.0 em produção (E5); docs-site MkDocs publicado no GitHub Pages.
+  SDD canônico vive em apps/ia/docs/spec/ no monorepo gwan-infra (padrão GWAN) —
+  OpenSpec cobre o fluxo de changes, não substitui docs/spec/.
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
