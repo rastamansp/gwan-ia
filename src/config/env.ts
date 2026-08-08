@@ -16,6 +16,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_STUDIO_URL: string;
   readonly VITE_GWAN_AR_URL: string;
   readonly VITE_GWAN_CRYPTO_URL: string;
+  readonly VITE_GWAN_SWIPE_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -84,6 +85,9 @@ const env = {
   // Gwan Crypto URL (login via wallet + dashboard de transações on-chain)
   VITE_GWAN_CRYPTO_URL:
     import.meta.env.VITE_GWAN_CRYPTO_URL || 'https://crypto.gwan.cloud/',
+  // Gwan Swipe URL (triagem de email por gestos — landing)
+  VITE_GWAN_SWIPE_URL:
+    import.meta.env.VITE_GWAN_SWIPE_URL || 'https://swipe.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

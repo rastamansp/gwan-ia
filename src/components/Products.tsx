@@ -11,6 +11,7 @@ import {
   Film,
   Glasses,
   Wallet,
+  Mails,
 } from 'lucide-react';
 // import { Scale } from 'lucide-react'; // Temporariamente desabilitado - produto Gwan Legal indisponível
 
@@ -184,6 +185,20 @@ const Products = () => {
       link: '/gwan-crypto',
       icon: Wallet,
       gradient: 'from-emerald-500 to-teal-600',
+    },
+    {
+      title: 'Gwan Swipe',
+      description:
+        'Triagem de email por gestos, estilo Tinder: cada mensagem da inbox vira um card — deslize para apagar, arquivar, mover para label ou adiar, com undo de 5 segundos e sincronização em lote com o Gmail.',
+      features: [
+        'Swipe em 4 direções (apagar, arquivar, label, adiar)',
+        'Ação otimista com undo de 5s',
+        'Privacidade: nenhum corpo de email persistido',
+        'App mobile (Expo) conectado ao Gmail',
+      ],
+      link: '/gwan-swipe',
+      icon: Mails,
+      gradient: 'from-green-500 to-emerald-600',
     },
   ];
 

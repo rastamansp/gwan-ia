@@ -42,6 +42,7 @@ const produtos: NavItem[] = [
   { name: 'Gwan Social', href: '/chut' },
   { name: 'Gwan AR', href: '/gwan-ar' },
   { name: 'Gwan Crypto', href: '/gwan-crypto' },
+  { name: 'Gwan Swipe', href: '/gwan-swipe' },
 ];
 
 const chatbots = [
