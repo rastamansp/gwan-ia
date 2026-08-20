@@ -17,6 +17,7 @@ interface ImportMetaEnv {
   readonly VITE_GWAN_AR_URL: string;
   readonly VITE_GWAN_CRYPTO_URL: string;
   readonly VITE_GWAN_SWIPE_URL: string;
+  readonly VITE_GWAN_BOOKER_URL: string;
   readonly VITE_CHAT_HEALTH_API_URL: string;
   readonly DEV: boolean;
   readonly MODE: string;
@@ -88,6 +89,9 @@ const env = {
   // Gwan Swipe URL (triagem de email por gestos — landing)
   VITE_GWAN_SWIPE_URL:
     import.meta.env.VITE_GWAN_SWIPE_URL || 'https://swipe.gwan.cloud/',
+  // Gwan Booker URL (venda de shows — CRM, pipeline, LP por artista, proposta pública)
+  VITE_GWAN_BOOKER_URL:
+    import.meta.env.VITE_GWAN_BOOKER_URL || 'https://booker.gwan.cloud/',
   // Chat Health API URL
   VITE_CHAT_HEALTH_API_URL:
     import.meta.env.VITE_CHAT_HEALTH_API_URL ||

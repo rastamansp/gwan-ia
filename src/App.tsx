@@ -56,6 +56,7 @@ const GwanStudioPage = lazy(() => import('./pages/GwanStudioPage'));
 const GwanArPage = lazy(() => import('./pages/GwanArPage'));
 const GwanCryptoPage = lazy(() => import('./pages/GwanCryptoPage'));
 const GwanSwipePage = lazy(() => import('./pages/GwanSwipePage'));
+const GwanBookerPage = lazy(() => import('./pages/GwanBookerPage'));
 
 // Componente de loading para Suspense
 const PageLoader: React.FC = () => (
@@ -87,6 +88,7 @@ function App() {
             <Route path="/gwan-ar" element={<GwanArPage />} />
             <Route path="/gwan-crypto" element={<GwanCryptoPage />} />
             <Route path="/gwan-swipe" element={<GwanSwipePage />} />
+            <Route path="/gwan-booker" element={<GwanBookerPage />} />
             <Route path="/litoral-ride" element={<LitoralRidePage />} />
             <Route path="/chut" element={<ChutPage />} />
             <Route path="/gwan-mart" element={<GwanMartPage />} />
