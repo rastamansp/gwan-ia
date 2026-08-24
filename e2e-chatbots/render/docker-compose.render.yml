@@ -1,0 +1,17 @@
+# Montagem do video de avaliacao dos chatbots (offline, sem rede, sem dominio).
+#
+#   docker compose -f e2e-chatbots/render/docker-compose.render.yml run --rm render
+services:
+  render:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gwan-ia-chatbots-render:local
+    working_dir: /work
+    volumes:
+      - ../../:/work
+    environment:
+      CHATBOTS_OUT: ${CHATBOTS_OUT:-e2e-chatbots/out}
+      CHATBOTS_NAME: ${CHATBOTS_NAME:-avaliacao-chatbots}
+    command: ["e2e-chatbots/render/assemble.mjs"]
+    network_mode: none
