@@ -17,8 +17,9 @@ import {
 // Lazy loading para páginas menos críticas (code-splitting)
 const DashboardPage = lazy(() => import('./pages/dashboard/DashboardPage'));
 const GwanMartPage = lazy(() => import('./pages/gwan-mart/GwanMartPage'));
-const CatalogPage = lazy(() => import('./pages/gwan-mart/CatalogPage'));
-const ProductPage = lazy(() => import('./pages/gwan-mart/ProductPage'));
+const MartStoreRedirect = lazy(
+  () => import('./pages/gwan-mart/MartStoreRedirect')
+);
 const MinhaIAPage = lazy(() => import('./pages/ia/MinhaIAPage'));
 const IAImagensPage = lazy(() => import('./pages/ia/IAImagensPage'));
 const IATextoPage = lazy(() => import('./pages/ia/IATextoPage'));
@@ -92,11 +93,8 @@ function App() {
             <Route path="/litoral-ride" element={<LitoralRidePage />} />
             <Route path="/chut" element={<ChutPage />} />
             <Route path="/gwan-mart" element={<GwanMartPage />} />
-            <Route path="/gwan-mart/catalog" element={<CatalogPage />} />
-            <Route
-              path="/gwan-mart/product/:productCode"
-              element={<ProductPage />}
-            />
+            {/* Catálogo e produto vivem em mart.gwan.cloud. */}
+            <Route path="/gwan-mart/*" element={<MartStoreRedirect />} />
             <Route path="/theme" element={<ThemePage />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/register-account" element={<RegisterPage />} />

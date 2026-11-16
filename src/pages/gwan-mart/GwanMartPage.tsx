@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   ShoppingBag,
   MessageCircle,
@@ -14,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import MartProductCard from '../../components/MartProductCard';
 import { useFeaturedProducts } from '../../hooks/useFeaturedProducts';
+import { martStoreUrl } from '../../utils/martStore';
 
 const stats = [
   { value: '500+', label: 'Produtos Vendidos', icon: TrendingUp },
@@ -75,11 +75,11 @@ const GwanMartPage: React.FC = () => {
                 className="group text-lg shadow-glow-primary"
                 asChild
               >
-                <Link to="/gwan-mart/catalog">
+                <a href={martStoreUrl('/catalog')}>
                   <ShoppingBag className="mr-2 h-5 w-5" />
                   Ver Produtos
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Link>
+                </a>
               </Button>
 
               <Button

@@ -4,6 +4,7 @@ interface ImportMetaEnv {
   readonly VITE_APP_VERSION: string;
   readonly VITE_GWAN_MART_API_URL: string;
   readonly VITE_GWAN_MART_CHAT_URL: string;
+  readonly VITE_GWAN_MART_URL: string;
   readonly VITE_GWAN_EVENT_URL: string;
   readonly VITE_GWAN_EVENTS_CHAT_URL: string;
   readonly VITE_GWAN_IMOVEIS_CHAT_URL: string;
@@ -48,6 +49,10 @@ const env = {
   // Gwan Mart Chat URL (base URL sem /chat, pois o ChatRepository adiciona)
   GWAN_MART_CHAT_URL:
     import.meta.env.VITE_GWAN_MART_CHAT_URL || 'http://localhost:3009/api',
+  // Gwan Mart — loja (catálogo e produto). O institucional mantém só a
+  // apresentação em /gwan-mart. O domínio também está fixo no nginx.conf.
+  VITE_GWAN_MART_URL:
+    import.meta.env.VITE_GWAN_MART_URL || 'https://mart.gwan.cloud/',
   // Gwan Events URL
   VITE_GWAN_EVENT_URL:
     import.meta.env.VITE_GWAN_EVENT_URL || 'https://events.gwan.com.br/',

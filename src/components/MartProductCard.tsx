@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
 import { Heart, Star } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { martProductUrl } from '../utils/martStore';
 
 type Numeric = number | string | null;
 
@@ -41,7 +41,7 @@ const MartProductCard = ({ product, showSimilarity }: MartProductCardProps) => {
     Number(product.promotionalPrice || product.originalPrice) || 0;
 
   return (
-    <Link to={`/gwan-mart/product/${product.code}`} className="group block">
+    <a href={martProductUrl(product.code)} className="group block">
       <Card className="relative h-full overflow-hidden border-2 transition-all duration-300 hover:border-primary/50 hover:shadow-hover">
         {/* Image */}
         <div className="relative">
@@ -121,7 +121,7 @@ const MartProductCard = ({ product, showSimilarity }: MartProductCardProps) => {
           </div>
         </CardContent>
       </Card>
-    </Link>
+    </a>
   );
 };
 
